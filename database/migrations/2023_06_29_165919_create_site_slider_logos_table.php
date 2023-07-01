@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('site_slider_logos', function (Blueprint $table) {
             $table->id();
+            $table->string('path');
+            $table->string('width')->default('100%');
+            $table->string('height')->default('100%');
             $table->timestamps();
         });
     }

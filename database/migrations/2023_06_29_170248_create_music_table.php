@@ -13,6 +13,19 @@ return new class extends Migration
     {
         Schema::create('music', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('music_id')->references('id')->on('music')->onDelete('cascade');
+            $table->string('title');
+            $table->string('link');
+            $table->string('link_dem');
+            $table->string('publisher');
+            $table->string('distr');
+            $table->string('genres_id')->references('id')->on('genres')->onDelete('cascade');
+            $table->boolean('is_active')->default(0);
+            $table->boolean('is_free')->default(0);
+            $table->text('description')->nullable();
+            $table->string('image')->nullable();
+            $table->string('seo_title')->nullable();
+            $table->string('seo_description')->nullable();
             $table->timestamps();
         });
     }

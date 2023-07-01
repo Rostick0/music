@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('music_kits', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('link');
+            $table->foreignId('music_id')->references('id')->on('music')->onDelete('cascade');
             $table->timestamps();
         });
     }
