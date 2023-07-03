@@ -24,14 +24,17 @@ Route::get('/{url}', [SitePageController::class, 'index']);
 
 // ,'middleware' => 'auth'
 Route::group(['prefix' => 'admin'], function ($router) {
-    Route::get('music_list', [MusicController::class, 'show'])->name('music.list');
-    Route::get('music_create', [MusicController::class, 'show_create'])->name('music.create');
-    Route::post('music_create', [MusicController::class, 'create']);
-    Route::get('music/{id}', [MusicController::class, 'show_edit'])->name('music.edit');
-    Route::post('music/{id}', [MusicController::class, 'create']);
+    Route::group(['prefix' => 'music'], function($router) {
+        Route::get('list', [MusicController::class, 'show'])->name('music.list');
+        Route::get('create', [MusicController::class, 'create'])->name('music.create');
+        Route::post('create', [MusicController::class, 'store']);
+        Route::get('{id}', [MusicController::class, 'edit'])->name('music.edit');
+        Route::post('{id}', [MusicController::class, 'create']);
+    });
+
     Route::get('music_kit/{id}', [SiteController::class, 'show'])->name('music_kit');
     Route::get('playlist_list', [PlaylistController::class, 'show'])->name('playlist');
-    Route::get('playlist/{id}', [PlaylistController::class, 'show_edit'])->name('playlist.edit');
+    Route::get('playlist/{id}', [PlaylistController::class, 'edit'])->name('playlist.edit');
     Route::get('statistic', [StatisticController::class, 'show'])->name('statistic');
     Route::get('subscriptions', [SubscriptionController::class, 'show'])->name('subscriptions');
     Route::get('users', [UserController::class, 'show'])->name('users');

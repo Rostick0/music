@@ -16,9 +16,9 @@ return new class extends Migration
             $table->foreignId('music_artists_id')->references('id')->on('music_artists')->onDelete('cascade');
             $table->string('title');
             $table->string('link');
-            $table->string('link_dem');
-            $table->string('publisher');
-            $table->string('distr');
+            $table->string('link_demo');
+            $table->string('publisher')->nullable();;
+            $table->string('distr')->nullable();;
             $table->string('genres_id')->references('id')->on('genres')->onDelete('cascade');
             $table->boolean('is_active')->default(0);
             $table->boolean('is_free')->default(0);
