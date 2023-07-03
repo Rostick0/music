@@ -40,6 +40,14 @@ class PlaylistController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     */
+    public function show_edit(Playlist $playlist)
+    {
+        //
+    }
+
+    /**
      * Show the form for editing the specified resource.
      */
     public function edit(Playlist $playlist)

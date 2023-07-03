@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('music_artists', function (Blueprint $table) {
+        Schema::create('site_links', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('surname')->nullable();
-            $table->text('description')->nullable();
+            $table->string('url');
+            $table->foreignId('site_pages_id')->references('id')->on('site_pages')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('music_artists');
+        Schema::dropIfExists('site_links');
     }
 };

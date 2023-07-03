@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('music_artists', function (Blueprint $table) {
+        Schema::create('site_pages', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('surname')->nullable();
-            $table->text('description')->nullable();
+            $table->string('seo_title')->nullable();
+            $table->string('seo_description')->nullable();
+            $table->text('html')->nullable();
+            $table->text('css')->nullable();
+            $table->text('js')->nullable();
             $table->timestamps();
         });
     }
@@ -25,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('music_artists');
+        Schema::dropIfExists('site_pages');
     }
 };

@@ -36,7 +36,23 @@ class MusicController extends Controller
      */
     public function show(Music $music)
     {
-        //
+        return view('music_list');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show_create(Music $music)
+    {
+        return view('music_add');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show_edit(Music $music)
+    {
+        return view('music_add');
     }
 
     /**

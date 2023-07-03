@@ -1,0 +1,57 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    appearance: none;
+    font-family: Helvetica, Arial, sans-serif;
+    line-height: 1.15;
+}
+
+button {
+    background: none;
+    cursor: pointer;
+}
+
+input,
+select {
+    border: 0;
+    outline: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    appearance: textfiled;
+    -moz-appearance: textfield;
+}
+
+input::-ms-clear {
+    display: none;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+    outline: none;
+}
+
+button {
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+textarea {
+    outline: none;
+    border: 0;
+    resize: none;
+}

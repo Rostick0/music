@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('telephone');
             $table->boolean('is_agree')->default(0);
+            $table->boolean('is_admin')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

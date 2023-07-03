@@ -2,17 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Site;
+use App\Models\SiteLinks;
+use App\Models\SitePage;
 use Illuminate\Http\Request;
 
-class SiteController extends Controller
+class SitePageController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request, string $url)
     {
-        //
+        $link = SiteLinks::where('url', $url)->firstOrFail();
+        $page = SitePage::find($link->site_pages_id)->firstOrFail();
+
+        return view('page', [
+            'page' => $page
+        ]);
     }
 
     /**
@@ -34,15 +40,15 @@ class SiteController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Site $site)
+    public function show(SitePage $sitePage)
     {
-        return view('settings');
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Site $site)
+    public function edit(SitePage $sitePage)
     {
         //
     }
@@ -50,7 +56,7 @@ class SiteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Site $site)
+    public function update(Request $request, SitePage $sitePage)
     {
         //
     }
@@ -58,7 +64,7 @@ class SiteController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Site $site)
+    public function destroy(SitePage $sitePage)
     {
         //
     }
