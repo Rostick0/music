@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('site_sliders', function (Blueprint $table) {
             $table->id();
-            $table->number()->default(8);
+            $table->integer('count')->default(8);
             $table->timestamps();
         });
     }

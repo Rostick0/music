@@ -18,7 +18,9 @@
             </a>
             <div class="admin-content__top_item">личный кабинет</div>
         </div>
-        @yield('html')
+        <div class="admin-content__inner">
+            @yield('html')
+        </div>
     </div>
 </div>
 

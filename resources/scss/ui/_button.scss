@@ -1,0 +1,14 @@
+.admin-button {
+    background-color: #0C3;
+    color: #fff;
+    padding: 8px 12px;
+    transition: 200ms;
+
+    &:hover {
+        background-color: #0B0;
+    }
+
+    &:active {
+        background-color: #0C4;
+    }
+}

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('link');
+            $table->time('duration');
             $table->foreignId('music_id')->references('id')->on('music')->onDelete('cascade');
             $table->timestamps();
         });

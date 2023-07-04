@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class MusicMood extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'music_id',
+        'moods_id'
+    ];
 }

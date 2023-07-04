@@ -19,27 +19,25 @@
     <nav class="admin-aside__nav">
         <ul class="admin-aside__navigation">
             <li class="admin-aside__navigation_item">
-                <a class="admin-aside__navigation_link{{ Route::currentRouteName() == 'music.list' ? ' _active' : '' }}"
+                <a class="admin-aside__navigation_link{{ Request::segment(2) === 'music' ? ' _active' : '' }}"
                     href="{{ route('music.list') }}">Треки</a>
             </li>
-            <li
-                class="admin-aside__navigation_item{{ Route::currentRouteName() === 'music.create' ? ' _active' : '' }}">
+            <li class="admin-aside__navigation_item{{ Request::segment(2) === 'music.create' ? ' _active' : '' }}">
                 <a class="admin-aside__navigation_link" href="{{ route('music.create') }}">Треки music kit</a>
             </li>
-            <li class="admin-aside__navigation_item{{ Route::currentRouteName() === 'playlist' ? ' _active' : '' }}">
+            <li class="admin-aside__navigation_item{{ Request::segment(2) === 'playlist' ? ' _active' : '' }}">
                 <a class="admin-aside__navigation_link" href="{{ route('playlist') }}">Плейлист</a>
             </li>
-            <li class="admin-aside__navigation_item{{ Route::currentRouteName() === 'statistic' ? ' _active' : '' }}">
+            <li class="admin-aside__navigation_item{{ Request::segment(2) === 'statistic' ? ' _active' : '' }}">
                 <a class="admin-aside__navigation_link" href="{{ route('statistic') }}">Статистика</a>
             </li>
-            <li
-                class="admin-aside__navigation_item{{ Route::currentRouteName() === 'subscriptions' ? ' _active' : '' }}">
+            <li class="admin-aside__navigation_item{{ Request::segment(2) === 'subscriptions' ? ' _active' : '' }}">
                 <a class="admin-aside__navigation_link" href="{{ route('subscriptions') }}">Подписки</a>
             </li>
-            <li class="admin-aside__navigation_item{{ Route::currentRouteName() === 'users' ? ' _active' : '' }}">
+            <li class="admin-aside__navigation_item{{ Request::segment(2) === 'users' ? ' _active' : '' }}">
                 <a class="admin-aside__navigation_link" href="{{ route('users') }}">Клиенты</a>
             </li>
-            <li class="admin-aside__navigation_item{{ Route::currentRouteName() === 'settings' ? ' _active' : '' }}">
+            <li class="admin-aside__navigation_item{{ Request::segment(2) === 'settings' ? ' _active' : '' }}">
                 <a class="admin-aside__navigation_link" href="{{ route('settings') }}">Настройки</a>
             </li>
         </ul>

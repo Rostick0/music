@@ -20,11 +20,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/{url}', [SitePageController::class, 'index']);
+Route::get('{url}', [SitePageController::class, 'index']);
 
 // ,'middleware' => 'auth'
 Route::group(['prefix' => 'admin'], function ($router) {
-    Route::group(['prefix' => 'music'], function($router) {
+    Route::group(['prefix' => 'music'], function ($router) {
         Route::get('list', [MusicController::class, 'show'])->name('music.list');
         Route::get('create', [MusicController::class, 'create'])->name('music.create');
         Route::post('create', [MusicController::class, 'store']);
@@ -33,10 +33,19 @@ Route::group(['prefix' => 'admin'], function ($router) {
     });
 
     Route::get('music_kit/{id}', [SiteController::class, 'show'])->name('music_kit');
-    Route::get('playlist_list', [PlaylistController::class, 'show'])->name('playlist');
-    Route::get('playlist/{id}', [PlaylistController::class, 'edit'])->name('playlist.edit');
+
+    Route::group(['prefix' => 'playlist'], function ($router) {
+        Route::get('list', [PlaylistController::class, 'show'])->name('playlist');
+        Route::get('{id}', [PlaylistController::class, 'edit'])->name('playlist.edit');
+    });
+
     Route::get('statistic', [StatisticController::class, 'show'])->name('statistic');
     Route::get('subscriptions', [SubscriptionController::class, 'show'])->name('subscriptions');
-    Route::get('users', [UserController::class, 'show'])->name('users');
+
+    Route::group(['prefix' => 'users'], function ($router) {
+        Route::get('/', [UserController::class, 'show'])->name('users');
+        // Route::get('{id}', [UserController::class, 'show'])->name('users');
+    });
+
     Route::get('settings', [SiteController::class, 'show'])->name('settings');
 });

@@ -17,13 +17,15 @@ return new class extends Migration
             $table->string('title');
             $table->string('link');
             $table->string('link_demo');
-            $table->string('publisher')->nullable();;
-            $table->string('distr')->nullable();;
+            $table->string('publisher')->nullable();
+            $table->string('distr')->nullable();
+            $table->date('create_date')->nullable();
             $table->string('genres_id')->references('id')->on('genres')->onDelete('cascade');
             $table->boolean('is_active')->default(0);
             $table->boolean('is_free')->default(0);
             $table->text('description')->nullable();
             $table->string('image')->nullable();
+            $table->time('duration')->nullable();
             $table->string('seo_title')->nullable();
             $table->string('seo_description')->nullable();
             $table->timestamps();
