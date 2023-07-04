@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('type');
             $table->integer('type_id');
-            $table->foreignId('music_id')->references('id')->on('music')->onDelete('cascade');
+            $table->foreignId('themes_id')->references('id')->on('themes')->onDelete('cascade');
             $table->timestamps();
         });
     }

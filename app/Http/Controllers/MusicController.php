@@ -98,9 +98,9 @@ class MusicController extends Controller
             ]);
 
             RelationshipInstrument::firstOrCreate([
-                'type' => 'instrument',
-                'type_id' => $value_instrument->id,
-                'music_id' => $music->id
+                'type' => 'music',
+                'type_id' => $music->id,
+                'instruments_id' => $value_instrument->id,
             ]);
         }
 
@@ -113,9 +113,9 @@ class MusicController extends Controller
             ]);
 
             RelationshipMood::firstOrCreate([
-                'type' => 'mood',
-                'type_id' => $value_mood->id,
-                'music_id' => $music->id
+                'type' => 'music',
+                'type_id' => $music->id,
+                'moods_id' => $value_mood->id,
             ]);
         }
 
@@ -128,9 +128,9 @@ class MusicController extends Controller
             ]);
 
             RelationshipTheme::firstOrCreate([
-                'type' => 'theme',
-                'type_id' => $value_theme->id,
-                'music_id' => $music->id,
+                'type' => 'music',
+                'type_id' => $music->id,
+                'themes_id' => $value_theme->id
             ]);
         }
     }

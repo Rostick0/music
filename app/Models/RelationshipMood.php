@@ -12,6 +12,6 @@ class RelationshipMood extends Model
     protected $fillable = [
         'type',
         'type_id',
-        'music_id'
+        'moods_id'
     ];
 }

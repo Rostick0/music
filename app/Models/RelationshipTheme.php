@@ -12,6 +12,6 @@ class RelationshipTheme extends Model
     protected $fillable = [
         'type',
         'type_id',
-        'music_id'
+        'themes_id'
     ];
 }
