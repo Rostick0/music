@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\MusicKit;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class MusicKitController extends Controller
 {
@@ -28,7 +29,13 @@ class MusicKitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = $request->validate([
+            'name' => 'required|max:255',
+            'link' => 'required|max:255',
+            'music_id' => 'required|' . Rule::exists('music', 'id'),
+        ]);
+
+        return MusicKit::create($request->all());
     }
 
     /**
@@ -50,9 +57,16 @@ class MusicKitController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, MusicKit $musicKit)
+    public function update(Request $request, int $music_id)
     {
-        //
+        $validator = $request->validate([
+            'name' => 'required|max:255',
+            'link' => 'required|max:255',
+        ]);
+
+        MusicKit::where('music_id', $music_id)->update($request->all());
+
+        return MusicKit::where('music_id', $music_id);
     }
 
     /**

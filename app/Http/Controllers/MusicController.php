@@ -7,6 +7,7 @@ use App\Models\Mood;
 use App\Models\Music;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class MusicController extends Controller
 {
@@ -32,13 +33,13 @@ class MusicController extends Controller
     public function store(Request $request)
     {
         $validator = $request->validate([
-            'music_artists_id' => 'required',
+            'music_artists_id' => 'required' . Rule::exists('music_artists', 'id'),
             'title' => 'required|max:255',
             'link' => 'required|max:255',
             'link_demo' => 'required|max:255',
             'publisher' => 'max:255',
             'distr' => 'max:255',
-            'genres_id' => 'required',
+            'genres_id' => 'required|' . Rule::exists('genres', 'id'),
             'is_active' => 'required|in:0,1',
             'is_free' => 'required|in:0,1',
             'description' => 'max:65536',
@@ -131,13 +132,13 @@ class MusicController extends Controller
     public function update(Request $request, int $id)
     {
         $validator = $request->validate([
-            'music_artists_id' => 'required',
+            'music_artists_id' => 'required' . Rule::exists('music_artists', 'id'),
             'title' => 'required|max:255',
             'link' => 'required|max:255',
             'link_demo' => 'required|max:255',
             'publisher' => 'max:255',
             'distr' => 'max:255',
-            'genres_id' => 'required',
+            'genres_id' => 'required|' . Rule::exists('genres', 'id'),
             'is_active' => 'required|in:0,1',
             'is_free' => 'required|in:0,1',
             'description' => 'max:65536',
