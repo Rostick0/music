@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MusicThemes extends Model
+class RelationshipInstrument extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'music_id',
-        'themes_id'
+        'type',
+        'type_id',
+        'music_id'
     ];
 }

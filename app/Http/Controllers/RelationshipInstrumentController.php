@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MusicMood;
+use App\Models\RelationshipInstrument;
 use Illuminate\Http\Request;
 
-class MusicMoodController extends Controller
+class RelationshipInstrumentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class MusicMoodController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(MusicMood $musicMood)
+    public function show(RelationshipInstrument $relationshipInstrument)
     {
         //
     }
@@ -42,7 +42,7 @@ class MusicMoodController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(MusicMood $musicMood)
+    public function edit(RelationshipInstrument $relationshipInstrument)
     {
         //
     }
@@ -50,7 +50,7 @@ class MusicMoodController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, MusicMood $musicMood)
+    public function update(Request $request, RelationshipInstrument $relationshipInstrument)
     {
         //
     }
@@ -58,7 +58,7 @@ class MusicMoodController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(MusicMood $musicMood)
+    public function destroy(RelationshipInstrument $relationshipInstrument)
     {
         //
     }

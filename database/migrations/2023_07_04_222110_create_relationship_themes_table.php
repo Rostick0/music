@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('music_moods', function (Blueprint $table) {
+        Schema::create('relationship_themes', function (Blueprint $table) {
             $table->id();
+            $table->string('type');
+            $table->integer('type_id');
             $table->foreignId('music_id')->references('id')->on('music')->onDelete('cascade');
-            $table->foreignId('moods_id')->references('id')->on('moods')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('music_moods');
+        Schema::dropIfExists('relationship_themes');
     }
 };

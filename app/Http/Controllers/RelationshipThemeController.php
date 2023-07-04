@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MusicInstrument;
+use App\Models\RelationshipTheme;
 use Illuminate\Http\Request;
 
-class MusicInstrumentController extends Controller
+class RelationshipThemeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class MusicInstrumentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(MusicInstrument $musicInstrument)
+    public function show(RelationshipTheme $relationshipTheme)
     {
         //
     }
@@ -42,7 +42,7 @@ class MusicInstrumentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(MusicInstrument $musicInstrument)
+    public function edit(RelationshipTheme $relationshipTheme)
     {
         //
     }
@@ -50,7 +50,7 @@ class MusicInstrumentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, MusicInstrument $musicInstrument)
+    public function update(Request $request, RelationshipTheme $relationshipTheme)
     {
         //
     }
@@ -58,7 +58,7 @@ class MusicInstrumentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(MusicInstrument $musicInstrument)
+    public function destroy(RelationshipTheme $relationshipTheme)
     {
         //
     }

@@ -7,9 +7,9 @@ use App\Models\Instrument;
 use App\Models\Mood;
 use App\Models\Music;
 use App\Models\MusicArtist;
-use App\Models\MusicInstrument;
-use App\Models\MusicMood;
-use App\Models\MusicThemes;
+use App\Models\RelationshipInstrument;
+use App\Models\RelationshipMood;
+use App\Models\RelationshipTheme;
 use App\Models\Theme;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -97,9 +97,10 @@ class MusicController extends Controller
                 'name' => trim(mb_strtolower($instrument))
             ]);
 
-            MusicInstrument::firstOrCreate([
-                'music_id' => $music->id,
-                'instruments_id' => $value_instrument->id
+            RelationshipInstrument::firstOrCreate([
+                'type' => 'instrument',
+                'type_id' => $value_instrument->id,
+                'music_id' => $music->id
             ]);
         }
 
@@ -111,9 +112,10 @@ class MusicController extends Controller
                 'name' => trim(mb_strtolower($mood))
             ]);
 
-            MusicMood::firstOrCreate([
-                'music_id' => $music->id,
-                'moods_id' => $value_mood->id
+            RelationshipMood::firstOrCreate([
+                'type' => 'mood',
+                'type_id' => $value_mood->id,
+                'music_id' => $music->id
             ]);
         }
 
@@ -125,9 +127,10 @@ class MusicController extends Controller
                 'name' => trim(mb_strtolower($theme))
             ]);
 
-            MusicThemes::firstOrCreate([
+            RelationshipTheme::firstOrCreate([
+                'type' => 'theme',
+                'type_id' => $value_theme->id,
                 'music_id' => $music->id,
-                'themes_id' => $value_theme->id
             ]);
         }
     }
