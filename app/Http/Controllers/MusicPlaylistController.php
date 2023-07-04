@@ -52,7 +52,8 @@ class MusicPlaylistController extends Controller
         $playlist = Playlist::create([
             'title' => $request->title,
             'description' => $request->description,
-            'image' => $image
+            'image' => $image,
+            'is_active' => $request->has('is_active')
         ]);
 
         $instruments = explode(',', $request->instruments);
