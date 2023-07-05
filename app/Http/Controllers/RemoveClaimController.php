@@ -18,9 +18,8 @@ class RemoveClaimController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(int $music_id)
     {
-        //
     }
 
     /**
@@ -28,7 +27,20 @@ class RemoveClaimController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = $request->validate([
+            'link' => 'required|max:255',
+            'music_id' => 'required'
+        ]);
+
+        $user_id = auth()->id();
+
+        $remove_claim = RemoveClaim::create([
+            'link' => $request->link,
+            'music_id' => $request->music_id,
+            'users_id' => $user_id
+        ]);
+
+        return $remove_claim;
     }
 
     /**
@@ -50,9 +62,16 @@ class RemoveClaimController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, RemoveClaim $removeClaim)
+    public function update(Request $request)
     {
-        //
+        $validator = $request->validate([
+            'id' => 'required',
+            'status' => 'required|max:255',
+        ]);
+
+        RemoveClaim::find($request->id)->update([
+            'status' => $request->status
+        ]);
     }
 
     /**

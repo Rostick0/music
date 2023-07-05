@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('remove_claims', function (Blueprint $table) {
             $table->id();
             $table->string('link');
-            $table->string('status');
+            $table->string('status')->default('обрабатывается');
+            $table->foreignId('music_id')->references('id')->on('music')->onDelete('cascade');
             $table->foreignId('users_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
