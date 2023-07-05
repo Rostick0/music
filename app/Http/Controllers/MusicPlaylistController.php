@@ -56,50 +56,9 @@ class MusicPlaylistController extends Controller
             'is_active' => $request->has('is_active')
         ]);
 
-        $instruments = explode(',', $request->instruments);
-        foreach ($instruments as $instrument) {
-            if (!trim($instrument)) continue;
-
-            $value_instrument = Instrument::firstOrCreate([
-                'name' => trim(mb_strtolower($instrument))
-            ]);
-
-            RelationshipInstrument::firstOrCreate([
-                'type' => 'playlist',
-                'type_id' => $playlist->id,
-                'instruments_id' => $value_instrument->id,
-            ]);
-        }
-
-        $moods = explode(',', $request->moods);
-        foreach ($moods as $mood) {
-            if (!trim($mood)) continue;
-
-            $value_mood = Mood::firstOrCreate([
-                'name' => trim(mb_strtolower($mood))
-            ]);
-
-            RelationshipMood::firstOrCreate([
-                'type' => 'playlist',
-                'type_id' => $playlist->id,
-                'moods_id' => $value_mood->id,
-            ]);
-        }
-
-        $themes = explode(',', $request->themes);
-        foreach ($themes as $theme) {
-            if (!trim($theme)) continue;
-
-            $value_theme = Theme::firstOrCreate([
-                'name' => trim(mb_strtolower($theme))
-            ]);
-
-            RelationshipTheme::firstOrCreate([
-                'type' => 'playlist',
-                'type_id' => $playlist->id,
-                'themes_id' => $value_theme->id
-            ]);
-        }
+        RelationshipInstrumentController::createRelationship($request->instruments, $playlist->id, 'playlist');
+        RelationshipMoodController::createRelationship($request->moods, $playlist->id, 'playlist');
+        RelationshipThemeController::createRelationship($request->themes, $playlist->id, 'playlist');
     }
 
     /**

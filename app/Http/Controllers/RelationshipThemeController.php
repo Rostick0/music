@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\RelationshipTheme;
+use App\Models\Theme;
 use Illuminate\Http\Request;
 
 class RelationshipThemeController extends Controller
@@ -21,6 +22,25 @@ class RelationshipThemeController extends Controller
     public function create()
     {
         //
+    }
+
+    // @param 'music|playlist' $type
+    static public function createRelationship($request_theme, int $type_id, string $type)
+    {
+        $themes = explode(',', $request_theme);
+        foreach ($themes as $theme) {
+            if (!trim($theme)) continue;
+
+            $value_theme = Theme::firstOrCreate([
+                'name' => trim(mb_strtolower($theme))
+            ]);
+
+            RelationshipTheme::firstOrCreate([
+                'type' => $type,
+                'type_id' => $type_id,
+                'themes_id' => $value_theme->id
+            ]);
+        }
     }
 
     /**

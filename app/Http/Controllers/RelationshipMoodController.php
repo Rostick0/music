@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mood;
 use App\Models\RelationshipMood;
 use Illuminate\Http\Request;
+
+class Type
+{
+}
 
 class RelationshipMoodController extends Controller
 {
@@ -21,6 +26,25 @@ class RelationshipMoodController extends Controller
     public function create()
     {
         //
+    }
+
+    // @param 'music|playlist' $type
+    static public function createRelationship($request_moods, int $type_id, string $type)
+    {
+        $moods = explode(',', $request_moods);
+        foreach ($moods as $mood) {
+            if (!trim($mood)) continue;
+
+            $value_mood = Mood::firstOrCreate([
+                'name' => trim(mb_strtolower($mood))
+            ]);
+
+            RelationshipMood::firstOrCreate([
+                'type' => $type,
+                'type_id' => $type_id,
+                'moods_id' => $value_mood->id,
+            ]);
+        }
     }
 
     /**

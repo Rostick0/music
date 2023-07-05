@@ -51,8 +51,6 @@ class MusicController extends Controller
             'distr' => 'max:255',
             'date' => 'date',
             'genres_id' => 'required|' . Rule::exists('genres', 'id'),
-            // 'is_active' => 'required',
-            // 'is_free' => 'required',
             'description' => 'max:65536',
             'image' => 'image|mimes:jpeg,png,jpg',
             'seo_title' => 'max:255',
@@ -62,8 +60,6 @@ class MusicController extends Controller
         $music_artists = MusicArtist::firstOrCreate([
             'name' => $request->music_artists
         ]);
-
-        // dd($music_artists->id);
 
         $image = NULL;
 
@@ -89,50 +85,9 @@ class MusicController extends Controller
             'seo_description' => $request->seo_description ?? NULL,
         ]);
 
-        $instruments = explode(',', $request->instruments);
-        foreach ($instruments as $instrument) {
-            if (!trim($instrument)) continue;
-
-            $value_instrument = Instrument::firstOrCreate([
-                'name' => trim(mb_strtolower($instrument))
-            ]);
-
-            RelationshipInstrument::firstOrCreate([
-                'type' => 'music',
-                'type_id' => $music->id,
-                'instruments_id' => $value_instrument->id,
-            ]);
-        }
-
-        $moods = explode(',', $request->moods);
-        foreach ($moods as $mood) {
-            if (!trim($mood)) continue;
-
-            $value_mood = Mood::firstOrCreate([
-                'name' => trim(mb_strtolower($mood))
-            ]);
-
-            RelationshipMood::firstOrCreate([
-                'type' => 'music',
-                'type_id' => $music->id,
-                'moods_id' => $value_mood->id,
-            ]);
-        }
-
-        $themes = explode(',', $request->themes);
-        foreach ($themes as $theme) {
-            if (!trim($theme)) continue;
-
-            $value_theme = Theme::firstOrCreate([
-                'name' => trim(mb_strtolower($theme))
-            ]);
-
-            RelationshipTheme::firstOrCreate([
-                'type' => 'music',
-                'type_id' => $music->id,
-                'themes_id' => $value_theme->id
-            ]);
-        }
+        RelationshipInstrumentController::createRelationship($request->instruments, $music->id, 'music');
+        RelationshipMoodController::createRelationship($request->moods, $music->id, 'music');
+        RelationshipThemeController::createRelationship($request->themes, $music->id, 'music');
     }
 
     /**
