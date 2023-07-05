@@ -5,18 +5,30 @@ namespace App\Http\Controllers;
 use App\Models\SiteLinks;
 use App\Models\SitePage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class SitePageController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request, string $url)
+    public function index(Request $request, string $url, int $id = null)
     {
-        $link = SiteLinks::where('url', $url)->firstOrFail();
-        $page = SitePage::find($link->site_pages_id)->firstOrFail();
+        // $link = SiteLinks::where('url', $url)->firstOrFail();
+        // $page = SitePage::find($link->site_pages_id)->firstOrFail();
 
-        return view('page', [
+        $path = resource_path("views/pages_db/$url.blade.php");
+
+        // dd($path);
+
+        // File::put(resource_path("views/pages_db/dd.blade.php"), 'dd');
+        // File::delete(resource_path("views/pages_db/dd.blade.php"));
+
+        if (!File::exists($path)) return abort(404);;
+
+        $page = File::get($path);
+
+        return view('pages_db.test', [
             'page' => $page
         ]);
     }

@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('{url}', [SitePageController::class, 'index']);
+Route::get('{url}/{id}', [SitePageController::class, 'index']);
 
 // ,'middleware' => 'auth'
 Route::group(['prefix' => 'admin'], function ($router) {

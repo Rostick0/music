@@ -1,5 +1,11 @@
-@extends('layout.admin')
+<html>
 
-@section('html')
-    
-@endsection
+<head></head>
+
+<body>
+    <pre>
+        {!! $page !!}
+    </pre>
+</body>
+
+</html>

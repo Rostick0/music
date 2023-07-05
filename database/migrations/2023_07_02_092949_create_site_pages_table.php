@@ -14,11 +14,10 @@ return new class extends Migration
         Schema::create('site_pages', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('url');
             $table->string('seo_title')->nullable();
             $table->string('seo_description')->nullable();
-            $table->text('html')->nullable();
-            $table->text('css')->nullable();
-            $table->text('js')->nullable();
+            $table->string('path')->nullable();
             $table->timestamps();
         });
     }
