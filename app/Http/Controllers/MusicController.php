@@ -32,7 +32,7 @@ class MusicController extends Controller
     {
         $genres = Genre::all();
 
-        return view('music_add', [
+        return view('music_create', [
             'genres' => $genres
         ]);
     }
