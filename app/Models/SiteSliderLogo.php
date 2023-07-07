@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class SiteSliderLogo extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'path',
+        'width',
+        'height',
+    ];
 }

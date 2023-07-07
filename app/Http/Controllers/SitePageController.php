@@ -17,27 +17,8 @@ class SitePageController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(string $url, $id = null)
+    public function index()
     {
-        // $link = SiteLinks::where('url', $url)->firstOrFail();
-        // $page = SitePage::find($link->site_pages_id)->firstOrFail();
-
-        $path = $this->get_path($url);
-        // dd($path);
-
-        // File::put(resource_path("views/pages_db/dd.blade.php"), 'ddadasd');
-        // File::delete(resource_path("views/pages_db/dd.blade.php"));
-
-        if (!File::exists($path)) return abort(404);;
-
-        $page = File::get($path);
-
-        dd($page);
-
-        return view('pages_db.test', [
-            'id' => $id,
-            'page' => $page
-        ]);
     }
 
     /**
@@ -84,9 +65,27 @@ class SitePageController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(SitePage $sitePage)
+    public function show(string $url, $id = null)
     {
-        //
+        // $link = SiteLinks::where('url', $url)->firstOrFail();
+        // $page = SitePage::find($link->site_pages_id)->firstOrFail();
+
+        $path = $this->get_path($url);
+        // dd($path);
+
+        // File::put(resource_path("views/pages_db/dd.blade.php"), 'ddadasd');
+        // File::delete(resource_path("views/pages_db/dd.blade.php"));
+
+        if (!File::exists($path)) return abort(404);;
+
+        $page = File::get($path);
+
+        dd($page);
+
+        return view('pages_db.test', [
+            'id' => $id,
+            'page' => $page
+        ]);
     }
 
     /**

@@ -20,13 +20,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('{url}', [SitePageController::class, 'index']);
-Route::get('{url}/{id}', [SitePageController::class, 'index']);
-
 // ,'middleware' => 'auth'
 Route::group(['prefix' => 'admin'], function ($router) {
     Route::group(['prefix' => 'music'], function ($router) {
-        Route::get('list', [MusicController::class, 'show'])->name('music.list');
+        Route::get('list', [MusicController::class, 'index'])->name('music.list');
         Route::get('create', [MusicController::class, 'create'])->name('music.create');
         Route::post('create', [MusicController::class, 'store']);
         Route::get('{id}', [MusicController::class, 'edit'])->name('music.edit');
@@ -36,19 +33,20 @@ Route::group(['prefix' => 'admin'], function ($router) {
     Route::get('music_kit/{id}', [SiteController::class, 'show'])->name('music_kit');
 
     Route::group(['prefix' => 'playlist'], function ($router) {
-        Route::get('list', [PlaylistController::class, 'show'])->name('playlist');
+        Route::get('list', [PlaylistController::class, 'index'])->name('playlist');
+        Route::get('create', [PlaylistController::class, 'create'])->name('playlist.create');
         Route::get('{id}', [PlaylistController::class, 'edit'])->name('playlist.edit');
     });
 
-    Route::get('statistic', [StatisticController::class, 'show'])->name('statistic');
-    Route::get('subscriptions', [SubscriptionController::class, 'show'])->name('subscriptions');
+    Route::get('statistic', [StatisticController::class, 'index'])->name('statistic');
+    Route::get('subscriptions', [SubscriptionController::class, 'index'])->name('subscriptions');
 
     Route::group(['prefix' => 'users'], function ($router) {
-        Route::get('/', [UserController::class, 'show'])->name('users');
+        Route::get('/', [UserController::class, 'index'])->name('users');
         // Route::get('{id}', [UserController::class, 'show'])->name('users');
     });
 
-    Route::get('settings', [SiteController::class, 'show'])->name('settings');
+    Route::get('settings', [SiteController::class, 'index'])->name('settings');
 
     Route::group(['prefix' => 'pages'], function ($router) {
         Route::get('list', [SitePageController::class, 'show'])->name('page.list');
@@ -58,3 +56,12 @@ Route::group(['prefix' => 'admin'], function ($router) {
         Route::post('{id}', [SitePageController::class, 'update']);
     });
 });
+
+Route::group(['prefix' => 'client'], function ($router) {
+    
+    Route::get('profile', [UserController::class, 'show'])->name('profile');
+});
+
+
+Route::get('{url}', [SitePageController::class, 'index']);
+Route::get('{url}/{id}', [SitePageController::class, 'index']);

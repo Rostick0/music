@@ -22,7 +22,11 @@ class MusicController extends Controller
      */
     public function index()
     {
-        //
+        $music_list = Music::paginate(20);
+
+        return view('admin.music_list', [
+            'music_list' => $music_list
+        ]);
     }
 
     /**
@@ -32,7 +36,7 @@ class MusicController extends Controller
     {
         $genres = Genre::all();
 
-        return view('music_create', [
+        return view('admin.music_create', [
             'genres' => $genres
         ]);
     }
@@ -95,11 +99,6 @@ class MusicController extends Controller
      */
     public function show(Music $music)
     {
-        $music_list = Music::paginate(20);
-
-        return view('music_list', [
-            'music_list' => $music_list
-        ]);
     }
 
     /**
@@ -107,7 +106,7 @@ class MusicController extends Controller
      */
     public function edit(Music $music)
     {
-        return view('music');
+        return view('admin.music');
     }
 
     /**

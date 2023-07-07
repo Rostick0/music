@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Genre;
 use App\Models\Playlist;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ class PlaylistController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.playlist_list');
     }
 
     /**
@@ -20,7 +21,11 @@ class PlaylistController extends Controller
      */
     public function create()
     {
-        //
+        $genres = Genre::all();
+
+        return view('admin.playlist_create', [
+            'genres' => $genres
+        ]);
     }
 
     /**

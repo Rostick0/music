@@ -9,8 +9,13 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
+    public function index()
+    {
+        return view('admin.users');
+    }
+
     public function show()
     {
-        return view('users');
+        return view('client.users');
     }
 }
