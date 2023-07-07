@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MusicController;
 use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\SiteController;
@@ -58,8 +59,16 @@ Route::group(['prefix' => 'admin'], function ($router) {
 });
 
 Route::group(['prefix' => 'client'], function ($router) {
+    Route::get('login', [AuthController::class, 'show_login'])->name('client.login');
+    Route::post('login', [AuthController::class, 'store_login']);
+
+    Route::get('register', [AuthController::class, 'show_register'])->name('client.register');
+    Route::post('register', [AuthController::class, 'store_register']);
     
     Route::get('profile', [UserController::class, 'show'])->name('profile');
+    Route::get('profile_edit', [UserController::class, 'edit'])->name('profile.edit');
+    Route::post('profile_edit', [UserController::class, 'update']);
+    Route::post('profile_password', [UserController::class, 'password_update']);
 });
 
 

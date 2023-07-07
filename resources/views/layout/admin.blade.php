@@ -6,7 +6,7 @@
     <div class="admin-content">
         <div class="admin-content__top">
             <a class="admin-content__top_item" href="">
-                <span>уведомление</span>
+                <span>уведомления</span>
                 <span class="admin-content__top_alert">
                     <span class="admin-content__top_alert_count">0</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#fff"

@@ -18,4 +18,22 @@ class UserController extends Controller
     {
         return view('client.users');
     }
+
+    public function edit()
+    {
+        return view('client.profile_edit');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request)
+    {
+        //
+    }
+
+    public function password_update(Request $request)
+    {
+        //
+    }
 }
