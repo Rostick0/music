@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClientRemoveClaimController;
 use App\Http\Controllers\ClientStatisticController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MusicController;
 use App\Http\Controllers\PlaylistController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RemoveClaimController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\SitePageController;
@@ -62,12 +63,6 @@ Route::group(['prefix' => 'admin'], function ($router) {
 });
 
 Route::group(['prefix' => 'client'], function ($router) {
-    Route::get('login', [AuthController::class, 'show_login'])->name('client.login');
-    Route::post('login', [AuthController::class, 'store_login']);
-
-    Route::get('register', [AuthController::class, 'show_register'])->name('client.register');
-    Route::post('register', [AuthController::class, 'store_register']);
-
     Route::get('music', [MusicController::class, 'index_client'])->name('client.music');
 
     Route::get('subscriptions', [ClientSubscriptionController::class, 'index'])->name('client.subscriptions');
@@ -83,6 +78,11 @@ Route::group(['prefix' => 'client'], function ($router) {
     Route::post('profile_password', [UserController::class, 'password_update']);
 });
 
+Route::get('login', [LoginController::class, 'show'])->name('login');
+Route::post('login', [LoginController::class, 'store_login']);
+
+Route::get('register', [RegisterController::class, 'show'])->name('register');
+Route::post('register', [RegisterController::class, 'store']);
 
 Route::get('{url}', [SitePageController::class, 'index']);
 Route::get('{url}/{id}', [SitePageController::class, 'index']);
