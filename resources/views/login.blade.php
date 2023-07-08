@@ -9,14 +9,14 @@
         <div class="auth-form__inputs">
             <label class="admin-label">
                 <span>E-mail</span>
-                <input class="admin-input" type="email" name="email" value="{{ old('email') }}" />
+                <input class="admin-input" type="email" name="email" value="{{ old('email') }}" required />
                 @error('email')
                     <span class="error">{{ $message }}</span>
                 @enderror
             </label>
             <label class="admin-label">
                 <span>Password</span>
-                <input class="admin-input" type="text" name="password" />
+                <input class="admin-input" type="text" name="password" required />
                 @error('password')
                     <span class="error">{{ $message }}</span>
                 @enderror
