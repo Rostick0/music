@@ -19,16 +19,16 @@
     <nav class="admin-aside__nav">
         <ul class="admin-aside__navigation">
             <li class="admin-aside__navigation_item{{ Request::segment(2) === 'music' ? ' _active' : '' }}">
-                <a class="admin-aside__navigation_link" href="{{ route('music.create') }}">Треки</a>
+                <a class="admin-aside__navigation_link" href="{{ route('client.music') }}">Треки</a>
             </li>
-            <li class="admin-aside__navigation_item{{ Request::segment(2) === 'statistic_list' ? ' _active' : '' }}">
-                <a class="admin-aside__navigation_link" href="{{ route('statistic_list') }}">Подписки</a>
+            <li class="admin-aside__navigation_item{{ Request::segment(2) === 'client.subscriptions' ? ' _active' : '' }}">
+                <a class="admin-aside__navigation_link" href="{{ route('client.subscriptions') }}">Подписки</a>
             </li>
             <li class="admin-aside__navigation_item{{ Request::segment(2) === 'statistic' ? ' _active' : '' }}">
-                <a class="admin-aside__navigation_link" href="{{ route('statistic_list') }}">Статистика</a>
+                <a class="admin-aside__navigation_link" href="{{ route('client.statistic') }}">Статистика</a>
             </li>
             <li class="admin-aside__navigation_item{{ Request::segment(2) === 'settings' ? ' _active' : '' }}">
-                <a class="admin-aside__navigation_link" href="{{ route('remove_claim') }}">Удаление копирайта</a>
+                <a class="admin-aside__navigation_link" href="{{ route('client.remove_claim') }}">Удаление копирайта</a>
             </li>
         </ul>
     </nav>

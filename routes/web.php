@@ -40,7 +40,9 @@ Route::group(['prefix' => 'admin'], function ($router) {
     Route::group(['prefix' => 'playlist'], function ($router) {
         Route::get('list', [PlaylistController::class, 'index'])->name('playlist');
         Route::get('create', [PlaylistController::class, 'create'])->name('playlist.create');
+        Route::post('create', [PlaylistController::class, 'store']);
         Route::get('{id}', [PlaylistController::class, 'edit'])->name('playlist.edit');
+        Route::post('{id}', [PlaylistController::class, 'update']);
     });
 
     Route::get('statistic', [StatisticController::class, 'index'])->name('statistic');

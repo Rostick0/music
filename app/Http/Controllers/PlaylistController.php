@@ -33,7 +33,24 @@ class PlaylistController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = $request->validate([
+            'title' => 'max:255',
+            'image' => 'image|mimes:jpeg,png,jpg',
+            'description' => 'max:65536',
+            'seo_title' => 'max:255',
+            'seo_description' => 'max:255'
+        ]);
+
+        $image = null;
+
+        $playlist = Playlist::create([
+            'title' => $request->title,
+            'image' => $image,
+            'description' => $request->description,
+            'is_active' => $request->has('is_active') ? 1 : 0,
+            'seo_title' => $request->seo_title,
+            'seo_description' => $request->seo_description,
+        ]);
     }
 
     /**

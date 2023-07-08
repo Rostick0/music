@@ -20,8 +20,8 @@
             </label>
             <label class="admin-label">
                 <span>Изображение</span>
-                <input class="admin-input" type="file" name="seo_title" value="{{ old('seo_title') }}">
-                @error('seo_title')
+                <input class="admin-input" type="file" name="image" value="{{ old('image') }}">
+                @error('image')
                     <span class="error">{{ $message }}</span>
                 @enderror
             </label>
@@ -68,7 +68,7 @@
                 <span>Активен?</span>
             </label>
         </div>
-        {{-- <div class="admin-form__flex">
+        <div class="admin-form__flex">
             <label class="admin-label">
                 <span>seo title</span>
                 <input class="admin-input" type="text" name="seo_title" value="{{ old('seo_title') }}">
@@ -83,7 +83,7 @@
                     <span class="error">{{ $message }}</span>
                 @enderror
             </label>
-        </div> --}}
+        </div>
         <button class="admin-button">Сохранить</button>
     </form>
 @endsection

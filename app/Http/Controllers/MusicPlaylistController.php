@@ -53,7 +53,7 @@ class MusicPlaylistController extends Controller
             'title' => $request->title,
             'description' => $request->description,
             'image' => $image,
-            'is_active' => $request->has('is_active')
+            'is_active' => $request->has('is_active') ? 1 : 0
         ]);
 
         RelationshipInstrumentController::createRelationship($request->instruments, $playlist->id, 'playlist');

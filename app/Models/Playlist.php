@@ -13,6 +13,8 @@ class Playlist extends Model
         'title',
         'image',
         'description',
-        'is_active'
+        'is_active',
+        'seo_title',
+        'seo_description'
     ];
 }

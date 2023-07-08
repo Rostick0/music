@@ -120,7 +120,7 @@
             </label>
             <label class="admin-label">
                 <span>Изображение</span>
-                <input class="admin-input" type="file" name="seo_title" value="{{ old('seo_title') }}">
+                <input class="admin-input" type="file" name="image" value="{{ old('seo_title') }}">
                 @error('seo_title')
                     <span class="error">{{ $message }}</span>
                 @enderror

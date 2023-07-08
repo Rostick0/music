@@ -54,7 +54,7 @@ class SitePageController extends Controller
             'seo_title' => $request->seo_title,
             'seo_description' => $request->seo_description,
             'path' => $request->path,
-            'is_active' => $request->has('is_active')
+            'is_active' => $request->has('is_active') ? 1 : 0
         ]);
 
         return redirect()->route('page.edit', [
@@ -126,7 +126,7 @@ class SitePageController extends Controller
             'seo_title' => $request->seo_title,
             'seo_description' => $request->seo_description,
             'path' => $request->path,
-            'is_active' => $request->has('is_active')
+            'is_active' => $request->has('is_active') ? 1 : 0
         ]);
 
         return redirect()->route('page.edit', [

@@ -16,7 +16,7 @@ class UserController extends Controller
 
     public function show()
     {
-        return view('client.users');
+        return view('client.profile');
     }
 
     public function edit()

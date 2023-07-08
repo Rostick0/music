@@ -1,5 +1,5 @@
 @include('layout.head')
-
+@vite(['resources/scss/admin/index.scss'])
 
 <div class="admin-wrapper">
     <x-client_aside />

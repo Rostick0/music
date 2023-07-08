@@ -74,13 +74,7 @@ class MusicController extends Controller
             'name' => $request->music_artists
         ]);
 
-        $image = NULL;
-
-        if ($request->file('image')) {
-            $extension = $request->file('image')->getClientOriginalExtension();
-            $image = time() . '.' . $extension;
-            $request->file('image')->storeAs('public/upload/image', $image);
-        }
+        $image = ImageController::upload($request->file('image'));
 
         $music = Music::create([
             'music_artists_id' => $music_artists->id,
@@ -90,8 +84,8 @@ class MusicController extends Controller
             'publisher' => $request->publisher ?? NULL,
             'distr' => $request->distr,
             'genres_id' => $request->genres_id,
-            'is_active' => $request->has('is_active'),
-            'is_free' => $request->has('is_free'),
+            'is_active' => $request->has('is_active') ? 1 : 0,
+            'is_free' => $request->has('is_free') ? 1 : 0,
             'description' => $request->description ?? NULL,
             'image' => $image,
             'seo_title' => $request->seo_title ?? NULL,
