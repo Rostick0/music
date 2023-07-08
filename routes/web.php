@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ClientRemoveClaimController;
+use App\Http\Controllers\ClientStatisticController;
 use App\Http\Controllers\MusicController;
 use App\Http\Controllers\PlaylistController;
+use App\Http\Controllers\RemoveClaimController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\SitePageController;
 use App\Http\Controllers\StatisticController;
@@ -64,9 +67,18 @@ Route::group(['prefix' => 'client'], function ($router) {
 
     Route::get('register', [AuthController::class, 'show_register'])->name('client.register');
     Route::post('register', [AuthController::class, 'store_register']);
-    
-    Route::get('profile', [UserController::class, 'show'])->name('profile');
-    Route::get('profile_edit', [UserController::class, 'edit'])->name('profile.edit');
+
+    Route::get('music', [MusicController::class, 'index_client'])->name('client.music');
+
+    Route::get('subscriptions', [ClientSubscriptionController::class, 'index'])->name('client.subscriptions');
+
+    Route::get('statistic', [ClientStatisticController::class, 'index'])->name('client.statistic');
+
+    Route::get('remove_claim', [ClientRemoveClaimController::class, 'index'])->name('client.remove_claim');
+    Route::post('remove_claim', [ClientRemoveClaimController::class, 'store']);
+
+    Route::get('profile', [UserController::class, 'show'])->name('client.profile');
+    Route::get('profile_edit', [UserController::class, 'edit'])->name('client.profile.edit');
     Route::post('profile_edit', [UserController::class, 'update']);
     Route::post('profile_password', [UserController::class, 'password_update']);
 });

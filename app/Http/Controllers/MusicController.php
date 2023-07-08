@@ -29,6 +29,15 @@ class MusicController extends Controller
         ]);
     }
 
+    public function index_client()
+    {
+        $music_list = Music::paginate(20);
+
+        return view('client.music_list', [
+            'music_list' => $music_list
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

@@ -1,4 +1,4 @@
-@extends('layout.client')
+@extends('layout.admin')
 
 @section('html')
     

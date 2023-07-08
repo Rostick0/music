@@ -12,7 +12,7 @@ class RemoveClaimController extends Controller
      */
     public function index()
     {
-        //
+        return view('client.remove_claim');
     }
 
     /**
