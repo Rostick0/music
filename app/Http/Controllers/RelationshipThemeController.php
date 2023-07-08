@@ -43,6 +43,33 @@ class RelationshipThemeController extends Controller
         }
     }
 
+    static public function createAndDeleteRelationship($request_theme, int $type_id, string $type)
+    {
+        $themes = explode(',', $request_theme);
+        $array_id = [];
+
+        foreach ($themes as $theme) {
+            if (!trim($theme)) continue;
+
+            $value_theme = Theme::firstOrCreate([
+                'name' => trim(mb_strtolower($theme))
+            ]);
+
+            $relationship = RelationshipTheme::firstOrCreate([
+                'type' => $type,
+                'type_id' => $type_id,
+                'themes_id' => $value_theme->id
+            ]);
+
+            $array_id[] = $relationship->id;
+        }
+
+        RelationshipTheme::where([
+            ['type', '=', $type],
+            ['type_id', '=', $type_id]
+        ])->whereNotIn('id', $array_id)->delete();
+    }
+
     /**
      * Store a newly created resource in storage.
      */

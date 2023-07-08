@@ -24,6 +24,10 @@
         display: grid;
         grid-gap: 10px;
     }
+
+    &__image {
+        max-width: 500px;
+    }
 }
 
 .playlist-grid {

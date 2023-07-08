@@ -43,6 +43,33 @@ class RelationshipInstrumentController extends Controller
         }
     }
 
+    static public function createAndDeleteRelationship($request_instruments, int $type_id, string $type)
+    {
+        $instruments = explode(',', $request_instruments);
+        $array_id = [];
+
+        foreach ($instruments as $instrument) {
+            if (!trim($instrument)) continue;
+
+            $value_instrument = Instrument::firstOrCreate([
+                'name' => trim(mb_strtolower($instrument))
+            ]);
+
+            $relationship = RelationshipInstrument::firstOrCreate([
+                'type' => $type,
+                'type_id' => $type_id,
+                'instruments_id' => $value_instrument->id,
+            ]);
+
+            $array_id[] = $relationship->id;
+        }
+
+        RelationshipInstrument::where([
+            ['type', '=', $type],
+            ['type_id', '=', $type_id]
+        ])->whereNotIn('id', $array_id)->delete();
+    }
+
     /**
      * Store a newly created resource in storage.
      */

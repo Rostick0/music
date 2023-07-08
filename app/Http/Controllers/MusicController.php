@@ -71,7 +71,7 @@ class MusicController extends Controller
         ]);
 
         $music_artists = MusicArtist::firstOrCreate([
-            'name' => $request->music_artists
+            'name' => trim($request->music_artists)
         ]);
 
         $image = ImageController::upload($request->file('image'));
@@ -107,9 +107,50 @@ class MusicController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Music $music)
+    public function edit(int $id)
     {
-        return view('admin.music');
+        $music = Music::find($id);
+        $music_artist = MusicArtist::find($music->id);
+
+        $themes = RelationshipTheme::select('themes.name')->join('themes', 'relationship_themes.themes_id', '=', 'themes.id')
+            ->where([
+                ['relationship_themes.type_id', '=', $music->id],
+                ['relationship_themes.type', '=', 'music']
+            ])->get();
+        $themes = array_map(function ($item) {
+            return $item['name'];
+        },  [...$themes]);
+
+        $moods = RelationshipMood::select('moods.name')->join('moods', 'relationship_moods.moods_id', '=', 'moods.id')
+            ->where([
+                ['relationship_moods.type_id', '=', $music->id],
+                ['relationship_moods.type', '=', 'music']
+            ])->get();
+        $moods = array_map(function ($item) {
+            return $item['name'];
+        },  [...$moods]);
+
+        $instruments = RelationshipInstrument::select('instruments.name')->join('instruments', 'relationship_instruments.instruments_id', '=', 'instruments.id')
+            ->where([
+                ['relationship_instruments.type_id', '=', $music->id],
+                ['relationship_instruments.type', '=', 'music']
+            ])->get();
+        $instruments = array_map(function ($item) {
+            return $item['name'];
+        },  [...$instruments]);
+
+        $genres = Genre::all();
+
+        // dd($music);
+
+        return view('admin.music_edit', [
+            'music' => $music,
+            'music_artist' => $music_artist,
+            'themes' => implode(', ', $themes),
+            'moods' => implode(', ', $moods),
+            'instruments' => implode(', ', $instruments),
+            'genres' => $genres,
+        ]);
     }
 
     /**
@@ -118,81 +159,45 @@ class MusicController extends Controller
     public function update(Request $request, int $id)
     {
         $validator = $request->validate([
-            'music_artists_id' => 'required' . Rule::exists('music_artists', 'id'),
+            'music_artists' => 'required',
             'title' => 'required|max:255',
             'link' => 'required|max:255',
             'link_demo' => 'required|max:255',
             'publisher' => 'max:255',
             'distr' => 'max:255',
+            'date' => 'date',
             'genres_id' => 'required|' . Rule::exists('genres', 'id'),
-            'is_active' => 'required|in:0,1',
-            'is_free' => 'required|in:0,1',
             'description' => 'max:65536',
             'image' => 'image|mimes:jpeg,png,jpg',
             'seo_title' => 'max:255',
             'seo_description' => 'max:255'
         ]);
 
-        $music_db = Music::find($id);
+        $music_artists = MusicArtist::firstOrCreate([
+            'name' => trim($request->music_artists)
+        ]);
 
-        $image = $music_db->image;
+        $image = ImageController::upload($request->file('image'));
 
-        if ($request->file('image')) {
-            if (Storage::exists('public/upload/image' . $image)) Storage::delete('public/upload/image' . $image);
-
-            $extension = $request->file('image')->getClientOriginalExtension();
-            $image = time() . '.' . $extension;
-            $request->file('image')->storeAs('public/upload/image', $image);
-        }
-
-        $music = $music_db->update([
-            'music_artists_id' => $request->music_artists_id,
+        Music::find($id)->update([
+            'music_artists_id' => $music_artists->id,
             'title' => $request->title,
             'link' => $request->link,
             'link_demo' => $request->link_demo,
             'publisher' => $request->publisher ?? NULL,
             'distr' => $request->distr,
             'genres_id' => $request->genres_id,
-            'is_active' => $request->is_active,
-            'is_free' => $request->is_free,
+            'is_active' => $request->has('is_active') ? 1 : 0,
+            'is_free' => $request->has('is_free') ? 1 : 0,
             'description' => $request->description ?? NULL,
             'image' => $image,
             'seo_title' => $request->seo_title ?? NULL,
             'seo_description' => $request->seo_description ?? NULL,
         ]);
 
-        $instruments = $request->instruments;
-        foreach ($instruments as $instrument) {
-            $value_instrument = Instrument::firstOrCreate([
-                'name' => mb_strtolower($instrument)
-            ]);
-
-            $music->music_instruments()->firstOrCreate([
-                'name' => $value_instrument->name
-            ]);
-        }
-
-        $moods = $request->moods;
-        foreach ($moods as $mood) {
-            $value_mood = Mood::firstOrCreate([
-                'name' => mb_strtolower($mood)
-            ]);
-
-            $music->music_moods()->firstOrCreate([
-                'name' => $value_mood->name
-            ]);
-        }
-
-        $themes = $request->themes;
-        foreach ($themes as $theme) {
-            $value_theme = Mood::firstOrCreate([
-                'name' => mb_strtolower($theme)
-            ]);
-
-            $music->music_themes()->firstOrCreate([
-                'name' => $value_theme->name
-            ]);
-        }
+        RelationshipInstrumentController::createAndDeleteRelationship($request->instruments, $id, 'music');
+        RelationshipMoodController::createAndDeleteRelationship($request->moods, $id, 'music');
+        RelationshipThemeController::createAndDeleteRelationship($request->themes, $id, 'music');
     }
 
     /**

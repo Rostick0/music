@@ -47,6 +47,33 @@ class RelationshipMoodController extends Controller
         }
     }
 
+    static public function createAndDeleteRelationship($request_moods, int $type_id, string $type)
+    {
+        $moods = explode(',', $request_moods);
+        $array_id = [];
+
+        foreach ($moods as $mood) {
+            if (!trim($mood)) continue;
+
+            $value_mood = Mood::firstOrCreate([
+                'name' => trim(mb_strtolower($mood))
+            ]);
+
+            $relationship = RelationshipMood::firstOrCreate([
+                'type' => $type,
+                'type_id' => $type_id,
+                'moods_id' => $value_mood->id,
+            ]);
+
+            $array_id[] = $relationship->id;
+        }
+
+        RelationshipMood::where([
+            ['type', '=', $type],
+            ['type_id', '=', $type_id]
+        ])->whereNotIn('id', $array_id)->delete();
+    }
+
     /**
      * Store a newly created resource in storage.
      */

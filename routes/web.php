@@ -32,7 +32,7 @@ Route::group(['prefix' => 'admin'], function ($router) {
         Route::get('create', [MusicController::class, 'create'])->name('music.create');
         Route::post('create', [MusicController::class, 'store']);
         Route::get('{id}', [MusicController::class, 'edit'])->name('music.edit');
-        Route::post('{id}', [MusicController::class, 'create']);
+        Route::post('{id}', [MusicController::class, 'update']);
     });
 
     Route::get('music_kit/{id}', [SiteController::class, 'show'])->name('music_kit');
