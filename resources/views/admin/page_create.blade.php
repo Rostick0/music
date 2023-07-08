@@ -37,7 +37,7 @@
             </label>
             <label class="admin-label admin-form__flex_long">
                 <span>seo description</span>
-                <textarea class="admin-input" type="text" name="seo_description" rows="1">{{ old('seo_description') }}</textarea>
+                <textarea class="admin-input" name="seo_description" rows="1">{{ old('seo_description') }}</textarea>
                 @error('seo_description')
                     <span class="error">{{ $message }}</span>
                 @enderror

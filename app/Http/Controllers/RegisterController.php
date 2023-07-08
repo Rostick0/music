@@ -11,7 +11,7 @@ class RegisterController extends Controller
 {
     public function show()
     {
-        return view('client.register');
+        return view('register');
     }
 
     public function store(Request $request)
@@ -27,11 +27,12 @@ class RegisterController extends Controller
         ]);
 
         $user = User::create([
-            'name' =>  $request->name,
-            'surname' =>  $request->surname,
-            'nickname' =>  $request->nickname,
+            'name' => $request->name,
+            'surname' => $request->surname,
+            'nickname' => $request->nickname,
             'email' =>  $request->email,
             'password' => Hash::make($request->password),
+            'telephone' => $request->telephone
         ]);
 
         Auth::login($user);

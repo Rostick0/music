@@ -1,0 +1,60 @@
+.auth-form {
+    width: 100%;
+    max-width: 300px;
+
+    &__title {
+        font-size: 32px;
+        text-align: center;
+        margin-bottom: 32px;
+    }
+
+    &__inputs {
+        display: flex;
+        flex-direction: column;
+        grid-gap: 10px;
+        margin-bottom: 16px;
+    }
+
+    &__button {
+        text-transform: uppercase;
+        margin-bottom: 5px;
+        width: 100%;
+    }
+
+    &__bottom {
+        font-size: 14px;
+        text-align: center;
+    }
+
+    &__link {
+        color: rgb(16, 220, 220);
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    &-register {
+        max-width: 600px;
+
+        &__inputs {
+            flex-direction: row;
+            flex-wrap: wrap;
+
+            &>* {
+                flex-basis: calc(50% - 5px);
+            }
+        }
+
+        &__label-long {
+            flex-basis: 100%;
+        }
+
+        &__button {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 50%;
+        }
+    }
+}
