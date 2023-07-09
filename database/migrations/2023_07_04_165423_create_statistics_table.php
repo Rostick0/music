@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('type');
             $table->string('type_paid')->nullable();
             $table->foreignId('users_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreignId('music_id')->references('id')->on('music')->onDelete('cascade');
+            $table->integer('music_id')->nullable();
             $table->timestamps();
         });
     }

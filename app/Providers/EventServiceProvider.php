@@ -2,6 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\RemoveClaim;
+use App\Models\Subscription;
+use App\Models\User;
+use App\Observers\RemoveClaimObserver;
+use App\Observers\SubscriptionObserver;
+use App\Observers\UserObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -25,7 +31,9 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        User::observe(UserObserver::class);
+        RemoveClaim::observe(RemoveClaimObserver::class);
+        Subscription::observe(SubscriptionObserver::class);
     }
 
     /**

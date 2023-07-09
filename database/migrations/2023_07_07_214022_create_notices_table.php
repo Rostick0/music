@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('type');
             $table->integer('type_id');
-            $table->boolean('is_ready')->default(0);
+            $table->boolean('is_read')->default(0);
             $table->timestamps();
         });
     }
