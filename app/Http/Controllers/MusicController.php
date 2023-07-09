@@ -3,16 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Genre;
-use App\Models\Instrument;
-use App\Models\Mood;
 use App\Models\Music;
 use App\Models\MusicArtist;
 use App\Models\RelationshipInstrument;
 use App\Models\RelationshipMood;
 use App\Models\RelationshipTheme;
-use App\Models\Theme;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 class MusicController extends Controller
@@ -95,6 +91,10 @@ class MusicController extends Controller
         RelationshipInstrumentController::createRelationship($request->instruments, $music->id, 'music');
         RelationshipMoodController::createRelationship($request->moods, $music->id, 'music');
         RelationshipThemeController::createRelationship($request->themes, $music->id, 'music');
+
+        return redirect()->route('music.edit', [
+            'id' => $music->id
+        ]);
     }
 
     /**
@@ -109,39 +109,13 @@ class MusicController extends Controller
      */
     public function edit(int $id)
     {
-        $music = Music::find($id);
+        $music = Music::findOrFail($id);
         $music_artist = MusicArtist::find($music->id);
 
-        $themes = RelationshipTheme::select('themes.name')->join('themes', 'relationship_themes.themes_id', '=', 'themes.id')
-            ->where([
-                ['relationship_themes.type_id', '=', $music->id],
-                ['relationship_themes.type', '=', 'music']
-            ])->get();
-        $themes = array_map(function ($item) {
-            return $item['name'];
-        },  [...$themes]);
-
-        $moods = RelationshipMood::select('moods.name')->join('moods', 'relationship_moods.moods_id', '=', 'moods.id')
-            ->where([
-                ['relationship_moods.type_id', '=', $music->id],
-                ['relationship_moods.type', '=', 'music']
-            ])->get();
-        $moods = array_map(function ($item) {
-            return $item['name'];
-        },  [...$moods]);
-
-        $instruments = RelationshipInstrument::select('instruments.name')->join('instruments', 'relationship_instruments.instruments_id', '=', 'instruments.id')
-            ->where([
-                ['relationship_instruments.type_id', '=', $music->id],
-                ['relationship_instruments.type', '=', 'music']
-            ])->get();
-        $instruments = array_map(function ($item) {
-            return $item['name'];
-        },  [...$instruments]);
-
+        $themes = RelationshipThemeController::get($music->id, 'music');
+        $moods = RelationshipMoodController::get($music->id, 'music');
+        $instruments = RelationshipInstrumentController::get($music->id, 'music');
         $genres = Genre::all();
-
-        // dd($music);
 
         return view('admin.music_edit', [
             'music' => $music,
@@ -179,7 +153,7 @@ class MusicController extends Controller
 
         $image = ImageController::upload($request->file('image'));
 
-        Music::find($id)->update([
+        $update_data = [
             'music_artists_id' => $music_artists->id,
             'title' => $request->title,
             'link' => $request->link,
@@ -190,14 +164,21 @@ class MusicController extends Controller
             'is_active' => $request->has('is_active') ? 1 : 0,
             'is_free' => $request->has('is_free') ? 1 : 0,
             'description' => $request->description ?? NULL,
-            'image' => $image,
             'seo_title' => $request->seo_title ?? NULL,
             'seo_description' => $request->seo_description ?? NULL,
-        ]);
+        ];
+
+        if ($image) {
+            $update_data['image'] = $image;
+        }
+
+        Music::find($id)->update($update_data);
 
         RelationshipInstrumentController::createAndDeleteRelationship($request->instruments, $id, 'music');
         RelationshipMoodController::createAndDeleteRelationship($request->moods, $id, 'music');
         RelationshipThemeController::createAndDeleteRelationship($request->themes, $id, 'music');
+
+        return redirect()->back();
     }
 
     /**

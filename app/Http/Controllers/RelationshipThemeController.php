@@ -8,20 +8,18 @@ use Illuminate\Http\Request;
 
 class RelationshipThemeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    static public function get(int $type_id, string $type)
     {
-        //
-    }
+        $themes = RelationshipTheme::select('themes.name')->join('themes', 'relationship_themes.themes_id', '=', 'themes.id')
+            ->where([
+                ['relationship_themes.type_id', '=', $type_id],
+                ['relationship_themes.type', '=', $type]
+            ])->get();
+        $themes = array_map(function ($item) {
+            return $item['name'];
+        },  [...$themes]);
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return $themes;
     }
 
     // @param 'music|playlist' $type
@@ -68,45 +66,5 @@ class RelationshipThemeController extends Controller
             ['type', '=', $type],
             ['type_id', '=', $type_id]
         ])->whereNotIn('id', $array_id)->delete();
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(RelationshipTheme $relationshipTheme)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(RelationshipTheme $relationshipTheme)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, RelationshipTheme $relationshipTheme)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(RelationshipTheme $relationshipTheme)
-    {
-        //
     }
 }

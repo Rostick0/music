@@ -12,20 +12,20 @@ class Type
 
 class RelationshipMoodController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
+    // @param 'music|playlist' $type
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    static public function get(int $type_id, string $type)
     {
-        //
+        $moods = RelationshipMood::select('moods.name')->join('moods', 'relationship_moods.moods_id', '=', 'moods.id')
+            ->where([
+                ['relationship_moods.type_id', '=', $type_id],
+                ['relationship_moods.type', '=', $type]
+            ])->get();
+        $moods = array_map(function ($item) {
+            return $item['name'];
+        },  [...$moods]);
+
+        return $moods;
     }
 
     // @param 'music|playlist' $type
@@ -72,45 +72,5 @@ class RelationshipMoodController extends Controller
             ['type', '=', $type],
             ['type_id', '=', $type_id]
         ])->whereNotIn('id', $array_id)->delete();
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(RelationshipMood $relationshipMood)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(RelationshipMood $relationshipMood)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, RelationshipMood $relationshipMood)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(RelationshipMood $relationshipMood)
-    {
-        //
     }
 }

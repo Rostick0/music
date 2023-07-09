@@ -75,7 +75,7 @@
                 <span>Жанр</span>
                 <select class="admin-input" name="genres_id" required>
                     @foreach ($genres as $genre)
-                        <option {{ $genre->id == old('genres_id') || $genre->id == $music->genres_id ? 'selected' : '' }}
+                        <option {{ (old('genres_id') ?? $music->genres_id) == $genre->id ? 'selected' : '' }}
                             value="{{ $genre->id }}">{{ $genre->name }}
                         </option>
                     @endforeach
@@ -105,12 +105,13 @@
         <div class="admin-form__flex">
             <label class="admin-checkbox">
                 <input class="admin-checkbox__input" type="checkbox" name="is_active"
-                    {{ $music->is_active ? 'checked' : '' }}>
+                    {{ old('is_active') ?? $music->is_active ? 'checked' : '' }}>
                 <span class="admin-checkbox__icon"></span>
                 <span>Активен?</span>
             </label>
             <label class="admin-checkbox">
-                <input class="admin-checkbox__input" type="checkbox" name="is_free" {{ $music->is_free ? 'checked' : '' }}>
+                <input class="admin-checkbox__input" type="checkbox" name="is_free"
+                    {{ old('is_free') ?? $music->is_free ? 'checked' : '' }}>
                 <span class="admin-checkbox__icon"></span>
                 <span>Бесплатный?</span>
             </label>
