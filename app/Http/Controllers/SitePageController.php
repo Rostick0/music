@@ -26,7 +26,7 @@ class SitePageController extends Controller
      */
     public function create()
     {
-        return view('page_create');
+        return view('admin.page_create');
     }
 
     /**
@@ -45,8 +45,6 @@ class SitePageController extends Controller
         $path = $this->get_path($request->url);
 
         $file = File::put($path, $request->content);
-
-        // if (!File::exists($path)) return back();
 
         $site_page = SitePage::create([
             'name' => $request->name,
@@ -67,22 +65,16 @@ class SitePageController extends Controller
      */
     public function show(string $url, $id = null)
     {
-        // $link = SiteLinks::where('url', $url)->firstOrFail();
-        // $page = SitePage::find($link->site_pages_id)->firstOrFail();
-
         $path = $this->get_path($url);
-        // dd($path);
 
         // File::put(resource_path("views/pages_db/dd.blade.php"), 'ddadasd');
         // File::delete(resource_path("views/pages_db/dd.blade.php"));
 
-        if (!File::exists($path)) return abort(404);;
+        if (!File::exists($path)) return abort(404);
 
         $page = File::get($path);
 
-        dd($page);
-
-        return view('pages_db.test', [
+        return view('pages_db.' . $path, [
             'id' => $id,
             'page' => $page
         ]);
@@ -91,9 +83,20 @@ class SitePageController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(SitePage $sitePage)
+    public function edit(int $id)
     {
-        //
+        $page = SitePage::findOrFail($id);
+
+        $path = $this->get_path($page->url);
+
+        if (!File::exists($path)) return abort(404);
+
+        $content = File::get($path);
+
+        return view('admin.page_edit', [
+            'page' => $page,
+            'content' => $content
+        ]);
     }
 
     /**
@@ -103,10 +106,10 @@ class SitePageController extends Controller
     {
         $validator = $request->validate([
             'name' => 'required|max:255',
-            'url' => 'required|max:255|unique:site_pages',
+            'url' => 'required|max:255|unique:site_pages,url,' . $id,
             'seo_title' => 'max:255',
             'seo_description' => 'max:255',
-            'path' => 'required|max:255'
+            'path' => 'required|max:255|unique:site_pages,path,' . $id,
         ]);
 
         $old_page = SitePage::find($id);
@@ -129,9 +132,7 @@ class SitePageController extends Controller
             'is_active' => $request->has('is_active') ? 1 : 0
         ]);
 
-        return redirect()->route('page.edit', [
-            'id' => $id
-        ]);
+        return redirect()->back();
     }
 
     /**

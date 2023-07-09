@@ -14,63 +14,63 @@ class SitePageSeeder extends Seeder
             'url' => 'about',
             'seo_title' => 'about',
             'seo_description' => 'about',
-            'path' => 'about.blade.php'
+            'path' => 'about'
         ],
         [
             'name' => 'contacts',
             'url' => 'contacts',
             'seo_title' => 'contacts',
             'seo_description' => 'contacts',
-            'path' => 'contacts.blade.php'
+            'path' => 'contacts'
         ],
         [
             'name' => 'favorite',
             'url' => 'favorite',
             'seo_title' => 'favorite',
             'seo_description' => 'favorite',
-            'path' => 'favorite.blade.php'
+            'path' => 'favorite'
         ],
         [
             'name' => 'home',
             'url' => 'home',
             'seo_title' => 'home',
             'seo_description' => 'home',
-            'path' => 'home.blade.php'
+            'path' => 'home'
         ],
         [
             'name' => 'playlists',
             'url' => 'playlists',
             'seo_title' => 'playlists',
             'seo_description' => 'playlists',
-            'path' => 'playlists.blade.php'
+            'path' => 'playlists'
         ],
         [
             'name' => 'pricing',
             'url' => 'pricing',
             'seo_title' => 'pricing',
             'seo_description' => 'pricing',
-            'path' => 'pricing.blade.php'
+            'path' => 'pricing'
         ],
         [
             'name' => 'sign_in',
             'url' => 'sign_in',
             'seo_title' => 'sign_in',
             'seo_description' => 'sign_in',
-            'path' => 'sign_in.blade.php'
+            'path' => 'sign_in'
         ],
         [
             'name' => 'sign_up',
             'url' => 'sign_up',
             'seo_title' => 'sign_up',
             'seo_description' => 'sign_up',
-            'path' => 'sign_up.blade.php'
+            'path' => 'sign_up'
         ],
         [
             'name' => 'tracks',
             'url' => 'tracks',
             'seo_title' => 'tracks',
             'seo_description' => 'tracks',
-            'path' => 'tracks.blade.php'
+            'path' => 'tracks'
         ]
     ];
 
