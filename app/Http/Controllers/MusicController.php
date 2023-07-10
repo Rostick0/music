@@ -18,7 +18,12 @@ class MusicController extends Controller
      */
     public function index()
     {
-        $music_list = Music::paginate(20);
+        $music_list = Music::select(
+            'music.*',
+            'genres.name as genre_name'
+        )
+            ->join('genres', 'music.genres_id', '=', 'genres.id')
+            ->paginate(20);
 
         return view('admin.music_list', [
             'music_list' => $music_list
