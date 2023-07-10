@@ -1,0 +1,24 @@
+.admin-pagination {
+    display: flex;
+    column-gap: 4px;
+    justify-content: center;
+    margin-top: 20px;
+
+    &__link {
+        border: 1px solid #979797;
+        text-align: center;
+        padding: 4px;
+        transition: 200ms;
+        min-width: 28px;
+
+        &:hover {
+            background-color: #e9e9e9;
+        }
+
+        &._active {
+            background-color: #000;
+            color: #fff;
+            border-color: #000;
+        }
+    }
+}

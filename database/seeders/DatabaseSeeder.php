@@ -22,7 +22,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             GenreSeeder::class,
+            MusicSeeder::class,
             SitePageSeeder::class,
+            RemoveClaimSeeder::class,
             StatisticSeeder::class,
             NoticeSeeder::class
         ]);

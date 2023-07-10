@@ -4,6 +4,7 @@ use App\Http\Controllers\ClientRemoveClaimController;
 use App\Http\Controllers\ClientStatisticController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MusicController;
+use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RemoveClaimController;
@@ -62,6 +63,8 @@ Route::group(['prefix' => 'admin'], function ($router) {
         Route::get('{id}', [SitePageController::class, 'edit'])->name('page.edit');
         Route::post('{id}', [SitePageController::class, 'update']);
     });
+
+    Route::get('notices', [NoticeController::class, 'index'])->name('notices');
 });
 
 Route::group(['prefix' => 'client'], function ($router) {

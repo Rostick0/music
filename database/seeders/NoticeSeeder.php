@@ -10,11 +10,11 @@ class NoticeSeeder extends Seeder
 {
     private $notices = [
         [
-            'type' => 'remove_claim',
+            'type' => 'remove_claims',
             'type_id' => 1
         ],
         [
-            'type' => 'remove_claim',
+            'type' => 'remove_claims',
             'type_id' => 2
         ]
     ];
