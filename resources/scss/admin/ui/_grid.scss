@@ -4,6 +4,7 @@
     &__content_item {
         display: grid;
         grid-gap: 5px;
+        padding: 8px 4px;
         word-break: break-all;
         overflow-wrap: anywhere;
     }
@@ -13,25 +14,31 @@
         margin-bottom: 20px;
     }
 
+    &__content_item {
+        border-bottom: 1px solid #000;
+        font-size: 16px;
+        margin-bottom: 8px;
+
+        &:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+    }
+
     &-notice {
 
         &__titles,
         &__content_item {
             grid-template-columns: .2fr 0.7fr 2fr .5fr .5fr repeat(2, 1fr) 152px;
-            padding: 8px 4px;
         }
+    }
 
+    &-music {
+
+        &__titles,
         &__content_item {
-            border-bottom: 1px solid #000;
-            font-size: 16px;
-            // padding-bottom: 8px;
-            margin-bottom: 8px;
-
-            &:last-child {
-                border-bottom: none;
-                padding-bottom: 0;
-                margin-bottom: 0;
-            }
+            grid-template-columns: .2fr 1fr 1.8fr 1fr .5fr .7fr .6fr .6fr 152px;
         }
     }
 }

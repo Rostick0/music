@@ -16,17 +16,28 @@ class MusicController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $where_sql = [];
+
+        if ($request->title) $where_sql[] = ['music.title', 'LIKE', '%' . $request->title . '%'];
+        if ($request->genres_id) $where_sql[] = ['music.genres_id', '=', $request->genres_id];
+
         $music_list = Music::select(
             'music.*',
-            'genres.name as genre_name'
+            'genres.name as genre_name',
+            'music_artists.name as music_artist_name'
         )
+            ->join('music_artists', 'music.music_artists_id', '=', 'music_artists.id')
             ->join('genres', 'music.genres_id', '=', 'genres.id')
+            ->where($where_sql)
             ->paginate(20);
 
+        $genres = Genre::all();
+
         return view('admin.music_list', [
-            'music_list' => $music_list
+            'music_list' => $music_list,
+            'genres' => $genres
         ]);
     }
 
