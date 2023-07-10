@@ -32,7 +32,7 @@ class GenreSeeder extends Seeder
     public function run(): void
     {
         foreach ($this->genres as $genre) {
-            Genre::create([
+            Genre::firstOrCreate([
                 'name' => $genre
             ]);
         }

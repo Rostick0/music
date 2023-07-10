@@ -15,13 +15,6 @@ class SitePageController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-    }
-
-    /**
      * Show the form for creating a new resource.
      */
     public function create()
@@ -72,11 +65,9 @@ class SitePageController extends Controller
 
         if (!File::exists($path)) return abort(404);
 
-        $page = File::get($path);
-
-        return view('pages_db.' . $path, [
+        return view('pages_db.' . $url, [
             'id' => $id,
-            'page' => $page
+            // 'page' => $page
         ]);
     }
 

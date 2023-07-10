@@ -79,6 +79,8 @@ class SitePageSeeder extends Seeder
      */
     public function run(): void
     {
-        SitePage::insert($this->pages);
+        foreach ($this->pages as $page) {
+            SitePage::firstOrCreate($page);
+        }
     }
 }
