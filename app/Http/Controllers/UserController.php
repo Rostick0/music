@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\RemoveClaim;
 use App\Models\Subscription;
 use App\Models\User;
 use Doctrine\Inflector\Rules\Substitution;
@@ -40,9 +41,15 @@ class UserController extends Controller
             ->orderByDesc('id')
             ->first();
 
+        $remove_claims = RemoveClaim::where('users_id', $id)
+            ->orderByDesc('id')
+            ->paginate(10);
+
+
         return view('admin.user_edit', [
             'user' => $user,
-            'subscription' => $subscription
+            'subscription' => $subscription,
+            'remove_claims' => $remove_claims
         ]);
     }
 

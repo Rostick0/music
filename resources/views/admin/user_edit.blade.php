@@ -65,7 +65,30 @@
                 <span>Активен?</span>
             </label>
         </div>
-
-        <button class="admin-button">Сохранить изменения</button>
+        {{-- <button class="admin-button">Сохранить изменения</button> --}}
     </form>
+    @if (!empty($remove_claims))
+        <div class="admin-remove-claim">
+            <h2 class="admin-remove-claim__title">Заявки на remove claim</h2>
+            @foreach ($remove_claims as $remove_claim)
+                <ul class="admin-remove-claim__list">
+                    <li class="admin-remove-claim__item">
+                        <a class="admin-label" target="_blank" href={{ $remove_claim->link }}>
+                            <span>Remove claim</span>
+                            <span class="admin-input text-ellipsis"
+                                title="{{ $remove_claim->link }}">{{ $remove_claim->link }}</span>
+                        </a>
+                        <label class="admin-label">
+                            <span>Дата</span>
+                            <span class="admin-input">{{ $remove_claim->created_at }}</span>
+                        </label>
+                        <label class="admin-label">
+                            <span>Статус</span>
+                            <span class="admin-input">{{ $remove_claim->status }}</span>
+                        </label>
+                    </li>
+                </ul>
+            @endforeach
+        </div>
+    @endif
 @endsection

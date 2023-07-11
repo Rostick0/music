@@ -1,0 +1,23 @@
+.admin-remove-claim {
+    margin-top: 100px;
+
+    &__title {
+        margin-bottom: 20px;
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        row-gap: 14px;
+    }
+
+    &__item {
+        display: flex;
+        column-gap: 10px;
+
+        &>* {
+            flex-grow: 0;
+            flex-basis: calc(25% - 10px);
+        }
+    }
+}
