@@ -45,7 +45,8 @@
             display: inline-block;
             opacity: 0;
             transition: 200ms;
-            transform: rotate(135deg) translate(-20%, 20%);
+            transform: rotate(135deg);
+            margin-top: -3px;
             width: 8px;
             height: 5px;
         }

@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Genre;
+use App\Models\Instrument;
+use App\Models\Mood;
 use App\Models\Music;
 use App\Models\MusicArtist;
 use App\Models\RelationshipInstrument;
 use App\Models\RelationshipMood;
 use App\Models\RelationshipTheme;
+use App\Models\Theme;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -19,7 +22,6 @@ class MusicController extends Controller
     public function index(Request $request)
     {
         $where_sql = [];
-
         if ($request->title) $where_sql[] = ['music.title', 'LIKE', '%' . $request->title . '%'];
         if ($request->genres_id) $where_sql[] = ['music.genres_id', '=', $request->genres_id];
 
@@ -30,14 +32,38 @@ class MusicController extends Controller
         )
             ->join('music_artists', 'music.music_artists_id', '=', 'music_artists.id')
             ->join('genres', 'music.genres_id', '=', 'genres.id')
-            ->where($where_sql)
-            ->paginate(20);
+            ->where($where_sql);
+        if ($request->themes) {
+            $music_list->whereIn('music.id', RelationshipTheme::select('type_id')
+                ->where('type', 'music')
+                ->whereIn('themes_id', $request->themes)
+                ->get());
+        }
+        if ($request->instruments) {
+            $music_list->whereIn('music.id', RelationshipInstrument::select('type_id')
+                ->where('type', 'music')
+                ->whereIn('instruments_id', $request->instruments)
+                ->get());
+        }
+        if ($request->moods) {
+            $music_list->whereIn('music.id', RelationshipMood::select('type_id')
+                ->where('type', 'music')
+                ->whereIn('moods_id', $request->moods)
+                ->get());
+        }
+        $music_list = $music_list->paginate(20);
 
         $genres = Genre::all();
+        $themes = Theme::all();
+        $instruments = Instrument::all();
+        $moods = Mood::all();
 
         return view('admin.music_list', [
             'music_list' => $music_list,
-            'genres' => $genres
+            'genres' => $genres,
+            'themes' => $themes,
+            'instruments' => $instruments,
+            'moods' => $moods
         ]);
     }
 

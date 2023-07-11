@@ -12,11 +12,55 @@
                     </option>
                 @endforeach
             </select>
-            <input class="admin-input" type="search" placeholder="Тема">
-            <input class="admin-input" type="search" placeholder="Инструменты">
-            <input class="admin-input" type="search" placeholder="Настроение">
+            <details class="admin-details">
+                <summary class="admin-details__summary">
+                    <div class="admin-input">Тема</div>
+                </summary>
+                <div class="admin-details__content">
+                    @foreach ($themes as $theme)
+                        <label class="admin-checkbox">
+                            <input class="admin-checkbox__input" type="checkbox" name="themes[]"
+                                value="{{ $theme->id }}">
+                            <span class="admin-checkbox__icon"></span>
+                            <span>{{ $theme->name }}</span>
+                        </label>
+                    @endforeach
+                </div>
+            </details>
+            <details class="admin-details">
+                <summary class="admin-details__summary">
+                    <div class="admin-input">Инструменты</div>
+                </summary>
+                <div class="admin-details__content">
+                    @foreach ($instruments as $instrument)
+                        <label class="admin-checkbox">
+                            <input class="admin-checkbox__input" type="checkbox" name="instruments[]"
+                                value="{{ $instrument->id }}" @if (1) checked @endif>
+                            <span class="admin-checkbox__icon"></span>
+                            <span>{{ $instrument->name }}</span>
+                        </label>
+                    @endforeach
+                </div>
+            </details>
+            <details class="admin-details">
+                <summary class="admin-details__summary">
+                    <div class="admin-input">Настроение</div>
+                </summary>
+                <div class="admin-details__content">
+                    @foreach ($moods as $mood)
+                        <label class="admin-checkbox">
+                            <input class="admin-checkbox__input" type="checkbox" name="moods[]" value="{{ $mood->id }}">
+                            <span class="admin-checkbox__icon"></span>
+                            <span>{{ $mood->name }}</span>
+                        </label>
+                    @endforeach
+                </div>
+            </details>
         </div>
-        <button class="admin-button admin-filter__button">Поиск</button>
+        <div class="admin-filter__buttons">
+            <button class="admin-button admin-filter__button">Поиск</button>
+            <a class="admin-button-red admin-filter__button" href="{{url()->current()}}">Сброс</a>
+        </div>
     </form>
     <div class="admin-grid">
         <div class="admin-grid__titles admin-grid-music__titles">

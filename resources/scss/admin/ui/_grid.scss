@@ -17,7 +17,10 @@
     &__content_item {
         border-bottom: 1px solid #000;
         font-size: 16px;
-        margin-bottom: 8px;
+
+        &._active{
+            font-weight: 700;
+        }
 
         &:last-child {
             border-bottom: none;

@@ -14,7 +14,8 @@
         </div>
         <ul class="admin-grid__content admin-grid-notice__content">
             @foreach ($notices as $notice)
-                <li class="admin-grid__content_item admin-grid-notice__content_item">
+                <li
+                    class="admin-grid__content_item admin-grid-notice__content_item @if (!$notice->is_read) _active @endif">
                     <div>{{ $notice->id }}</div>
                     <div>{{ $notice->type }}</div>
                     <a class="text-ellipsis" title="{{ $notice->remove_claim_link }}" target="_blank"
