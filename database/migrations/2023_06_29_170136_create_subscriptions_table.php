@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
+            $table->foreignId('subscription_types_id')->references('id')->on('subscription_types')->onDelete('cascade');
             $table->foreignId('users_id')->references('id')->on('users')->onDelete('cascade');
+            $table->boolean('is_auto_renewal')->default(0);
+            $table->timestamp('date_end');
             $table->timestamps();
         });
     }

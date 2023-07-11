@@ -26,7 +26,7 @@
                 <span>Ссылка на трэк</span>
                 <input class="admin-input" type="text" name="link" maxlength="255"
                     value="{{ old('link') ?? $music->link }}" required>
-                @error('music_artists')
+                @error('link')
                     <span class="error">{{ $message }}</span>
                 @enderror
             </label>

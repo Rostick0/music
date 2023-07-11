@@ -31,9 +31,13 @@ class UserController extends Controller
     {
     }
 
-    public function edit()
+    public function edit(int $id)
     {
-        return view('admin.user_edit');
+        $user = User::find($id);
+
+        return view('admin.user_edit', [
+            'user' => $user
+        ]);
     }
 
     /**

@@ -52,7 +52,7 @@ Route::group(['prefix' => 'admin'], function ($router) {
 
     Route::group(['prefix' => 'users'], function ($router) {
         Route::get('/', [UserController::class, 'index'])->name('user.list');
-        Route::get('{id}', [UserController::class, 'show'])->name('user.edit');
+        Route::get('{id}', [UserController::class, 'edit'])->name('user.edit');
     });
 
     Route::get('settings', [SiteController::class, 'index'])->name('settings');
