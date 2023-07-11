@@ -52,4 +52,12 @@
             grid-template-columns: .2fr repeat(4, 1fr) .7fr 152px;
         }
     }
+
+    &-statistic {
+
+        &__titles,
+        &__content_item {
+            grid-template-columns: .2fr 1fr .7fr 152px;
+        }
+    }
 }

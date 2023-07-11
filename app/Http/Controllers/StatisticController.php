@@ -12,7 +12,19 @@ class StatisticController extends Controller
      */
     public function index()
     {
-        return view('admin.statistic_list');
+        $statistics = Statistic::select(
+            'statistics.*',
+            'users.email as user_email',
+            'music.title as music_title'
+        )
+            ->join('users', 'users.id', '=', 'statistics.users_id')
+            ->leftJoin('music', 'music.id', '=', 'statistics.music_id')
+            ->orderByDesc('statistics.id')
+            ->paginate(20);
+
+        return view('admin.statistic_list', [
+            'statistics' => $statistics
+        ]);
     }
 
     /**
