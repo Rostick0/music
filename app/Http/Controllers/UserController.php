@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -9,30 +10,36 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.users');
+        $where_sql = [];
+
+        if ($request->name) $where_sql[] = ['name', 'LIKE', '%' . $request->name . '%'];
+        if ($request->surname) $where_sql[] = ['surname', 'LIKE', '%' . $request->surname . '%'];
+        if ($request->email) $where_sql[] = ['email', 'LIKE', '%' . $request->email . '%'];
+
+        $users = User::where($where_sql)
+            ->orderByDesc('id')
+            ->paginate(20);
+
+        return view('admin.user_list', [
+            'users' => $users
+        ]);
     }
 
     public function show()
     {
-        return view('client.profile');
     }
 
     public function edit()
     {
-        return view('client.profile_edit');
+        return view('admin.user_edit');
     }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request)
-    {
-        //
-    }
-
-    public function password_update(Request $request)
     {
         //
     }

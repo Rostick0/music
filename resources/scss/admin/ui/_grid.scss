@@ -18,7 +18,7 @@
         border-bottom: 1px solid #000;
         font-size: 16px;
 
-        &._active{
+        &._active {
             font-weight: 700;
         }
 
@@ -33,7 +33,7 @@
 
         &__titles,
         &__content_item {
-            grid-template-columns: .2fr 0.7fr 2fr .5fr .5fr repeat(2, 1fr) 152px;
+            grid-template-columns: .2fr 0.7fr 2fr .5fr .5fr 1fr 1fr 152px;
         }
     }
 
@@ -42,6 +42,14 @@
         &__titles,
         &__content_item {
             grid-template-columns: .2fr 1fr 1.8fr 1fr .5fr .7fr .6fr .6fr 152px;
+        }
+    }
+
+    &-user {
+
+        &__titles,
+        &__content_item {
+            grid-template-columns: .2fr repeat(4, 1fr) .7fr 152px;
         }
     }
 }
