@@ -25,7 +25,7 @@ class SubscriptionTypeSeeder extends Seeder
     public function run(): void
     {
         foreach ($this->subscription_types as $type) {
-            SubscriptionType::create($type);
+            SubscriptionType::firstOrCreate($type);
         }
     }
 }

@@ -44,23 +44,15 @@
             </label>
             <label class="admin-label">
                 <span>Дата начало подписки</span>
-                <input class="admin-input" type="text" name="distr" maxlength="255"
-                    value="{{ old('distr') ?? $user->distr }}">
-                @error('distr')
-                    <span class="error">{{ $message }}</span>
-                @enderror
+                <span class="admin-input">{{ $subscription->created_at ?? '-' }}</span>
             </label>
             <label class="admin-label">
                 <span>Дата окончания</span>
-                <input class="admin-input" type="text" name="distr" maxlength="255"
-                    value="{{ old('distr') ?? $user->distr }}">
-                @error('distr')
-                    <span class="error">{{ $message }}</span>
-                @enderror
+                <span class="admin-input">{{ $subscription->date_end ?? '-' }}</span>
             </label>
             <label class="admin-checkbox">
-                <input class="admin-checkbox__input" type="checkbox" name="is_free"
-                    {{ old('is_free') ?? $user->is_free ? 'checked' : '' }}>
+                <input class="admin-checkbox__input" type="checkbox" name="is_auto_renewal"
+                    {{ old('is_auto_renewal') ?? ($subscription->is_auto_renewal ?? false) ? 'checked' : '' }} disabled>
                 <span class="admin-checkbox__icon"></span>
                 <span>Автопродление подписки?</span>
             </label>
@@ -73,7 +65,7 @@
                 <span>Активен?</span>
             </label>
         </div>
-        
+
         <button class="admin-button">Сохранить изменения</button>
     </form>
 @endsection

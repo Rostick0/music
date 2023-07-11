@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Subscription;
 use App\Models\User;
+use Doctrine\Inflector\Rules\Substitution;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -34,9 +36,13 @@ class UserController extends Controller
     public function edit(int $id)
     {
         $user = User::find($id);
+        $subscription = Subscription::where('users_id', $id)
+            ->orderByDesc('id')
+            ->first();
 
         return view('admin.user_edit', [
-            'user' => $user
+            'user' => $user,
+            'subscription' => $subscription
         ]);
     }
 
