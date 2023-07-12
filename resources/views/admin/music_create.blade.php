@@ -5,7 +5,7 @@
         @csrf
         <div class="admin-form__flex">
             <label class="admin-label">
-                <span>Исполнитель</span>
+                <span>Исполнитель*</span>
                 <input class="admin-input" type="text" name="music_artists" maxlength="255"
                     value="{{ old('music_artists') }}" required>
                 @error('music_artists')
@@ -13,7 +13,7 @@
                 @enderror
             </label>
             <label class="admin-label">
-                <span>Название</span>
+                <span>Название*</span>
                 <input class="admin-input" type="text" name="title" maxlength="255" value="{{ old('title') }}"
                     required>
                 @error('title')
@@ -23,7 +23,7 @@
         </div>
         <div class="admin-form__flex">
             <label class="admin-label">
-                <span>Ссылка на трэк</span>
+                <span>Ссылка на трэк*</span>
                 <input class="admin-input" type="text" name="link" maxlength="255" value="{{ old('link') }}"
                     required>
                 @error('link')
@@ -32,8 +32,7 @@
             </label>
             <label class="admin-label">
                 <span>Ссылка на демо трэк</span>
-                <input class="admin-input" type="text" name="link_demo" maxlength="255" value="{{ old('link_demo') }}"
-                    required>
+                <input class="admin-input" type="text" name="link_demo" maxlength="255" value="{{ old('link_demo') }}">
                 @error('link_demo')
                     <span class="error">{{ $message }}</span>
                 @enderror
@@ -70,7 +69,7 @@
                 @enderror
             </label>
             <label class="admin-label">
-                <span>Жанр</span>
+                <span>Жанр*</span>
                 <select class="admin-input" name="genres_id" required>
                     @foreach ($genres as $genre)
                         <option {{ $genre->id == old('genres_id') ? 'selected' : '' }} value="{{ $genre->id }}">

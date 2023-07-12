@@ -5,7 +5,7 @@
         @csrf
         <div class="admin-form__gird playlist-grid">
             <label class="admin-label">
-                <span>Название</span>
+                <span>Название*</span>
                 <input class="admin-input" type="text" name="title" maxlength="255"
                     value="{{ old('title') ?? $playlist->title }}" required>
                 @error('title')
@@ -34,7 +34,7 @@
         @endif
         <div class="admin-form__flex">
             <label class="admin-label">
-                <span>Жанр</span>
+                <span>Жанр*</span>
                 <select class="admin-input" name="genres_id" required>
                     @foreach ($genres as $genre)
                         <option {{ (old('genres_id') ?? $playlist->genres_id) == $genre->id ? 'selected' : '' }}

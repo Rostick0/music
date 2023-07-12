@@ -5,7 +5,7 @@
         @csrf
         <div class="admin-form__flex">
             <label class="admin-label">
-                <span>Имя</span>
+                <span>Имя*</span>
                 <input class="admin-input" type="text" name="name" maxlength="255" value="{{ old('name') ?? $user->name }}"
                     required>
                 @error('name')
@@ -13,7 +13,7 @@
                 @enderror
             </label>
             <label class="admin-label">
-                <span>Фамилия</span>
+                <span>Фамилия*</span>
                 <input class="admin-input" type="text" name="surname" maxlength="255"
                     value="{{ old('surname') ?? $user->surname }}" required>
                 @error('surname')
@@ -21,7 +21,7 @@
                 @enderror
             </label>
             <label class="admin-label">
-                <span>Эл. почта</span>
+                <span>Эл. почта*</span>
                 <input class="admin-input" type="text" name="email" maxlength="255"
                     value="{{ old('email') ?? $user->email }}" required>
                 @error('email')
@@ -31,7 +31,7 @@
             <label class="admin-label">
                 <span>Телефон</span>
                 <input class="admin-input" type="tel" name="telephone" maxlength="255"
-                    value="{{ old('telephone') ?? $user->telephone }}" required>
+                    value="{{ old('telephone') ?? $user->telephone }}">
                 @error('telephone')
                     <span class="error">{{ $message }}</span>
                 @enderror

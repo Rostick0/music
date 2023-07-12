@@ -5,14 +5,14 @@
         @csrf
         <div class="admin-form__flex">
             <label class="admin-label">
-                <span>Название</span>
+                <span>Название*</span>
                 <input class="admin-input" type="text" name="name" maxlength="255" value="{{ old('name') }}" required>
                 @error('name')
                     <span class="error">{{ $message }}</span>
                 @enderror
             </label>
             <label class="admin-label">
-                <span>URL</span>
+                <span>URL*</span>
                 <input class="admin-input" type="text" name="url" maxlength="255" value="{{ old('url') }}"
                     required>
                 @error('url')
@@ -20,7 +20,7 @@
                 @enderror
             </label>
             <label class="admin-label">
-                <span>Путь</span>
+                <span>Путь*</span>
                 <input class="admin-input" type="text" name="path" maxlength="255" value="{{ old('path') }}"
                     required>
                 @error('path')
@@ -54,7 +54,7 @@
         </div>
         <div class="admin-form__flex">
             <label class="admin-label admin-form__flex_long admin-form__flex_100">
-                <span>Контент сайта</span>
+                <span>Контент страницы</span>
                 <textarea class="summernote" name="content" id="content">{{ old('content') }}</textarea>
                 @error('content')
                     <span class="error">{{ $message }}</span>
