@@ -13,7 +13,7 @@ class UserObserver
     public function created(User $user): void
     {
         Statistic::create([
-            'type' => 'register',
+            'statistic_types_id' => 2,
             'users_id' => $user->id
         ]);
     }

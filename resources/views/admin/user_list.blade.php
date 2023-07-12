@@ -3,9 +3,11 @@
 @section('html')
     <form class="admin-filter" action="{{ url()->current() }}">
         <div class="admin-filter__inputs">
-            <input class="admin-input" type="search" placeholder="Имя" name="name">
-            <input class="admin-input" type="search" placeholder="Фамилия" name="surname">
-            <input class="admin-input" type="search" placeholder="E-mail" name="email">
+            <input class="admin-input" type="search" placeholder="Имя" name="name" value="{{ Request::get('name') }}">
+            <input class="admin-input" type="search" placeholder="Фамилия" name="surname"
+                value="{{ Request::get('surname') }}">
+            <input class="admin-input" type="search" placeholder="E-mail" name="email"
+                value="{{ Request::get('email') }}">
         </div>
         <div class="admin-filter__buttons">
             <button class="admin-button admin-filter__button">Поиск</button>

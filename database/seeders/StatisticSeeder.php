@@ -10,22 +10,22 @@ class StatisticSeeder extends Seeder
 {
     private $statistics = [
         [
-            'type' => 'subscription',
+            'statistic_types_id' => 1,
             'type_paid' => 'month',
             'users_id' => 1,
         ],
         [
-            'type' => 'register',
+            'statistic_types_id' => 2,
             'users_id' => 4,
         ],
         [
-            'type' => 'download',
+            'statistic_types_id' => 3,
             'type_paid' => 'month',
             'users_id' => 1,
             'music_id' => 1
         ],
         [
-            'type' => 'subscription',
+            'statistic_types_id' => 1,
             'type_paid' => 'year',
             'users_id' => 3,
         ]

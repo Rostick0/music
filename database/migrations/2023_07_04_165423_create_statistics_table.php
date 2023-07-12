@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('statistics', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
+            $table->foreignId('statistic_types_id')->references('id')->on('statistic_types')->onDelete('cascade');;
             $table->string('type_paid')->nullable();
             $table->foreignId('users_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('music_id')->nullable();

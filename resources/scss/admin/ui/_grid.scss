@@ -60,4 +60,11 @@
             grid-template-columns: .2fr 1fr .7fr 152px;
         }
     }
+
+    &-subscription {
+        &__titles,
+        &__content_item {
+            grid-template-columns: .2fr .5fr 1fr .5fr 152px 152px;
+        }
+    }
 }

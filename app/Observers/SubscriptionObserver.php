@@ -13,7 +13,7 @@ class SubscriptionObserver
     public function created(Subscription $subscription): void
     {
         Statistic::create([
-            'type' => 'subscription',
+            'statistic_types_id' => 1,
             'type_paid' => $subscription->type,
             'users_id' => $subscription->users_id
         ]);
