@@ -13,6 +13,8 @@ use App\Models\RelationshipTheme;
 use App\Models\Theme;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\File;
+use wapmorgan\Mp3Info\Mp3Info;
 
 class MusicController extends Controller
 {
@@ -97,7 +99,7 @@ class MusicController extends Controller
             'music_artists' => 'required',
             'title' => 'required|max:255',
             'link' => 'required|max:255',
-            'link_demo' => 'required|max:255',
+            'link_demo' => 'max:255',
             'publisher' => 'max:255',
             'distr' => 'max:255',
             'date' => 'date',
@@ -114,6 +116,9 @@ class MusicController extends Controller
 
         $image = ImageController::upload($request->file('image'));
 
+        $audio = new Mp3Info($request->link, true);
+        $audio = gmdate("H:i:s", $audio->duration);
+
         $music = Music::create([
             'music_artists_id' => $music_artists->id,
             'title' => $request->title,
@@ -126,6 +131,7 @@ class MusicController extends Controller
             'is_free' => $request->has('is_free') ? 1 : 0,
             'description' => $request->description ?? NULL,
             'image' => $image,
+            'duration' => $audio,
             'seo_title' => $request->seo_title ?? NULL,
             'seo_description' => $request->seo_description ?? NULL,
         ]);
@@ -178,7 +184,7 @@ class MusicController extends Controller
             'music_artists' => 'required',
             'title' => 'required|max:255',
             'link' => 'required|max:255',
-            'link_demo' => 'required|max:255',
+            'link_demo' => 'max:255',
             'publisher' => 'max:255',
             'distr' => 'max:255',
             'date' => 'date',
