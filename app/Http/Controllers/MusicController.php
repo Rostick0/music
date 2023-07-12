@@ -53,6 +53,13 @@ class MusicController extends Controller
                 ->whereIn('moods_id', $request->moods)
                 ->get());
         }
+        if ($request->min_time && $request->max_time) {
+            $music_list->whereBetween('duration', [$request->min_time, $request->max_time]);
+        } else if ($request->min_time && !$request->max_time) {
+            $music_list->where('duration', '>', $request->min_time);
+        } else if (!$request->min_time && $request->max_time) {
+            $music_list->where('duration', '<', $request->max_time);
+        }
         $music_list = $music_list->paginate(20);
 
         $genres = Genre::all();

@@ -11,9 +11,28 @@ class MusicKitController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $where_sql = [];
+
+        if ($request->name) $where_sql[] = ['music_kits', 'LIKE', '%' . $request->name . '%'];
+        if ($request->link) $where_sql[] = ['music_kits', 'LIKE', '%' . $request->link . '%'];
+
+        $music_kits = MusicKit::where($where_sql);
+
+        if ($request->min_time && $request->max_time) {
+            $music_kits->whereBetween('duration', [$request->min_time, $request->max_time]);
+        } else if ($request->min_time && !$request->max_time) {
+            $music_kits->where('duration', '>', $request->min_time);
+        } else if (!$request->min_time && $request->max_time) {
+            $music_kits->where('duration', '<', $request->max_time);
+        }
+
+        $music_kits = $music_kits->paginate(20);
+
+        return view('admin.music_kit_list', [
+            'music_kits' => $music_kits
+        ]);
     }
 
     /**

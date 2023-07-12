@@ -5,6 +5,7 @@ use App\Http\Controllers\ClientStatisticController;
 use App\Http\Controllers\ClientUserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MusicController;
+use App\Http\Controllers\MusicKitController;
 use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\RegisterController;
@@ -38,7 +39,11 @@ Route::group(['prefix' => 'admin'], function ($router) {
         Route::post('{id}', [MusicController::class, 'update']);
     });
 
-    Route::get('music_kit/{id}', [SiteController::class, 'show'])->name('music_kit');
+    Route::group(['prefix' => 'music_kit'], function ($router) {
+        Route::get('list', [MusicKitController::class, 'index'])->name('music_kit.list');
+        Route::get('{id}', [MusicKitController::class, 'edit'])->name('music_kit.edit');
+    });
+
 
     Route::group(['prefix' => 'playlist'], function ($router) {
         Route::get('list', [PlaylistController::class, 'index'])->name('playlist');

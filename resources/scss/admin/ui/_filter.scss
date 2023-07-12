@@ -1,14 +1,18 @@
 .admin-filter {
     display: flex;
-    align-items: flex-start;
+    align-items: flex-end;
     column-gap: 10px;
     margin-bottom: 48px;
 
     &__inputs {
         flex-grow: 1;
         display: flex;
-        column-gap: 10px;
-        margin-bottom: 12px;
+        flex-wrap: wrap;
+        grid-gap: 10px;
+
+        &>* {
+            flex-basis: calc(25% - 10px);
+        }
     }
 
     &__button {
