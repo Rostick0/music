@@ -11,6 +11,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RemoveClaimController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\SitePageController;
+use App\Http\Controllers\SiteSettingController;
 use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserController;
@@ -55,7 +56,8 @@ Route::group(['prefix' => 'admin'], function ($router) {
         Route::get('{id}', [UserController::class, 'edit'])->name('user.edit');
     });
 
-    Route::get('settings', [SiteController::class, 'index'])->name('settings');
+    Route::get('settings', [SiteSettingController::class, 'edit'])->name('settings');
+    Route::post('settings', [SiteSettingController::class, 'update']);
 
     Route::group(['prefix' => 'pages'], function ($router) {
         Route::get('list', [SitePageController::class, 'index'])->name('page.list');

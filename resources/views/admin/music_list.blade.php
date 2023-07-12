@@ -1,6 +1,10 @@
 @extends('layout.admin')
 
 @section('html')
+    <a class="admin-button admin-button-add" href="{{ route('music.create') }}">
+        <span>Добавить</span>
+        <span class="admin-button-add__plus">+</span>
+    </a>
     <form class="admin-filter" action="{{ url()->current() }}">
         <div class="admin-filter__inputs">
             <input class="admin-input" type="search" placeholder="Название" name="title" value={{ Request::get('title') }}>

@@ -24,4 +24,17 @@
             background-color: rgb(200, 10, 10);
         }
     }
+
+    &-add {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-left: auto;
+        margin-bottom: 16px;
+        max-width: 112px;
+
+        &__plus {
+            font-size: 20px;
+        }
+    }
 }
