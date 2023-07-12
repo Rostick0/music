@@ -37,6 +37,9 @@
             <li class="admin-aside__navigation_item{{ Request::segment(2) === 'users' ? ' _active' : '' }}">
                 <a class="admin-aside__navigation_link" href="{{ route('user.list') }}">Клиенты</a>
             </li>
+            <li class="admin-aside__navigation_item{{ Request::segment(2) === 'page' ? ' _active' : '' }}">
+                <a class="admin-aside__navigation_link" href="{{ route('page.list') }}">Страницы</a>
+            </li>
             <li class="admin-aside__navigation_item{{ Request::segment(2) === 'settings' ? ' _active' : '' }}">
                 <a class="admin-aside__navigation_link" href="{{ route('settings') }}">Настройки</a>
             </li>

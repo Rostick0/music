@@ -14,6 +14,21 @@ class SitePageController extends Controller
         return resource_path("views/pages_db/$name_file.blade.php");
     }
 
+    public function index(Request $request)
+    {
+        $where_sql = [];
+
+        if ($request->name) $where_sql[] = ['name', 'LIKE', '%' . $request->name . '%'];
+        if ($request->url) $where_sql[] = ['url', 'LIKE', '%' . $request->url . '%'];
+
+        $pages = SitePage::where($where_sql)
+            ->paginate(20);
+
+        return view('admin.page_list', [
+            'pages' => $pages
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -60,14 +75,10 @@ class SitePageController extends Controller
     {
         $path = $this->get_path($url);
 
-        // File::put(resource_path("views/pages_db/dd.blade.php"), 'ddadasd');
-        // File::delete(resource_path("views/pages_db/dd.blade.php"));
-
         if (!File::exists($path)) return abort(404);
 
         return view('pages_db.' . $url, [
             'id' => $id,
-            // 'page' => $page
         ]);
     }
 

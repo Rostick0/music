@@ -3,8 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Genre;
+use App\Models\Instrument;
+use App\Models\Mood;
 use App\Models\Playlist;
 use App\Models\RelationshipInstrument;
+use App\Models\RelationshipMood;
+use App\Models\RelationshipTheme;
+use App\Models\Theme;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -13,9 +18,50 @@ class PlaylistController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.playlist_list');
+        $where_sql = [];
+        if ($request->title) $where_sql[] = ['playlists.title', 'LIKE', '%' . $request->title . '%'];
+        if ($request->genres_id) $where_sql[] = ['playlists.genres_id', '=', $request->genres_id];
+
+        $playlists = Playlist::select(
+            'playlists.*',
+            'genres.name as genre_name',
+        )
+            ->join('genres', 'playlists.genres_id', '=', 'genres.id')
+            ->where($where_sql);
+        if ($request->themes) {
+            $playlists->whereIn('playlists.id', RelationshipTheme::select('type_id')
+                ->where('type', 'playlist')
+                ->whereIn('themes_id', $request->themes)
+                ->get());
+        }
+        if ($request->instruments) {
+            $playlists->whereIn('playlists.id', RelationshipInstrument::select('type_id')
+                ->where('type', 'playlist')
+                ->whereIn('instruments_id', $request->instruments)
+                ->get());
+        }
+        if ($request->moods) {
+            $playlists->whereIn('playlists.id', RelationshipMood::select('type_id')
+                ->where('type', 'playlist')
+                ->whereIn('moods_id', $request->moods)
+                ->get());
+        }
+        $playlists = $playlists->paginate(20);
+
+        $genres = Genre::all();
+        $themes = Theme::all();
+        $instruments = Instrument::all();
+        $moods = Mood::all();
+
+        return view('admin.playlist_list', [
+            'playlists' => $playlists,
+            'genres' => $genres,
+            'themes' => $themes,
+            'instruments' => $instruments,
+            'moods' => $moods
+        ]);
     }
 
     /**

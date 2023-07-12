@@ -67,4 +67,18 @@
             grid-template-columns: .2fr .5fr 1fr .5fr 152px 152px;
         }
     }
+
+    &-page {
+        &__titles,
+        &__content_item {
+            grid-template-columns: .2fr .5fr 1fr 152px;
+        }
+    }
+
+    &-playlist {
+        &__titles,
+        &__content_item {
+            grid-template-columns: .2fr 1fr 1.75fr 1fr .5fr 152px;
+        }
+    }
 }

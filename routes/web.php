@@ -58,7 +58,7 @@ Route::group(['prefix' => 'admin'], function ($router) {
     Route::get('settings', [SiteController::class, 'index'])->name('settings');
 
     Route::group(['prefix' => 'pages'], function ($router) {
-        Route::get('list', [SitePageController::class, 'show'])->name('page.list');
+        Route::get('list', [SitePageController::class, 'index'])->name('page.list');
         Route::get('create', [SitePageController::class, 'create'])->name('page.create');
         Route::post('create', [SitePageController::class, 'store']);
         Route::get('{id}', [SitePageController::class, 'edit'])->name('page.edit');
