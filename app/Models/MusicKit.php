@@ -12,6 +12,7 @@ class MusicKit extends Model
     protected $fillable = [
         'name',
         'link',
+        'is_active',
         'duration',
         'music_id'
     ];

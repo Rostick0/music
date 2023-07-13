@@ -1,0 +1,31 @@
+.admin-select {
+    &-async {
+        position: relative;
+        width: 100%;
+
+        &._active {
+
+            .admin-select-async__list {
+                display: flex;
+            }
+        }
+
+        &__list {
+            background-color: #f9f9f9;
+            border: 1px solid #979797;
+            display: none;
+            flex-direction: column;
+            row-gap: 4px;
+            padding: 10px;
+            margin-top: 4px;
+            position: absolute;
+            overflow: auto;
+            width: 100%;
+            max-height: 200px;
+        }
+
+        &__item {
+            cursor: pointer;
+        }
+    }
+}

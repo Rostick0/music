@@ -41,6 +41,7 @@ Route::group(['prefix' => 'admin'], function ($router) {
 
     Route::group(['prefix' => 'music_kit'], function ($router) {
         Route::get('list', [MusicKitController::class, 'index'])->name('music_kit.list');
+        Route::get('create', [MusicKitController::class, 'create'])->name('music_kit.create');
         Route::get('{id}', [MusicKitController::class, 'edit'])->name('music_kit.edit');
     });
 

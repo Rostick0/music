@@ -85,6 +85,18 @@ class MusicController extends Controller
         ]);
     }
 
+    public function search(Request $request)
+    {
+        $music_list = Music::select('id', 'title')
+            ->where('title', 'LIKE', '%' . $request->title . '%')
+            ->limit(20)
+            ->get() ?? [];
+
+        return response([
+            'music' => $music_list
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

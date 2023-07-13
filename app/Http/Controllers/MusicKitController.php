@@ -40,7 +40,7 @@ class MusicKitController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.music_kit_create');
     }
 
     /**
@@ -54,7 +54,15 @@ class MusicKitController extends Controller
             'music_id' => 'required|' . Rule::exists('music', 'id'),
         ]);
 
-        return MusicKit::create($request->all());
+        $music_kit = MusicKit::create([
+            'name' => $request->name,
+            'link' => $request->link,
+            'music_id' => $request->music_id,
+        ]);
+
+        return redirect()->route('music_kit.edit', [
+            'id' => $music_kit->id
+        ]);
     }
 
     /**
@@ -68,9 +76,13 @@ class MusicKitController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(MusicKit $musicKit)
+    public function edit(int $id)
     {
-        //
+        $music_kit = MusicKit::find($id);
+
+        return view('admin.music_kit_edit', [
+            'music_kit' => $music_kit
+        ]);
     }
 
     /**

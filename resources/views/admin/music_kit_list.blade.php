@@ -37,15 +37,15 @@
             <div>Дата</div>
         </div>
         <ul class="admin-grid__content admin-grid-music-kit__content">
-            @foreach ($music_kits as $music_item)
+            @foreach ($music_kits as $music_kit)
                 <li class="admin-grid__content_item admin-grid-music-kit__content_item">
-                    <a href="{{ route('music_kit.edit', ['id' => $kit_list->id]) }}">{{ $kit_list->id }}</a>
-                    <div>{{ $kit_list->name }}</div>
-                    <a class="text-ellipsis" title="{{ $kit_list->link }}" target="_blank"
-                        href="{{ $kit_list->link }}">{{ $kit_list->link }}</a>
-                    <div>{{ $kit_list->duration }}</div>
-                    <div>{{ $kit_list->is_active ? 'Да' : 'Нет' }}</div>
-                    <div>{{ $kit_list->created_at }}</div>
+                    <a href="{{ route('music_kit.edit', ['id' => $music_kit->id]) }}">{{ $music_kit->id }}</a>
+                    <div>{{ $music_kit->name }}</div>
+                    <a class="text-ellipsis" title="{{ $music_kit->link }}" target="_blank"
+                        href="{{ $music_kit->link }}">{{ $music_kit->link }}</a>
+                    <div>{{ $music_kit->duration }}</div>
+                    <div>{{ $music_kit->is_active ? 'Да' : 'Нет' }}</div>
+                    <div>{{ $music_kit->created_at }}</div>
                 </li>
             @endforeach
         </ul>
