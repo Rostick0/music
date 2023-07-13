@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\MusicKit;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use wapmorgan\Mp3Info\Mp3Info;
 
 class MusicKitController extends Controller
 {
@@ -54,10 +55,14 @@ class MusicKitController extends Controller
             'music_id' => 'required|' . Rule::exists('music', 'id'),
         ]);
 
+        $audio = new Mp3Info($request->link, true);
+        $duration = gmdate("H:i:s", $audio->duration);
+
         $music_kit = MusicKit::create([
             'name' => $request->name,
             'link' => $request->link,
             'music_id' => $request->music_id,
+            'duration' => $duration
         ]);
 
         return redirect()->route('music_kit.edit', [
@@ -78,7 +83,15 @@ class MusicKitController extends Controller
      */
     public function edit(int $id)
     {
-        $music_kit = MusicKit::find($id);
+        $music_kit = MusicKit::select(
+            'music_kits.*',
+            'music.title as music_title',
+        )
+            ->join('music', 'music.id', '=', 'music_kits.music_id')
+            ->where('music_kits.id', $id)
+            ->first();
+
+        // dd($music_kit);
 
         return view('admin.music_kit_edit', [
             'music_kit' => $music_kit
@@ -88,16 +101,25 @@ class MusicKitController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, int $music_id)
+    public function update(Request $request, int $id)
     {
         $validator = $request->validate([
             'name' => 'required|max:255',
             'link' => 'required|max:255',
+            'music_id' => 'required|' . Rule::exists('music', 'id'),
         ]);
 
-        MusicKit::where('music_id', $music_id)->update($request->all());
+        $audio = new Mp3Info($request->link, true);
+        $duration = gmdate("H:i:s", $audio->duration);
 
-        return MusicKit::where('music_id', $music_id);
+        MusicKit::where('id', $id)->update([
+            'name' => $request->name,
+            'link' => $request->link,
+            'music_id' => $request->music_id,
+            'duration' => $duration
+        ]);
+
+        return back();
     }
 
     /**

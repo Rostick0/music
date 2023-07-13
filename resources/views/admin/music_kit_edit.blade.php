@@ -6,15 +6,16 @@
         <div class="admin-form__flex">
             <label class="admin-label">
                 <span>Название*</span>
-                <input class="admin-input" type="text" name="name" maxlength="255" value="{{ old('name') }}" required>
+                <input class="admin-input" type="text" name="name" maxlength="255"
+                    value="{{ old('name') ?? $music_kit->name }}" required>
                 @error('name')
                     <span class="error">{{ $message }}</span>
                 @enderror
             </label>
             <label class="admin-label">
                 <span>Ссылка на music kit*</span>
-                <input class="admin-input" type="text" name="link" maxlength="255" value="{{ old('link') }}"
-                    required>
+                <input class="admin-input" type="text" name="link" maxlength="255"
+                    value="{{ old('link') ?? $music_kit->link }}" required>
                 @error('link')
                     <span class="error">{{ $message }}</span>
                 @enderror
@@ -23,8 +24,9 @@
                 <span>Название музыки*</span>
                 <div class="admin-select-async music-select-async">
                     <input class="admin-input admin-select-async__input" type="text" maxlength="255" name="music_name"
-                        value="{{ old('music_name') }}" required>
-                    <input class="admin-select-async__value" name="music_id" value="{{ old('music_id') }}" required hidden>
+                        value="{{ old('music_name') ?? $music_kit->music_title }}" required>
+                    <input class="admin-select-async__value" name="music_id"
+                        value="{{ old('music_id') ?? $music_kit->music_id }}" required hidden>
                     <ul class="admin-select-async__list">
                         <li class="admin-select-async__item">1</li>
                     </ul>

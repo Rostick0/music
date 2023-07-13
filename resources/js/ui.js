@@ -13,6 +13,12 @@ export const asyncSelect = (selectDom, asyncFunction) => {
     //     select.classList.remove('_active')
     // }
 
+    const setActiveFalse = () => {
+        if (!select.classList.contains('_active')) return;
+
+        select.classList.remove('_active');
+    }
+
     selectInput.onclick = () => {
         select.classList.toggle('_active');
     }
@@ -42,6 +48,7 @@ export const asyncSelect = (selectDom, asyncFunction) => {
 
         selectItems?.forEach(item => {
             item.onclick = function () {
+                setActiveFalse();
                 selectInput.value = item.textContent;
                 selectValue.value = item.getAttribute('data-id');
             };
