@@ -9,8 +9,13 @@
         <div class="admin-filter__inputs">
             <label class="admin-label w-100">
                 <span>Название</span>
-                <input class="admin-input" type="search" placeholder="Название" name="title"
-                    value={{ Request::get('title') }}>
+                <input class="admin-input" type="search" placeholder="Название" name="music_artists"
+                    value={{ Request::get('music_artists') }}>
+            </label>
+            <label class="admin-label w-100">
+                <span>Автор</span>
+                <input class="admin-input" type="search" placeholder="Автор" name="artists"
+                    value={{ Request::get('artists') }}>
             </label>
             <label class="admin-label w-100">
                 <span>Жанр</span>

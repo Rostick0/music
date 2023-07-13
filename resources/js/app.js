@@ -1,16 +1,22 @@
 import { asyncSelect } from './ui';
 
-const func = (value) => {
-    return fetch('/api/music?title=' + value)
-        .then(res => {
-            if (!res?.ok) throw new Error();
+(function () {
+    const musicSelectAsync = document.querySelector('.music-select-async');
 
-            return res.json();
-        })
-        .then(res => {
-            return res?.music ?? [];
-        })
+    if (!musicSelectAsync) return;
 
-};
+    const asyncGetMusic = (value) => {
+        return fetch('/api/music?title=' + value)
+            .then(res => {
+                if (!res?.ok) throw new Error();
 
-asyncSelect(document.querySelector('.music-select-async'), func);
+                return res.json();
+            })
+            .then(res => {
+                return res?.music ?? [];
+            })
+
+    };
+
+    asyncSelect(musicSelectAsync, asyncGetMusic);
+})();
