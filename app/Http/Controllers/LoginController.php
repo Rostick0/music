@@ -10,6 +10,8 @@ class LoginController extends Controller
 {
     public function show()
     {
+        // dd(auth()->user()->id);
+
         return view('login');
     }
 
@@ -22,7 +24,7 @@ class LoginController extends Controller
             'password' => 'required'
         ]);
 
-        if (Auth::attempt($credentials, true)) {
+        if (!Auth::attempt($credentials, true)) {
             throw ValidationException::withMessages([
                 'email' => trans('auth.failed')
             ]);

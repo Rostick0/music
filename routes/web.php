@@ -30,7 +30,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // ,'middleware' => 'auth'
-Route::group(['prefix' => 'admin'], function ($router) {
+Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function ($router) {
     Route::group(['prefix' => 'music'], function ($router) {
         Route::get('list', [MusicController::class, 'index'])->name('music.list');
         Route::get('create', [MusicController::class, 'create'])->name('music.create');

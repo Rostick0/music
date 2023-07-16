@@ -10,7 +10,7 @@ class Statistic extends Model
     use HasFactory;
 
     protected $fillable = [
-        'type',
+        'statistic_types_id',
         'type_paid',
         'users_id',
         'music_id',
