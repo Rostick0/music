@@ -88,10 +88,46 @@ class MusicController extends Controller
 
     public function search(Request $request)
     {
-        $music_list = Music::select('id', 'title')
-            ->where('title', 'LIKE', '%' . $request->title . '%')
-            ->limit(20)
-            ->get() ?? [];
+        $where_sql = [];
+        if ($request->title) $where_sql[] = ['music.title', 'LIKE', '%' . $request->title . '%'];
+        if ($request->genres_id) $where_sql[] = ['music.genres_id', '=', $request->genres_id];
+        if ($request->music_artists) $where_sql[] = ['music_artists.name', 'LIKE', '%' . $request->music_artists . '%'];
+
+        $music_list = Music::select(
+            'music.*',
+            'genres.name as genre_name',
+            'music_artists.name as music_artist_name'
+        )
+            ->join('music_artists', 'music.music_artists_id', '=', 'music_artists.id')
+            ->join('genres', 'music.genres_id', '=', 'genres.id')
+            ->where($where_sql);
+        if ($request->themes) {
+            $music_list->whereIn('music.id', RelationshipTheme::select('type_id')
+                ->where('type', 'music')
+                ->whereIn('themes_id', $request->themes)
+                ->get());
+        }
+        if ($request->instruments) {
+            $music_list->whereIn('music.id', RelationshipInstrument::select('type_id')
+                ->where('type', 'music')
+                ->whereIn('instruments_id', $request->instruments)
+                ->get());
+        }
+        if ($request->moods) {
+            $music_list->whereIn('music.id', RelationshipMood::select('type_id')
+                ->where('type', 'music')
+                ->whereIn('moods_id', $request->moods)
+                ->get());
+        }
+        if ($request->min_time && $request->max_time) {
+            $music_list->whereBetween('duration', [$request->min_time, $request->max_time]);
+        } else if ($request->min_time && !$request->max_time) {
+            $music_list->where('duration', '>', $request->min_time);
+        } else if (!$request->min_time && $request->max_time) {
+            $music_list->where('duration', '<', $request->max_time);
+        }
+        
+        $music_list = $music_list->paginate(20);
 
         return response([
             'music' => $music_list
