@@ -1,0 +1,34 @@
+.banner-main {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: var(--white);
+    padding: 6.5rem 0 6.25rem;
+
+    &__title {
+        font-size: 3rem;
+        font-weight: 700;
+        line-height: 1.25;
+        margin-bottom: 3rem;
+        max-width: 28rem;
+    }
+
+    &__description {
+        max-width: 28rem;
+    }
+
+    &__button {
+        max-width: 11.25rem;
+        width: 100%;
+
+        &s {
+            display: flex;
+            column-gap: 1.25rem;
+            margin: 3.75rem 0;
+        }
+    }
+
+    &__slider {
+        overflow: hidden;
+    }
+}

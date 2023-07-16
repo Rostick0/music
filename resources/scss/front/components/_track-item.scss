@@ -1,0 +1,91 @@
+.track-item {
+    border-radius: .625rem;
+    display: flex;
+    align-items: center;
+    padding: 1.875rem;
+    position: relative;
+
+    &::before {
+        background: var(--gradient);
+        border-radius: inherit;
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: .03;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+
+    &__img {
+        border-radius: .625rem;
+        display: flex;
+        margin-right: 1.87rem;
+        width: 3.75rem;
+        min-width: 3.75rem;
+        height: 3.75rem;
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        margin-right: 90px;
+    }
+
+    &__free {
+        background: var(--gradient);
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        color: var(--white);
+        font-size: .75rem;
+        padding: 6px 10px;
+        position: absolute;
+        top: 0;
+        line-height: 1;
+    }
+
+    &__name {
+        font-weight: 600;
+    }
+
+    &__artist {
+        opacity: .6;
+    }
+
+    &__application {
+        display: flex;
+        align-items: center;
+        flex-grow: 1;
+        column-gap: 20px;
+    }
+
+    &__audio {
+        flex-grow: 1;
+        margin-right: 3.125rem;
+    }
+
+    &__buttons {
+        display: flex;
+        align-items: center;
+        grid-gap: 1.25rem;
+    }
+
+    @media (max-width: 1366px) {
+        &__img {
+            margin-right: 1.5rem;
+        }
+
+        &__info {
+            margin-right: 1.5rem;
+        }
+
+        &__audio {
+            margin-right: 2rem;
+        }
+
+        &__buttons {
+            grid-gap: .625rem;
+        }
+    }
+}

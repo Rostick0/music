@@ -1,0 +1,36 @@
+.button {
+    border-radius: 5px;
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 500;
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1;
+    text-align: center;
+    padding: 1.31rem 1.5rem;
+
+    &-white {
+        @extend .button;
+        background-color: var(--white);
+        color: var(--dark);
+    }
+
+    &-gradient {
+        @extend .button;
+        background: var(--gradient);
+        color: var(--white);
+    }
+
+    &-white-border {
+        @extend .button-white;
+        border: 1px solid var(--border-color);
+    }
+
+    &__all {
+        text-align: center;
+        width: 100%;
+    }
+}
+
+.track-button {
+    display: flex;
+}

@@ -1,0 +1,36 @@
+.banner {
+    background: var(--gradient);
+    color: var(--white);
+    padding: 1.25rem 0;
+
+    &__container {
+        display: flex;
+        align-items: center;
+        row-gap: 20px;
+
+        &_left {
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    &__text {
+        margin-left: 1.87rem;
+    }
+
+    &__link {
+        flex-shrink: 0;
+        margin-left: auto;
+    }
+
+    @media (max-width: 768px) {
+        &__container {
+            align-items: baseline;
+            flex-direction: column;
+        }
+
+        &__link {
+            width: 100%;
+        }
+    }
+}

@@ -1,4 +1,4 @@
-@extends('layout.admin')
+@extends('layout.admin.index')
 
 @section('html')
     <form class="admin-filter" action="{{ url()->current() }}">

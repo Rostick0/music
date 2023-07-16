@@ -1,0 +1,44 @@
+.header {
+    padding: 1.87rem 0;
+
+    &__container {
+        display: flex;
+        align-items: center;
+    }
+
+    &__nav {
+        display: flex;
+        column-gap: 2.5rem;
+        margin-left: 3.25rem;
+        margin-right: auto;
+    }
+
+    &__favorite {
+        background: var(--gradient-opacity);
+        border-radius: 3.75rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 3rem;
+        position: relative;
+        min-width: 3.75rem;
+        width: 3.75rem;
+        height: 3.75rem;
+
+        &_count {
+            background-color: var(--dark);
+            color: var(--white);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            padding: 0 0.35rem;
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 25px;
+            height: 25px;
+        }
+    }
+}

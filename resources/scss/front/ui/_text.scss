@@ -1,0 +1,19 @@
+.text {
+    &-big {
+        font-size: 1.5rem;
+    }
+
+    &-medium {
+        font-size: 1.125rem;
+    }
+
+    @media (max-width: 768px) {
+        &-big {
+            font-size: 1.125rem;
+        }
+
+        &-medium {
+            font-size: 1rem;
+        }
+    }
+}

@@ -1,4 +1,4 @@
-@extends('layout.auth')
+@extends('layout.auth.index')
 
 @section('seo_title', 'Sing up')
 

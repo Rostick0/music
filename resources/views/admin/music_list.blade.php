@@ -1,4 +1,4 @@
-@extends('layout.admin')
+@extends('layout.admin.index')
 
 @section('html')
     <a class="admin-button admin-button-add" href="{{ route('music.create') }}">
