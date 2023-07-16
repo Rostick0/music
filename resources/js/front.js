@@ -11,7 +11,7 @@ try {
         },
     });
 } catch (e) {
-    
+
 }
 
 
@@ -37,6 +37,7 @@ try {
     selects?.forEach(select => {
         const selectSwitch = select.querySelector('.select__switch');
         const selectValue = select.querySelector('.select__value');
+        const selectInput = select.querySelector('.select__input');
 
         selectSwitch.onclick = () => {
             select.classList.toggle('_active')
@@ -52,6 +53,7 @@ try {
         selectItems?.forEach(item => {
             item.onclick = () => {
                 selectValue.textContent = item?.textContent;
+                selectInput.value = item?.getAttribute('data-id');
 
                 if (!select.classList.contains('_active')) return;
 
@@ -89,4 +91,17 @@ try {
             isActive = !isActive;
         };
     })
+})();
+
+(function () {
+    const tracksFilter = document.querySelector('.tracks__filter');
+
+
+    if (!tracksFilter) return;
+
+    tracksFilter.onchange = e => {
+        console.log(e);
+    }
+
+    
 })();

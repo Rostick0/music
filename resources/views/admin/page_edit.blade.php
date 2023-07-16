@@ -56,13 +56,13 @@
             </label>
         </div>
         <div class="admin-form__flex">
-            <label class="admin-label admin-form__flex_long admin-form__flex_100">
+            <div class="admin-label admin-form__flex_long admin-form__flex_100">
                 <span>Контент страницы</span>
                 <textarea class="summernote" name="content" id="content">{{ old('content') ?? $content }}</textarea>
                 @error('content')
                     <span class="error">{{ $message }}</span>
                 @enderror
-            </label>
+            </div>
         </div>
         <button class="admin-button">Сохранить</button>
     </form>
@@ -74,7 +74,7 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
     <script type="text/javascript" defer>
         $('.summernote').summernote({
-            height: 400
+            height: 500
         });
     </script>
     @vite(['resources/js/front.js'])

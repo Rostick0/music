@@ -80,7 +80,7 @@ class SitePageController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $url = '/home', $id = null)
+    public function show(Request $request, string $url = '/home', $id = null)
     {
         $path = $this->get_path($url);
 
@@ -88,6 +88,7 @@ class SitePageController extends Controller
 
         return view('pages_db.' . $url, [
             'id' => $id,
+            'request' => $request
         ]);
     }
 

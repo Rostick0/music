@@ -86,12 +86,18 @@ class MusicController extends Controller
         ]);
     }
 
-    public function search(Request $request)
+    public function search(Request $request, $type = 'json')
     {
         $where_sql = [];
         if ($request->title) $where_sql[] = ['music.title', 'LIKE', '%' . $request->title . '%'];
         if ($request->genres_id) $where_sql[] = ['music.genres_id', '=', $request->genres_id];
         if ($request->music_artists) $where_sql[] = ['music_artists.name', 'LIKE', '%' . $request->music_artists . '%'];
+
+        if ($request->count && $request->count > 20) {
+            $count = 20;
+        } else {
+            $count = $request->count ?? 8;
+        }
 
         $music_list = Music::select(
             'music.*',
@@ -127,11 +133,22 @@ class MusicController extends Controller
             $music_list->where('duration', '<', $request->max_time);
         }
 
-        $music_list = $music_list->paginate(8);
+        $music_list = $music_list->paginate($count);
 
-        return response([
-            'music' => $music_list
-        ]);
+        if ($type === 'json') {
+            return response($music_list);
+        }
+
+        return $music_list;
+    }
+
+    public static function normalizeTime($time)
+    {
+        $time = substr($time, 0, -3);
+
+        if ($time[0] == '0') $time = substr($time, 1);
+
+        return $time;
     }
 
     /**

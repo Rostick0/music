@@ -14,9 +14,8 @@ import './libs/lazyloading';
                 return res.json();
             })
             .then(res => {
-                return res?.music ?? [];
+                return res?.data ?? [];
             })
-
     };
 
     asyncSelect(musicSelectAsync, asyncGetMusic);

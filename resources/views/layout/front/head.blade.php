@@ -77,7 +77,7 @@
                         <a class="header__nav_item" href="/about">About</a>
                         <a class="header__nav_item" href="/contacts">Contacts</a>
                     </nav>
-                    <a class="header__favorite" href="">
+                    <a class="header__favorite" href="/favorite">
                         <div class="header__favorite_count">22</div>
                         <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_52_186)">
@@ -98,7 +98,7 @@
                             </defs>
                         </svg>
                     </a>
-                    <a class="button-gradient header__sing-in" href="">Sign in</a>
+                    <a class="button-gradient header__sing-in" href="/login">Sign in</a>
                 </div>
             </div>
         </header>

@@ -15,8 +15,8 @@ class MusicSeeder extends Seeder
     private $music = [
         [
             'title' => 'Заголовок',
-            'link' => 'https://music.arizona-rp.com/rodina/1686521201.mp3',
-            'link_demo' => 'https://music.arizona-rp.com/rodina/1686521201.mp3',
+            'link' => '1686521201.mp3',
+            'link_demo' => '1686521201.mp3',
             'publisher' => 'https:://vk.com',
             'distr' => 'https:://vk.com',
             'genres_id' => 1,
@@ -24,8 +24,8 @@ class MusicSeeder extends Seeder
         ],
         [
             'title' => 'Новая песня',
-            'link' => 'https://music.arizona-rp.com/rodina/1686521221.mp3',
-            'link_demo' => 'https://music.arizona-rp.com/rodina/1686521221.mp3',
+            'link' => '1686521221.mp3',
+            'link_demo' => '1686521221.mp3',
             'publisher' => 'https:://vk.com',
             'distr' => 'https:://vk.com',
             'genres_id' => 1,
