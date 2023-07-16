@@ -126,8 +126,8 @@ class MusicController extends Controller
         } else if (!$request->min_time && $request->max_time) {
             $music_list->where('duration', '<', $request->max_time);
         }
-        
-        $music_list = $music_list->paginate(20);
+
+        $music_list = $music_list->paginate(8);
 
         return response([
             'music' => $music_list

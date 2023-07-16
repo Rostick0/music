@@ -1,1 +1,7 @@
-<p>new page my page<br></p>
+@extends('layout.front.index')
+
+@section('php')
+@endsection
+
+@section('html')
+@endsection

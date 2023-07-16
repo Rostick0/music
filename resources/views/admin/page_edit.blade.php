@@ -1,6 +1,7 @@
 @extends('layout.admin.index')
 
 @section('html')
+    @vite(['resources/scss/front/index.scss'])
     <form class="admin-form" action="{{ url()->current() }}" method="post">
         @csrf
         <div class="admin-form__flex">
@@ -76,4 +77,5 @@
             height: 400
         });
     </script>
+    @vite(['resources/js/front.js'])
 @endsection

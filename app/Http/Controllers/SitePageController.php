@@ -51,7 +51,17 @@ class SitePageController extends Controller
 
         $path = $this->get_path($request->url);
 
-        $file = File::put($path, $request->content);
+        $file = File::put(
+            $path,
+            '@extends("layout.front.index")
+
+            @section("php")
+            @endsection
+            
+            @section("html")
+            ' . $request->content . '
+            @endsection'
+        );
 
         $site_page = SitePage::create([
             'name' => $request->name,
@@ -70,7 +80,7 @@ class SitePageController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $url, $id = null)
+    public function show(string $url = '/home', $id = null)
     {
         $path = $this->get_path($url);
 

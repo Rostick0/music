@@ -5,13 +5,13 @@
         <div class="footer__container">
             <div class="footer__top">
                 <nav class="footer__nav">
-                    <a class="footer__nav_item a-white text-big" href="">Home</a>
-                    <a class="footer__nav_item a-white text-big" href="">Tracks</a>
-                    <a class="footer__nav_item a-white text-big" href="">Playlists</a>
-                    <a class="footer__nav_item a-white text-big" href="">Music kits</a>
-                    <a class="footer__nav_item a-white text-big" href="">Pricing</a>
-                    <a class="footer__nav_item a-white text-big" href="">About</a>
-                    <a class="footer__nav_item a-white text-big" href="">Contacts</a>
+                    <a class="footer__nav_item a-white text-big" href="/">Home</a>
+                    <a class="footer__nav_item a-white text-big" href="/tracks">Tracks</a>
+                    <a class="footer__nav_item a-white text-big" href="/playlists">Playlists</a>
+                    <a class="footer__nav_item a-white text-big" href="/music_kits">Music kits</a>
+                    <a class="footer__nav_item a-white text-big" href="/pricing">Pricing</a>
+                    <a class="footer__nav_item a-white text-big" href="/about">About</a>
+                    <a class="footer__nav_item a-white text-big" href="/contacts">Contacts</a>
                 </nav>
             </div>
             <div class="footer__center">

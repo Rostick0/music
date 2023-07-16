@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
     @vite(['resources/scss/index.scss'])
     <title>@yield('seo_title', $site->seo_title)</title>
     <meta name="description" content="@yield('seo_description', $site->seo_description)">
@@ -70,13 +69,13 @@
                         </svg>
                     </a>
                     <nav class="header__nav">
-                        <a class="header__nav_item" href="">Home</a>
-                        <a class="header__nav_item" href="">Tracks</a>
-                        <a class="header__nav_item" href="">Playlists</a>
-                        <a class="header__nav_item" href="">Music kits</a>
-                        <a class="header__nav_item" href="">Pricing</a>
-                        <a class="header__nav_item" href="">About</a>
-                        <a class="header__nav_item" href="">Contacts</a>
+                        <a class="header__nav_item" href="/">Home</a>
+                        <a class="header__nav_item" href="/tracks">Tracks</a>
+                        <a class="header__nav_item" href="/playlists">Playlists</a>
+                        <a class="header__nav_item" href="/music_kits">Music kits</a>
+                        <a class="header__nav_item" href="/pricing">Pricing</a>
+                        <a class="header__nav_item" href="/about">About</a>
+                        <a class="header__nav_item" href="/contacts">Contacts</a>
                     </nav>
                     <a class="header__favorite" href="">
                         <div class="header__favorite_count">22</div>

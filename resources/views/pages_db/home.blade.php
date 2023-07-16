@@ -1,6 +1,6 @@
-@extends('layout.front.index')
+@extends("layout.front.index")
 
-@section('php')
+@section("php")
     @php
         $genres = App\Models\Genre::all();
         $moods = App\Models\Mood::all();
@@ -10,7 +10,8 @@
 @endsection
 
 
-@section('html')
+@section("html")
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
     <section class="banner-main lazy" data-bg="/img/banner.png">
         <div class="container">
             <h1 class="banner-main__title">No Copyright music for creator</h1>
@@ -18,7 +19,7 @@
                 commercials</div>
             <div class="banner-main__buttons">
                 <a class="button-gradient banner-main__button" href="">Browse now</a>
-                <a class="button-white banner-main__button" href="">Playlists</a>
+                <a class="button-white banner-main__button" href="/playlists">Playlists</a>
             </div>
             <div class="banner-main__slider mySwiper swipper">
                 <div class="swiper-wrapper">

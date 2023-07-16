@@ -1,1 +1,7 @@
-<p>test 123 вфы<br></p>
+@extends('layout.front.index')
+
+@section('php')
+@endsection
+
+@section('html')
+@endsection
