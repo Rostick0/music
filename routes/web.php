@@ -3,6 +3,8 @@
 use App\Http\Controllers\ClientRemoveClaimController;
 use App\Http\Controllers\ClientStatisticController;
 use App\Http\Controllers\ClientUserController;
+use App\Http\Controllers\ComponentController;
+use App\Http\Controllers\DeletedController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MusicController;
 use App\Http\Controllers\MusicKitController;
@@ -29,8 +31,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// ,'middleware' => 'auth'
-Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function ($router) {
+// ,'middleware' => 'admin'
+Route::group(['prefix' => 'admin'], function ($router) {
     Route::group(['prefix' => 'music'], function ($router) {
         Route::get('list', [MusicController::class, 'index'])->name('music.list');
         Route::get('create', [MusicController::class, 'create'])->name('music.create');
@@ -75,7 +77,17 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function ($router) 
         Route::post('{id}', [SitePageController::class, 'update']);
     });
 
+    Route::group(['prefix' => 'components'], function ($router) {
+        Route::get('list', [ComponentController::class, 'index'])->name('component.list');
+        Route::get('create', [ComponentController::class, 'create'])->name('component.create');
+        Route::post('create', [ComponentController::class, 'store']);
+        Route::get('{id}', [ComponentController::class, 'edit'])->name('component.edit');
+        Route::post('{id}', [ComponentController::class, 'update']);
+    });
+
     Route::get('notices', [NoticeController::class, 'index'])->name('notices');
+
+    Route::get('/deleted', [DeletedController::class, 'show'])->name('deleted');
 });
 
 Route::group(['prefix' => 'client'], function ($router) {

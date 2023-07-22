@@ -153,5 +153,9 @@ class SitePageController extends Controller
     public function destroy(int $id)
     {
         $site_page = SitePage::find($id)->delete();
+
+        return redirect(route('deleted', [
+            'text' => 'Страница удалена ' . $site_page->name
+        ]));
     }
 }
