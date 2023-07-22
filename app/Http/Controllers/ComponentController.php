@@ -48,7 +48,7 @@ class ComponentController extends Controller
             'path' => 'required|max:255|unique:components',
         ]);
 
-        $path = $this->get_path($request->url);
+        $path = $this->get_path($request->path);
 
         $file = File::put($path, $request->content);
 
@@ -68,11 +68,11 @@ class ComponentController extends Controller
     {
         $component = Component::findOrFail($id);
 
-        $path = $this->get_path($component->url);
+        $path = $this->get_path($component->path);
 
-        if (!Component::exists($path)) return abort(404);
+        if (!File::exists($path)) return abort(404);
 
-        $content = Component::get($path);
+        $content = File::get($path);
 
         return view('admin.component_edit', [
             'component' => $component,

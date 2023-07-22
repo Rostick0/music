@@ -7,7 +7,7 @@
         <div class="admin-form__flex">
             <label class="admin-label">
                 <span>Название*</span>
-                <input class="admin-input" type="text" name="name" maxlength="255" value="{{ old('name') ?? $page->name }}"
+                <input class="admin-input" type="text" name="name" maxlength="255" value="{{ old('name') ?? $component->name }}"
                     required>
                 @error('name')
                     <span class="error">{{ $message }}</span>
@@ -16,7 +16,7 @@
             <label class="admin-label">
                 <span>Путь*</span>
                 <input class="admin-input" type="text" name="path" maxlength="255"
-                    value="{{ old('path') ?? $page->path }}" required>
+                    value="{{ old('path') ?? $component->path }}" required>
                 @error('path')
                     <span class="error">{{ $message }}</span>
                 @enderror
