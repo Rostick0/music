@@ -2,13 +2,14 @@
 @vite(['resources/scss/admin/index.scss'])
 
 <div class="admin-wrapper">
-    <x-admin_aside />
+    @include('aside.admin_aside')
     <div class="admin-content">
         <div class="admin-content__top">
-            <a class="admin-content__top_item" href="{{route('notices')}}">
+            <a class="admin-content__top_item" href="{{ route('notices') }}">
                 <span>уведомления</span>
                 <span class="admin-content__top_alert">
-                    <span class="admin-content__top_alert_count">{{App\Models\Notice::where('is_read', 0)->count()}}</span>
+                    <span
+                        class="admin-content__top_alert_count">{{ App\Models\Notice::where('is_read', 0)->count() }}</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#fff"
                         viewBox="0 0 16 16">
                         <path

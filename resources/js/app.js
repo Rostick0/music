@@ -1,5 +1,4 @@
 import { asyncSelect } from './ui';
-import './libs/lazyloading';
 
 (function () {
     const musicSelectAsync = document.querySelector('.music-select-async');

@@ -1,6 +1,3 @@
-import './libs/swiper';
-import './libs/wavesurfer';
-
 try {
     new Swiper(".mySwiper", {
         slidesPerView: 5,

@@ -11,6 +11,7 @@ export default defineConfig({
                 'resources/scss/auth/index.scss',
                 'resources/js/app.js',
                 'resources/js/front.js'
+
             ],
             refresh: true,
         }),
