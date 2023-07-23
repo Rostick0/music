@@ -110,19 +110,19 @@ class MusicController extends Controller
         if ($request->themes) {
             $music_list->whereIn('music.id', RelationshipTheme::select('type_id')
                 ->where('type', 'music')
-                ->whereIn('themes_id', $request->themes)
+                ->whereIn('themes_id', is_array($request->themes) ? $request->themes : [$request->themes])
                 ->get());
         }
         if ($request->instruments) {
             $music_list->whereIn('music.id', RelationshipInstrument::select('type_id')
                 ->where('type', 'music')
-                ->whereIn('instruments_id', $request->instruments)
+                ->whereIn('instruments_id', is_array($request->instruments) ? $request->instruments : [$request->instruments])
                 ->get());
         }
         if ($request->moods) {
             $music_list->whereIn('music.id', RelationshipMood::select('type_id')
                 ->where('type', 'music')
-                ->whereIn('moods_id', $request->moods)
+                ->whereIn('moods_id', is_array($request->moods) ? $request->moods : [$request->moods])
                 ->get());
         }
         if ($request->min_time && $request->max_time) {

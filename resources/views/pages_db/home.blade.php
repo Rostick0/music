@@ -248,7 +248,7 @@
                     <div class="select__switch">
                         <div class="select__name">Moods</div>
                         <div class="select__switch_flex">
-                            <div class="select__value">Bass</div>
+                            <div class="select__value">None</div>
                             <svg class="select__icon" width="20" height="20" viewBox="0 0 20 20" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <g opacity="0.8">
@@ -266,7 +266,7 @@
                                 </defs>
                             </svg>
                         </div>
-                        <input class="select__input" name="mood" type="hidden">
+                        <input class="select__input" name="moods" type="hidden">
                     </div>
                     <ul class="select__list">
                         @foreach ($moods as $mood)
@@ -278,7 +278,7 @@
                     <div class="select__switch">
                         <div class="select__name">Themes</div>
                         <div class="select__switch_flex">
-                            <div class="select__value">Christmas</div>
+                            <div class="select__value">None</div>
                             <svg class="select__icon" width="20" height="20" viewBox="0 0 20 20" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <g opacity="0.8">
@@ -296,7 +296,7 @@
                                 </defs>
                             </svg>
                         </div>
-                        <input class="select__input" name="theme" type="hidden">
+                        <input class="select__input" name="themes" type="hidden">
                     </div>
                     <ul class="select__list">
                         @foreach ($themes as $theme)
@@ -308,7 +308,7 @@
                     <div class="select__switch">
                         <div class="select__name">Instruments</div>
                         <div class="select__switch_flex">
-                            <div class="select__value">Bass</div>
+                            <div class="select__value">None</div>
                             <svg class="select__icon" width="20" height="20" viewBox="0 0 20 20" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <g opacity="0.8">
@@ -326,7 +326,7 @@
                                 </defs>
                             </svg>
                         </div>
-                        <input class="select__input" name="instrument" type="hidden">
+                        <input class="select__input" name="instruments" type="hidden">
                     </div>
                     <ul class="select__list">
                         @foreach ($instruments as $instrument)
