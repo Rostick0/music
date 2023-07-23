@@ -5,14 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MusicPlaylist extends Model
+class RelationshipPlaylist extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'link',
-        'duration',
-        'music_id'
+        'music_id',
+        'playlists_id',
     ];
 }

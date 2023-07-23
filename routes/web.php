@@ -39,6 +39,7 @@ Route::group(['prefix' => 'admin'], function ($router) {
         Route::post('create', [MusicController::class, 'store']);
         Route::get('{id}', [MusicController::class, 'edit'])->name('music.edit');
         Route::post('{id}', [MusicController::class, 'update']);
+        Route::post('delete/{id}', [MusicController::class, 'destroy'])->name('music.delete');
     });
 
     Route::group(['prefix' => 'music_kit'], function ($router) {
@@ -47,6 +48,7 @@ Route::group(['prefix' => 'admin'], function ($router) {
         Route::post('create', [MusicKitController::class, 'store']);
         Route::get('{id}', [MusicKitController::class, 'edit'])->name('music_kit.edit');
         Route::post('{id}', [MusicKitController::class, 'update']);
+        Route::post('delete/{id}', [MusicKitController::class, 'destroy'])->name('music_kit.delete');
     });
 
 
@@ -56,6 +58,7 @@ Route::group(['prefix' => 'admin'], function ($router) {
         Route::post('create', [PlaylistController::class, 'store']);
         Route::get('{id}', [PlaylistController::class, 'edit'])->name('playlist.edit');
         Route::post('{id}', [PlaylistController::class, 'update']);
+        Route::post('delete/{id}', [PlaylistController::class, 'destroy'])->name('playlist.delete');
     });
 
     Route::get('statistic', [StatisticController::class, 'index'])->name('statistic');
@@ -64,6 +67,7 @@ Route::group(['prefix' => 'admin'], function ($router) {
     Route::group(['prefix' => 'users'], function ($router) {
         Route::get('/', [UserController::class, 'index'])->name('user.list');
         Route::get('{id}', [UserController::class, 'edit'])->name('user.edit');
+        Route::post('delete/{id}', [UserController::class, 'destroy'])->name('user.delete');
     });
 
     Route::get('settings', [SiteSettingController::class, 'edit'])->name('settings');
@@ -75,6 +79,7 @@ Route::group(['prefix' => 'admin'], function ($router) {
         Route::post('create', [SitePageController::class, 'store']);
         Route::get('{id}', [SitePageController::class, 'edit'])->name('page.edit');
         Route::post('{id}', [SitePageController::class, 'update']);
+        Route::post('delete/{id}', [SitePageController::class, 'destroy'])->name('page.delete');
     });
 
     Route::group(['prefix' => 'components'], function ($router) {
@@ -83,11 +88,13 @@ Route::group(['prefix' => 'admin'], function ($router) {
         Route::post('create', [ComponentController::class, 'store']);
         Route::get('{id}', [ComponentController::class, 'edit'])->name('component.edit');
         Route::post('{id}', [ComponentController::class, 'update']);
+        Route::post('delete/{id}', [ComponentController::class, 'destroy'])->name('component.delete');
     });
 
     Route::get('notices', [NoticeController::class, 'index'])->name('notices');
 
     Route::get('/deleted', [DeletedController::class, 'show'])->name('deleted');
+    Route::get('/delete_confirm', [DeletedController::class, 'confirm'])->name('delete_confirm');
 });
 
 Route::group(['prefix' => 'client'], function ($router) {

@@ -24,4 +24,9 @@ class ImageController extends Controller
 
         return $defaultImage;
     }
+
+    public static function destroy($image_path)
+    {
+        return Storage::delete('upload/image/' . $image_path);
+    }
 }

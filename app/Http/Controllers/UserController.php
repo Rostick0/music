@@ -60,4 +60,14 @@ class UserController extends Controller
     {
         //
     }
+
+    public function destroy(int $id)
+    {
+        $user_email = User::find($id)->email;
+        $user = User::destroy($id);
+
+        return redirect(route('deleted', [
+            'text' => 'Пользователь удален ' . $user_email
+        ]));
+    }
 }

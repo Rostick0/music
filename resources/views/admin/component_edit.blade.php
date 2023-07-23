@@ -7,8 +7,8 @@
         <div class="admin-form__flex">
             <label class="admin-label">
                 <span>Название*</span>
-                <input class="admin-input" type="text" name="name" maxlength="255" value="{{ old('name') ?? $component->name }}"
-                    required>
+                <input class="admin-input" type="text" name="name" maxlength="255"
+                    value="{{ old('name') ?? $component->name }}" required>
                 @error('name')
                     <span class="error">{{ $message }}</span>
                 @enderror
@@ -31,7 +31,11 @@
                 @enderror
             </div>
         </div>
-        <button class="admin-button">Сохранить</button>
+        <div class="admin-buttons">
+            <button class="admin-button">Сохранить</button>
+            <a class="admin-button-red" href="{{ route('delete_confirm') }}">Удалить</a>
+        </div>
+
     </form>
 
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">

@@ -305,8 +305,14 @@ class MusicController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Music $music)
+    public function destroy(int $id)
     {
-        //
+        $music = Music::find($id);
+        ImageController::destroy($music->image);
+        $delete = Music::destroy($id);
+
+        return redirect(route('deleted', [
+            'text' => 'Музыка удалена ' . $music->title
+        ]));
     }
 }

@@ -125,8 +125,13 @@ class MusicKitController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(MusicKit $musicKit)
+    public function destroy(int $id)
     {
-        //
+        $music_kit_name = MusicKit::find($id)->name;
+        $delete = MusicKit::destroy($id);
+
+        return redirect(route('deleted', [
+            'text' => 'Music kit удален ' . $music_kit_name
+        ]));
     }
 }
