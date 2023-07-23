@@ -3,6 +3,9 @@
 namespace App\Observers;
 
 use App\Models\Music;
+use App\Models\RelationshipInstrument;
+use App\Models\RelationshipMood;
+use App\Models\RelationshipTheme;
 
 class MusicObserver
 {
@@ -27,7 +30,14 @@ class MusicObserver
      */
     public function deleted(Music $music): void
     {
-        //
+        $where_sql = [
+            ['type', '=', 'music'],
+            ['type_id', '=', $music->id]
+        ];
+
+        RelationshipMood::where($where_sql)->delete();
+        RelationshipTheme::where($where_sql)->delete();
+        RelationshipInstrument::where($where_sql)->delete();
     }
 
     /**

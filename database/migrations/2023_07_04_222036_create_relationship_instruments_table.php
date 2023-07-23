@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('relationship_instruments', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
+            $table->string('type'); // playlist|music
             $table->integer('type_id');
             $table->foreignId('instruments_id')->references('id')->on('instruments')->onDelete('cascade');
             $table->timestamps();
