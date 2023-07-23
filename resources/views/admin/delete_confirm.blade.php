@@ -4,6 +4,7 @@
     <form class="admin-delete" action="{{ route($type . '.delete', [
         'id' => $type_id,
     ]) }}" method="post">
+        @csrf
         <div class="text-center big-text admin-delete__title">
             <strong>Вы уверены, что хотите удалить?</strong>
         </div>

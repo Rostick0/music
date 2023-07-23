@@ -94,6 +94,13 @@
                 @enderror
             </label>
         </div>
-        <button class="admin-button">Сохранить</button>
+        <div class="admin-delete__buttons">
+            <button class="admin-button">Сохранить</button>
+            <a class="admin-button-red"
+                href="{{ route('delete_confirm', [
+                    'type' => 'pages',
+                    'type_id' => $page->id,
+                ]) }}">Удалить</a>
+        </div>
     </form>
 @endsection

@@ -33,7 +33,10 @@
         </div>
         <div class="admin-buttons">
             <button class="admin-button">Сохранить</button>
-            <a class="admin-button-red" href="{{ route('delete_confirm') }}">Удалить</a>
+            <a class="admin-button-red" href="{{ route('delete_confirm', [
+                'type' => 'components',
+                'type_id' => $component->id
+            ]) }}">Удалить</a>
         </div>
 
     </form>

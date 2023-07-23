@@ -65,7 +65,14 @@
                 <span>Активен?</span>
             </label>
         </div>
-        {{-- <button class="admin-button">Сохранить изменения</button> --}}
+        <div class="admin-delete__buttons">
+            <button class="admin-button">Сохранить</button>
+            <a class="admin-button-red"
+                href="{{ route('delete_confirm', [
+                    'type' => 'users',
+                    'type_id' => $user->id,
+                ]) }}">Удалить</a>
+        </div>
     </form>
     @if (!empty($remove_claims))
         <div class="admin-remove-claim">

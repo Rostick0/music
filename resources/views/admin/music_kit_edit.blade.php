@@ -44,6 +44,13 @@
                 <span>Активен?</span>
             </label>
         </div>
-        <button class="admin-button">Сохранить изменения</button>
+        <div class="admin-delete__buttons">
+            <button class="admin-button">Сохранить изменения</button>
+            <a class="admin-button-red"
+                href="{{ route('delete_confirm', [
+                    'type' => 'music_kits',
+                    'type_id' => $music_kit->id,
+                ]) }}">Удалить</a>
+        </div>
     </form>
 @endsection
