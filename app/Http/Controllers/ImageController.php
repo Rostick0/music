@@ -27,6 +27,10 @@ class ImageController extends Controller
 
     public static function destroy($image_path)
     {
+        if (!Storage::exists('upload/image/' . $image_path)) {
+            return;
+        }
+
         return Storage::delete('upload/image/' . $image_path);
     }
 }
