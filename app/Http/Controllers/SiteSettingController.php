@@ -32,7 +32,9 @@ class SiteSettingController extends Controller
             "seo_title" => $request->seo_title,
             "seo_description" => $request->seo_description,
             "email" => $request->email,
-            "address" => $request->address
+            "address" => $request->address,
+            "count_admin" => $request->count_admin,
+            "count_front" => $request->count_front,
         ];
 
         File::put(public_path('config.json'), json_encode($result));

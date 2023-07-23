@@ -15,7 +15,7 @@
 
 @section('html')
     <x-main-banner />
-    <section class="section playlist">
+    <section class="section section-main playlist">
         <div class="container">
             <h2 class="section-title playlist__title">Playlists</h2>
             <div class="playlist__list">
@@ -210,7 +210,7 @@
         </div>
     </section>
 
-    <section class="section tracks">
+    <section class="section section-main tracks">
         <div class="container">
             <h2 class="section-title tracks__title">Tracks</h2>
             <form class="tracks__filter">
@@ -477,7 +477,7 @@
             <a class="button-white-border button__all tracks__all" href="/tracks">Show more</a>
     </section>
 
-    <section class="section faq">
+    <section class="section section-main faq">
         <div class="container">
             <h2 class="section-title faq__title">FAQ</h2>
             <ul class="faq__list">
@@ -504,7 +504,7 @@
         </div>
     </section>
 
-    <section class="section introducing">
+    <section class="section section-main introducing">
         <div class="container">
             <h2 class="section-title introducing__title">Introducing «Top Audio»</h2>
             <h3 class="section-subtitle introducing__subtitle text-big">The Choice of Global Titans for Premium Music!

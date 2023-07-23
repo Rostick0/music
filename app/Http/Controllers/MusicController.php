@@ -61,7 +61,7 @@ class MusicController extends Controller
         } else if (!$request->min_time && $request->max_time) {
             $music_list->where('duration', '<', $request->max_time);
         }
-        $music_list = $music_list->paginate(20);
+        $music_list = $music_list->paginate(app('site')->count_admin ?? 20);
 
         $genres = Genre::all();
         $themes = Theme::all();
@@ -79,7 +79,7 @@ class MusicController extends Controller
 
     public function index_client()
     {
-        $music_list = Music::paginate(20);
+        $music_list = Music::paginate(app('site')->count_admin ?? 20);
 
         return view('client.music_list', [
             'music_list' => $music_list

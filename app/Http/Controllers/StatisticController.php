@@ -36,7 +36,7 @@ class StatisticController extends Controller
             $statistics->whereIn('statistic_types.id', $request->statistic_types);
         }
 
-        $statistics = $statistics->paginate(20);
+        $statistics = $statistics->paginate(app('site')->count_admin ?? 20);
 
         return view('admin.statistic_list', [
             'statistics' => $statistics,

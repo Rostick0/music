@@ -48,7 +48,7 @@ class PlaylistController extends Controller
                 ->whereIn('moods_id', $request->moods)
                 ->get());
         }
-        $playlists = $playlists->paginate(20);
+        $playlists = $playlists->paginate(app('site')->count_admin ?? 20);
 
         $genres = Genre::all();
         $themes = Theme::all();

@@ -3,4 +3,9 @@
     font-weight: 700;
     line-height: 125%;
     margin-bottom: 3.75rem;
+
+    @media (max-width: 768px) {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
 }

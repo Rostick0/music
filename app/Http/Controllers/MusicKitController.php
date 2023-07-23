@@ -29,7 +29,7 @@ class MusicKitController extends Controller
             $music_kits->where('duration', '<', $request->max_time);
         }
 
-        $music_kits = $music_kits->paginate(20);
+        $music_kits = $music_kits->paginate(app('site')->count_admin ?? 20);
 
         return view('admin.music_kit_list', [
             'music_kits' => $music_kits

@@ -23,7 +23,7 @@ class ComponentController extends Controller
         if ($request->name) $where_sql[] = ['name', 'LIKE', '%' . $request->name . '%'];
 
         $components = Component::where($where_sql)
-            ->paginate(20);
+            ->paginate(app('site')->count_admin ?? 20);
 
         return view('admin.component_list', [
             'components' => $components

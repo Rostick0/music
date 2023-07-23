@@ -161,6 +161,9 @@
     </div>
 </footer>
 </div>
+<script>
+    const limitDefault = {{ $site->count_front }};
+</script>
 <script src="/js/libs/lazyloading.js"></script>
 <script src="/js/libs/wavesurfer.js"></script>
 <script src="/js/libs/swiper.js"></script>

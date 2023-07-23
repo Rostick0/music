@@ -23,7 +23,7 @@ class UserController extends Controller
 
         $users = User::where($where_sql)
             ->orderByDesc('id')
-            ->paginate(20);
+            ->paginate(app('site')->count_admin ?? 20);
 
         return view('admin.user_list', [
             'users' => $users

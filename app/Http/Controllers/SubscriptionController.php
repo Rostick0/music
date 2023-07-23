@@ -33,7 +33,7 @@ class SubscriptionController extends Controller
             $subscriptions->whereIn('subscriptions.subscription_types_id', $request->subscription_types);
         }
 
-        $subscriptions = $subscriptions->paginate(20);
+        $subscriptions = $subscriptions->paginate(app('site')->count_admin ?? 20);
 
         return view('admin.subscription_list', [
             'subscriptions' => $subscriptions,

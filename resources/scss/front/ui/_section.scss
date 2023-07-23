@@ -1,7 +1,12 @@
 .section {
-    padding-top: 5.25rem;
+
+    &-main {
+        padding: 5.25rem;
+    }
 
     @media (max-width: 768px) {
-        padding-top: 2rem;
+        &-main {
+            padding-top: 2rem;
+        }
     }
 }

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
     <title>@yield('seo_title', $site->seo_title)</title>
     <meta name="description" content="@yield('seo_description', $site->seo_description)">
+    <meta name="_token" content="{{ csrf_token() }}">
 </head>
 
 <body>
@@ -46,7 +47,12 @@
                         <a class="header__nav_item" href="/contacts">Contacts</a>
                     </nav>
                     <a class="header__favorite" href="/favorite">
-                        <div class="header__favorite_count">22</div>
+                        @php
+                            $count_favorite = App\Http\Controllers\FavoriteController::countMy();
+                        @endphp
+                        @if ($count_favorite)
+                            <div class="header__favorite_count">{{ $count_favorite }}</div>
+                        @endif
                         <svg width="30" height="30" viewBox="0 0 30 30" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_52_186)">

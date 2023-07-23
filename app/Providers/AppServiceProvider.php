@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -21,6 +23,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        View::share('site', json_decode(File::get(public_path('config.json'))));
+        App::singleton('site', function() {
+            return json_decode(File::get(public_path('config.json')));
+        });
+        View::share('site', app('site'));
     }
 }

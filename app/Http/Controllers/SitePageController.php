@@ -21,7 +21,7 @@ class SitePageController extends Controller
         if ($request->url) $where_sql[] = ['url', 'LIKE', '%' . $request->url . '%'];
 
         $pages = SitePage::where($where_sql)
-            ->paginate(20);
+            ->paginate(app('site')->count_admin ?? 20);
 
         return view('admin.page_list', [
             'pages' => $pages

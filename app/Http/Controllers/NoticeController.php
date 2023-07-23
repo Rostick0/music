@@ -29,7 +29,7 @@ class NoticeController extends Controller
                     ->join('music', 'music.id', '=', 'remove_claims.music_id');
             })
             ->orderByDesc('notices.id')
-            ->paginate(20);
+            ->paginate(app('site')->count_admin ?? 20);
 
         $array_ids = array_map(
             fn ($item) => $item['id'],

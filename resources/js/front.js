@@ -214,7 +214,6 @@ initWaveSurfer();
     const values = {};
 
     allInputs?.forEach(elem => {
-        console.log(elem?.name)
         values[elem?.name] = '';
 
         Object.defineProperty(elem, 'value', {
@@ -237,8 +236,6 @@ initWaveSurfer();
                         })
 
                         initWaveSurfer();
-
-                        console.log(res);
                     });
             }, 500)
         });
