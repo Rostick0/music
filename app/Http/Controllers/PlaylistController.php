@@ -85,7 +85,6 @@ class PlaylistController extends Controller
             'title' => 'max:255',
             'image' => 'image|mimes:jpeg,png,jpg',
             'description' => 'max:65536',
-            'genres_id' => 'required|' . Rule::exists('genres', 'id'),
             'seo_title' => 'max:255',
             'seo_description' => 'max:255'
         ]);
@@ -96,12 +95,12 @@ class PlaylistController extends Controller
             'title' => $request->title,
             'image' => $image,
             'description' => $request->description,
-            'genres_id' => $request->genres_id,
             'is_active' => $request->has('is_active') ? 1 : 0,
             'seo_title' => $request->seo_title,
             'seo_description' => $request->seo_description,
         ]);
 
+        RelationshipGenreController::createAndDeleteRelationship($request->genres, $playlist->id, 'playlist');
         RelationshipInstrumentController::createAndDeleteRelationship($request->instruments, $playlist->id, 'playlist');
         RelationshipMoodController::createAndDeleteRelationship($request->moods, $playlist->id, 'playlist');
         RelationshipThemeController::createAndDeleteRelationship($request->themes, $playlist->id, 'playlist');
@@ -149,7 +148,6 @@ class PlaylistController extends Controller
             'title' => 'max:255',
             'image' => 'image|mimes:jpeg,png,jpg',
             'description' => 'max:65536',
-            'genres_id' => 'required|' . Rule::exists('genres', 'id'),
             'seo_title' => 'max:255',
             'seo_description' => 'max:255'
         ]);
@@ -159,7 +157,6 @@ class PlaylistController extends Controller
         $update_data = [
             'title' => $request->title,
             'description' => $request->description,
-            'genres_id' => $request->genres_id,
             'is_active' => $request->has('is_active') ? 1 : 0,
             'seo_title' => $request->seo_title,
             'seo_description' => $request->seo_description,
@@ -171,6 +168,7 @@ class PlaylistController extends Controller
 
         Playlist::find($id)->update($update_data);
 
+        RelationshipGenreController::createAndDeleteRelationship($request->genres, $id, 'playlist');
         RelationshipInstrumentController::createAndDeleteRelationship($request->instruments, $id, 'playlist');
         RelationshipMoodController::createAndDeleteRelationship($request->moods, $id, 'playlist');
         RelationshipThemeController::createAndDeleteRelationship($request->themes, $id, 'playlist');

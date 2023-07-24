@@ -71,19 +71,24 @@
                     <span class="error">{{ $message }}</span>
                 @enderror
             </label>
-            <label class="admin-label">
-                <span>Жанр*</span>
-                <select class="admin-input" name="genres_id" required>
-                    @foreach ($genres as $genre)
-                        <option {{ (old('genres_id') ?? $music->genres_id) == $genre->id ? 'selected' : '' }}
-                            value="{{ $genre->id }}">{{ $genre->name }}
-                        </option>
-                    @endforeach
-                </select>
-                @error('genres_id')
-                    <span class="error">{{ $message }}</span>
-                @enderror
-            </label>
+            <div class="admin-label w-100">
+                <span>Тема</span>
+                <details class="admin-details">
+                    <summary class="admin-details__summary">
+                        <div class="admin-input">Тема</div>
+                    </summary>
+                    <div class="admin-details__content">
+                        @foreach ($genres as $genre)
+                            <label class="admin-checkbox">
+                                <input class="admin-checkbox__input" type="checkbox" name="genres[]"
+                                    @if (array_search($genre->id, Request::get('genres') ?? []) !== false) checked @endif value="{{ $genre->id }}">
+                                <span class="admin-checkbox__icon"></span>
+                                <span>{{ $genre->name }}</span>
+                            </label>
+                        @endforeach
+                    </div>
+                </details>
+            </div>
             <label class="admin-label">
                 <span>Настроение (через запятую)</span>
                 <input class="admin-input" type="text" name="moods" value="{{ old('moods') ?? $moods }}">
@@ -156,10 +161,11 @@
         </div>
         <div class="admin-delete__buttons">
             <button class="admin-button">Сохранить изменения</button>
-            <a class="admin-button-red" href="{{route('delete_confirm', [
-                'type' => 'music',
-                'type_id' => $music->id
-            ])}}">Удалить</a>
+            <a class="admin-button-red"
+                href="{{ route('delete_confirm', [
+                    'type' => 'music',
+                    'type_id' => $music->id,
+                ]) }}">Удалить</a>
         </div>
     </form>
 @endsection

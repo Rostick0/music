@@ -160,9 +160,6 @@ class MusicController extends Controller
         return $time;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $genres = Genre::all();
@@ -185,7 +182,6 @@ class MusicController extends Controller
             'publisher' => 'max:255',
             'distr' => 'max:255',
             'date' => 'date',
-            'genres_id' => 'required|' . Rule::exists('genres', 'id'),
             'description' => 'max:65536',
             'image' => 'image|mimes:jpeg,png,jpg',
             'seo_title' => 'max:255',
@@ -208,7 +204,6 @@ class MusicController extends Controller
             'link_demo' => $request->link_demo,
             'publisher' => $request->publisher ?? NULL,
             'distr' => $request->distr,
-            'genres_id' => $request->genres_id,
             'is_active' => $request->has('is_active') ? 1 : 0,
             'is_free' => $request->has('is_free') ? 1 : 0,
             'description' => $request->description ?? NULL,
@@ -218,6 +213,7 @@ class MusicController extends Controller
             'seo_description' => $request->seo_description ?? NULL,
         ]);
 
+        RelationshipGenreController::createAndDeleteRelationship($request->genres, $music->id, 'music');
         RelationshipInstrumentController::createRelationship($request->instruments, $music->id, 'music');
         RelationshipMoodController::createRelationship($request->moods, $music->id, 'music');
         RelationshipThemeController::createRelationship($request->themes, $music->id, 'music');
@@ -270,7 +266,6 @@ class MusicController extends Controller
             'publisher' => 'max:255',
             'distr' => 'max:255',
             'date' => 'date',
-            'genres_id' => 'required|' . Rule::exists('genres', 'id'),
             'description' => 'max:65536',
             'image' => 'image|mimes:jpeg,png,jpg',
             'seo_title' => 'max:255',
@@ -290,7 +285,6 @@ class MusicController extends Controller
             'link_demo' => $request->link_demo,
             'publisher' => $request->publisher ?? NULL,
             'distr' => $request->distr,
-            'genres_id' => $request->genres_id,
             'is_active' => $request->has('is_active') ? 1 : 0,
             'is_free' => $request->has('is_free') ? 1 : 0,
             'description' => $request->description ?? NULL,
@@ -304,6 +298,7 @@ class MusicController extends Controller
 
         Music::find($id)->update($update_data);
 
+        RelationshipGenreController::createAndDeleteRelationship($request->genres, $id, 'music');
         RelationshipInstrumentController::createAndDeleteRelationship($request->instruments, $id, 'music');
         RelationshipMoodController::createAndDeleteRelationship($request->moods, $id, 'music');
         RelationshipThemeController::createAndDeleteRelationship($request->themes, $id, 'music');

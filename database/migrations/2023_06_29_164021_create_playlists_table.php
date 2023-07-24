@@ -16,8 +16,7 @@ return new class extends Migration
             $table->string('title')->nullable();
             $table->string('image')->nullable();
             $table->text('description')->nullable();
-            $table->string('genres_id')->references('id')->on('genres')->onDelete('cascade');
-            $table->boolean('is_active')->nullable();
+            $table->boolean('is_active')->default(0);
             $table->string('seo_title')->nullable();
             $table->string('seo_description')->nullable();
             $table->timestamps();

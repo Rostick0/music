@@ -2,11 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Http\Controllers\RelationshipGenreController;
 use App\Http\Controllers\RelationshipInstrumentController;
 use App\Http\Controllers\RelationshipMoodController;
 use App\Http\Controllers\RelationshipThemeController;
 use App\Models\Music;
 use App\Models\MusicArtist;
+use App\Models\RelationshipGenre;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -17,18 +19,16 @@ class MusicSeeder extends Seeder
             'title' => 'Заголовок',
             'link' => '1686521201.mp3',
             'link_demo' => '1686521201.mp3',
-            'publisher' => 'https:://vk.com',
-            'distr' => 'https:://vk.com',
-            'genres_id' => 1,
+            'publisher' => 'https://vk.com',
+            'distr' => 'https://vk.com',
             'duration' => '5:11'
         ],
         [
             'title' => 'Новая песня',
             'link' => '1686521221.mp3',
             'link_demo' => '1686521221.mp3',
-            'publisher' => 'https:://vk.com',
-            'distr' => 'https:://vk.com',
-            'genres_id' => 1,
+            'publisher' => 'https://vk.com',
+            'distr' => 'https://vk.com',
             'duration' => '4:03'
         ],
     ];
@@ -53,6 +53,11 @@ class MusicSeeder extends Seeder
         'лучший'
     ];
 
+    private $genres = [
+        1,
+        2
+    ];
+
     /**
      * Run the database seeds.
      */
@@ -68,6 +73,7 @@ class MusicSeeder extends Seeder
                 'music_artists_id' => $music_artists->id
             ]);
 
+            RelationshipGenreController::createAndDeleteRelationship($this->genres[$i], $music->id, 'music');
             RelationshipInstrumentController::createRelationship($this->instruments[$i], $music->id, 'music');
             RelationshipMoodController::createRelationship($this->moods[$i], $music->id, 'music');
             RelationshipThemeController::createRelationship($this->themes[$i], $music->id, 'music');

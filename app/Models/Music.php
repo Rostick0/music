@@ -17,7 +17,6 @@ class Music extends Model
         'publisher',
         'distr',
         'create_date',
-        'genres_id',
         'is_active',
         'is_free',
         'description',
