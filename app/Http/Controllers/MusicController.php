@@ -7,6 +7,7 @@ use App\Models\Instrument;
 use App\Models\Mood;
 use App\Models\Music;
 use App\Models\MusicArtist;
+use App\Models\RelationshipGenre;
 use App\Models\RelationshipInstrument;
 use App\Models\RelationshipMood;
 use App\Models\RelationshipTheme;
@@ -25,7 +26,6 @@ class MusicController extends Controller
     {
         $where_sql = [];
         if ($request->title) $where_sql[] = ['music.title', 'LIKE', '%' . $request->title . '%'];
-        if ($request->genres_id) $where_sql[] = ['music.genres_id', '=', $request->genres_id];
         if ($request->music_artists) $where_sql[] = ['music_artists.name', 'LIKE', '%' . $request->music_artists . '%'];
 
         $music_list = Music::select(
@@ -34,8 +34,13 @@ class MusicController extends Controller
             'music_artists.name as music_artist_name'
         )
             ->join('music_artists', 'music.music_artists_id', '=', 'music_artists.id')
-            ->join('genres', 'music.genres_id', '=', 'genres.id')
             ->where($where_sql);
+        if ($request->genres) {
+            $music_list->whereIn('music.id', RelationshipTheme::select('type_id')
+                ->where('type', 'music')
+                ->whereIn('genres_id', $request->genres)
+                ->get());
+        }
         if ($request->themes) {
             $music_list->whereIn('music.id', RelationshipTheme::select('type_id')
                 ->where('type', 'music')
@@ -90,7 +95,6 @@ class MusicController extends Controller
     {
         $where_sql = [];
         if ($request->title) $where_sql[] = ['music.title', 'LIKE', '%' . $request->title . '%'];
-        if ($request->genres_id) $where_sql[] = ['music.genres_id', '=', $request->genres_id];
         if ($request->music_artists) $where_sql[] = ['music_artists.name', 'LIKE', '%' . $request->music_artists . '%'];
 
         if ($request->count && $request->count > 20) {
@@ -105,8 +109,13 @@ class MusicController extends Controller
             'music_artists.name as music_artist_name'
         )
             ->join('music_artists', 'music.music_artists_id', '=', 'music_artists.id')
-            ->join('genres', 'music.genres_id', '=', 'genres.id')
             ->where($where_sql);
+        if ($request->genres) {
+            $music_list->whereIn('music.id', RelationshipGenre::select('type_id')
+                ->where('type', 'music')
+                ->whereIn('genres_id', is_array($request->genres) ? $request->genres : [$request->genres])
+                ->get());
+        }
         if ($request->themes) {
             $music_list->whereIn('music.id', RelationshipTheme::select('type_id')
                 ->where('type', 'music')
