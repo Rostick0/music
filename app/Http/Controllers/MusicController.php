@@ -170,7 +170,7 @@ class MusicController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = $request->validate([
+        $request->validate([
             'music_artists' => 'required',
             'title' => 'required|max:255',
             'link' => 'required|mimes:mp3',
@@ -266,11 +266,11 @@ class MusicController extends Controller
      */
     public function update(Request $request, int $id)
     {
-        $validator = $request->validate([
+        $request->validate([
             'music_artists' => 'required',
             'title' => 'required|max:255',
-            'link' => 'required|max:255',
-            'link_demo' => 'max:255',
+            'link' => 'mimes:mp3',
+            'link_demo' => 'mimes:mp3',
             'publisher' => 'max:255',
             'distr' => 'max:255',
             'create_date' => 'date',
@@ -291,14 +291,14 @@ class MusicController extends Controller
         $update_data = [
             'music_artists_id' => $music_artists->id,
             'title' => $request->title,
-            'publisher' => $request->publisher ?? NULL,
+            'publisher' => $request->publisher,
             'distr' => $request->distr,
             'create_date' => $request->create_date,
             'is_active' => $request->has('is_active') ? 1 : 0,
             'is_free' => $request->has('is_free') ? 1 : 0,
-            'description' => $request->description ?? NULL,
-            'seo_title' => $request->seo_title ?? NULL,
-            'seo_description' => $request->seo_description ?? NULL,
+            'description' => $request->description,
+            'seo_title' => $request->seo_title,
+            'seo_description' => $request->seo_description,
         ];
 
         if ($music) {
@@ -329,10 +329,7 @@ class MusicController extends Controller
     public function destroy(int $id)
     {
         $music = Music::find($id);
-        ImageController::destroy($music->image);
-        MusicUploadController::destroy($music->link);
-        MusicUploadController::destroy($music->link_demo, 'music_demo');
-        $delete = Music::destroy($id);
+        Music::destroy($id);
 
         return redirect(route('deleted', [
             'text' => 'Музыка удалена ' . $music->title

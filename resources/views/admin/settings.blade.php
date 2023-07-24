@@ -63,6 +63,24 @@
                 @enderror
             </label>
         </div>
+        <div class="admin-form__flex">
+            <label class="admin-label">
+                <span>Количество отображений в админке</span>
+                <input class="admin-input" type="text" name="count_admin"
+                    value="{{ old('count_admin') ?? $site->count_admin }}">
+                @error('count_admin')
+                    <span class="error">{{ $message }}</span>
+                @enderror
+            </label>
+            <label class="admin-label">
+                <span>Количество отображений у пользователей</span>
+                <input class="admin-input" type="text" name="count_front"
+                    value="{{ old('count_front') ?? $site->count_front }}">
+                @error('count_front')
+                    <span class="error">{{ $message }}</span>
+                @enderror
+            </label>
+        </div>
         <button class="admin-button">Сохранить</button>
     </form>
 @endsection

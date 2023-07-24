@@ -51,16 +51,18 @@ class MusicKitController extends Controller
     {
         $validator = $request->validate([
             'name' => 'required|max:255',
-            'link' => 'required|max:255',
+            'link' => 'required|mimes:mp3',
             'music_id' => 'required|' . Rule::exists('music', 'id'),
         ]);
 
         $audio = new Mp3Info($request->link, true);
         $duration = gmdate("H:i:s", $audio->duration);
 
+        $music = MusicUploadController::upload($request->link, 'music_kit');
+
         $music_kit = MusicKit::create([
             'name' => $request->name,
-            'link' => $request->link,
+            'link' => $music,
             'music_id' => $request->music_id,
             'duration' => $duration
         ]);
@@ -91,8 +93,6 @@ class MusicKitController extends Controller
             ->where('music_kits.id', $id)
             ->first();
 
-        // dd($music_kit);
-
         return view('admin.music_kit_edit', [
             'music_kit' => $music_kit
         ]);
@@ -105,19 +105,26 @@ class MusicKitController extends Controller
     {
         $validator = $request->validate([
             'name' => 'required|max:255',
-            'link' => 'required|max:255',
+            'link' => 'mimes:mp3',
             'music_id' => 'required|' . Rule::exists('music', 'id'),
         ]);
 
-        $audio = new Mp3Info($request->link, true);
-        $duration = gmdate("H:i:s", $audio->duration);
-
-        MusicKit::where('id', $id)->update([
+        $update_data = [
             'name' => $request->name,
-            'link' => $request->link,
             'music_id' => $request->music_id,
-            'duration' => $duration
-        ]);
+        ];
+
+        $music = MusicUploadController::upload($request->link, 'music_kit');
+
+        if ($music) {
+            $audio = new Mp3Info($request->link, true);
+            $audio_duration = gmdate("H:i:s", $audio->duration);
+
+            $update_data['link'] = $music;
+            $update_data['duration'] = $audio_duration;
+        }
+
+        MusicKit::where('id', $id)->update($update_data);
 
         return back();
     }
@@ -127,11 +134,11 @@ class MusicKitController extends Controller
      */
     public function destroy(int $id)
     {
-        $music_kit_name = MusicKit::find($id)->name;
-        $delete = MusicKit::destroy($id);
+        $music_kit = MusicKit::find($id);
+        MusicKit::destroy($id);
 
         return redirect(route('deleted', [
-            'text' => 'Music kit удален ' . $music_kit_name
+            'text' => 'Music kit удален ' . $music_kit->name
         ]));
     }
 }

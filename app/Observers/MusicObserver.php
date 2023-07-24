@@ -2,6 +2,8 @@
 
 namespace App\Observers;
 
+use App\Http\Controllers\ImageController;
+use App\Http\Controllers\MusicUploadController;
 use App\Models\Music;
 use App\Models\RelationshipInstrument;
 use App\Models\RelationshipMood;
@@ -35,6 +37,9 @@ class MusicObserver
             ['type_id', '=', $music->id]
         ];
 
+        ImageController::destroy($music->image);
+        MusicUploadController::destroy($music->link);
+        MusicUploadController::destroy($music->link_demo, 'music_demo');
         RelationshipMood::where($where_sql)->delete();
         RelationshipTheme::where($where_sql)->delete();
         RelationshipInstrument::where($where_sql)->delete();
