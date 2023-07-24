@@ -23,16 +23,15 @@
         </div>
         <div class="admin-form__flex">
             <label class="admin-label">
-                <span>Ссылка на трэк*</span>
-                <input class="admin-input" type="text" name="link" maxlength="255" value="{{ old('link') }}"
-                    required>
+                <span>Трэк*</span>
+                <input class="admin-input" type="file" name="link" value="{{ old('link') }}" required>
                 @error('link')
                     <span class="error">{{ $message }}</span>
                 @enderror
             </label>
             <label class="admin-label">
-                <span>Ссылка на демо трэк</span>
-                <input class="admin-input" type="text" name="link_demo" maxlength="255" value="{{ old('link_demo') }}">
+                <span>Демо трэк</span>
+                <input class="admin-input" type="file" name="link_demo" value="{{ old('link_demo') }}">
                 @error('link_demo')
                     <span class="error">{{ $message }}</span>
                 @enderror
@@ -112,7 +111,7 @@
             </label>
             <label class="admin-checkbox">
                 <input class="admin-checkbox__input" type="checkbox" name="is_free"
-                    {{ old('is_active') ? 'is_free' : '' }}>
+                    {{ old('is_active') ? 'checked' : '' }}>
                 <span class="admin-checkbox__icon"></span>
                 <span>Бесплатный?</span>
             </label>

@@ -173,8 +173,8 @@ class MusicController extends Controller
         $validator = $request->validate([
             'music_artists' => 'required',
             'title' => 'required|max:255',
-            'link' => 'required|max:255',
-            'link_demo' => 'max:255',
+            'link' => 'required|mimes:mp3',
+            'link_demo' => 'mimes:mp3',
             'publisher' => 'max:255',
             'distr' => 'max:255',
             'date' => 'date',
@@ -189,25 +189,27 @@ class MusicController extends Controller
         ]);
 
         $image = ImageController::upload($request->file('image'));
+        $music = MusicUploadController::upload($request->file('link'));
+        $music_demo = MusicUploadController::upload($request->file('link_demo'), 'music_demo');
 
         $audio = new Mp3Info($request->link, true);
-        $audio = gmdate("H:i:s", $audio->duration);
+        $audio_duration = gmdate("H:i:s", $audio->duration);
 
         $music = Music::create([
             'music_artists_id' => $music_artists->id,
             'title' => $request->title,
-            'link' => $request->link,
-            'link_demo' => $request->link_demo,
-            'publisher' => $request->publisher ?? NULL,
+            'link' => $music,
+            'link_demo' => $music_demo,
+            'publisher' => $request->publisher,
             'distr' => $request->distr,
             'create_date' => $request->create_date,
             'is_active' => $request->has('is_active') ? 1 : 0,
             'is_free' => $request->has('is_free') ? 1 : 0,
-            'description' => $request->description ?? NULL,
+            'description' => $request->description,
             'image' => $image,
-            'duration' => $audio,
-            'seo_title' => $request->seo_title ?? NULL,
-            'seo_description' => $request->seo_description ?? NULL,
+            'duration' => $audio_duration,
+            'seo_title' => $request->seo_title,
+            'seo_description' => $request->seo_description,
         ]);
 
         RelationshipGenreController::createAndDeleteRelationship($request->genres, $music->id, 'music');
@@ -233,7 +235,7 @@ class MusicController extends Controller
     public function edit(int $id)
     {
         $music = Music::findOrFail($id);
-        $music_artist = MusicArtist::find($music->id);
+        $music_artist = MusicArtist::find($music->music_artists_id);
 
         $themes = RelationshipThemeController::get($music->id, 'music');
         $moods = RelationshipMoodController::get($music->id, 'music');
@@ -283,12 +285,12 @@ class MusicController extends Controller
         ]);
 
         $image = ImageController::upload($request->file('image'));
+        $music = MusicUploadController::upload($request->file('link'));
+        $music_demo = MusicUploadController::upload($request->file('link_demo'), 'music_demo');
 
         $update_data = [
             'music_artists_id' => $music_artists->id,
             'title' => $request->title,
-            'link' => $request->link,
-            'link_demo' => $request->link_demo,
             'publisher' => $request->publisher ?? NULL,
             'distr' => $request->distr,
             'create_date' => $request->create_date,
@@ -298,6 +300,16 @@ class MusicController extends Controller
             'seo_title' => $request->seo_title ?? NULL,
             'seo_description' => $request->seo_description ?? NULL,
         ];
+
+        if ($music) {
+            $audio = new Mp3Info($request->link, true);
+            $audio_duration = gmdate("H:i:s", $audio->duration);
+
+            $update_data['link'] = $music;
+            $update_data['duration'] = $audio_duration;
+        }
+
+        if ($music_demo) $update_data['link_demo'] = $music_demo;
 
         if ($image) $update_data['image'] = $image;
 
@@ -318,6 +330,8 @@ class MusicController extends Controller
     {
         $music = Music::find($id);
         ImageController::destroy($music->image);
+        MusicUploadController::destroy($music->link);
+        MusicUploadController::destroy($music->link_demo, 'music_demo');
         $delete = Music::destroy($id);
 
         return redirect(route('deleted', [

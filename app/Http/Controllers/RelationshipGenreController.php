@@ -13,9 +13,9 @@ class RelationshipGenreController extends Controller
     {
         $genres = $request_genres;
 
-        if (!is_array($genres)) {
-            $genres = [$genres]; 
-        }
+        if (!$genres) return;
+
+        if (!is_array($genres)) $genres = [$genres];
 
         $array_id = [];
 
