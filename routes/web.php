@@ -6,6 +6,7 @@ use App\Http\Controllers\ClientUserController;
 use App\Http\Controllers\ComponentController;
 use App\Http\Controllers\DeletedController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\MusicController;
 use App\Http\Controllers\MusicKitController;
 use App\Http\Controllers\NoticeController;
@@ -118,6 +119,8 @@ Route::post('login', [LoginController::class, 'store']);
 
 Route::get('register', [RegisterController::class, 'show'])->name('register');
 Route::post('register', [RegisterController::class, 'store']);
+
+Route::get('logout', [LogoutController::class, 'store'])->name('logout');
 
 Route::get('/', [SitePageController::class, 'show']);
 Route::get('{url}', [SitePageController::class, 'show']);
