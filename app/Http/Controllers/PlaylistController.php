@@ -21,15 +21,9 @@ class PlaylistController extends Controller
     public function index(Request $request)
     {
         $where_sql = [];
-        if ($request->title) $where_sql[] = ['playlists.title', 'LIKE', '%' . $request->title . '%'];
-        if ($request->genres_id) $where_sql[] = ['playlists.genres_id', '=', $request->genres_id];
+        if ($request->title) $where_sql[] = ['title', 'LIKE', '%' . $request->title . '%'];
 
-        $playlists = Playlist::select(
-            'playlists.*',
-            'genres.name as genre_name',
-        )
-            ->join('genres', 'playlists.genres_id', '=', 'genres.id')
-            ->where($where_sql);
+        $playlists = Playlist::where($where_sql);
         if ($request->themes) {
             $playlists->whereIn('playlists.id', RelationshipTheme::select('type_id')
                 ->where('type', 'playlist')
@@ -128,7 +122,16 @@ class PlaylistController extends Controller
         $themes = RelationshipThemeController::get($playlist->id, 'playlist');
         $moods = RelationshipMoodController::get($playlist->id, 'playlist');
         $instruments = RelationshipInstrumentController::get($playlist->id, 'playlist');
-        $genres = Genre::all();
+        $genres = Genre::select(
+            'genres.*',
+            'relationship_genres.id as relationship_id'
+        )->leftJoin('relationship_genres', function ($join) use ($playlist) {
+            $join->on('relationship_genres.genres_id', '=', 'genres.id')
+                ->where([
+                    ['type_id', '=', $playlist->id],
+                    ['type', '=', 'playlist']
+                ]);
+        })->get();
 
         return view('admin.playlist_edit', [
             'playlist' => $playlist,
@@ -162,9 +165,7 @@ class PlaylistController extends Controller
             'seo_description' => $request->seo_description,
         ];
 
-        if ($image) {
-            $update_data['image'] = $image;
-        }
+        if ($image) $update_data['image'] = $image;
 
         Playlist::find($id)->update($update_data);
 

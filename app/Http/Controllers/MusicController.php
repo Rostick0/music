@@ -30,7 +30,6 @@ class MusicController extends Controller
 
         $music_list = Music::select(
             'music.*',
-            'genres.name as genre_name',
             'music_artists.name as music_artist_name'
         )
             ->join('music_artists', 'music.music_artists_id', '=', 'music_artists.id')
@@ -105,7 +104,6 @@ class MusicController extends Controller
 
         $music_list = Music::select(
             'music.*',
-            'genres.name as genre_name',
             'music_artists.name as music_artist_name'
         )
             ->join('music_artists', 'music.music_artists_id', '=', 'music_artists.id')
@@ -144,9 +142,7 @@ class MusicController extends Controller
 
         $music_list = $music_list->paginate($count);
 
-        if ($type === 'json') {
-            return response($music_list);
-        }
+        if ($type === 'json') return response($music_list);
 
         return $music_list;
     }
@@ -204,6 +200,7 @@ class MusicController extends Controller
             'link_demo' => $request->link_demo,
             'publisher' => $request->publisher ?? NULL,
             'distr' => $request->distr,
+            'create_date' => $request->create_date,
             'is_active' => $request->has('is_active') ? 1 : 0,
             'is_free' => $request->has('is_free') ? 1 : 0,
             'description' => $request->description ?? NULL,
@@ -241,7 +238,16 @@ class MusicController extends Controller
         $themes = RelationshipThemeController::get($music->id, 'music');
         $moods = RelationshipMoodController::get($music->id, 'music');
         $instruments = RelationshipInstrumentController::get($music->id, 'music');
-        $genres = Genre::all();
+        $genres = Genre::select(
+            'genres.*',
+            'relationship_genres.id as relationship_id'
+        )->leftJoin('relationship_genres', function ($join) use ($music) {
+            $join->on('relationship_genres.genres_id', '=', 'genres.id')
+                ->where([
+                    ['type_id', '=', $music->id],
+                    ['type', '=', 'music']
+                ]);
+        })->get();
 
         return view('admin.music_edit', [
             'music' => $music,
@@ -265,7 +271,7 @@ class MusicController extends Controller
             'link_demo' => 'max:255',
             'publisher' => 'max:255',
             'distr' => 'max:255',
-            'date' => 'date',
+            'create_date' => 'date',
             'description' => 'max:65536',
             'image' => 'image|mimes:jpeg,png,jpg',
             'seo_title' => 'max:255',
@@ -285,6 +291,7 @@ class MusicController extends Controller
             'link_demo' => $request->link_demo,
             'publisher' => $request->publisher ?? NULL,
             'distr' => $request->distr,
+            'create_date' => $request->create_date,
             'is_active' => $request->has('is_active') ? 1 : 0,
             'is_free' => $request->has('is_free') ? 1 : 0,
             'description' => $request->description ?? NULL,
@@ -292,9 +299,7 @@ class MusicController extends Controller
             'seo_description' => $request->seo_description ?? NULL,
         ];
 
-        if ($image) {
-            $update_data['image'] = $image;
-        }
+        if ($image) $update_data['image'] = $image;
 
         Music::find($id)->update($update_data);
 

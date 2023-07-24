@@ -57,7 +57,7 @@
         </div>
         <div class="admin-form__flex">
             <label class="admin-label">
-                <span>Ссылка на дистрибьютор</span>
+                <span>Дата создания</span>
                 <input class="admin-input" type="date" name="create_date"
                     value="{{ old('create_date') ?? $music->create_date }}" maxlength="255">
                 @error('create_date')
@@ -72,16 +72,16 @@
                 @enderror
             </label>
             <div class="admin-label w-100">
-                <span>Тема</span>
+                <span>Жанр</span>
                 <details class="admin-details">
                     <summary class="admin-details__summary">
-                        <div class="admin-input">Тема</div>
+                        <div class="admin-input">Жанр</div>
                     </summary>
                     <div class="admin-details__content">
                         @foreach ($genres as $genre)
                             <label class="admin-checkbox">
                                 <input class="admin-checkbox__input" type="checkbox" name="genres[]"
-                                    @if (array_search($genre->id, Request::get('genres') ?? []) !== false) checked @endif value="{{ $genre->id }}">
+                                    @if (array_search($genre->id, Request::get('genres') ?? []) !== false || isset($genre->relationship_id)) checked @endif value="{{ $genre->id }}">
                                 <span class="admin-checkbox__icon"></span>
                                 <span>{{ $genre->name }}</span>
                             </label>

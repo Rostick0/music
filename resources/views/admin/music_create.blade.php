@@ -54,7 +54,7 @@
         </div>
         <div class="admin-form__flex">
             <label class="admin-label">
-                <span>Ссылка на дистрибьютор</span>
+                <span>Дата создания</span>
                 <input class="admin-input" type="date" name="create_date" value="{{ old('create_date') }}"
                     maxlength="255">
                 @error('create_date')

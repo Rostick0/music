@@ -12,13 +12,18 @@ class RelationshipGenreController extends Controller
     static public function createAndDeleteRelationship($request_genres, int $type_id, string $type)
     {
         $genres = $request_genres;
+
+        if (!is_array($genres)) {
+            $genres = [$genres]; 
+        }
+
         $array_id = [];
 
         foreach ($genres as $genre) {
             $relationship = RelationshipGenre::firstOrCreate([
                 'type' => $type,
                 'type_id' => $type_id,
-                'genres_id' => $genre->id,
+                'genres_id' => $genre,
             ]);
 
             $array_id[] = $relationship->id;
