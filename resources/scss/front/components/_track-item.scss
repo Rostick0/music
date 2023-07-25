@@ -30,7 +30,8 @@
     &__info {
         display: flex;
         flex-direction: column;
-        margin-right: 90px;
+        margin-right: 5.625rem;
+        width: 20%;
     }
 
     &__free {
@@ -56,8 +57,9 @@
     &__application {
         display: flex;
         align-items: center;
-        flex-grow: 1;
         column-gap: 20px;
+        margin-left: auto;
+        width: 55%;
     }
 
     &__audio {

@@ -369,7 +369,7 @@
                         <img class="track-item__img lazy"
                             data-src="{{ App\Http\Controllers\ImageController::getViewImage($music_item->image) }}"
                             alt="{{ $music_item->title }}">
-                        <div class="track-item__info">
+                        <div class="track-item__info text-ellipsis">
                             @if ($music_item->is_free)
                                 <div class="track-item__free">FREE</div>
                             @endif
