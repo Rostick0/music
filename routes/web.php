@@ -133,7 +133,7 @@ Route::group(['middleware' => 'auth'], function ($router) {
     });
 });
 
-Route::post('/feedback', [FeedbackController::class, 'store']);
+Route::post('/contacts', [FeedbackController::class, 'store']);
 
 Route::get('/', [SitePageController::class, 'show']);
 Route::get('{url}', [SitePageController::class, 'show']);
