@@ -32,7 +32,6 @@ class StatisticController extends Controller
             ->orderByDesc('statistics.id');
 
         if ($request->statistic_types) {
-            // dd($restatistic_types);
             $statistics->whereIn('statistic_types.id', $request->statistic_types);
         }
 

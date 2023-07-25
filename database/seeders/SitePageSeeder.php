@@ -52,6 +52,13 @@ class SitePageSeeder extends Seeder
             'path' => 'pricing'
         ],
         [
+            'name' => 'feedback',
+            'url' => 'feedback',
+            'seo_title' => 'feedback',
+            'seo_description' => 'feedback',
+            'path' => 'feedback'
+        ],
+        [
             'name' => 'sign_in',
             'url' => 'sign_in',
             'seo_title' => 'sign_in',

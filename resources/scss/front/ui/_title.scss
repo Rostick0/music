@@ -8,4 +8,9 @@
         font-size: 1.5rem;
         margin-bottom: 1.5rem;
     }
+
+    &-big {
+        @extend .section-title;
+        font-size: 3rem;
+    }
 }

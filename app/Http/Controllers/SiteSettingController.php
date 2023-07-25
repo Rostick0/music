@@ -7,17 +7,11 @@ use Illuminate\Support\Facades\File;
 
 class SiteSettingController extends Controller
 {
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit()
     {
         return view('admin.settings');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request)
     {
         $validator = $request->validate([

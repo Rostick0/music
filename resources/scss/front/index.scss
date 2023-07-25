@@ -24,3 +24,66 @@ body,
 .main {
     flex-grow: 1;
 }
+
+.feedback {
+    margin-bottom: 8rem;
+
+    &__title {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    &__social {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin-bottom: 2.75rem;
+
+        &_link {
+            display: flex;
+        }
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        row-gap: 1rem;
+    }
+
+    &__button {
+        align-self: flex-end;
+        margin-left: auto;
+    }
+
+    @media (max-width: 768px) {
+        margin-bottom: 4rem;
+
+        &__title {
+            margin-bottom: 1rem;
+        }
+
+        &__social {
+            margin-bottom: 1.75rem;
+        }
+
+        &__form {
+            row-gap: .33rem;
+        }
+    }
+}
+
+.input {
+    border: 1px solid var(--border-color);
+    border-radius: .625rem;
+    padding: 1.2rem;
+}
+
+.label {
+    display: flex;
+    flex-direction: column;
+    row-gap: .33rem;
+
+    &__name {
+        opacity: 0.6;
+    }
+}

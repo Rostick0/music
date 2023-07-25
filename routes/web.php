@@ -5,6 +5,8 @@ use App\Http\Controllers\ClientStatisticController;
 use App\Http\Controllers\ClientUserController;
 use App\Http\Controllers\ComponentController;
 use App\Http\Controllers\DeletedController;
+use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\MusicController;
@@ -121,6 +123,17 @@ Route::get('register', [RegisterController::class, 'show'])->name('register');
 Route::post('register', [RegisterController::class, 'store']);
 
 Route::get('logout', [LogoutController::class, 'store'])->name('logout');
+
+Route::group(['middleware' => 'auth'], function ($router) {
+
+
+    Route::group(['prefix' => 'favorite'], function ($router) {
+        Route::post('create/{music_id}', [FavoriteController::class, 'create']);
+        Route::post('delete/{id}', [FavoriteController::class, 'destroy']);
+    });
+});
+
+Route::post('/feedback', [FeedbackController::class, 'store']);
 
 Route::get('/', [SitePageController::class, 'show']);
 Route::get('{url}', [SitePageController::class, 'show']);
