@@ -366,17 +366,19 @@
             <ul class="tracks__list">
                 @foreach ($music_list as $music_item)
                     <li class="tracks__item track-item">
-                        <img class="track-item__img lazy"
-                            data-src="{{ App\Http\Controllers\ImageController::getViewImage($music_item->image) }}"
-                            alt="{{ $music_item->title }}">
-                        <div class="track-item__info text-ellipsis">
-                            @if ($music_item->is_free)
-                                <div class="track-item__free">FREE</div>
-                            @endif
-                            <div class="track-item__name">{{ $music_item->title }}</div>
-                            <div class="track-item__artist">{{ $music_item->music_artist_name }}</div>
+                        <div class="track-item__info">
+                            <img class="track-item__img lazy"
+                                data-src="{{ App\Http\Controllers\ImageController::getViewImage($music_item->image) }}"
+                                alt="{{ $music_item->title }}">
+                            <div class="track-item__text text-ellipsis">
+                                @if ($music_item->is_free)
+                                    <div class="track-item__free">FREE</div>
+                                @endif
+                                <div class="track-item__name">{{ $music_item->title }}</div>
+                                <div class="track-item__artist">{{ $music_item->music_artist_name }}</div>
+                            </div>
                         </div>
-                        <div class="track-item__application">
+                        <div class="track-item__timer">
                             <button class="track-button track-item__button">
                                 <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -396,8 +398,8 @@
                             </button>
                             <div class="track-time track-item__time">
                                 {{ App\Http\Controllers\MusicController::normalizeTime($music_item->duration) }}</div>
-                            <div class="track-item__audio track-item__audio_{{ $music_item->id }}"></div>
                         </div>
+                        <div class="track-item__audio track-item__audio_{{ $music_item->id }}"></div>
                         <div class="track-item__buttons">
                             <button class="track-item__favorite">
                                 <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
@@ -416,7 +418,8 @@
                                     </defs>
                                 </svg>
                             </button>
-                            <button class="track-item__download">
+                            <a class="track-item__download"
+                                href="{{ Storage::url('upload/music/' . $music_item->link) }}" download>
                                 <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <g clip-path="url(#clip0_98_282)">
@@ -436,8 +439,8 @@
                                         </clipPath>
                                     </defs>
                                 </svg>
-                            </button>
-                            <button class="track-item__buy">
+                            </a>
+                            <a class="track-item__buy" href="/pricing">
                                 <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <g clip-path="url(#clip0_98_281)">
@@ -469,7 +472,7 @@
                                         </clipPath>
                                     </defs>
                                 </svg>
-                            </button>
+                            </a>
                         </div>
                     </li>
                 @endforeach
