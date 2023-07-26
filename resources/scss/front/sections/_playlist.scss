@@ -9,6 +9,13 @@
         margin-top: 1.87rem;
     }
 
+    &__filter {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        column-gap: .625rem;
+        margin-bottom: 4.5rem;
+    }
+
     @media (max-width: 1366px) {
         &__list {
             grid-template-columns: repeat(2, 1fr);
