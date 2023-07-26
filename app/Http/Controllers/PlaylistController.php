@@ -22,6 +22,7 @@ class PlaylistController extends Controller
     {
         $where_sql = [];
         if ($request->title) $where_sql[] = ['title', 'LIKE', '%' . $request->title . '%'];
+        if (!(auth()->check() && auth()->user()->is_admin)) $where_sql[] = ['music.is_active', 1];
 
         $playlists = Playlist::where($where_sql);
         if ($request->themes) {
@@ -154,7 +155,7 @@ class PlaylistController extends Controller
             'seo_title' => 'max:255',
             'seo_description' => 'max:255'
         ]);
-
+        
         $image = ImageController::upload($request->file('image'));
 
         $update_data = [

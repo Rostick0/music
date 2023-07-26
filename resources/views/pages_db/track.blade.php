@@ -7,9 +7,9 @@
         $moods = App\Models\Mood::all();
         $themes = App\Models\Theme::all();
         // $instruments = App\Models\Instrument::all();
-        $music = App\Models\Music::where('id', $id)->firstOrFail();
+        $music = App\Http\Controllers\FrontMusicController::getById($id);
         $artist_name = App\Models\MusicArtist::find($music->music_artists_id)->name;
-        $music_list = App\Models\Music::whereNot('id', $id)->get();
+        $music_list = App\Http\Controllers\FrontMusicController::getSimilar($id);
     @endphp
 @endsection
 
