@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClientRemoveClaimController;
 use App\Http\Controllers\ClientStatisticController;
+use App\Http\Controllers\ClientSubscriptionController;
 use App\Http\Controllers\ClientUserController;
 use App\Http\Controllers\ComponentController;
 use App\Http\Controllers\DeletedController;
@@ -101,11 +102,7 @@ Route::group(['prefix' => 'admin'], function ($router) {
 });
 
 Route::group(['prefix' => 'client'], function ($router) {
-    Route::get('music', [MusicController::class, 'index_client'])->name('client.music');
-
     Route::get('subscriptions', [ClientSubscriptionController::class, 'index'])->name('client.subscriptions');
-
-    Route::get('statistic', [ClientStatisticController::class, 'index'])->name('client.statistic');
 
     Route::get('remove_claim', [ClientRemoveClaimController::class, 'index'])->name('client.remove_claim');
     Route::post('remove_claim', [ClientRemoveClaimController::class, 'store']);
@@ -113,7 +110,7 @@ Route::group(['prefix' => 'client'], function ($router) {
     Route::get('profile', [ClientUserController::class, 'show'])->name('client.profile');
     Route::get('profile_edit', [ClientUserController::class, 'edit'])->name('client.profile.edit');
     Route::post('profile_edit', [ClientUserController::class, 'update']);
-    Route::post('profile_password', [ClientUserController::class, 'password_update']);
+    Route::post('profile_password', [ClientUserController::class, 'password_update'])->name('client.profile_password');
 });
 
 Route::get('login', [LoginController::class, 'show'])->name('login');
