@@ -22,14 +22,14 @@
             </label>
         </div>
         <div class="admin-form__flex">
-            <label class="admin-label">
+            {{-- <label class="admin-label">
                 <span>Эл. почта*</span>
                 <input class="admin-input" type="text" name="email" maxlength="255"
                     value="{{ old('email') ?? $user->email }}" required>
                 @error('email')
                     <span class="error">{{ $message }}</span>
                 @enderror
-            </label>
+            </label> --}}
             <label class="admin-label">
                 <span>Телефон</span>
                 <input class="admin-input" type="tel" name="telephone" maxlength="255"
@@ -45,7 +45,7 @@
     </form>
     <br>
     <br>
-    <form class="admin-form" action="{{ route('client.profile_password') }}" method="post">
+    <form class="admin-form" action="{{ route('admin.profile_password') }}" method="post">
         @csrf
         <div class="admin-form__flex">
             <label class="admin-label">

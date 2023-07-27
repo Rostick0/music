@@ -6,6 +6,7 @@ use App\Http\Controllers\ClientSubscriptionController;
 use App\Http\Controllers\ClientUserController;
 use App\Http\Controllers\ComponentController;
 use App\Http\Controllers\DeletedController;
+use App\Http\Controllers\EmailVertificationController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\LoginController;
@@ -23,6 +24,7 @@ use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -99,6 +101,10 @@ Route::group(['prefix' => 'admin'], function ($router) {
 
     Route::get('/deleted', [DeletedController::class, 'show'])->name('deleted');
     Route::get('/delete_confirm', [DeletedController::class, 'confirm'])->name('delete_confirm');
+
+    Route::get('profile_edit', [ClientUserController::class, 'edit'])->name('admin.profile.edit');
+    Route::post('profile_edit', [ClientUserController::class, 'update']);
+    Route::post('profile_password', [ClientUserController::class, 'password_update'])->name('admin.profile_password');
 });
 
 Route::group(['prefix' => 'client'], function ($router) {
@@ -121,8 +127,17 @@ Route::post('register', [RegisterController::class, 'store']);
 
 Route::get('logout', [LogoutController::class, 'store'])->name('logout');
 
-Route::group(['middleware' => 'auth'], function ($router) {
+Route::get('/email/verify', [EmailVertificationController::class, 'show'])->middleware('auth')->name('verification.notice');
 
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect('/');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::post('/email/verification-notification', [EmailVertificationController::class, 'notification'])->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+Route::group(['middleware' => 'auth'], function ($router) {
 
     Route::group(['prefix' => 'favorite'], function ($router) {
         Route::post('create/{music_id}', [FavoriteController::class, 'create']);
