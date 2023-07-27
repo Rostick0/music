@@ -11,6 +11,9 @@ class SubscriptionType extends Model
 
     protected $fillable = [
         'name',
+        'description',
+        'advantages',
+        'is_active',
         'price',
     ];
 }

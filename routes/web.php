@@ -23,6 +23,7 @@ use App\Http\Controllers\SitePageController;
 use App\Http\Controllers\SiteSettingController;
 use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\SubscriptionTypeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -70,6 +71,14 @@ Route::group(['prefix' => 'admin'], function ($router) {
 
     Route::get('statistic', [StatisticController::class, 'index'])->name('statistic');
     Route::get('subscriptions', [SubscriptionController::class, 'index'])->name('subscriptions');
+
+    Route::group(['prefix' => 'subscription_type'], function ($router) {
+        Route::get('list', [SubscriptionTypeController::class, 'index'])->name('subscription_type.list');
+        Route::get('create', [SubscriptionTypeController::class, 'create'])->name('subscription_type.create');
+        Route::post('create', [SubscriptionTypeController::class, 'store']);
+        Route::get('{id}', [SubscriptionTypeController::class, 'edit'])->name('subscription_type.edit');
+        Route::post('{id}', [SubscriptionTypeController::class, 'update']);
+    });
 
     Route::group(['prefix' => 'users'], function ($router) {
         Route::get('/', [UserController::class, 'index'])->name('user.list');

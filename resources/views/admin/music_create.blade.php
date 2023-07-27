@@ -111,7 +111,7 @@
             </label>
             <label class="admin-checkbox">
                 <input class="admin-checkbox__input" type="checkbox" name="is_free"
-                    {{ old('is_active') ? 'checked' : '' }}>
+                    {{ old('is_free') ? 'checked' : '' }}>
                 <span class="admin-checkbox__icon"></span>
                 <span>Бесплатный?</span>
             </label>
