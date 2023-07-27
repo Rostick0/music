@@ -1,4 +1,4 @@
-@extends('layout.client.index')
+@extends('layout.admin.index')
 
 @section('html')
     <form class="admin-form" action="{{ url()->current() }}" method="post">

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\ClientRemoveClaimController;
 use App\Http\Controllers\ClientStatisticController;
 use App\Http\Controllers\ClientSubscriptionController;
@@ -102,9 +103,9 @@ Route::group(['prefix' => 'admin'], function ($router) {
     Route::get('/deleted', [DeletedController::class, 'show'])->name('deleted');
     Route::get('/delete_confirm', [DeletedController::class, 'confirm'])->name('delete_confirm');
 
-    Route::get('profile_edit', [ClientUserController::class, 'edit'])->name('admin.profile.edit');
-    Route::post('profile_edit', [ClientUserController::class, 'update']);
-    Route::post('profile_password', [ClientUserController::class, 'password_update'])->name('admin.profile_password');
+    Route::get('profile_edit', [AdminUserController::class, 'edit'])->name('admin.profile.edit');
+    Route::post('profile_edit', [AdminUserController::class, 'update']);
+    Route::post('profile_password', [AdminUserController::class, 'password_update'])->name('admin.profile_password');
 });
 
 Route::group(['prefix' => 'client'], function ($router) {
