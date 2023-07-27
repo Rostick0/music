@@ -3,11 +3,10 @@
 @section('html')
     <form class="admin-filter" action="{{ url()->current() }}">
         <div class="admin-filter__inputs">
-            {{-- {{ dd(Request::get('subscription_types')) }} --}}
             <input class="admin-input" type="search" placeholder="Название" name="name" value="{{ Request::get('name') }}">
-            <input class="admin-input" type="number" step="0.01" placeholder="Цена от" name="name"
+            <input class="admin-input" type="number" step="0.01" placeholder="Цена от" name="price_min"
                 value="{{ Request::get('price_min') }}">
-            <input class="admin-input" type="number" step="0.01" placeholder="Цена от" name="name"
+            <input class="admin-input" type="number" step="0.01" placeholder="Цена до" name="price_max"
                 value="{{ Request::get('price_max') }}">
         </div>
         <div class="admin-filter__buttons">

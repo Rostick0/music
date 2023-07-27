@@ -7,9 +7,16 @@ use Illuminate\Http\Request;
 
 class SubscriptionTypeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $subscription_types = SubscriptionType::paginate(app('site')->count_admin);
+        $where_sql = [];
+
+        if ($request->name) $where_sql[] = ['name', '=', $request->name];
+        if ($request->price_max) $where_sql[] = ['price', '<=', $request->price_max];
+        if ($request->price_min) $where_sql[] = ['price', '>=', $request->price_min];
+
+        $subscription_types = SubscriptionType::where($where_sql)
+            ->paginate(app('site')->count_admin);
 
         return view('admin.subscription_type_list', [
             'subscription_types' => $subscription_types
