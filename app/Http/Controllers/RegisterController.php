@@ -36,10 +36,9 @@ class RegisterController extends Controller
         ]);
 
         Auth::login($user);
+        FavoriteController::insertDb();
 
-        if ($user->is_admin) {
-            return redirect()->route('admin.music');
-        }
+        if ($user->is_admin) return redirect()->route('admin.music');
 
         return redirect()->route('client.profile');
     }

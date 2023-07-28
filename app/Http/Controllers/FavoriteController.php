@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Favorite;
 use App\Models\Music;
+use Carbon\Carbon;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,6 +15,20 @@ class FavoriteController extends Controller
     private static function getLocalFavorite()
     {
         return json_decode(Cookie::get('favorite')) ?? [];
+    }
+
+    public static function insertDb()
+    {
+        $local_favorite = FavoriteController::getLocalFavorite();
+
+        if (empty($local_favorite)) return;
+
+        foreach ($local_favorite as $favorite) {
+            Favorite::firstOrCreate([
+                'music_id' => $favorite,
+                'users_id' => auth()->id()
+            ]);
+        }
     }
 
     public function create(int $music_id)

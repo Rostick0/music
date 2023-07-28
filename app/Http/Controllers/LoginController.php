@@ -31,6 +31,7 @@ class LoginController extends Controller
         }
 
         if (Auth::check()) {
+            FavoriteController::insertDb();
             return $this->redirectProfile();
         }
 
