@@ -1,10 +1,18 @@
 @import './../reset';
-@import './root';
 @import './../utils';
 @import './ui';
 @import './components';
 @import './sections';
 @import './fonts';
+
+:root {
+    --border-color: rgba(27, 18, 30, 0.10);
+    --main-color: #FF9211;
+    --white: #fff;
+    --dark: #1B121E;
+    --gradient: linear-gradient(225deg, #FF9211 0%, #F11 100%);
+    --gradient-opacity: linear-gradient(225deg, rgba(255, 146, 17, .03) 0%, rgba(255, 17, 17, .03) 100%);
+}
 
 html,
 body,

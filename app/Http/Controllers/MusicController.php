@@ -12,6 +12,7 @@ use App\Models\RelationshipInstrument;
 use App\Models\RelationshipMood;
 use App\Models\RelationshipTheme;
 use App\Models\Theme;
+use Illuminate\Database\Query\JoinClause;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\File;
@@ -31,7 +32,7 @@ class MusicController extends Controller
 
         $music_list = Music::select(
             'music.*',
-            'music_artists.name as music_artist_name'
+            'music_artists.name as music_artist_name',
         )
             ->join('music_artists', 'music.music_artists_id', '=', 'music_artists.id')
             ->where($where_sql);
@@ -105,9 +106,14 @@ class MusicController extends Controller
 
         $music_list = Music::select(
             'music.*',
-            'music_artists.name as music_artist_name'
+            'music_artists.name as music_artist_name',
+            'favorites.id as favorite_id'
         )
             ->join('music_artists', 'music.music_artists_id', '=', 'music_artists.id')
+            ->leftJoin('favorites', function (JoinClause $join) {
+                $join->on('favorites.music_id', '=', 'music.id')
+                    ->where('favorites.users_id', auth()->id());
+            })
             ->where($where_sql);
         if ($request->genres) {
             $music_list->whereIn('music.id', RelationshipGenre::select('type_id')

@@ -10,8 +10,7 @@ class Favorite extends Model
     use HasFactory;
 
     protected $fillable = [
-        'email',
-        'theme',
-        'message',
+        'music_id',
+        'users_id',
     ];
 }

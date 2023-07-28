@@ -72,8 +72,6 @@
         margin-right: 1.25rem;
     }
 
-
-
     &__audio {
         flex-grow: 1;
         margin-right: 3.125rem;
@@ -83,6 +81,22 @@
         display: flex;
         align-items: center;
         grid-gap: 1.25rem;
+
+        &>* {
+            display: flex;
+        }
+    }
+
+    &__favorite {
+        &._active {
+            svg {
+                fill: var(--main-color);
+
+                path {
+                    stroke: var(--main-color);
+                }
+            }
+        }
     }
 
     @media (max-width: 1366px) {
