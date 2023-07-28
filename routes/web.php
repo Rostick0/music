@@ -155,8 +155,8 @@ Route::group([], function ($router) {
     });
 });
 
-Route::post('/contacts', [FeedbackController::class, 'store']);
-
 Route::get('/', [SitePageController::class, 'show']);
 Route::get('{url}', [SitePageController::class, 'show']);
 Route::get('{url}/{id}', [SitePageController::class, 'show']);
+
+Route::post('/contacts', [FeedbackController::class, 'store']);

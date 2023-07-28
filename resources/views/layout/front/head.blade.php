@@ -9,7 +9,10 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
     <title>@yield('seo_title', $site->seo_title)</title>
     <meta name="description" content="@yield('seo_description', $site->seo_description)">
-    <meta name="_token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script>
+        const userId = {{ auth()->id() ?? 'null' }};
+    </script>
 </head>
 
 <body>

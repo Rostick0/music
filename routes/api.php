@@ -20,3 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('music', [MusicController::class, 'search']);
+
+Route::get('test', function () {
+    return response()->json(auth()->check());
+});
