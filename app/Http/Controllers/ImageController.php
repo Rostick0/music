@@ -25,6 +25,10 @@ class ImageController extends Controller
         return $defaultImage;
     }
 
+    public static function check($image) {
+        return $image && Storage::disk('public')->exists('upload/image/' . $image);
+    }
+
     public static function destroy($image_path)
     {
         if (!Storage::exists('upload/image/' . $image_path)) {

@@ -27,7 +27,7 @@
                 @enderror
             </label>
         </div>
-        @if ($music->image)
+        @if (App\Http\Controllers\ImageController::check($playlist->image))
             <div class="admin-form__image">
                 <img src="{{ Storage::url('upload/image/' . $playlist->image) }}" width="100%" alt="">
             </div>
@@ -104,7 +104,7 @@
             <a class="admin-button-red"
                 href="{{ route('delete_confirm', [
                     'type' => 'pages',
-                    'type_id' => $page->id,
+                    'type_id' => $playlist->id,
                 ]) }}">Удалить</a>
         </div>
     </form>
