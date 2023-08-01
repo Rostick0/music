@@ -28,7 +28,10 @@
                 @error('link')
                     <span class="error">{{ $message }}</span>
                 @enderror
-                <audio src="{{ Storage::url('upload/music/' . $music->link) }}" controls></audio>
+                @if (App\Http\Controllers\MusicUploadController::check($music->link))
+                    <span>{{ App\Http\Controllers\MusicUploadController::getViewLink($music->link) }}</span>
+                    <audio class="admin-audio" src="{{ Storage::url('upload/music/' . $music->link) }}" controls></audio>
+                @endif
             </label>
             <label class="admin-label">
                 <span>Демо трэк</span>
@@ -36,8 +39,9 @@
                 @error('link_demo')
                     <span class="error">{{ $message }}</span>
                 @enderror
-                @if (isset($music->link_demo) && Storage::exists('upload/music_demo/' . $music->link_demo))
-                    <audio src="{{ Storage::url('upload/music_demo/' . $music->link_demo) }}" controls></audio>
+                @if (App\Http\Controllers\MusicUploadController::check($music->link_demo, 'music_demo'))
+                    <span>{{ App\Http\Controllers\MusicUploadController::getViewLink($music->link) }}</span>
+                    <audio class="admin-audio" src="{{ Storage::url('upload/music_demo/' . $music->link_demo) }}" controls></audio>
                 @endif
             </label>
             <label class="admin-label">

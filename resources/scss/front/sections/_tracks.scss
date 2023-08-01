@@ -3,7 +3,6 @@
         display: grid;
         grid-template-columns: repeat(5, 1fr); 
         column-gap: .625rem;
-        overflow-x: auto;
         margin-bottom: 4.5rem;
 
         .select {
@@ -22,6 +21,8 @@
     }
 
     @media (max-width: 1120px) {
+        overflow-x: auto;
+
         .select__list {
             position: static;
             margin-bottom: .75rem;
