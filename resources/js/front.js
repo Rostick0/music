@@ -1,6 +1,8 @@
 import { throttle } from './optimization';
 import { addClass, objConvertUrl, removeClass } from './helpers';
 const csrfToken = document.querySelector('meta[name="csrf-token"]');
+const STORAGE_URL = '/storage/upload';
+const MUSIC_URL = STORAGE_URL + '/music/';
 
 const myFetch = (url, options) => {
     const bearerToken = typeof accessToken === 'string' && accessToken ? 'Bearer ' + accessToken : null;
@@ -84,44 +86,48 @@ function initWaveSurfer() {
 
     if (!trackItems?.length) return;
 
-    const clearActiveMusic = (wavesurfer) => {
-        const musicList = document.querySelectorAll('.track-item._active');
+    const plays = [];
 
+    const clearActiveMusic = () => {
+        const musicList = document.querySelectorAll('.track-item._active');
         if (!musicList?.length) return;
 
         musicList?.forEach(item => {
-            console.log(wavesurfer);
-            wavesurfer.pause();
+            console.log(item);
+            plays?.forEach(item => item?.pause());
+            plays?.splice(0, plays?.length - 1);
+
             removeClass(item, '_active');
         });
     };
 
     trackItems?.forEach(item => {
-        let isActive = false;
+        const trackItemAudio = item.querySelector('.track-item__audio');
 
         const wavesurfer = WaveSurfer.create({
-            container: '.' + item.querySelector('.track-item__audio').classList?.value?.replace(' ', '.'),
+            container: '.' + trackItemAudio.classList?.value?.replace(' ', '.'),
             waveColor: 'rgba(27, 18, 30, .2)',
             progressColor: '#FF1111',
-            url: '/audio/1686521221.mp3',
+            url: MUSIC_URL + trackItemAudio.getAttribute('data-music'),
             height: 40,
         });
 
         const trackItemButton = item.querySelector('.track-item__button');
-
         trackItemButton.onclick = () => {
-            if (!isActive) {
-                clearActiveMusic(wavesurfer);
-                console.log(wavesurfer);
+            if (!item.classList.contains('_active')) {
+                plays.push(wavesurfer);
+                clearActiveMusic();
                 addClass(item, '_active');
                 wavesurfer?.play();
-            } else {
-                removeClass(item, '_active');
-                wavesurfer?.pause();
+
+                return;
             }
 
-            isActive = !isActive;
+            wavesurfer?.pause();
+            removeClass(item, '_active');
         };
+
+
     })
 }
 

@@ -406,7 +406,8 @@
                             <div class="track-time track-item__time">
                                 {{ App\Http\Controllers\MusicController::normalizeTime($music_item->duration) }}</div>
                         </div>
-                        <div class="track-item__audio track-item__audio_{{ $music_item->id }}"></div>
+                        <div class="track-item__audio track-item__audio_{{ $music_item->id }}"
+                            data-music="{{ $music_item->link }}"></div>
 
                         <div class="track-item__buttons">
                             @if (

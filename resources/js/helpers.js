@@ -3,11 +3,11 @@ export const objConvertUrl = obj => {
 }
 
 export const addClass = (elem, className) => {
-    elem.classList.add(className);
+    elem?.classList?.add(className);
 }
 
 export const removeClass = (elem, className) => {
-    if (!elem.classList.contains(className)) return;
+    if (!elem?.classList?.contains(className)) return;
 
     elem.classList.remove(className);
 }
