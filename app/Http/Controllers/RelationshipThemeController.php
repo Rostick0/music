@@ -10,7 +10,7 @@ class RelationshipThemeController extends Controller
 {
     static public function get(int $type_id, string $type)
     {
-        $themes = RelationshipTheme::select('themes.name')->join('themes', 'relationship_themes.themes_id', '=', 'themes.id')
+        $themes = RelationshipTheme::select('themes.name')->join('themes', 'relationship_themes.theme_id', '=', 'themes.id')
             ->where([
                 ['relationship_themes.type_id', '=', $type_id],
                 ['relationship_themes.type', '=', $type]
@@ -36,7 +36,7 @@ class RelationshipThemeController extends Controller
             RelationshipTheme::firstOrCreate([
                 'type' => $type,
                 'type_id' => $type_id,
-                'themes_id' => $value_theme->id
+                'theme_id' => $value_theme->id
             ]);
         }
     }
@@ -56,7 +56,7 @@ class RelationshipThemeController extends Controller
             $relationship = RelationshipTheme::firstOrCreate([
                 'type' => $type,
                 'type_id' => $type_id,
-                'themes_id' => $value_theme->id
+                'theme_id' => $value_theme->id
             ]);
 
             $array_id[] = $relationship->id;

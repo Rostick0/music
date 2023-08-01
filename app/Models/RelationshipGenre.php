@@ -12,6 +12,6 @@ class RelationshipGenre extends Model
     protected $fillable = [
         'type',
         'type_id',
-        'genres_id'
+        'genre_id'
     ];
 }

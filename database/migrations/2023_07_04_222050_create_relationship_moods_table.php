@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('type'); // playlist|music
             $table->integer('type_id');
-            $table->foreignId('moods_id')->references('id')->on('moods')->onDelete('cascade');
+            $table->foreignId('mood_id')->references('id')->on('moods')->onDelete('cascade');
             $table->timestamps();
         });
     }

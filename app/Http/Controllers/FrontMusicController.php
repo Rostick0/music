@@ -24,24 +24,24 @@ class FrontMusicController extends Controller
 
     public static function getSimilar(int $music_id)
     {
-        $genres_ids = RelationshipGenre::select('genres_id')->where([
+        $genre_ids = RelationshipGenre::select('genre_id')->where([
             'type' => 'music',
             'type_id' => $music_id
         ]);
 
-        $themes_ids = RelationshipTheme::select('themes_id')
+        $theme_id = RelationshipTheme::select('theme_id')
             ->where([
                 'type' => 'music',
                 'type_id' => $music_id
             ]);
 
-        $instruments_ids = RelationshipInstrument::select('instruments_id')
+        $instrument_ids = RelationshipInstrument::select('instrument_id')
             ->where([
                 'type' => 'music',
                 'type_id' => $music_id
             ]);
 
-        $moods_ids = RelationshipMood::select('moods_id')
+        $mood_ids = RelationshipMood::select('mood_id')
             ->where([
                 'type' => 'music',
                 'type_id' => $music_id
@@ -50,23 +50,23 @@ class FrontMusicController extends Controller
         $music_genre = FrontMusicController::joinArtist()
             ->whereIn('music.id', RelationshipGenre::select('type_id')
                 ->where('type', 'music')
-                ->whereIn('genres_id', $genres_ids));
+                ->whereIn('genre_id', $genre_ids));
 
         $music_theme = FrontMusicController::joinArtist()
             ->whereIn('music.id', RelationshipTheme::select('type_id')
                 ->where('type', 'music')
-                ->whereIn('themes_id', $themes_ids));
+                ->whereIn('theme_id', $theme_id));
 
         $music_instrument = FrontMusicController::joinArtist()
             ->whereIn('music.id', RelationshipInstrument::select('type_id')
                 ->where('type', 'music')
-                ->whereIn('instruments_id', $instruments_ids));
+                ->whereIn('instrument_id', $instrument_ids));
 
 
         $music_mood = FrontMusicController::joinArtist()
             ->whereIn('music.id', RelationshipMood::select('type_id')
                 ->where('type', 'music')
-                ->whereIn('moods_id', $moods_ids));
+                ->whereIn('mood_id', $mood_ids));
 
 
         $music_list = FrontMusicController::joinArtist()

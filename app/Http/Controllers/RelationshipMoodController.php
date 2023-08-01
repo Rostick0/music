@@ -16,7 +16,7 @@ class RelationshipMoodController extends Controller
 
     static public function get(int $type_id, string $type)
     {
-        $moods = RelationshipMood::select('moods.name')->join('moods', 'relationship_moods.moods_id', '=', 'moods.id')
+        $moods = RelationshipMood::select('moods.name')->join('moods', 'relationship_moods.mood_id', '=', 'moods.id')
             ->where([
                 ['relationship_moods.type_id', '=', $type_id],
                 ['relationship_moods.type', '=', $type]
@@ -42,7 +42,7 @@ class RelationshipMoodController extends Controller
             RelationshipMood::firstOrCreate([
                 'type' => $type,
                 'type_id' => $type_id,
-                'moods_id' => $value_mood->id,
+                'mood_id' => $value_mood->id,
             ]);
         }
     }
@@ -62,7 +62,7 @@ class RelationshipMoodController extends Controller
             $relationship = RelationshipMood::firstOrCreate([
                 'type' => $type,
                 'type_id' => $type_id,
-                'moods_id' => $value_mood->id,
+                'mood_id' => $value_mood->id,
             ]);
 
             $array_id[] = $relationship->id;

@@ -12,6 +12,6 @@ class RelationshipInstrument extends Model
     protected $fillable = [
         'type',
         'type_id',
-        'instruments_id'
+        'instrument_id'
     ];
 }

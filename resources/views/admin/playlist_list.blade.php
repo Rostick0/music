@@ -89,6 +89,7 @@
                     <a href="{{ route('playlist.edit', ['id' => $playlist->id]) }}">{{ $playlist->id }}</a>
                     <div>{{ $playlist->title }}</div>
                     <div>{{ $playlist->genre_name }}</div>
+                    <div>{{ $playlist->genre_name }}</div>
                     <div>{{ $playlist->is_active ? 'Да' : 'Нет' }}</div>
                     <div>{{ $playlist->created_at }}</div>
                 </li>

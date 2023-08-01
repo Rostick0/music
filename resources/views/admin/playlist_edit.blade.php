@@ -53,14 +53,16 @@
             </div>
             <label class="admin-label">
                 <span>Тема (через запятую)</span>
-                <input class="admin-input" type="text" name="themes" value="{{ old('themes') ?? $themes }}">
+                <input class="admin-input" type="text" name="themes"
+                    value="{{ old('themes') ?? App\Http\Controllers\RelationshipHelper::getNameByItems($music->themes) }}">
                 @error('themes')
                     <span class="error">{{ $message }}</span>
                 @enderror
             </label>
             <label class="admin-label">
                 <span>Настроение (через запятую)</span>
-                <input class="admin-input" type="text" name="moods" value="{{ old('moods') ?? $moods }}">
+                <input class="admin-input" type="text" name="moods"
+                    value="{{ old('moods') ?? App\Http\Controllers\RelationshipHelper::getNameByItems($music->moods) }}">
                 @error('moods')
                     <span class="error">{{ $message }}</span>
                 @enderror
@@ -68,7 +70,7 @@
             <label class="admin-label">
                 <span>Инструменты (через запятую)</span>
                 <input class="admin-input" type="text" name="instruments"
-                    value="{{ old('instruments') ?? $instruments }}">
+                    value="{{ old('instruments') ?? App\Http\Controllers\RelationshipHelper::getNameByItems($music->instruments) }}">
                 @error('instruments')
                     <span class="error">{{ $message }}</span>
                 @enderror

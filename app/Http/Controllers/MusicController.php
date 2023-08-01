@@ -39,25 +39,25 @@ class MusicController extends Controller
         if ($request->genres) {
             $music_list->whereIn('music.id', RelationshipTheme::select('type_id')
                 ->where('type', 'music')
-                ->whereIn('genres_id', $request->genres)
+                ->whereIn('genre_id', $request->genres)
                 ->get());
         }
         if ($request->themes) {
             $music_list->whereIn('music.id', RelationshipTheme::select('type_id')
                 ->where('type', 'music')
-                ->whereIn('themes_id', $request->themes)
+                ->whereIn('theme_id', $request->themes)
                 ->get());
         }
         if ($request->instruments) {
             $music_list->whereIn('music.id', RelationshipInstrument::select('type_id')
                 ->where('type', 'music')
-                ->whereIn('instruments_id', $request->instruments)
+                ->whereIn('instrument_id', $request->instruments)
                 ->get());
         }
         if ($request->moods) {
             $music_list->whereIn('music.id', RelationshipMood::select('type_id')
                 ->where('type', 'music')
-                ->whereIn('moods_id', $request->moods)
+                ->whereIn('mood_id', $request->moods)
                 ->get());
         }
         if ($request->min_time && $request->max_time) {
@@ -118,25 +118,25 @@ class MusicController extends Controller
         if ($request->genres) {
             $music_list->whereIn('music.id', RelationshipGenre::select('type_id')
                 ->where('type', 'music')
-                ->whereIn('genres_id', is_array($request->genres) ? $request->genres : [$request->genres])
+                ->whereIn('genre_id', is_array($request->genres) ? $request->genres : [$request->genres])
                 ->get());
         }
         if ($request->themes) {
             $music_list->whereIn('music.id', RelationshipTheme::select('type_id')
                 ->where('type', 'music')
-                ->whereIn('themes_id', is_array($request->themes) ? $request->themes : [$request->themes])
+                ->whereIn('theme_id', is_array($request->themes) ? $request->themes : [$request->themes])
                 ->get());
         }
         if ($request->instruments) {
             $music_list->whereIn('music.id', RelationshipInstrument::select('type_id')
                 ->where('type', 'music')
-                ->whereIn('instruments_id', is_array($request->instruments) ? $request->instruments : [$request->instruments])
+                ->whereIn('instrument_id', is_array($request->instruments) ? $request->instruments : [$request->instruments])
                 ->get());
         }
         if ($request->moods) {
             $music_list->whereIn('music.id', RelationshipMood::select('type_id')
                 ->where('type', 'music')
-                ->whereIn('moods_id', is_array($request->moods) ? $request->moods : [$request->moods])
+                ->whereIn('mood_id', is_array($request->moods) ? $request->moods : [$request->moods])
                 ->get());
         }
         if ($request->min_time && $request->max_time) {
@@ -230,28 +230,18 @@ class MusicController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Music $music)
-    {
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(int $id)
     {
         $music = Music::findOrFail($id);
         $music_artist = MusicArtist::find($music->music_artists_id);
-
-        $themes = RelationshipThemeController::get($music->id, 'music');
-        $moods = RelationshipMoodController::get($music->id, 'music');
-        $instruments = RelationshipInstrumentController::get($music->id, 'music');
+        
         $genres = Genre::select(
             'genres.*',
             'relationship_genres.id as relationship_id'
         )->leftJoin('relationship_genres', function ($join) use ($music) {
-            $join->on('relationship_genres.genres_id', '=', 'genres.id')
+            $join->on('relationship_genres.genre_id', '=', 'genres.id')
                 ->where([
                     ['type_id', '=', $music->id],
                     ['type', '=', 'music']
@@ -261,9 +251,6 @@ class MusicController extends Controller
         return view('admin.music_edit', [
             'music' => $music,
             'music_artist' => $music_artist,
-            'themes' => implode(', ', $themes),
-            'moods' => implode(', ', $moods),
-            'instruments' => implode(', ', $instruments),
             'genres' => $genres,
         ]);
     }

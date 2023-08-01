@@ -28,19 +28,19 @@ class PlaylistController extends Controller
         if ($request->themes) {
             $playlists->whereIn('playlists.id', RelationshipTheme::select('type_id')
                 ->where('type', 'playlist')
-                ->whereIn('themes_id', $request->themes)
+                ->whereIn('theme_id', $request->themes)
                 ->get());
         }
         if ($request->instruments) {
             $playlists->whereIn('playlists.id', RelationshipInstrument::select('type_id')
                 ->where('type', 'playlist')
-                ->whereIn('instruments_id', $request->instruments)
+                ->whereIn('instrument_id', $request->instruments)
                 ->get());
         }
         if ($request->moods) {
             $playlists->whereIn('playlists.id', RelationshipMood::select('type_id')
                 ->where('type', 'playlist')
-                ->whereIn('moods_id', $request->moods)
+                ->whereIn('mood_id', $request->moods)
                 ->get());
         }
         $playlists = $playlists->paginate(app('site')->count_admin ?? 20);
@@ -119,15 +119,12 @@ class PlaylistController extends Controller
     public function edit(int $id)
     {
         $playlist = Playlist::findOrFail($id);
-
-        $themes = RelationshipThemeController::get($playlist->id, 'playlist');
-        $moods = RelationshipMoodController::get($playlist->id, 'playlist');
-        $instruments = RelationshipInstrumentController::get($playlist->id, 'playlist');
+        
         $genres = Genre::select(
             'genres.*',
             'relationship_genres.id as relationship_id'
         )->leftJoin('relationship_genres', function ($join) use ($playlist) {
-            $join->on('relationship_genres.genres_id', '=', 'genres.id')
+            $join->on('relationship_genres.genre_id', '=', 'genres.id')
                 ->where([
                     ['type_id', '=', $playlist->id],
                     ['type', '=', 'playlist']
@@ -136,9 +133,6 @@ class PlaylistController extends Controller
 
         return view('admin.playlist_edit', [
             'playlist' => $playlist,
-            'themes' => implode(', ', $themes),
-            'moods' => implode(', ', $moods),
-            'instruments' => implode(', ', $instruments),
             'genres' => $genres,
         ]);
     }

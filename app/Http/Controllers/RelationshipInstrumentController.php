@@ -10,7 +10,7 @@ class RelationshipInstrumentController extends Controller
 {
     static public function get(int $type_id, string $type)
     {
-        $instruments = RelationshipInstrument::select('instruments.name')->join('instruments', 'relationship_instruments.instruments_id', '=', 'instruments.id')
+        $instruments = RelationshipInstrument::select('instruments.name')->join('instruments', 'relationship_instruments.instrument_id', '=', 'instruments.id')
             ->where([
                 ['relationship_instruments.type_id', '=', $type_id],
                 ['relationship_instruments.type', '=', $type]
@@ -36,7 +36,7 @@ class RelationshipInstrumentController extends Controller
             RelationshipInstrument::firstOrCreate([
                 'type' => $type,
                 'type_id' => $type_id,
-                'instruments_id' => $value_instrument->id,
+                'instrument_id' => $value_instrument->id,
             ]);
         }
     }
@@ -56,7 +56,7 @@ class RelationshipInstrumentController extends Controller
             $relationship = RelationshipInstrument::firstOrCreate([
                 'type' => $type,
                 'type_id' => $type_id,
-                'instruments_id' => $value_instrument->id,
+                'instrument_id' => $value_instrument->id,
             ]);
 
             $array_id[] = $relationship->id;

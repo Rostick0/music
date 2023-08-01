@@ -1,6 +1,7 @@
 @extends('layout.admin.index')
 
 @section('html')
+    {{-- {{ dd($music->theme) }} --}}
     <form class="admin-form" action="{{ url()->current() }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="admin-form__flex">
@@ -41,7 +42,8 @@
                 @enderror
                 @if (App\Http\Controllers\MusicUploadController::check($music->link_demo, 'music_demo'))
                     <span>{{ App\Http\Controllers\MusicUploadController::getViewLink($music->link) }}</span>
-                    <audio class="admin-audio" src="{{ Storage::url('upload/music_demo/' . $music->link_demo) }}" controls></audio>
+                    <audio class="admin-audio" src="{{ Storage::url('upload/music_demo/' . $music->link_demo) }}"
+                        controls></audio>
                 @endif
             </label>
             <label class="admin-label">
@@ -68,11 +70,12 @@
                     value="{{ old('create_date') ?? $music->create_date }}" maxlength="255">
                 @error('create_date')
                     <span class="error">{{ $message }}</span>
-                @enderror
+                @enderror   
             </label>
             <label class="admin-label">
                 <span>Тема (через запятую)</span>
-                <input class="admin-input" type="text" name="themes" value="{{ old('themes') ?? $themes }}">
+                <input class="admin-input" type="text" name="themes"
+                    value="{{ old('themes') ?? App\Http\Controllers\RelationshipHelper::getNameByItems($music->themes) }}">
                 @error('themes')
                     <span class="error">{{ $message }}</span>
                 @enderror
@@ -97,7 +100,7 @@
             </div>
             <label class="admin-label">
                 <span>Настроение (через запятую)</span>
-                <input class="admin-input" type="text" name="moods" value="{{ old('moods') ?? $moods }}">
+                <input class="admin-input" type="text" name="moods" value="{{ old('moods') ?? App\Http\Controllers\RelationshipHelper::getNameByItems($music->moods) }}">
                 @error('moods')
                     <span class="error">{{ $message }}</span>
                 @enderror
@@ -107,7 +110,7 @@
             <label class="admin-label">
                 <span>Инструменты (через запятую)</span>
                 <input class="admin-input" type="text" name="instruments"
-                    value="{{ old('instruments') ?? $instruments }}">
+                    value="{{ old('instruments') ?? App\Http\Controllers\RelationshipHelper::getNameByItems($music->instruments) }}">
                 @error('instruments')
                     <span class="error">{{ $message }}</span>
                 @enderror

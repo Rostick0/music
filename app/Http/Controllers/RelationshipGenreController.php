@@ -23,7 +23,7 @@ class RelationshipGenreController extends Controller
             $relationship = RelationshipGenre::firstOrCreate([
                 'type' => $type,
                 'type_id' => $type_id,
-                'genres_id' => $genre,
+                'genre_id' => $genre,
             ]);
 
             $array_id[] = $relationship->id;
