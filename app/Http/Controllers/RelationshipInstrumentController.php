@@ -8,20 +8,6 @@ use Illuminate\Http\Request;
 
 class RelationshipInstrumentController extends Controller
 {
-    static public function get(int $type_id, string $type)
-    {
-        $instruments = RelationshipInstrument::select('instruments.name')->join('instruments', 'relationship_instruments.instrument_id', '=', 'instruments.id')
-            ->where([
-                ['relationship_instruments.type_id', '=', $type_id],
-                ['relationship_instruments.type', '=', $type]
-            ])->get();
-        $instruments = array_map(function ($item) {
-            return $item['name'];
-        },  [...$instruments]);
-
-        return $instruments;
-    }
-
     // @param 'music|playlist' $type
     static public function createRelationship($request_instruments, int $type_id, string $type)
     {

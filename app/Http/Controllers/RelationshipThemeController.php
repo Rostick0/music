@@ -8,20 +8,6 @@ use Illuminate\Http\Request;
 
 class RelationshipThemeController extends Controller
 {
-    static public function get(int $type_id, string $type)
-    {
-        $themes = RelationshipTheme::select('themes.name')->join('themes', 'relationship_themes.theme_id', '=', 'themes.id')
-            ->where([
-                ['relationship_themes.type_id', '=', $type_id],
-                ['relationship_themes.type', '=', $type]
-            ])->get();
-        $themes = array_map(function ($item) {
-            return $item['name'];
-        },  [...$themes]);
-
-        return $themes;
-    }
-
     // @param 'music|playlist' $type
     static public function createRelationship($request_theme, int $type_id, string $type)
     {

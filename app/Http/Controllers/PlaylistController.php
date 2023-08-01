@@ -119,7 +119,7 @@ class PlaylistController extends Controller
     public function edit(int $id)
     {
         $playlist = Playlist::findOrFail($id);
-        
+
         $genres = Genre::select(
             'genres.*',
             'relationship_genres.id as relationship_id'

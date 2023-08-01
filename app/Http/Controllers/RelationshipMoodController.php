@@ -13,22 +13,6 @@ class Type
 class RelationshipMoodController extends Controller
 {
     // @param 'music|playlist' $type
-
-    static public function get(int $type_id, string $type)
-    {
-        $moods = RelationshipMood::select('moods.name')->join('moods', 'relationship_moods.mood_id', '=', 'moods.id')
-            ->where([
-                ['relationship_moods.type_id', '=', $type_id],
-                ['relationship_moods.type', '=', $type]
-            ])->get();
-        $moods = array_map(function ($item) {
-            return $item['name'];
-        },  [...$moods]);
-
-        return $moods;
-    }
-
-    // @param 'music|playlist' $type
     static public function createRelationship($request_moods, int $type_id, string $type)
     {
         $moods = explode(',', $request_moods);
