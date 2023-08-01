@@ -40,18 +40,34 @@
                             </svg>
                         </button>
                         <div class="header-mobile__modal">
-                            <div class="header-mobile__modal_top">
-
+                            <div class="container header-mobile__modal_container">
+                                <div class="header-mobile__modal_top">
+                                    <button class="header-mobile__close">
+                                        <svg width="27" height="25" viewBox="0 0 27 25" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M1 20.3846H25.9136" stroke="#1B121E" stroke-width="1.5"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M1 12.6923H25.9136" stroke="#1B121E" stroke-width="1.5"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M1 5H25.9136" stroke="#1B121E" stroke-width="1.5"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </button>
+                                    <a class="header-mobile__logo" href="/">
+                                        <img src="{{ $site->logo }}" alt="">
+                                    </a>
+                                </div>
+                                <nav class="header-mobile__nav">
+                                    <a class="header-mobile__nav_item" href="/">Home</a>
+                                    <a class="header-mobile__nav_item" href="/tracks">Tracks</a>
+                                    <a class="header-mobile__nav_item" href="/playlists">Playlists</a>
+                                    <a class="header-mobile__nav_item" href="/music_kits">Music kits</a>
+                                    <a class="header-mobile__nav_item" href="/pricing">Pricing</a>
+                                    <a class="header-mobile__nav_item" href="/about">About</a>
+                                    <a class="header-mobile__nav_item" href="/contacts">Contacts</a>
+                                </nav>
+                                <a class="button-gradient header-mobile__sing-in" href="/login">Sign in</a>
                             </div>
-                            <nav class="header-mobile__nav">
-                                <a class="header__nav_item" href="/">Home</a>
-                                <a class="header__nav_item" href="/tracks">Tracks</a>
-                                <a class="header__nav_item" href="/playlists">Playlists</a>
-                                <a class="header__nav_item" href="/music_kits">Music kits</a>
-                                <a class="header__nav_item" href="/pricing">Pricing</a>
-                                <a class="header__nav_item" href="/about">About</a>
-                                <a class="header__nav_item" href="/contacts">Contacts</a>
-                            </nav>
                         </div>
                     </div>
                     <a class="header__logo" href="/">
@@ -82,8 +98,8 @@
                                     stroke-linejoin="round" />
                             </g>
                             <defs>
-                                <linearGradient id="paint0_linear_52_186" x1="29.0668" y1="0.94281" x2="-1.67865"
-                                    y2="4.17713" gradientUnits="userSpaceOnUse">
+                                <linearGradient id="paint0_linear_52_186" x1="29.0668" y1="0.94281"
+                                    x2="-1.67865" y2="4.17713" gradientUnits="userSpaceOnUse">
                                     <stop stop-color="#FF9211" />
                                     <stop offset="1" stop-color="#FF1111" />
                                 </linearGradient>

@@ -82,53 +82,55 @@ function setSelects() {
 setSelects();
 
 function initWaveSurfer() {
-    const trackItems = document.querySelectorAll('.track-item');
+    try {
+        const trackItems = document.querySelectorAll('.track-item');
 
-    if (!trackItems?.length) return;
+        if (!trackItems?.length) return;
 
-    const plays = [];
+        const plays = [];
 
-    const clearActiveMusic = () => {
-        const musicList = document.querySelectorAll('.track-item._active');
-        if (!musicList?.length) return;
+        const clearActiveMusic = () => {
+            const musicList = document.querySelectorAll('.track-item._active');
+            if (!musicList?.length) return;
 
-        musicList?.forEach(item => {
-            console.log(item);
-            plays?.forEach(item => item?.pause());
-            plays?.splice(0, plays?.length - 1);
+            musicList?.forEach(item => {
+                console.log(item);
+                plays?.forEach(item => item?.pause());
+                plays?.splice(0, plays?.length - 1);
 
-            removeClass(item, '_active');
-        });
-    };
-
-    trackItems?.forEach(item => {
-        const trackItemAudio = item.querySelector('.track-item__audio');
-
-        const wavesurfer = WaveSurfer.create({
-            container: '.' + trackItemAudio.classList?.value?.replace(' ', '.'),
-            waveColor: 'rgba(27, 18, 30, .2)',
-            progressColor: '#FF1111',
-            url: MUSIC_URL + trackItemAudio.getAttribute('data-music'),
-            height: 40,
-        });
-
-        const trackItemButton = item.querySelector('.track-item__button');
-        trackItemButton.onclick = () => {
-            if (!item.classList.contains('_active')) {
-                plays.push(wavesurfer);
-                clearActiveMusic();
-                addClass(item, '_active');
-                wavesurfer?.play();
-
-                return;
-            }
-
-            wavesurfer?.pause();
-            removeClass(item, '_active');
+                removeClass(item, '_active');
+            });
         };
 
+        trackItems?.forEach(item => {
+            const trackItemAudio = item.querySelector('.track-item__audio');
 
-    })
+            const wavesurfer = WaveSurfer.create({
+                container: '.' + trackItemAudio.classList?.value?.replace(' ', '.'),
+                waveColor: 'rgba(27, 18, 30, .2)',
+                progressColor: '#FF1111',
+                url: MUSIC_URL + trackItemAudio.getAttribute('data-music'),
+                height: 40,
+            });
+
+            const trackItemButton = item.querySelector('.track-item__button');
+            trackItemButton.onclick = () => {
+                if (!item.classList.contains('_active')) {
+                    plays.push(wavesurfer);
+                    clearActiveMusic();
+                    addClass(item, '_active');
+                    wavesurfer?.play();
+
+                    return;
+                }
+
+                wavesurfer?.pause();
+                removeClass(item, '_active');
+            };
+        })
+    } catch (e) {
+
+    }
 }
 
 initWaveSurfer();
@@ -297,4 +299,20 @@ initWaveSurfer();
             }, 500)
         });
     });
+})();
+
+(function () {
+    const headerMobileBurger = document.querySelector('.header-mobile__burger');
+    const headerMobileModal = document.querySelector('.header-mobile__modal');
+    const headerMobileClose = document.querySelector('.header-mobile__close');
+
+    if (!headerMobileBurger || !headerMobileBurger) return;
+
+    headerMobileBurger.onclick = () => {
+        addClass(headerMobileModal, '_active');
+    }
+
+    headerMobileClose.onclick = () => {
+        removeClass(headerMobileModal, '_active');
+    }
 })();

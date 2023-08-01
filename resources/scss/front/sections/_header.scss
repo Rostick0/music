@@ -9,13 +9,13 @@
     &-mobile {
         display: none;
 
-        &__burger {
-
-        }
+        &__burger {}
 
         &__modal {
             background-color: var(--white);
-            display: none;
+            display: block;
+            transition: 600ms;
+            transform: translateX(-150%);
             position: fixed;
             left: 0;
             top: 0;
@@ -23,12 +23,42 @@
             height: 100%;
             z-index: 10000;
 
+            &_container {
+                padding: 1.56rem;
+                height: 100%;
+            }
+
             &._active {
-                display: block;
+                transform: translateX(0%);
+            }
+
+            &_top {
+                display: flex;
+                align-items: center;
+                padding-right: 27px;
+                margin-bottom: 1rem;
             }
         }
 
+        &__logo {
+            margin: 0 auto;
+        }
 
+        &__nav {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 2.25rem;
+
+            &_item {
+                border-bottom: 1px solid var(--dark);
+                padding: 1.25rem 0;
+            }
+        }
+
+        &__sing-in {
+            display: block;
+            padding: 1rem 2rem;
+        }
     }
 
 
