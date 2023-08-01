@@ -4,7 +4,7 @@
 @endsection
 
 @section('html')
-    <section class="about">
+    <section class="section-page about">
         <div class="container">
             <div class="about__container">
                 <h1 class="section-title-big about__title">About</h1>

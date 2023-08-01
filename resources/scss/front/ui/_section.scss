@@ -4,9 +4,17 @@
         padding-top: 5.25rem;
     }
 
+    &-page {
+        margin-bottom: 1rem 0 8rem;
+    }
+
     @media (max-width: 768px) {
         &-main {
             padding-top: 2rem;
+        }
+
+        &-page {
+            margin-bottom: 1.56rem;
         }
     }
 }

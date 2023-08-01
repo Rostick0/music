@@ -1,6 +1,19 @@
 import { throttle } from './optimization';
-import { objConvertUrl } from './helpers';
+import { addClass, objConvertUrl, removeClass } from './helpers';
 const csrfToken = document.querySelector('meta[name="csrf-token"]');
+
+const myFetch = (url, options) => {
+    const bearerToken = typeof accessToken === 'string' && accessToken ? 'Bearer ' + accessToken : null;
+
+    const { headers, ...other } = options;
+
+    headers.Authorization = bearerToken;
+
+    return fetch(url, {
+        ...other,
+        headers
+    })
+}
 
 try {
     new Swiper(".mySwiper", {
@@ -71,6 +84,18 @@ function initWaveSurfer() {
 
     if (!trackItems?.length) return;
 
+    const clearActiveMusic = (wavesurfer) => {
+        const musicList = document.querySelectorAll('.track-item._active');
+
+        if (!musicList?.length) return;
+
+        musicList?.forEach(item => {
+            console.log(wavesurfer);
+            wavesurfer.pause();
+            removeClass(item, '_active');
+        });
+    };
+
     trackItems?.forEach(item => {
         let isActive = false;
 
@@ -86,8 +111,12 @@ function initWaveSurfer() {
 
         trackItemButton.onclick = () => {
             if (!isActive) {
+                clearActiveMusic(wavesurfer);
+                console.log(wavesurfer);
+                addClass(item, '_active');
                 wavesurfer?.play();
             } else {
+                removeClass(item, '_active');
                 wavesurfer?.pause();
             }
 

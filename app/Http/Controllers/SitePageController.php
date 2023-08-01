@@ -83,6 +83,8 @@ class SitePageController extends Controller
     public function show(Request $request, string $url = '/home', $id = null)
     {
         $path = $this->get_path($url);
+        // dd(auth()->user()->tokens);
+        // dd(auth()->user()->createToken('auth')->plainTextToken);
 
         if (!File::exists($path)) return abort(404);
 

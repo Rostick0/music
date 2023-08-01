@@ -18,6 +18,16 @@
         z-index: -1;
     }
 
+    &._active {
+        .track-item__button_start {
+            opacity: 0;
+        }
+
+        .track-item__button_pause {
+            opacity: 1;
+        }
+    }
+
     &__info {
         display: flex;
         width: 25%;
@@ -57,14 +67,18 @@
     &__artist {
         opacity: .6;
     }
+   
+    &__button {
+        &_start,
+        &_pause {
+            transition: 200ms;
+        }
 
-    // &__application {
-    //     display: flex;
-    //     align-items: center;
-    //     column-gap: 20px;
-    //     margin-left: auto;
-    //     width: 55%;
-    // }
+        &_pause {
+            opacity: 0;
+        }
+    }
+
     &__timer {
         display: flex;
         align-items: center;

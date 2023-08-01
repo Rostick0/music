@@ -147,7 +147,7 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 
 Route::post('/email/verification-notification', [EmailVertificationController::class, 'notification'])->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
-Route::group([], function ($router) {
+Route::group(['middleware' => 'auth'], function ($router) {
 
     Route::group(['prefix' => 'favorite'], function ($router) {
         Route::post('create/{music_id}', [FavoriteController::class, 'create'])->name('favorite.create');

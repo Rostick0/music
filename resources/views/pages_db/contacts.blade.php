@@ -4,7 +4,7 @@
 @endsection
 
 @section('html')
-    <section class="feedback">
+    <section class="section-page feedback">
         <div class="container">
             <div class="feedback__container">
                 <h1 class="section-title-big feedback__title">Contacts</h1>

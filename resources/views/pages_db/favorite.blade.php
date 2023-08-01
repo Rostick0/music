@@ -9,7 +9,7 @@
 
 
 @section('html')
-    <section class="section tracks">
+    <section class="section section-page tracks">
         <div class="container">
             <h2 class="section-title tracks__title">Favorite</h2>
             <ul class="tracks__list">

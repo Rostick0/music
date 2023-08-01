@@ -7,7 +7,7 @@
 @endsection
 
 @section('html')
-    <section class="pricing">
+    <section class="section-page pricing">
         <div class="container">
             <div class="pricing__container">
                 <h1 class="section-title-big pricing__title">Pricing plan</h1>

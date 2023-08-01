@@ -15,7 +15,7 @@
 
 
 @section('html')
-    <section class="track">
+    <section class="section-page track">
         <div class="track__top">
             <div class="container">
                 <div class="track__info">

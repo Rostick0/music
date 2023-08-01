@@ -19,8 +19,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// Route::group(['middleware' => 'auth:sanctum'], function ($router) {});
+
 Route::get('music', [MusicController::class, 'search']);
 
-Route::get('test', function () {
-    return response()->json(auth()->check());
+
+Route::get('test', function ($request) {
+    return response()->json(auth());
 });

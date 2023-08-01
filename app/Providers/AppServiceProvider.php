@@ -30,7 +30,14 @@ class AppServiceProvider extends ServiceProvider
         });
         View::share('site', app('site'));
 
-        $has_subscription = Subscription::where('date_end', '>=', Carbon::now())->count() ? true : false;
-        App::singleton('has_subscription', $has_subscription);
+
+        // $has_subscription = false;
+        // if (auth()->check()) {
+        //     $has_subscription = Subscription::where([
+        //         ['date_end', '>=', Carbon::now()],
+        //         ['users_id', '=', auth()->id()]
+        //     ])->count() ? true : false;
+        // }
+        // App::singleton('has_subscription', $has_subscription);
     }
 }
