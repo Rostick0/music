@@ -236,7 +236,7 @@ class MusicController extends Controller
     {
         $music = Music::findOrFail($id);
         $music_artist = MusicArtist::find($music->music_artists_id);
-        
+
         $genres = Genre::select(
             'genres.*',
             'relationship_genres.id as relationship_id'
@@ -274,13 +274,15 @@ class MusicController extends Controller
             'seo_description' => 'max:255'
         ]);
 
+        $music_old = Music::find($id);
+
         $music_artists = MusicArtist::firstOrCreate([
             'name' => trim($request->music_artists)
         ]);
 
         $image = ImageController::upload($request->file('image'));
-        $music = MusicUploadController::upload($request->file('link'));
-        $music_demo = MusicUploadController::upload($request->file('link_demo'), 'music_demo');
+        $upload = MusicUploadController::upload($request->file('link'));
+        $upload_demo = MusicUploadController::upload($request->file('link_demo'), 'music_demo');
 
         $update_data = [
             'music_artists_id' => $music_artists->id,
@@ -295,19 +297,29 @@ class MusicController extends Controller
             'seo_description' => $request->seo_description,
         ];
 
-        if ($music) {
+        if ($upload) {
             $audio = new Mp3Info($request->link, true);
             $audio_duration = gmdate("H:i:s", $audio->duration);
 
-            $update_data['link'] = $music;
+            $update_data['link'] = $upload;
             $update_data['duration'] = $audio_duration;
+
+            MusicUploadController::destroy($music_old->link);
         }
 
-        if ($music_demo) $update_data['link_demo'] = $music_demo;
+        if ($upload_demo) {
+            $update_data['link_demo'] = $upload_demo;
 
-        if ($image) $update_data['image'] = $image;
+            if ($music_old->link_demo) MusicUploadController::destroy($music_old->link_demo, 'music_demo');
+        }
 
-        Music::find($id)->update($update_data);
+        if ($image) {
+            $update_data['image'] = $image;
+
+            if ($music_old->image) ImageController::destroy($music_old->image);
+        }
+
+        $music_old->update($update_data);
 
         RelationshipGenreController::createAndDeleteRelationship($request->genres, $id, 'music');
         RelationshipInstrumentController::createAndDeleteRelationship($request->instruments, $id, 'music');
