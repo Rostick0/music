@@ -16,26 +16,26 @@ class MusicKitSeeder extends Seeder
         $music_kits = [
             [
                 'name' => 'Коротко',
-                'link' => 'https://music.arizona-rp.com/rodina/1686521221.mp3',
-                'duration' => '0:11',
+                'link' => '1690965462.mp3',
+                'duration' => '5:11',
                 'music_id' => 1,
             ],
             [
                 'name' => 'Коротко 2',
-                'link' => 'https://music.arizona-rp.com/rodina/1686521221.mp3',
-                'duration' => '0:14',
+                'link' => '1690965463.mp3',
+                'duration' => '2:06',
                 'music_id' => 2,
             ],
             [
                 'name' => 'Коротко 3',
-                'link' => 'https://music.arizona-rp.com/rodina/1686521221.mp3',
-                'duration' => '0:16',
+                'link' => '1690965464.mp3',
+                'duration' => '5:11',
                 'music_id' => 2,
             ],
             [
                 'name' => 'Коротко 4',
-                'link' => 'https://music.arizona-rp.com/rodina/1686521221.mp3',
-                'duration' => '0:06',
+                'link' => '1690965465.mp3',
+                'duration' => '2:06',
                 'music_id' => 1,
             ]
         ];

@@ -45,6 +45,13 @@ class SitePageSeeder extends Seeder
             'path' => 'playlists'
         ],
         [
+            'name' => 'playlist',
+            'url' => 'playlist',
+            'seo_title' => 'playlist',
+            'seo_description' => 'playlist',
+            'path' => 'playlist'
+        ],
+        [
             'name' => 'pricing',
             'url' => 'pricing',
             'seo_title' => 'pricing',
@@ -71,6 +78,13 @@ class SitePageSeeder extends Seeder
             'seo_title' => 'tracks',
             'seo_description' => 'tracks',
             'path' => 'tracks'
+        ],
+        [
+            'name' => 'track',
+            'url' => 'track',
+            'seo_title' => 'track',
+            'seo_description' => 'track',
+            'path' => 'track'
         ],
         [
             'name' => 'music_kits',

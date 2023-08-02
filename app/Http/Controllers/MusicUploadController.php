@@ -24,16 +24,16 @@ class MusicUploadController extends Controller
         return $music;
     }
 
-    public static function getViewLink($music, $type = 'music')
+    public static function getViewLink($link, $type = 'music')
     {
-        if (Storage::disk('public')->exists(MusicUploadController::getPath($type) . $music)) return Storage::url(MusicUploadController::getPath($type) . $music);
+        if (Storage::disk('public')->exists(MusicUploadController::getPath($type) . $link)) return Storage::url(MusicUploadController::getPath($type) . $link);
 
         return;
     }
 
-    public static function check($music, $type = 'music')
+    public static function check($link, $type = 'music')
     {
-        return $music && Storage::disk('public')->exists(MusicUploadController::getPath($type) . $music);
+        return $link && Storage::disk('public')->exists(MusicUploadController::getPath($type) . $link);
     }
 
     public static function destroy($music_path, $type = 'music')

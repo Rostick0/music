@@ -408,7 +408,6 @@
                         </div>
                         <div class="track-item__audio track-item__audio_{{ $music_item->id }}"
                             data-music="{{ $music_item->link }}"></div>
-
                         <div class="track-item__buttons">
                             @if (
                                 $music_item->favorite_id ||
@@ -465,7 +464,9 @@
                                 </form>
                             @endif
                             <a class="track-item__download"
-                                href="{{ Storage::url('upload/music/' . $music_item->link) }}" download>
+                                href="{{ App\Http\Controllers\MusicDownloadController::getLink($music_item->link, $music_item->link_demo, $music_item->is_free) }}"
+                                download>
+                                {{-- Storage::url('upload/music/' . $music_item->link) --}}
                                 <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <g clip-path="url(#clip0_98_282)">
