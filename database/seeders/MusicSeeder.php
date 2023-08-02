@@ -17,19 +17,19 @@ class MusicSeeder extends Seeder
     private $music = [
         [
             'title' => 'Заголовок',
-            'link' => '1686521201.mp3',
-            'link_demo' => '1686521201.mp3',
+            'link' => '1690208658.mp3',
+            'link_demo' => '1690208658.mp3',
             'publisher' => 'https://vk.com',
             'distr' => 'https://vk.com',
             'duration' => '5:11'
         ],
         [
             'title' => 'Новая песня',
-            'link' => '1686521221.mp3',
-            'link_demo' => '1686521221.mp3',
+            'link' => '1690208753.mp3',
+            'link_demo' => '1690208753.mp3',
             'publisher' => 'https://vk.com',
             'distr' => 'https://vk.com',
-            'duration' => '4:03'
+            'duration' => '5:11'
         ],
     ];
 

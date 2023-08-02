@@ -362,7 +362,8 @@ body,
 
     &__info {
         display: flex;
-        grid-gap: 2rem 5rem;
+        align-items: flex-start;
+        column-gap: 5rem;
         margin-bottom: 4rem;
     }
 
@@ -387,7 +388,7 @@ body,
 
     &__artist {
         font-size: 1.5rem;
-        margin: 1.87rem 0 3.25rem;
+        margin-bottom: 3.25rem;
         opacity: 0.6;
     }
 
@@ -399,6 +400,33 @@ body,
 
     .tracks__title {
         margin-bottom: 2rem;
+    }
+
+    @media (max-width: 1024px) {
+        &__info {
+            column-gap: 2rem;
+        }
+
+        &__artist {
+            margin-bottom: 1.5rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        &__category {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 600px) {
+        &__image {
+            margin: 0 auto;
+        }
+
+        &__info {
+            row-gap: 3rem;
+            flex-direction: column;
+        }
     }
 }
 
@@ -439,6 +467,10 @@ body,
     }
 
     @media (max-width: 768px) {
+        &__name {
+            margin-bottom: 1.25rem;
+        }
+
         &__link {
             padding: .93rem;
         }

@@ -14,6 +14,10 @@
         grid-template-columns: repeat(4, 1fr);
         column-gap: .625rem;
         margin-bottom: 4.5rem;
+
+        .select {
+            min-width: 13rem;
+        }
     }
 
     @media (max-width: 1366px) {
@@ -23,6 +27,15 @@
     }
 
     @media (max-width: 768px) {
+        &__filter {
+            overflow-x: auto;
+        }
+
+        .select__list {
+            position: static;
+            margin-bottom: .75rem;
+        }
+
         &__list {
             grid-template-columns: 1fr;
             grid-gap: 0.93rem;

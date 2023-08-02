@@ -3,10 +3,6 @@
 @section('php')
     @php
         // // $playlists = App\Models\Playlist::limit(6)->orderByDesc('id')->get();
-        $genres = App\Models\Genre::all();
-        $moods = App\Models\Mood::all();
-        $themes = App\Models\Theme::all();
-        // $instruments = App\Models\Instrument::all();
         $music = App\Http\Controllers\FrontMusicController::getById($id);
         $artist_name = App\Models\MusicArtist::find($music->music_artists_id)->name;
         $music_list = App\Http\Controllers\FrontMusicController::getSimilar($id);
@@ -149,7 +145,7 @@
                     <li class="track__category_item category-item">
                         <div class="category-item__name section-title">Genres</div>
                         <ul class="category-item__list">
-                            @foreach ($genres as $genre)
+                            @foreach ($music->genres as $genre)
                                 <li class="category-item__item">
                                     <a class="category-item__link text-medium" href="/tracks?genre={{ $genre->id }}">
                                         {{ $genre->name }}
@@ -161,7 +157,7 @@
                     <li class="track__category_item category-item">
                         <div class="category-item__name section-title">Moods</div>
                         <ul class="category-item__list">
-                            @foreach ($moods as $mood)
+                            @foreach ($music->moods as $mood)
                                 <li class="category-item__item">
                                     <a class="category-item__link text-medium" href="/tracks?mood={{ $mood->id }}">
                                         {{ $mood->name }}
