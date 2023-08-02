@@ -7,6 +7,9 @@
         <form class="auth-form" action="{{ url()->current() }}" method="post">
             @csrf
             <div class="auth-form__title">Sing in</div>
+            @if (Session::has('success'))
+                <div class="auth-form__success success">{{ Session::get('success') }}</div>
+            @endif
             <div class="auth-form__inputs">
                 <label class="label">
                     <span>E-mail</span>

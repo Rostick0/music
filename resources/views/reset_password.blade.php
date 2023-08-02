@@ -7,10 +7,14 @@
         <form class="auth-form" action="{{ url()->current() }}" method="post">
             @csrf
             <div class="auth-form__title">Password Reset</div>
+            @if (Session::has('success'))
+                <div class="auth-form__success success">{{ Session::get('success') }}</div>
+            @endif
             <div class="auth-form__inputs auth-form-register__inputs">
                 <label class="label auth-form-register__label-long">
                     <span>E-mail*</span>
-                    <input class="input-form" type="email" placeholder="Your email" name="email" value="{{ old('email') }}" required />
+                    <input class="input-form" type="email" placeholder="Your email" name="email"
+                        value="{{ old('email') }}" required />
                     @error('email')
                         <span class="error">{{ $message }}</span>
                     @enderror

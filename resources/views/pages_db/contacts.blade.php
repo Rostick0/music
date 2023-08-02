@@ -100,21 +100,33 @@
                         </a>
                     </li>
                 </ul>
+                @if (Session::has('success'))
+                    <div class="feedback__success success">{{ Session::get('success') }}</div>
+                @endif
                 <form class="feedback__form" action="{{ url()->current() }}" method="post">
                     @csrf
                     <label class="label">
                         <span class="label__name">Email</span>
                         <input class="input" type="text" name="email" value="{{ old('email') }}" maxlength="255"
                             required>
+                        @error('email')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
                     </label>
                     <label class="label">
                         <span class="label__name">Theme</span>
                         <input class="input" type="text" name="theme" value="{{ old('theme') }}" maxlength="255"
                             required>
+                        @error('theme')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
                     </label>
                     <label class="label">
                         <span class="label__name">Message</span>
                         <textarea class="input" name="message" maxlength="65536" rows="5" required>{{ old('message') }}</textarea>
+                        @error('message')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
                     </label>
                     <button class="button-gradient feedback__button">Отправить</button>
                 </form>
