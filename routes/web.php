@@ -18,6 +18,7 @@ use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RemoveClaimController;
+use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\SitePageController;
 use App\Http\Controllers\SiteSettingController;
@@ -27,6 +28,7 @@ use App\Http\Controllers\SubscriptionTypeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Routing\RouteGroup;
 
 /*
 |--------------------------------------------------------------------------
@@ -129,16 +131,23 @@ Route::group(['prefix' => 'client'], function ($router) {
     Route::post('profile_password', [ClientUserController::class, 'password_update'])->name('client.profile_password');
 });
 
-Route::get('login', [LoginController::class, 'show'])->name('login');
-Route::post('login', [LoginController::class, 'store']);
+Route::group(['middleware' => 'guest'], function ($router) {
+    Route::get('/login', [LoginController::class, 'show'])->name('login');
+    Route::post('/login', [LoginController::class, 'store']);
 
-Route::get('register', [RegisterController::class, 'show'])->name('register');
-Route::post('register', [RegisterController::class, 'store']);
+    Route::get('/register', [RegisterController::class, 'show'])->name('register');
+    Route::post('/register', [RegisterController::class, 'store']);
+
+    Route::get('/reset_password', [ResetPasswordController::class, 'show'])->name('password.reset');
+    Route::post('/reset_password', [ResetPasswordController::class, 'store']);
+
+    Route::get('/reset_edit/{token}', [ResetPasswordController::class, 'edit'])->name('password.edit');
+    Route::post('/reset_edit', [ResetPasswordController::class, 'update']);
+});
 
 Route::get('logout', [LogoutController::class, 'store'])->name('logout');
 
 Route::get('/email/verify', [EmailVertificationController::class, 'show'])->middleware('auth')->name('verification.notice');
-
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
 
@@ -147,12 +156,9 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 
 Route::post('/email/verification-notification', [EmailVertificationController::class, 'notification'])->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
-Route::group(['middleware' => 'auth'], function ($router) {
-
-    Route::group(['prefix' => 'favorite'], function ($router) {
-        Route::post('create/{music_id}', [FavoriteController::class, 'create'])->name('favorite.create');
-        Route::post('delete/{id}', [FavoriteController::class, 'destroy'])->name('favorite.delete');
-    });
+Route::group(['prefix' => 'favorite'], function ($router) {
+    Route::post('create/{music_id}', [FavoriteController::class, 'create'])->name('favorite.create');
+    Route::post('delete/{id}', [FavoriteController::class, 'destroy'])->name('favorite.delete');
 });
 
 Route::get('/', [SitePageController::class, 'show']);
