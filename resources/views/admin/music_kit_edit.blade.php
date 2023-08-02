@@ -12,14 +12,6 @@
                     <span class="error">{{ $message }}</span>
                 @enderror
             </label>
-            <label class="admin-label">
-                <span>Ссылка на music kit*</span>
-                <input class="admin-input" type="text" name="link" maxlength="255"
-                    value="{{ old('link') ?? $music_kit->link }}" required>
-                @error('link')
-                    <span class="error">{{ $message }}</span>
-                @enderror
-            </label>
             <div class="admin-label" tabindex="0">
                 <span>Название музыки*</span>
                 <div class="admin-select-async music-select-async">
@@ -35,6 +27,20 @@
                     <span class="error">{{ $message }}</span>
                 @enderror
             </div>
+        </div>
+        <div class="admin-form__flex">
+            <label class="admin-label">
+                <span>Трэк*</span>
+                <input class="admin-input" type="file" name="link" value="{{ old('link') }}" required>
+                @error('link')
+                    <span class="error">{{ $message }}</span>
+                @enderror
+                @if (App\Http\Controllers\MusicUploadController::check($music_kit->link, 'music_kit'))
+                    <span>{{ App\Http\Controllers\MusicUploadController::getViewLink($music_kit->link, 'music_kit') }}</span>
+                    <audio class="admin-audio" src="{{ Storage::url('upload/music_kit/' . $music_kit->link) }}"
+                        controls></audio>
+                @endif
+            </label>
         </div>
         <div class="admin-form__flex">
             <label class="admin-checkbox">

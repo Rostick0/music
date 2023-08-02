@@ -57,8 +57,7 @@ class MusicKitController extends Controller
 
         $audio = new Mp3Info($request->link, true);
         $duration = gmdate("H:i:s", $audio->duration);
-
-        $music = MusicUploadController::upload($request->link, 'music_kit');
+        $music = MusicUploadController::upload($request->file('link'), 'music_kit');
 
         $music_kit = MusicKit::create([
             'name' => $request->name,
@@ -109,22 +108,26 @@ class MusicKitController extends Controller
             'music_id' => 'required|' . Rule::exists('music', 'id'),
         ]);
 
+        $music_kit_old = MusicKit::find($id);
+
         $update_data = [
             'name' => $request->name,
             'music_id' => $request->music_id,
         ];
 
-        $music = MusicUploadController::upload($request->link, 'music_kit');
+        $upload = MusicUploadController::upload($request->file('link'), 'music_kit');
 
-        if ($music) {
+        if ($upload) {
             $audio = new Mp3Info($request->link, true);
             $audio_duration = gmdate("H:i:s", $audio->duration);
 
-            $update_data['link'] = $music;
+            $update_data['link'] = $upload;
             $update_data['duration'] = $audio_duration;
+
+            MusicUploadController::destroy($music_kit_old->link, 'music_kit');
         }
 
-        MusicKit::where('id', $id)->update($update_data);
+        $music_kit_old->update($update_data);
 
         return back();
     }
