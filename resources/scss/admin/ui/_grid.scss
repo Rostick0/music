@@ -41,7 +41,7 @@
 
         &__titles,
         &__content_item {
-            grid-template-columns: .2fr 1fr 1.8fr 1fr .5fr .7fr .6fr .6fr 152px;
+            grid-template-columns: .2fr 1fr 1.8fr 1fr .5fr .7fr .6fr .6fr 152px 16px;
         }
     }
 
@@ -71,35 +71,35 @@
     &-page {
         &__titles,
         &__content_item {
-            grid-template-columns: .2fr .5fr 1fr 152px;
+            grid-template-columns: .2fr .5fr 1fr 152px 16px;
         }
     }
 
     &-playlist {
         &__titles,
         &__content_item {
-            grid-template-columns: .2fr 1fr 1.75fr 1fr .5fr 152px;
+            grid-template-columns: .2fr 1.3fr repeat(4, 1fr) .5fr 152px 16px;
         }
     }
 
     &-music-kit {
         &__titles,
         &__content_item {
-            grid-template-columns: .2fr 1fr 1.75fr 1fr .5fr 152px;
+            grid-template-columns: .2fr 1fr 1.75fr 1fr .5fr 152px 16px;
         }
     }
 
     &-component {
         &__titles,
         &__content_item {
-            grid-template-columns: .1fr auto 152px;
+            grid-template-columns: .1fr auto 152px 16px;
         }
     }
 
     &-subscription_type {
         &__titles,
         &__content_item {
-            grid-template-columns: .05fr 2fr 1fr 80px 152px;
+            grid-template-columns: .05fr 2fr 1fr 80px 152px 16px;
         }
     }
 }
