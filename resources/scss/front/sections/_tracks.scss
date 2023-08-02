@@ -10,6 +10,13 @@
         }
     }
 
+    &__none {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 19rem;
+    }
+
     &__list {
         display: flex;
         flex-direction: column;
