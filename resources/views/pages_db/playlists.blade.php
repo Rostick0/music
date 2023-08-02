@@ -1,7 +1,5 @@
 @extends('layout.front.index')
 
-
-
 @section('php')
     @php
         $genres = App\Models\Genre::all();
