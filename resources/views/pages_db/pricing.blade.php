@@ -18,7 +18,16 @@
                                 <div class="pricing-item__title">{{ $subscription_type->name }}</div>
                                 <div class="pricing-item__info">{{ $subscription_type->price }},
                                     {{ $subscription_type->description ?? '' }}</div>
-                                <button class="button-gradient pricing-item__button">Buy</button>
+                                <form action="https://unitpay.ru/pay/441707-c74ca" method="post">
+                                    <input type="hidden" name="account" value="demo">
+                                    <input type="hidden" name="sum" value="{{ $subscription_type->price }}">
+                                    <input type="hidden" name="desc" value="{{ $subscription_type->description }}">
+                                    <input type="hidden" name="locale" value="en">
+                                    <input type="hidden" name="currency" value="USD">
+                                    <input type="hidden" name="signature"
+                                        value="e54cb651d4e5c5c4a6a8bf5d135879a49b7cfc2db72d1115f621b049a6ec304e">
+                                    <button class="button-gradient pricing-item__button">Buy</button>
+                                </form>
                             </div>
                             @if ($subscription_type->advantages)
                                 <div class="pricing-item__advantages">{{ $subscription_type->advantages }}</div>
