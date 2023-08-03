@@ -5,7 +5,7 @@
     }
 
     &-page {
-        margin-bottom: 1rem 0 8rem;
+        padding: 1rem 0 8rem;
     }
 
     @media (max-width: 768px) {
@@ -14,7 +14,7 @@
         }
 
         &-page {
-            margin-bottom: 1.56rem;
+            padding: 1rem 0 1.56rem;
         }
     }
 }

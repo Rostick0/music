@@ -10,7 +10,7 @@
 @endsection
 
 @section('html')
-    <section class="section section-main playlist">
+    <section class="section-page playlist">
         <div class="container">
             <h2 class="section-title playlist__title">Playlists</h2>
             <form class="playlist__filter">

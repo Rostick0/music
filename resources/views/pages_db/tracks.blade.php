@@ -14,7 +14,7 @@
 
 
 @section('html')
-    <section class="section tracks">
+    <section class="section-page tracks">
         <div class="container">
             <h2 class="section-title tracks__title">Tracks</h2>
             <form class="tracks__filter">

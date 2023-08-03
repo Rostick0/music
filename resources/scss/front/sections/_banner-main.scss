@@ -31,4 +31,29 @@
     &__slider {
         overflow: hidden;
     }
+
+    @media (max-width: 768px) {
+        padding: 3rem 0;
+
+        &__title {
+            margin-bottom: 2rem;
+        }
+
+        &__buttons {
+            margin: 2.5rem 0 2rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        padding: 2.75rem 0 1.87ren;
+
+        &__button {
+            max-width: 100%;
+        }
+
+        &__buttons {
+            flex-direction: column;
+            row-gap: .93rem;
+        }
+    }
 }
