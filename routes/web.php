@@ -71,7 +71,8 @@ Route::group(['prefix' => 'admin'], function ($router) {
         Route::post('{id}', [PlaylistController::class, 'update']);
         Route::post('delete/{id}', [PlaylistController::class, 'destroy'])->name('playlist.delete');
         Route::get('{playlist_id}/music/list', [RelationshipPlaylistController::class, 'music_list'])->name('playlist.music.list');
-        Route::post('{playlist_id}/music/list/{music_id}', [PlaylistController::class, 'music_add'])->name('playlist.music.add');        
+        Route::post('{playlist_id}/music/list/{music_id}', [RelationshipPlaylistController::class, 'music_add'])->name('playlist.music.add');
+        Route::post('music/delete/{id}', [RelationshipPlaylistController::class, 'music_remove'])->name('playlist.music.delete');
     });
 
     Route::get('statistic', [StatisticController::class, 'index'])->name('statistic');

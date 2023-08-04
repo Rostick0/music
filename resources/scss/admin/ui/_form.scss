@@ -1,18 +1,18 @@
 .admin-form {
     display: flex;
     flex-direction: column;
-    row-gap: 10px;
+    row-gap: .625rem;
 
     &__flex {
         display: flex;
-        column-gap: 10px;
+        column-gap: .625rem;
 
         &>* {
-            flex-basis: calc(25% - 10px);
+            flex-basis: calc(25% - .625rem);
         }
 
         &_long {
-            flex-basis: calc(50% - 10px);
+            flex-basis: calc(50% - .625rem);
         }
 
         &_100 {
@@ -22,11 +22,23 @@
 
     &__gird {
         display: grid;
-        grid-gap: 10px;
+        grid-gap: .625rem;
     }
 
     &__image {
         max-width: 500px;
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        row-gap: .75rem;
+    }
+
+    &__item {
+        display: flex;
+        align-items: center;
+        column-gap: .625rem;
     }
 }
 

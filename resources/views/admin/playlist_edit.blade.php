@@ -101,15 +101,6 @@
                 @enderror
             </label>
         </div>
-        <div class="admin-form__flex">
-            <form action="">
-                <a class="admin-button admin-button-add-form"
-                    href="{{ route('playlist.music.list', ['id' => $playlist->id]) }}">
-                    <span class="admin-button-add__plus">+</span>
-                    <span>Добавить музыку</span>
-                </a>
-            </form>
-        </div>
         <div class="admin-delete__buttons">
             <button class="admin-button">Сохранить</button>
             <a class="admin-button-red"
@@ -119,4 +110,34 @@
                 ]) }}">Удалить</a>
         </div>
     </form>
+    <br>
+    <div class="admin-form__flex">
+        <a class="admin-button admin-button-add-form"
+            href="{{ route('playlist.music.list', ['playlist_id' => $playlist->id]) }}">
+            <span class="admin-button-add__plus">+</span>
+            <span>Добавить музыку</span>
+        </a>
+    </div>
+    <br>
+    @if (!empty($playlist->music))
+        <div class="admin-form__list">
+            @foreach ($playlist->music as $music)
+                <div class="admin-form__item">
+                    <div>{{ $music->title }}</div>
+                    <a
+                        href="{{ route('music.edit', [
+                            'id' => $music->id,
+                        ]) }}">{{ App\Http\Controllers\MusicUploadController::getViewLink($music->link) }}</a>
+                    <form
+                        action="{{ route('playlist.music.delete', [
+                            'id' => $music->relationship_playlist_id,
+                        ]) }}"
+                        method="post">
+                        @csrf
+                        <button class="admin-button-red">Удалить</button>
+                    </form>
+                </div>
+            @endforeach
+        </div>
+    @endif
 @endsection

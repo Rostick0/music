@@ -84,16 +84,16 @@ class MusicController extends Controller
         ]);
     }
 
-    public function search(Request $request, $type = 'json')
+    public function search(Request $request, $type = 'json', $where_sql = [])
     {
-        $where_sql = [];
+        $where_sql = $where_sql ?? [];
         if ($request->title) $where_sql[] = ['music.title', 'LIKE', '%' . $request->title . '%'];
         if ($request->music_artists) $where_sql[] = ['music_artists.name', 'LIKE', '%' . $request->music_artists . '%'];
 
-        if ($request->count && $request->count > 20) {
-            $count = 20;
+        if ($request->count && $request->count > app('site')->count_front) {
+            $count = app('site')->count_front;
         } else {
-            $count = $request->count ?? 8;
+            $count = $request->count ?? app('site')->count_front;
         }
 
         $music_list = Music::select(
