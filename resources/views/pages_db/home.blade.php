@@ -684,8 +684,8 @@
                     </p>
                 </li>
                 <li class="introducing__item">
-                    <svg class="introducing__icon" width="60" height="60" viewBox="0 0 60 60"
-                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="introducing__icon" width="60" height="60" viewBox="0 0 60 60" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M17.825 32.5001C16.4595 30.3247 15.7017 27.8233 15.6305 25.2559C15.5593 22.6885 16.1773 20.1489 17.4202 17.9012C18.6631 15.6536 20.4854 13.78 22.6978 12.4753C24.9101 11.1706 27.4316 10.4824 30 10.4824C32.5684 10.4824 35.0899 11.1706 37.3022 12.4753C39.5146 13.78 41.3369 15.6536 42.5798 17.9012C43.8227 20.1489 44.4407 22.6885 44.3695 25.2559C44.2983 27.8233 43.5405 30.3247 42.175 32.5001"
                             stroke="url(#paint0_linear_52_683)" stroke-width="2" stroke-linecap="round"
@@ -733,4 +733,6 @@
             </ul>
         </div>
     </section>
+
+    <x-player />
 @endsection

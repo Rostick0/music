@@ -29,6 +29,11 @@
         text-align: center;
         width: 100%;
     }
+
+    @media (max-width: 1024px) {
+        font-size: .75rem;
+        padding: .93rem;
+    }
 }
 
 .track-button {
