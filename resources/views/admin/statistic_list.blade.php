@@ -47,7 +47,7 @@
                     @else
                         <div>{{ $statistic->statistics_name }}</div>
                     @endif
-                    <a href={{ route('user.edit', ['id' => $statistic->users_id]) }}>{{ $statistic->user_email }}</a>
+                    <a href={{ route('user.edit', ['id' => $statistic->user_id]) }}>{{ $statistic->user_email }}</a>
                     <div>{{ $statistic->created_at }}</div>
                 </li>
             @endforeach

@@ -20,7 +20,7 @@ class ClientSubscriptionController extends Controller
             'users.email as user_email'
         )
             ->join('subscription_types', 'subscription_types.id', '=', 'subscriptions.subscription_types_id')
-            ->join('users', 'users.id', '=', 'subscriptions.users_id')
+            ->join('users', 'users.id', '=', 'subscriptions.user_id')
             ->orderByDesc('subscriptions.id')
             ->where($where_sql);
 

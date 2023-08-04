@@ -37,7 +37,7 @@ class RemoveClaimController extends Controller
         $remove_claim = RemoveClaim::create([
             'link' => $request->link,
             'music_id' => $request->music_id,
-            'users_id' => $user_id
+            'user_id' => $user_id
         ]);
 
         return $remove_claim;

@@ -15,7 +15,7 @@ class SubscriptionObserver
         Statistic::create([
             'statistic_types_id' => 1,
             'type_paid' => $subscription->type,
-            'users_id' => $subscription->users_id
+            'user_id' => $subscription->user_id
         ]);
     }
 

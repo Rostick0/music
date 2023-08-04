@@ -14,6 +14,6 @@ class RemoveClaim extends Model
         'link',
         'status',
         'music_id',
-        'users_id'
+        'user_id'
     ];
 }

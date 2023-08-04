@@ -8,6 +8,7 @@ use App\Models\Mood;
 use App\Models\Playlist;
 use App\Models\RelationshipInstrument;
 use App\Models\RelationshipMood;
+use App\Models\RelationshipPlaylist;
 use App\Models\RelationshipTheme;
 use App\Models\Theme;
 use Illuminate\Http\Request;
@@ -59,6 +60,39 @@ class PlaylistController extends Controller
         ]);
     }
 
+    public function music_list(Request $request, int $id)
+    {
+        $music_controller = new MusicController();
+
+        $music_list = $music_controller->search($request, '');
+
+        $genres = Genre::all();
+        $themes = Theme::all();
+        $instruments = Instrument::all();
+        $moods = Mood::all();
+
+        return view('admin.playlist_music_list', [
+            'id' => $id,
+            'music_list' => $music_list,
+            'genres' => $genres,
+            'themes' => $themes,
+            'instruments' => $instruments,
+            'moods' => $moods
+        ]);
+    }
+
+    public function music_add(int $id, int $music_id)
+    {
+        RelationshipPlaylist::firstOrCreate([
+            'music_id' => $music_id,
+            'playlist_id' => $id,
+        ]);
+
+        redirect()->route('playlist.edit', [
+            'id' => $id
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -106,14 +140,6 @@ class PlaylistController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Playlist $playlist)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(int $id)
@@ -149,7 +175,7 @@ class PlaylistController extends Controller
             'seo_title' => 'max:255',
             'seo_description' => 'max:255'
         ]);
-        
+
         $image = ImageController::upload($request->file('image'));
 
         $update_data = [

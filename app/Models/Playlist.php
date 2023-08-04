@@ -38,4 +38,8 @@ class Playlist extends Model
     {
         return $this->hasMany(RelationshipTheme::class, 'type_id', 'id')->select('themes.name as name', 'themes.id as id')->join('themes', 'themes.id', '=', 'relationship_themes.theme_id')->where('type', 'playlist');
     }
+
+    public function music(): HasMany {
+        return $this->hasMany(RelationshipPlaylist::class, 'playlist_id', 'id')->select('music.*')->join('music', 'music.id', '=', 'relationship_playlists.music_id');
+    }
 }

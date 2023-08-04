@@ -25,7 +25,7 @@ class NoticeController extends Controller
             ->join('remove_claims', function (JoinClause $join) {
                 $join->on('notices.type_id', '=', 'remove_claims.id')
                     ->where('notices.type', '=', 'remove_claims')
-                    ->join('users', 'users.id', '=', 'remove_claims.users_id')
+                    ->join('users', 'users.id', '=', 'remove_claims.user_id')
                     ->join('music', 'music.id', '=', 'remove_claims.music_id');
             })
             ->orderByDesc('notices.id')

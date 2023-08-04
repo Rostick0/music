@@ -36,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
             if (auth()->check()) {
                 $has_subscription = Subscription::where([
                     ['date_end', '>=', Carbon::now()],
-                    ['users_id', '=', auth()->id()]
+                    ['user_id', '=', auth()->id()]
                 ])->count() ? true : false;
             }
 

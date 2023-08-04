@@ -34,8 +34,9 @@ class MusicController extends Controller
             'music.*',
             'music_artists.name as music_artist_name',
         )
-            ->join('music_artists', 'music.music_artists_id', '=', 'music_artists.id')
-            ->where($where_sql);
+            ->join('music_artists', 'music.music_artist_id', '=', 'music_artists.id')
+            ->where($where_sql)
+            ->orderByDesc('id');
         if ($request->genres) {
             $music_list->whereIn('music.id', RelationshipTheme::select('type_id')
                 ->where('type', 'music')
@@ -83,15 +84,6 @@ class MusicController extends Controller
         ]);
     }
 
-    public function index_client()
-    {
-        $music_list = Music::paginate(app('site')->count_admin ?? 20);
-
-        return view('client.music_list', [
-            'music_list' => $music_list
-        ]);
-    }
-
     public function search(Request $request, $type = 'json')
     {
         $where_sql = [];
@@ -109,12 +101,13 @@ class MusicController extends Controller
             'music_artists.name as music_artist_name',
             'favorites.id as favorite_id'
         )
-            ->join('music_artists', 'music.music_artists_id', '=', 'music_artists.id')
+            ->join('music_artists', 'music.music_artist_id', '=', 'music_artists.id')
             ->leftJoin('favorites', function (JoinClause $join) {
                 $join->on('favorites.music_id', '=', 'music.id')
-                    ->where('favorites.users_id', auth()->id());
+                    ->where('favorites.user_id', auth()->id());
             })
-            ->where($where_sql);
+            ->where($where_sql)
+            ->orderByDesc('id');
         if ($request->genres) {
             $music_list->whereIn('music.id', RelationshipGenre::select('type_id')
                 ->where('type', 'music')
@@ -203,7 +196,7 @@ class MusicController extends Controller
         $audio_duration = gmdate("H:i:s", $audio->duration);
 
         $music = Music::create([
-            'music_artists_id' => $music_artists->id,
+            'music_artist_id' => $music_artists->id,
             'title' => $request->title,
             'link' => $music,
             'link_demo' => $music_demo,
@@ -235,7 +228,7 @@ class MusicController extends Controller
     public function edit(int $id)
     {
         $music = Music::findOrFail($id);
-        $music_artist = MusicArtist::find($music->music_artists_id);
+        $music_artist = MusicArtist::find($music->music_artist_id);
 
         $genres = Genre::select(
             'genres.*',
@@ -285,7 +278,7 @@ class MusicController extends Controller
         $upload_demo = MusicUploadController::upload($request->file('link_demo'), 'music_demo');
 
         $update_data = [
-            'music_artists_id' => $music_artists->id,
+            'music_artist_id' => $music_artists->id,
             'title' => $request->title,
             'publisher' => $request->publisher,
             'distr' => $request->distr,

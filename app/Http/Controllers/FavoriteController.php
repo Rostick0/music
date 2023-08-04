@@ -26,7 +26,7 @@ class FavoriteController extends Controller
         foreach ($local_favorite as $favorite) {
             Favorite::firstOrCreate([
                 'music_id' => $favorite,
-                'users_id' => auth()->id()
+                'user_id' => auth()->id()
             ]);
         }
     }
@@ -38,7 +38,7 @@ class FavoriteController extends Controller
         if (auth()->check()) {
             Favorite::firstOrCreate([
                 'music_id' => $music_id,
-                'users_id' => auth()->id()
+                'user_id' => auth()->id()
             ]);
         } else {
             $ids = FavoriteController::getLocalFavorite();
@@ -64,10 +64,10 @@ class FavoriteController extends Controller
                 'music.*',
                 'music_artists.name as music_artist_name',
             )
-                ->join('music_artists', 'music.music_artists_id', '=', 'music_artists.id')
+                ->join('music_artists', 'music.music_artist_id', '=', 'music_artists.id')
                 ->join('favorites', function (JoinClause $join) {
                     $join->on('favorites.music_id', '=', 'music.id')
-                        ->where('favorites.users_id', auth()->id());
+                        ->where('favorites.user_id', auth()->id());
                 })
                 ->paginate(app('site')->count_front);
 
@@ -80,7 +80,7 @@ class FavoriteController extends Controller
             'music.*',
             'music_artists.name as music_artist_name',
         )
-            ->join('music_artists', 'music.music_artists_id', '=', 'music_artists.id')
+            ->join('music_artists', 'music.music_artist_id', '=', 'music_artists.id')
             ->whereIn('music.id', $local_favorite)
             ->paginate(app('site')->count_front);
 
@@ -93,7 +93,7 @@ class FavoriteController extends Controller
 
         if (!$user_id) return count(FavoriteController::getLocalFavorite());
 
-        return Favorite::where('users_id', $user_id)->count();
+        return Favorite::where('user_id', $user_id)->count();
     }
 
     public function destroy(int $id)

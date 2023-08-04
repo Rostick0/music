@@ -101,6 +101,15 @@
                 @enderror
             </label>
         </div>
+        <div class="admin-form__flex">
+            <form action="">
+                <a class="admin-button admin-button-add-form"
+                    href="{{ route('playlist.music.list', ['id' => $playlist->id]) }}">
+                    <span class="admin-button-add__plus">+</span>
+                    <span>Добавить музыку</span>
+                </a>
+            </form>
+        </div>
         <div class="admin-delete__buttons">
             <button class="admin-button">Сохранить</button>
             <a class="admin-button-red"

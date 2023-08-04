@@ -2,9 +2,8 @@
 
 @section('php')
     @php
-        // // $playlists = App\Models\Playlist::limit(6)->orderByDesc('id')->get();
         $music = App\Http\Controllers\FrontMusicController::getById($id);
-        $artist_name = App\Models\MusicArtist::find($music->music_artists_id)->name;
+        $artist_name = App\Models\MusicArtist::find($music->music_artist_id)->name;
         $music_list = App\Http\Controllers\FrontMusicController::getSimilar($id);
     @endphp
 @endsection

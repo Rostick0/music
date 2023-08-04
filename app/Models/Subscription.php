@@ -11,7 +11,7 @@ class Subscription extends Model
 
     protected $fillable = [
         'subscription_types_id',
-        'users_id',
+        'user_id',
         'is_auto_renewal',
         'date_end',
     ];

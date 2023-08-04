@@ -69,6 +69,8 @@ Route::group(['prefix' => 'admin'], function ($router) {
         Route::get('{id}', [PlaylistController::class, 'edit'])->name('playlist.edit');
         Route::post('{id}', [PlaylistController::class, 'update']);
         Route::post('delete/{id}', [PlaylistController::class, 'destroy'])->name('playlist.delete');
+        Route::get('{id}/music/list', [PlaylistController::class, 'music_list'])->name('playlist.music.list');
+        Route::post('{id}/music/list/{music_id}', [PlaylistController::class, 'music_add'])->name('playlist.music.add');        
     });
 
     Route::get('statistic', [StatisticController::class, 'index'])->name('statistic');

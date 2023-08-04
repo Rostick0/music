@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('music', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('music_artists_id')->references('id')->on('music_artists')->onDelete('cascade');
+            $table->foreignId('music_artist_id')->references('id')->on('music_artists')->onDelete('cascade');
             $table->string('title');
             $table->string('link');
             $table->string('link_demo')->nullable();

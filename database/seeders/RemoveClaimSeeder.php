@@ -11,12 +11,12 @@ class RemoveClaimSeeder extends Seeder
     private $remove_claims = [
         [
             'link' => 'https://www.youtube.com/watch?v=3hAMKCcM4tE',
-            'users_id' => 1,
+            'user_id' => 1,
             'music_id' => 1
         ],
         [
             'link' => 'https://www.youtube.com/watch?v=7nFspOuD0ZY',
-            'users_id' => 2,
+            'user_id' => 2,
             'music_id' => 2
         ]
     ];

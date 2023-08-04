@@ -41,7 +41,7 @@
                 <li class="admin-grid__content_item admin-grid-subscription__content_item">
                     <div>{{ $subscription->id }}</div>
                     <div>{{ $subscription->subscription_name }}</div>
-                    <a href={{ route('user.edit', ['id' => $subscription->users_id]) }}>{{ $subscription->user_email }}</a>
+                    <a href={{ route('user.edit', ['id' => $subscription->user_id]) }}>{{ $subscription->user_email }}</a>
                     <div>{{ $subscription->is_auto_renewal ? 'Да' : 'Нет' }}</div>
                     <div>{{ $subscription->created_at }}</div>
                     <div>{{ $subscription->date_end }}</div>

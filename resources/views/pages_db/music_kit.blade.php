@@ -6,7 +6,7 @@
         // $music_kit
         $music_kit = App\Http\Controllers\FrontMusicKitController::getById($id);
         $music = $music_kit->music;
-        $artist_name = App\Models\MusicArtist::find($music->music_artists_id)->name;
+        $artist_name = App\Models\MusicArtist::find($music->music_artist_id)->name;
         $music_list = App\Http\Controllers\FrontMusicController::getSimilar($music->id);
     @endphp
 @endsection

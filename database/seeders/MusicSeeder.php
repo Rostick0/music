@@ -70,7 +70,7 @@ class MusicSeeder extends Seeder
 
             $music = Music::firstOrCreate([
                 ...$this->music[$i],
-                'music_artists_id' => $music_artists->id
+                'music_artist_id' => $music_artists->id
             ]);
 
             RelationshipGenreController::createAndDeleteRelationship($this->genres[$i], $music->id, 'music');

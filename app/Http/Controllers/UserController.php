@@ -37,11 +37,11 @@ class UserController extends Controller
     public function edit(int $id)
     {
         $user = User::find($id);
-        $subscription = Subscription::where('users_id', $id)
+        $subscription = Subscription::where('user_id', $id)
             ->orderByDesc('id')
             ->first();
 
-        $remove_claims = RemoveClaim::where('users_id', $id)
+        $remove_claims = RemoveClaim::where('user_id', $id)
             ->orderByDesc('id')
             ->paginate(10);
 

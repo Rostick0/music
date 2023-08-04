@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('relationship_playlists', function (Blueprint $table) {
             $table->id();
             $table->foreignId('music_id')->references('id')->on('music')->onDelete('cascade');
-            $table->foreignId('playlists_id')->references('id')->on('playlists')->onDelete('cascade');
+            $table->foreignId('playlist_id')->references('id')->on('playlists')->onDelete('cascade');
             $table->timestamps();
         });
     }

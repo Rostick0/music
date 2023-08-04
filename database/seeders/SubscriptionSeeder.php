@@ -17,25 +17,25 @@ class SubscriptionSeeder extends Seeder
         $subscriptions = [
             [
                 'subscription_types_id' => 1,
-                'users_id' => 1,
+                'user_id' => 1,
                 'is_auto_renewal' => 0,
                 'date_end' => Carbon::now()->addMonth(),
             ],
             [
                 'subscription_types_id' => 2,
-                'users_id' => 2,
+                'user_id' => 2,
                 'is_auto_renewal' => 1,
                 'date_end' => Carbon::now()->addYear(),
             ],
             [
                 'subscription_types_id' => 2,
-                'users_id' => 3,
+                'user_id' => 3,
                 'is_auto_renewal' => 1,
                 'date_end' => Carbon::now()->addMonth(),
             ],
             [
                 'subscription_types_id' => 2,
-                'users_id' => 4,
+                'user_id' => 4,
                 'is_auto_renewal' => 1,
                 'date_end' => Carbon::now()->addYear(),
             ],

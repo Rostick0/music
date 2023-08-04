@@ -25,7 +25,7 @@ class StatisticController extends Controller
             'users.email as user_email',
             'music.title as music_title'
         )
-            ->join('users', 'users.id', '=', 'statistics.users_id')
+            ->join('users', 'users.id', '=', 'statistics.user_id')
             ->join('statistic_types', 'statistic_types.id', '=', 'statistics.statistic_types_id')
             ->leftJoin('music', 'music.id', '=', 'statistics.music_id')
             ->where($where_sql)

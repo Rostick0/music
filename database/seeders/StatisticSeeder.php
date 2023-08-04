@@ -12,22 +12,22 @@ class StatisticSeeder extends Seeder
         [
             'statistic_types_id' => 1,
             'type_paid' => 'month',
-            'users_id' => 1,
+            'user_id' => 1,
         ],
         [
             'statistic_types_id' => 2,
-            'users_id' => 4,
+            'user_id' => 4,
         ],
         [
             'statistic_types_id' => 3,
             'type_paid' => 'month',
-            'users_id' => 1,
+            'user_id' => 1,
             'music_id' => 1
         ],
         [
             'statistic_types_id' => 1,
             'type_paid' => 'year',
-            'users_id' => 3,
+            'user_id' => 3,
         ]
     ];
 

@@ -11,6 +11,6 @@ class Favorite extends Model
 
     protected $fillable = [
         'music_id',
-        'users_id',
+        'user_id',
     ];
 }

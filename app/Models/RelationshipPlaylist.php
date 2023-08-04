@@ -11,6 +11,6 @@ class RelationshipPlaylist extends Model
 
     protected $fillable = [
         'music_id',
-        'playlists_id',
+        'playlist_id',
     ];
 }

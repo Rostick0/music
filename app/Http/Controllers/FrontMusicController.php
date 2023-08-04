@@ -86,6 +86,6 @@ class FrontMusicController extends Controller
             'music.*',
             'music_artists.name as music_artist_name'
         )
-            ->join('music_artists', 'music.music_artists_id', '=', 'music_artists.id');
+            ->join('music_artists', 'music.music_artist_id', '=', 'music_artists.id');
     }
 }

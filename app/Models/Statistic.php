@@ -12,7 +12,7 @@ class Statistic extends Model
     protected $fillable = [
         'statistic_types_id',
         'type_paid',
-        'users_id',
+        'user_id',
         'music_id',
     ];
 }

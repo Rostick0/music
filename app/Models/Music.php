@@ -11,7 +11,7 @@ class Music extends Model
     use HasFactory;
 
     protected $fillable = [
-        'music_artists_id',
+        'music_artist_id',
         'title',
         'link',
         'link_demo',

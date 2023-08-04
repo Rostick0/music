@@ -14,7 +14,7 @@ class UserObserver
     {
         Statistic::create([
             'statistic_types_id' => 2,
-            'users_id' => $user->id
+            'user_id' => $user->id
         ]);
     }
 
