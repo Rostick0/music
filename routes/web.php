@@ -17,6 +17,7 @@ use App\Http\Controllers\MusicKitController;
 use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\RelationshipPlaylistController;
 use App\Http\Controllers\RemoveClaimController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\SiteController;
@@ -69,8 +70,8 @@ Route::group(['prefix' => 'admin'], function ($router) {
         Route::get('{id}', [PlaylistController::class, 'edit'])->name('playlist.edit');
         Route::post('{id}', [PlaylistController::class, 'update']);
         Route::post('delete/{id}', [PlaylistController::class, 'destroy'])->name('playlist.delete');
-        Route::get('{id}/music/list', [PlaylistController::class, 'music_list'])->name('playlist.music.list');
-        Route::post('{id}/music/list/{music_id}', [PlaylistController::class, 'music_add'])->name('playlist.music.add');        
+        Route::get('{playlist_id}/music/list', [RelationshipPlaylistController::class, 'music_list'])->name('playlist.music.list');
+        Route::post('{playlist_id}/music/list/{music_id}', [PlaylistController::class, 'music_add'])->name('playlist.music.add');        
     });
 
     Route::get('statistic', [StatisticController::class, 'index'])->name('statistic');

@@ -2,64 +2,58 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Genre;
+use App\Models\Instrument;
+use App\Models\Mood;
+use App\Models\Playlist;
 use App\Models\RelationshipPlaylist;
+use App\Models\Theme;
 use Illuminate\Http\Request;
 
 class RelationshipPlaylistController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    // id => playlist_id
+    public function music_list(Request $request, int $playlist_id)
     {
-        //
+        if (Playlist::find($playlist_id)->count() < 1) return abort(404);
+
+        $music_controller = new MusicController();
+
+        $music_list = $music_controller->search($request, '');
+
+        $genres = Genre::all();
+        $themes = Theme::all();
+        $instruments = Instrument::all();
+        $moods = Mood::all();
+
+        return view('admin.playlist_music_list', [
+            'id' => $playlist_id,
+            'music_list' => $music_list,
+            'genres' => $genres,
+            'themes' => $themes,
+            'instruments' => $instruments,
+            'moods' => $moods
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    // id => playlist_id
+    public function music_add(int $playlist_id, int $music_id)
     {
-        //
+        RelationshipPlaylist::firstOrCreate([
+            'music_id' => $music_id,
+            'playlist_id' => $playlist_id,
+        ]);
+
+        redirect()->route('playlist.edit', [
+            'id' => $playlist_id
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    // id => relationship_playlist id
+    public function music_remove($id)
     {
-        //
-    }
+        RelationshipPlaylist::destroy($id);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(RelationshipPlaylist $relationshipPlaylist)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(RelationshipPlaylist $relationshipPlaylist)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, RelationshipPlaylist $relationshipPlaylist)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(RelationshipPlaylist $relationshipPlaylist)
-    {
-        //
+        return back();
     }
 }
