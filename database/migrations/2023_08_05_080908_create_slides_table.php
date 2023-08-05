@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('slides', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->string('image');
             $table->string('width')->default('100%');
             $table->string('height')->default('100%');

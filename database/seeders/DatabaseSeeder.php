@@ -24,7 +24,8 @@ class DatabaseSeeder extends Seeder
             RemoveClaimSeeder::class,
             SubscriptionTypeSeeder::class,
             SubscriptionSeeder::class,
-            NoticeSeeder::class
+            NoticeSeeder::class,
+            SlideSeeder::class
         ]);
     }
 }

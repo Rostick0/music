@@ -166,7 +166,6 @@
 </script>
 <script src="/js/libs/lazyloading.js"></script>
 <script src="/js/libs/wavesurfer.js"></script>
-<script src="/js/libs/swiper.js"></script>
 @vite(['resources/js/app.js'])
 @vite(['resources/js/front.js'])
 </body>

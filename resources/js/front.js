@@ -18,37 +18,6 @@ const myFetch = (url, options = {}) => {
     })
 }
 
-try {
-    new Swiper(".mySwiper", {
-        slidesPerView: 2,
-        spaceBetween: 10,
-        breakpoints: {
-            1: {
-                slidesPerView: 1,
-            },
-            400: {
-                slidesPerView: 2,
-                spaceBetween: 24,
-            },
-            768: {
-                slidesPerView: 4,
-                spaceBetween: 32,
-            },
-            1440: {
-                slidesPerView: 5,
-                spaceBetween: 36,
-            }
-        },
-        autoplay: {
-            delay: 2500,
-            disableOnInteraction: false,
-        },
-    });
-} catch (e) {
-
-}
-
-
 (function () {
     const faqItems = document.querySelectorAll('.faq__item');
 

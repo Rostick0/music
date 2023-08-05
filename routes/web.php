@@ -25,7 +25,7 @@ use App\Http\Controllers\SiteFaqController;
 use App\Http\Controllers\SitePageController;
 use App\Http\Controllers\SiteSettingController;
 use App\Http\Controllers\SlideController;
-use App\Http\Controllers\SlideSettingController;
+use App\Http\Controllers\SliderSettingController;
 use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\SubscriptionTypeController;
@@ -105,7 +105,7 @@ Route::group(['prefix' => 'admin'], function ($router) {
     });
 
     Route::group(['prefix' => 'slider'], function ($router) {
-        Route::post('setting', [SlideSettingController::class, 'update'])->name('slider.setting');
+        Route::post('setting', [SliderSettingController::class, 'update'])->name('slider.setting');
         Route::post('create', [SlideController::class, 'store'])->name('slide.create');
         Route::post('delete/{id}', [SlideController::class, 'destroy']);
     });

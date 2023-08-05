@@ -20,7 +20,7 @@ class ImageController extends Controller
 
     public static function getViewImage($image, $type = 'image', $defaultImage = '/img/music.png')
     {
-        if ($image && Storage::disk('public')->exists("upload/$type/" . $image)) return Storage::url('upload/image/' . $image);
+        if ($image && Storage::disk('public')->exists("upload/$type/" . $image)) return Storage::url("upload/$type/" . $image);
 
         return $defaultImage;
     }

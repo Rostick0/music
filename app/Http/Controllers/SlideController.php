@@ -19,15 +19,17 @@ class SlideController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'name_slide' => 'required|max:255',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg'
         ]);
 
-        $image = ImageController::upload($request->file('image'));
+        $image = ImageController::upload($request->file('image'), 'slide');
 
         $width = SlideController::setType($request->width);
         $height = SlideController::setType($request->height);
 
         Slide::create([
+            'name' => $request->name_slide,
             'image' => $image,
             'width' => $width,
             'height' => $height,
@@ -36,14 +38,18 @@ class SlideController extends Controller
         return back();
     }
 
-    public function update(Request $request, Slide $slide)
+    public function update(Request $request, int $id)
     {
         //
     }
 
     public function destroy(int $id)
     {
-        Slide::destroy($id);
+        $slide = Slide::find($id);
+
+        ImageController::destroy($slide->image, 'slide');
+
+        $slide->destroy($id);
 
         return back();
     }

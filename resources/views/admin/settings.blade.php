@@ -148,29 +148,29 @@
             <div class="admin-form__flex">
                 <label class="admin-label">
                     <span>Количество лого при больше 1440px</span>
-                    <input class="admin-input" type="number" name="count-slide-1440">
-                    @error('count-slide-1440')
+                    <input class="admin-input" type="number" name="count_slide_1440">
+                    @error('count_slide_1440')
                         <span class="error">{{ $message }}</span>
                     @enderror
                 </label>
                 <label class="admin-label">
                     <span>Количество лого при больше 768px</span>
-                    <input class="admin-input" type="number" name="count-slide-768">
-                    @error('count-slide-768')
+                    <input class="admin-input" type="number" name="count_slide_768">
+                    @error('count_slide_768')
                         <span class="error">{{ $message }}</span>
                     @enderror
                 </label>
                 <label class="admin-label">
                     <span>Количество лого при больше 400px</span>
-                    <input class="admin-input" type="number" name="count-slide-400">
-                    @error('count-slide-400')
+                    <input class="admin-input" type="number" name="count_slide_400">
+                    @error('count_slide_400')
                         <span class="error">{{ $message }}</span>
                     @enderror
                 </label>
                 <label class="admin-label">
                     <span>Количество лого при меньше 400px</span>
-                    <input class="admin-input" type="number" name="count-slide-min">
-                    @error('count-slide-min')
+                    <input class="admin-input" type="number" name="count_slide_min">
+                    @error('count_slide_min')
                         <span class="error">{{ $message }}</span>
                     @enderror
                 </label>
@@ -179,6 +179,13 @@
         <h3>Слайды</h3>
         <form class="admin-form__flex aling-items-end" action="{{ route('slide.create') }}" method="post">
             @csrf
+            <label class="admin-label">
+                <span>Название</span>
+                <input class="admin-input" type="file" name="name_slide">
+                @error('name_slide')
+                    <span class="error">{{ $message }}</span>
+                @enderror
+            </label>
             <label class="admin-label">
                 <span>Картинка</span>
                 <input class="admin-input" type="file" name="image">
