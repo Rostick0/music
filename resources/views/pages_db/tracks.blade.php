@@ -43,6 +43,7 @@
                         <input class="select__input" name="genre" type="hidden">
                     </div>
                     <ul class="select__list">
+                        <li class="select__item" data-id="">None</li>
                         @foreach ($genres as $genre)
                             <li class="select__item" data-id="{{ $genre->id }}">{{ $genre->name }}</li>
                         @endforeach
@@ -73,6 +74,7 @@
                         <input class="select__input" name="moods" type="hidden">
                     </div>
                     <ul class="select__list">
+                        <li class="select__item" data-id="">None</li>
                         @foreach ($moods as $mood)
                             <li class="select__item" data-id="{{ $mood->id }}">{{ $mood->name }}</li>
                         @endforeach
@@ -103,6 +105,7 @@
                         <input class="select__input" name="themes" type="hidden">
                     </div>
                     <ul class="select__list">
+                        <li class="select__item" data-id="">None</li>
                         @foreach ($themes as $theme)
                             <li class="select__item" data-id="{{ $theme->id }}">{{ $theme->name }}</li>
                         @endforeach
@@ -133,6 +136,7 @@
                         <input class="select__input" name="instruments" type="hidden">
                     </div>
                     <ul class="select__list">
+                        <li class="select__item" data-id="">None</li>
                         @foreach ($instruments as $instrument)
                             <li class="select__item" data-id="{{ $instrument->id }}">{{ $instrument->name }}</li>
                         @endforeach
@@ -163,6 +167,7 @@
                         <input class="select__input" name="duration" type="hidden">
                     </div>
                     <ul class="select__list">
+                        <li class="select__item" data-id="">None</li>
                         <li class="select__item"></li>
                     </ul>
                 </div>

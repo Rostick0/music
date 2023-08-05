@@ -354,7 +354,11 @@ initWaveSurfer();
             set: throttle(function (newValue) {
                 values[this?.name] = newValue;
 
-                myFetch('/api/music' + objConvertUrl(values))
+                const covertUrl = objConvertUrl(values);
+
+                window.history.replaceState(null, null, covertUrl);
+
+                myFetch('/api/music' + covertUrl)
                     .then(res => {
                         if (!res?.ok) {
                             return;
@@ -422,7 +426,10 @@ initWaveSurfer();
             set: throttle(function (newValue) {
                 values[this?.name] = newValue;
 
-                myFetch('/api/playlist' + objConvertUrl(values))
+                const covertUrl = objConvertUrl(values);
+
+                window.history.replaceState(null, null, covertUrl);
+                myFetch('/api/playlist' + covertUrl)
                     .then(res => {
                         if (!res?.ok) {
                             return;
@@ -431,12 +438,10 @@ initWaveSurfer();
                         return res.json()
                     })
                     .then(res => {
-                        console.log(playlistList);
                         playlistList.innerHTML = "";
-                        console.log(res);
 
                         if (!res?.data?.length) {
-                            playlistList.innerHTML = '<h3 class="tracks__none">Playlist not found</h3>';
+                            playlistList.innerHTML = '<h3 class="playlist__none">Playlist not found</h3>';
                             return;
                         }
 
