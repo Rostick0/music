@@ -54,7 +54,7 @@
             <label class="admin-label">
                 <span>Тема (через запятую)</span>
                 <input class="admin-input" type="text" name="themes"
-                    value="{{ old('themes') ?? App\Http\Controllers\RelationshipHelper::getNameByItems($playlist->themes) }}">
+                    value="{{ old('themes') ?? App\Http\Controllers\RelationshipHelper::getNameByItems($playlist->themes, '—') }}">
                 @error('themes')
                     <span class="error">{{ $message }}</span>
                 @enderror
@@ -62,7 +62,7 @@
             <label class="admin-label">
                 <span>Настроение (через запятую)</span>
                 <input class="admin-input" type="text" name="moods"
-                    value="{{ old('moods') ?? App\Http\Controllers\RelationshipHelper::getNameByItems($playlist->moods) }}">
+                    value="{{ old('moods') ?? App\Http\Controllers\RelationshipHelper::getNameByItems($playlist->moods, '—') }}">
                 @error('moods')
                     <span class="error">{{ $message }}</span>
                 @enderror
@@ -70,7 +70,7 @@
             <label class="admin-label">
                 <span>Инструменты (через запятую)</span>
                 <input class="admin-input" type="text" name="instruments"
-                    value="{{ old('instruments') ?? App\Http\Controllers\RelationshipHelper::getNameByItems($playlist->instruments) }}">
+                    value="{{ old('instruments') ?? App\Http\Controllers\RelationshipHelper::getNameByItems($playlist->instruments, '—') }}">
                 @error('instruments')
                     <span class="error">{{ $message }}</span>
                 @enderror
@@ -119,6 +119,7 @@
         </a>
     </div>
     <br>
+    <h2>Список музыки</h2>
     @if (!empty($playlist->music))
         <div class="admin-form__list">
             @foreach ($playlist->music as $music)

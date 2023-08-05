@@ -28,7 +28,6 @@ class MusicController extends Controller
         $where_sql = [];
         if ($request->title) $where_sql[] = ['music.title', 'LIKE', '%' . $request->title . '%'];
         if ($request->music_artists) $where_sql[] = ['music_artists.name', 'LIKE', '%' . $request->music_artists . '%'];
-        if (!(auth()->check() && auth()->user()->is_admin)) $where_sql[] = ['music.is_active', 1];
 
         $music_list = Music::select(
             'music.*',

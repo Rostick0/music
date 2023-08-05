@@ -216,7 +216,7 @@
                 <li class="admin-form__flex admin-form__slides_item">
                     <label class="admin-label">
                         <span>Название</span>
-                        <input class="admin-input" type="text" value="{{ $slide_item->question }}" disabled>
+                        <input class="admin-input" type="text" value="{{ $slide_item->name }}" disabled>
                     </label>
                     <img src="{{ App\Http\Controllers\ImageController::getViewImage($slide_item->image, 'slide') }}"
                         alt="">

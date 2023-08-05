@@ -19,7 +19,8 @@ class MusicKitController extends Controller
         if ($request->name) $where_sql[] = ['music_kits', 'LIKE', '%' . $request->name . '%'];
         if ($request->link) $where_sql[] = ['music_kits', 'LIKE', '%' . $request->link . '%'];
 
-        $music_kits = MusicKit::where($where_sql);
+        $music_kits = MusicKit::where($where_sql)
+            ->orderByDesc('id');
 
         if ($request->min_time && $request->max_time) {
             $music_kits->whereBetween('duration', [$request->min_time, $request->max_time]);

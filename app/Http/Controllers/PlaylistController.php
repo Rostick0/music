@@ -23,9 +23,9 @@ class PlaylistController extends Controller
     {
         $where_sql = [];
         if ($request->title) $where_sql[] = ['title', 'LIKE', '%' . $request->title . '%'];
-        if (!(auth()->check() && auth()->user()->is_admin)) $where_sql[] = ['playlists.is_active', 1];
 
-        $playlists = Playlist::where($where_sql);
+        $playlists = Playlist::where($where_sql)
+        ->orderByDesc('id');
         if ($request->themes) {
             $playlists->whereIn('playlists.id', RelationshipTheme::select('type_id')
                 ->where('type', 'playlist')
