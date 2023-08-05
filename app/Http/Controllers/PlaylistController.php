@@ -65,8 +65,8 @@ class PlaylistController extends Controller
     public function search(Request $request, $type = 'json')
     {
         $where_sql = [];
-        if ($request->title) $where_sql[] = ['music.title', 'LIKE', '%' . $request->title . '%'];
-        if (!(auth()->check() && auth()->user()->is_admin)) $where_sql[] = ['is_active', '=', 1];
+        if ($request->title) $where_sql[] = ['title', 'LIKE', '%' . $request->title . '%'];
+        // if (!(auth()->check() && auth()->user()->is_admin)) $where_sql[] = ['is_active', '=', 1];
 
         if ($request->count && $request->count > app('site')->count_front) {
             $count = app('site')->count_front;

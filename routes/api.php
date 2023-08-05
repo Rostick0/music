@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MusicController;
+use App\Http\Controllers\PlaylistController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Route::group(['middleware' => 'auth:sanctum'], function ($router) {});
 
 Route::get('music', [MusicController::class, 'search']);
+Route::get('playlist', [PlaylistController::class, 'search']);
 
 
 Route::get('test', function ($request) {
