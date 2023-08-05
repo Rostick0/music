@@ -41,6 +41,13 @@ class Playlist extends Model
 
     public function music(): HasMany
     {
-        return $this->hasMany(RelationshipPlaylist::class, 'playlist_id', 'id')->select('music.*', 'relationship_playlists.id as relationship_playlist_id')->join('music', 'music.id', '=', 'relationship_playlists.music_id');
+        return $this->hasMany(RelationshipPlaylist::class, 'playlist_id', 'id')
+            ->select(
+                'music.*',
+                'relationship_playlists.id as relationship_playlist_id',
+                'music_artists.name as music_artist_name'
+            )
+            ->join('music', 'music.id', '=', 'relationship_playlists.music_id')
+            ->join('music_artists', 'music.music_artist_id', '=', 'music_artists.id');
     }
 }
