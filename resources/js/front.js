@@ -67,145 +67,148 @@ function setSelects() {
 }
 
 setSelects();
-
-function initWaveSurfer() {
-    try {
-        const trackItems = document.querySelectorAll('.track-item');
-        const player = document.querySelector('.player');
-
-        let wavesurferPlayer = null;
-
-        if (!trackItems?.length) return;
-
-        let activeMusic = null;
-        const plays = [];
-        const musicItems = [];
-
-        const clearActiveMusic = () => {
-            const musicList = document.querySelectorAll('.track-item._active');
-            if (!musicList?.length) return;
-
-            musicList?.forEach(item => {
-                plays?.forEach(item => {
-                    item?.pause();
-                    item?.unAll();
-                });
-                plays?.splice(0, plays?.length - 1);
-
-                removeClass(item, '_active');
-            });
-        };
-
-        const audioPlayerEdit = ({ title, artist, time, musicUrl }, itemDom, wavesurfer) => {
-            const playerText = document.querySelector('.player__text');
-            const playerAudio = player.querySelector('.player__audio');
-            const playerButton = player.querySelector('.player__button');
-
-            playerAudio.innerHTML = null;
-
-            playerButton.onclick = () => {
-                player.classList.toggle('_active');
-            }
-
-            const wavesurferPlayerInner = WaveSurfer.create({
-                container: '.' + playerAudio.classList?.value?.replace(' ', '.'),
-                waveColor: 'rgba(27, 18, 30, .2)',
-                progressColor: '#FF1111',
-                url: musicUrl,
-                height: 40,
-            });
-
-            wavesurferPlayer = wavesurferPlayerInner;
-
-            wavesurferPlayerInner.on('ready', () => {
-                let isWavesurfer2Clicked = false;
-
-                wavesurferPlayerInner.on('click', position => {
-                    isWavesurfer2Clicked = true;
-                    wavesurfer?.seekTo(position);
-                });
-
-                wavesurfer.on('timeupdate', position => {
-                    if (isWavesurfer2Clicked) {
-                        isWavesurfer2Clicked = false;
-                        return;
-                    }
-
-                    wavesurferPlayerInner?.seekTo(position / wavesurfer.duration);
-                });
-
-            })
-
-            player.onclick = () => {
-                wavesurfer?.playPause();
-
-                if (itemDom.classList.contains('_active')) {
-                    removeClass(itemDom, '_active');
-                } else {
-                    addClass(itemDom, '_active');
-                }
-            };
-
-            playerText.innerHTML = `
-                <div class="track-item__name" title="${title}">${title}</div>
-                <div class="track-item__artist" title="${artist}">${artist}</div>
-            `;
-
-            const playerTtime = document.querySelector('.player__time');
-
-            playerTtime.textContent = time;
-        };
-
-        trackItems?.forEach(item => {
-            const trackItemAudio = item.querySelector('.track-item__audio');
-
-            const wavesurfer = WaveSurfer.create({
-                container: '.' + trackItemAudio.classList?.value?.replace(' ', '.'),
-                waveColor: 'rgba(27, 18, 30, .2)',
-                progressColor: '#FF1111',
-                url: MUSIC_URL + trackItemAudio.getAttribute('data-music'),
-                height: 40,
-            });
-
-            musicItems.push(trackItemAudio.getAttribute('data-music'));
-
-            const trackItemButton = item.querySelector('.track-item__button');
-            trackItemButton.onclick = () => {
-                if (!item.classList.contains('_active')) {
-                    plays.push(wavesurfer);
-                    clearActiveMusic();
-                    addClassOnce(player, '_show');
-                    addClassOnce(player, '_active');
-                    addClass(item, '_active');
-                    wavesurfer?.play();
-                    wavesurferPlayer?.unAll();
-                    audioPlayerEdit({
-                        title: trackItemAudio.getAttribute('data-title'),
-                        artist: trackItemAudio.getAttribute('data-artist'),
-                        time: trackItemAudio.getAttribute('data-time'),
-                        musicUrl: MUSIC_URL + trackItemAudio.getAttribute('data-music')
-                    }, item, wavesurfer);
-                    return;
-                }
-
-                wavesurfer?.pause();
-                removeClass(player, '_active');
-                removeClass(item, '_active');
-                removeClass(player, '_show');
-            };
-        })
-    } catch (e) {
-
-    }
-}
-
-initWaveSurfer();
-
 (function () {
     const tracksFilter = document.querySelector('.tracks__filter');
     if (!tracksFilter) return;
     const allInputs = tracksFilter?.querySelectorAll('.select__input');
     const trackList = document.querySelector('.tracks__list');
+
+    const musicList = [];
+
+    document.querySelectorAll('.track-item__audio')?.forEach(item => {
+        const dataMusic = item.getAttribute('data-music');
+
+        if (dataMusic) musicList.push(dataMusic);
+    });
+
+    const initWaveSurfer = () => {
+        try {
+            const trackItems = document.querySelectorAll('.track-item');
+            const player = document.querySelector('.player');
+
+            let wavesurferPlayer = null;
+
+            if (!trackItems?.length) return;
+
+            let activeMusic = null;
+            const plays = [];
+            const musicItems = [];
+
+            const clearActiveMusic = () => {
+                const trackItemActive = document.querySelectorAll('.track-item._active');
+                if (!trackItemActive?.length) return;
+
+                trackItemActive?.forEach(item => {
+                    plays?.forEach(item => {
+                        item?.pause();
+                        item?.unAll();
+                    });
+                    plays?.splice(0, plays?.length - 1);
+
+                    removeClass(item, '_active');
+                });
+            };
+
+            const audioPlayerEdit = ({ title, artist, time, musicUrl }, itemDom, wavesurfer) => {
+                const playerText = document.querySelector('.player__text');
+                const playerAudio = player.querySelector('.player__audio');
+                const playerButton = player.querySelector('.player__button');
+
+                playerAudio.innerHTML = null;
+
+                const wavesurferPlayerInner = WaveSurfer.create({
+                    container: '.' + playerAudio.classList?.value?.replace(' ', '.'),
+                    waveColor: 'rgba(27, 18, 30, .2)',
+                    progressColor: '#FF1111',
+                    url: musicUrl,
+                    height: 40,
+                });
+
+                wavesurferPlayer = wavesurferPlayerInner;
+
+                wavesurferPlayerInner.on('ready', () => {
+                    let isWavesurfer2Clicked = false;
+
+                    wavesurferPlayerInner.on('click', position => {
+                        wavesurfer?.seekTo(position);
+                        isWavesurfer2Clicked = true;
+                    });
+
+                    wavesurfer.on('timeupdate', position => {
+                        if (isWavesurfer2Clicked) {
+                            isWavesurfer2Clicked = false;
+                            return;
+                        }
+
+                        wavesurferPlayerInner?.seekTo(position / wavesurfer.duration);
+                    });
+                });
+
+                playerButton.onclick = () => {
+                    wavesurfer?.playPause();
+                    player.classList.toggle('_active');
+
+                    if (itemDom.classList.contains('_active')) {
+                        removeClass(itemDom, '_active');
+                    } else {
+                        addClass(itemDom, '_active');
+                    }
+                };
+
+                playerText.innerHTML = `
+                <div class="track-item__name" title="${title}">${title}</div>
+                <div class="track-item__artist" title="${artist}">${artist}</div>
+            `;
+
+                const playerTtime = document.querySelector('.player__time');
+
+                playerTtime.textContent = time;
+            };
+
+            trackItems?.forEach(item => {
+                const trackItemAudio = item.querySelector('.track-item__audio');
+
+                const wavesurfer = WaveSurfer.create({
+                    container: '.' + trackItemAudio.classList?.value?.replace(' ', '.'),
+                    waveColor: 'rgba(27, 18, 30, .2)',
+                    progressColor: '#FF1111',
+                    url: MUSIC_URL + trackItemAudio.getAttribute('data-music'),
+                    height: 40,
+                });
+
+                musicItems.push(trackItemAudio.getAttribute('data-music'));
+
+                const trackItemButton = item.querySelector('.track-item__button');
+                trackItemButton.onclick = () => {
+                    if (!item.classList.contains('_active')) {
+                        plays.push(wavesurfer);
+                        clearActiveMusic();
+                        addClassOnce(player, '_show');
+                        addClassOnce(player, '_active');
+                        addClass(item, '_active');
+                        wavesurfer?.play();
+                        wavesurferPlayer?.unAll();
+                        audioPlayerEdit({
+                            title: trackItemAudio.getAttribute('data-title'),
+                            artist: trackItemAudio.getAttribute('data-artist'),
+                            time: trackItemAudio.getAttribute('data-time'),
+                            musicUrl: MUSIC_URL + trackItemAudio.getAttribute('data-music')
+                        }, item, wavesurfer);
+                        return;
+                    }
+
+                    wavesurfer?.pause();
+                    removeClass(player, '_active');
+                    removeClass(item, '_active');
+                    removeClass(player, '_show');
+                };
+            })
+        } catch (e) {
+
+        }
+    }
+
+    initWaveSurfer();
 
     const musicButton = (musicId, favoriteId) => {
         if (favoriteId) {
@@ -370,6 +373,7 @@ initWaveSurfer();
                         return res.json()
                     })
                     .then(res => {
+                        musicList.length = 0;
                         trackList.innerHTML = "";
 
                         if (!res?.data?.length) {
@@ -378,6 +382,7 @@ initWaveSurfer();
                         }
 
                         res?.data?.forEach(music => {
+                            musicList.push(music?.link)
                             trackList.insertAdjacentHTML('beforeend', musicItem(music));
                         });
 

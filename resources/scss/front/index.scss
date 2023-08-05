@@ -620,6 +620,11 @@ body,
         margin-right: 1.87rem;
     }
 
+    &__prev,
+    &__next {
+        display: flex;
+    }
+
     &__text {
         max-width: 10vw;
     }

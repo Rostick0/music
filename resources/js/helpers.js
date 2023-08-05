@@ -21,7 +21,7 @@ export const removeClass = (elem, className) => {
 export const normalizeTime = (duration) => {
     let time = duration.slice(0,-3);
 
-    if (time[0] == '0') duration = duration.slice(1);
+    if (time[0] == '0') time = time.slice(1);
 
     return time;
 }
