@@ -107,7 +107,7 @@ Route::group(['prefix' => 'admin'], function ($router) {
     Route::group(['prefix' => 'slider'], function ($router) {
         Route::post('setting', [SliderSettingController::class, 'update'])->name('slider.setting');
         Route::post('create', [SlideController::class, 'store'])->name('slide.create');
-        Route::post('delete/{id}', [SlideController::class, 'destroy']);
+        Route::post('delete/{id}', [SlideController::class, 'destroy'])->name('slide.delete');
     });
 
     Route::group(['prefix' => 'pages'], function ($router) {

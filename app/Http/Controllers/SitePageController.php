@@ -86,7 +86,7 @@ class SitePageController extends Controller
         // dd(auth()->user()->tokens);
         // dd(auth()->user()->createToken('auth')->plainTextToken);
 
-        if (!File::exists($path)) return abort(404);
+        if (!File::exists($path) && SitePage::whereFirst('url', $url)->is_active == 0) return abort(404);
 
         return view('pages_db.' . $url, [
             'id' => $id,

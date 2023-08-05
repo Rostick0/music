@@ -252,8 +252,8 @@ initWaveSurfer();
     const musicItem = (music) => {
         return `<li class="tracks__item track-item">
         <div class="track-item__info">
-            <img class="track-item__img lazy"
-                data-src="${music?.image}"
+            <img decoding="async" class="track-item__img"
+                src="${music?.image ?? '/img/music.png'}"
                 alt="${music?.title}">
             <div class="track-item__text text-ellipsis">
                 ${music?.is_free ? '<div class="track-item__free">FREE</div>' : ''}
@@ -362,7 +362,6 @@ initWaveSurfer();
                         return res.json()
                     })
                     .then(res => {
-                        musicList.length = 0;
                         trackList.innerHTML = "";
 
                         res?.data?.forEach(music => {

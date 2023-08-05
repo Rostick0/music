@@ -40,6 +40,27 @@
         align-items: center;
         column-gap: .625rem;
     }
+
+    &__slides {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: .625rem;
+        
+        &_item {
+            flex-direction: column;
+            row-gap: .75rem;
+        }
+
+        &_form {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+        img {
+            max-height: 6.25rem;
+        }
+    }
 }
 
 .playlist-grid {

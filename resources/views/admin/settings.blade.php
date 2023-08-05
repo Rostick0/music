@@ -181,7 +181,7 @@
             @csrf
             <label class="admin-label">
                 <span>Название</span>
-                <input class="admin-input" type="file" name="name_slide">
+                <input class="admin-input" type="text" name="name_slide">
                 @error('name_slide')
                     <span class="error">{{ $message }}</span>
                 @enderror
@@ -211,5 +211,26 @@
                 <button class="admin-button">Создать</button>
             </span>
         </form>
+        <ul class="admin-form__slides">
+            @foreach ($slide_list as $slide_item)
+                <li class="admin-form__flex admin-form__slides_item">
+                    <label class="admin-label">
+                        <span>Название</span>
+                        <input class="admin-input" type="text" value="{{ $slide_item->question }}" disabled>
+                    </label>
+                    <img src="{{ App\Http\Controllers\ImageController::getViewImage($slide_item->image, 'slide') }}"
+                        alt="">
+                    <form class="admin-form__slides_form"
+                        action="{{ route('slide.delete', [
+                            'id' => $slide_item->id,
+                        ]) }}"
+                        method="post">
+                        @csrf
+                        <button class="admin-button-red">Удалить</button>
+                    </form>
+                </li>
+            @endforeach
+        </ul>
+
     </div>
 @endsection

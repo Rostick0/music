@@ -15,7 +15,7 @@
     <script>
         const userId = {{ auth()->id() ?? 'null' }};
         const hasSubscription = {{ $has_subscription ?? 'null' }};
-        const accessToken = null;
+        const accessToken = {{ '`' . $token_controller->get() . '`' ?? 'null' }};
         // {{ '`' . $token_controller->get() . '`' ?? 'null' }};
     </script>
 </head>

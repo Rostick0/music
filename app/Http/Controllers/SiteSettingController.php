@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SiteFaq;
+use App\Models\Slide;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -11,9 +12,11 @@ class SiteSettingController extends Controller
     public function edit()
     {
         $faq_list = SiteFaq::all();
+        $slide_list = Slide::all();
 
         return view('admin.settings', [
-            'faq_list' => $faq_list
+            'faq_list' => $faq_list,
+            'slide_list' => $slide_list,
         ]);
     }
 
