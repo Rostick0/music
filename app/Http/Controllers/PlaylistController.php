@@ -6,11 +6,13 @@ use App\Models\Genre;
 use App\Models\Instrument;
 use App\Models\Mood;
 use App\Models\Playlist;
+use App\Models\RelationshipGenre;
 use App\Models\RelationshipInstrument;
 use App\Models\RelationshipMood;
 use App\Models\RelationshipPlaylist;
 use App\Models\RelationshipTheme;
 use App\Models\Theme;
+use Illuminate\Database\Query\JoinClause;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -25,7 +27,7 @@ class PlaylistController extends Controller
         if ($request->title) $where_sql[] = ['title', 'LIKE', '%' . $request->title . '%'];
 
         $playlists = Playlist::where($where_sql)
-        ->orderByDesc('id');
+            ->orderByDesc('id');
         if ($request->themes) {
             $playlists->whereIn('playlists.id', RelationshipTheme::select('type_id')
                 ->where('type', 'playlist')
@@ -58,6 +60,51 @@ class PlaylistController extends Controller
             'instruments' => $instruments,
             'moods' => $moods
         ]);
+    }
+
+    public function search(Request $request, $type = 'json')
+    {
+        $where_sql = [];
+        if ($request->title) $where_sql[] = ['music.title', 'LIKE', '%' . $request->title . '%'];
+        if (!(auth()->check() && auth()->user()->is_admin)) $where_sql[] = ['is_active', '=', 1];
+
+        if ($request->count && $request->count > app('site')->count_front) {
+            $count = app('site')->count_front;
+        } else {
+            $count = $request->count ?? app('site')->count_front;
+        }
+
+        $playlists = Playlist::where($where_sql)
+            ->orderByDesc('id');
+        if ($request->genres) {
+            $playlists->whereIn('id', RelationshipGenre::select('type_id')
+                ->where('type', 'playlist')
+                ->whereIn('genre_id', is_array($request->genres) ? $request->genres : [$request->genres])
+                ->get());
+        }
+        if ($request->themes) {
+            $playlists->whereIn('id', RelationshipTheme::select('type_id')
+                ->where('type', 'playlist')
+                ->whereIn('theme_id', is_array($request->themes) ? $request->themes : [$request->themes])
+                ->get());
+        }
+        if ($request->instruments) {
+            $playlists->whereIn('id', RelationshipInstrument::select('type_id')
+                ->where('type', 'playlist')
+                ->whereIn('instrument_id', is_array($request->instruments) ? $request->instruments : [$request->instruments])
+                ->get());
+        }
+        if ($request->moods) {
+            $playlists->whereIn('id', RelationshipMood::select('type_id')
+                ->where('type', 'playlist')
+                ->whereIn('mood_id', is_array($request->moods) ? $request->moods : [$request->moods])
+                ->get());
+        }
+        $playlists = $playlists->paginate($count);
+
+        if ($type === 'json') return response($playlists);
+
+        return $playlists;
     }
 
     /**
