@@ -42,17 +42,16 @@ class SiteSettingController extends Controller
         return back();
     }
 
-    public function update_banner(Request $request)
-    {
-        $request->validate([
-            'heigth' => 'numeric'
-        ]);
+    // public function update_banner(Request $request)
+    // {
+    //     $request->validate([
+    //         'heigth' => 'numeric'
+    //     ]);
 
-        $request = [
-            'title' => $request->title,
-            'subtitle' => $request->subtitle,
-            'height' => $request->heigth + 'px',
-            ''
-        ];
-    }
+    //     $request = [
+    //         'title' => $request->title,
+    //         'subtitle' => $request->subtitle,
+    //         'height' => $request->heigth + 'px',
+    //     ];
+    // }
 }

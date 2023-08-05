@@ -8,27 +8,29 @@
             <path d="M12 14.0054V25.4343" stroke="#1B121E" stroke-width="1.5" stroke-linecap="round"
                 stroke-linejoin="round" />
         </svg>
-        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="40" height="40" rx="20" fill="url(#paint0_linear_111_2751)"></rect>
-            <g class="track-item__button_start">
-                <path
-                    d="M15 25.509C15.0004 25.9876 15.1322 26.4559 15.3798 26.8581C15.6273 27.2602 15.9801 27.5793 16.3961 27.7771C16.812 27.9749 17.2735 28.0431 17.7254 27.9735C18.1774 27.904 18.6006 27.6996 18.9447 27.3849L27 20.0032L18.9447 12.6169C18.6008 12.3015 18.1775 12.0966 17.7254 12.0267C17.2732 11.9568 16.8114 12.0249 16.3952 12.2228C15.979 12.4207 15.6261 12.7401 15.3787 13.1426C15.1312 13.5452 14.9998 14.014 15 14.4928V25.509Z"
-                    fill="white"></path>
-            </g>
-            <g class="track-item__button_pause">
-                <path d="M15.9998 13.6665V27.0002" stroke="white" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round"></path>
-                <path d="M24 13.6665V27.0002" stroke="white" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round"></path>
-            </g>
-            <defs>
-                <linearGradient id="paint0_linear_111_2751" x1="40" y1="0" x2="-3.72369" y2="4.59913"
-                    gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#FF9211"></stop>
-                    <stop offset="1" stop-color="#FF1111"></stop>
-                </linearGradient>
-            </defs>
-        </svg>
+        <button class="track-button player__button">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="40" height="40" rx="20" fill="url(#paint0_linear_111_2751)"></rect>
+                <g class="track-item__button_start">
+                    <path
+                        d="M15 25.509C15.0004 25.9876 15.1322 26.4559 15.3798 26.8581C15.6273 27.2602 15.9801 27.5793 16.3961 27.7771C16.812 27.9749 17.2735 28.0431 17.7254 27.9735C18.1774 27.904 18.6006 27.6996 18.9447 27.3849L27 20.0032L18.9447 12.6169C18.6008 12.3015 18.1775 12.0966 17.7254 12.0267C17.2732 11.9568 16.8114 12.0249 16.3952 12.2228C15.979 12.4207 15.6261 12.7401 15.3787 13.1426C15.1312 13.5452 14.9998 14.014 15 14.4928V25.509Z"
+                        fill="white"></path>
+                </g>
+                <g class="track-item__button_pause">
+                    <path d="M15.9998 13.6665V27.0002" stroke="white" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round"></path>
+                    <path d="M24 13.6665V27.0002" stroke="white" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round"></path>
+                </g>
+                <defs>
+                    <linearGradient id="paint0_linear_111_2751" x1="40" y1="0" x2="-3.72369"
+                        y2="4.59913" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#FF9211"></stop>
+                        <stop offset="1" stop-color="#FF1111"></stop>
+                    </linearGradient>
+                </defs>
+            </svg>
+        </button>
         <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="40" height="40" rx="5" fill="white" />
             <path

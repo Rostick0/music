@@ -1,6 +1,7 @@
 @extends('layout.admin.index')
 
 @section('html')
+    <h2>Настройки</h2>
     <form class="admin-form" action="{{ url()->current() }}" method="post">
         @csrf
         <div class="admin-form__flex">
@@ -80,6 +81,7 @@
         <button class="admin-button">Сохранить</button>
     </form>
     <br>
+    <h2>FAQ</h2>
     <div class="admin-form">
         <form class="admin-form__flex aling-items-end" action="{{ route('faq.create') }}" method="post">
             @csrf
@@ -129,5 +131,78 @@
                 </div>
             </div>
         @endforeach
+    </div>
+    <br>
+    <h2>Слайдер</h2>
+    <div class="admin-form">
+        <h3>Настройки слайдера</h3>
+        <form class="admin-form" action="{{ route('slider.setting') }}">
+            @csrf
+            <label class="admin-label">
+                <span>Изображение слайдера</span>
+                <input class="admin-input" type="file" name="bg_image">
+                @error('bg_image')
+                    <span class="error">{{ $message }}</span>
+                @enderror
+            </label>
+            <div class="admin-form__flex">
+                <label class="admin-label">
+                    <span>Количество лого при больше 1440px</span>
+                    <input class="admin-input" type="number" name="count-slide-1440">
+                    @error('count-slide-1440')
+                        <span class="error">{{ $message }}</span>
+                    @enderror
+                </label>
+                <label class="admin-label">
+                    <span>Количество лого при больше 768px</span>
+                    <input class="admin-input" type="number" name="count-slide-768">
+                    @error('count-slide-768')
+                        <span class="error">{{ $message }}</span>
+                    @enderror
+                </label>
+                <label class="admin-label">
+                    <span>Количество лого при больше 400px</span>
+                    <input class="admin-input" type="number" name="count-slide-400">
+                    @error('count-slide-400')
+                        <span class="error">{{ $message }}</span>
+                    @enderror
+                </label>
+                <label class="admin-label">
+                    <span>Количество лого при меньше 400px</span>
+                    <input class="admin-input" type="number" name="count-slide-min">
+                    @error('count-slide-min')
+                        <span class="error">{{ $message }}</span>
+                    @enderror
+                </label>
+            </div>
+        </form>
+        <h3>Слайды</h3>
+        <form class="admin-form__flex aling-items-end" action="{{ route('slide.create') }}" method="post">
+            @csrf
+            <label class="admin-label">
+                <span>Картинка</span>
+                <input class="admin-input" type="file" name="image">
+                @error('image')
+                    <span class="error">{{ $message }}</span>
+                @enderror
+            </label>
+            <label class="admin-label">
+                <span>Ширина</span>
+                <input class="admin-input" type="text" name="width">
+                @error('width')
+                    <span class="error">{{ $message }}</span>
+                @enderror
+            </label>
+            <label class="admin-label">
+                <span>Высота</span>
+                <input class="admin-input" type="text" name="height">
+                @error('height')
+                    <span class="error">{{ $message }}</span>
+                @enderror
+            </label>
+            <span>
+                <button class="admin-button">Создать</button>
+            </span>
+        </form>
     </div>
 @endsection

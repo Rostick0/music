@@ -128,11 +128,15 @@ function initWaveSurfer() {
         };
 
         const audioPlayerEdit = ({ name, artist, time, musicUrl }, itemDom, wavesurfer) => {
-            const player = document.querySelector('.player');
             const playerText = document.querySelector('.player__text');
             const playerAudio = player.querySelector('.player__audio');
+            const playerButton = player.querySelector('.player__button');
 
             playerAudio.innerHTML = null;
+
+            playerButton.onclick = () => {
+                player.classList.toggle('_active');
+            }
 
             const wavesurferPlayerInner = WaveSurfer.create({
                 container: '.' + playerAudio.classList?.value?.replace(' ', '.'),
@@ -213,7 +217,7 @@ function initWaveSurfer() {
                 }
 
                 wavesurfer?.pause();
-                addClassOnce(player, '_active');
+                removeClass(player, '_active');
                 removeClass(item, '_active');
                 removeClass(player, '_show');
             };

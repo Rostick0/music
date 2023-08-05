@@ -24,6 +24,8 @@ use App\Http\Controllers\SiteController;
 use App\Http\Controllers\SiteFaqController;
 use App\Http\Controllers\SitePageController;
 use App\Http\Controllers\SiteSettingController;
+use App\Http\Controllers\SlideController;
+use App\Http\Controllers\SlideSettingController;
 use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\SubscriptionTypeController;
@@ -100,6 +102,12 @@ Route::group(['prefix' => 'admin'], function ($router) {
         Route::post('create', [SiteFaqController::class, 'store'])->name('faq.create');
         Route::post('edit/{id}', [SiteFaqController::class, 'update'])->name('faq.edit');
         Route::post('delete/{id}', [SiteFaqController::class, 'delete'])->name('faq.delete');
+    });
+
+    Route::group(['prefix' => 'slider'], function ($router) {
+        Route::post('setting', [SlideSettingController::class, 'update'])->name('slider.setting');
+        Route::post('create', [SlideController::class, 'store'])->name('slide.create');
+        Route::post('delete/{id}', [SlideController::class, 'destroy']);
     });
 
     Route::group(['prefix' => 'pages'], function ($router) {
