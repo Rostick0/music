@@ -88,6 +88,19 @@ body,
     font-size: 14px;
 }
 
+.banner-main {
+    .swiper-slide {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100px;
+
+        img {
+            max-width: 100px
+        }
+    }
+}
+
 .auth {
     display: flex;
     align-items: center;
@@ -536,7 +549,7 @@ body,
         }
     }
 
-    @media (max-width: 820px ) and (min-height: 400px) {
+    @media (max-width: 820px) and (min-height: 400px) {
         flex-wrap: wrap;
 
         &__switch {

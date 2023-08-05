@@ -365,6 +365,11 @@ initWaveSurfer();
                     .then(res => {
                         trackList.innerHTML = "";
 
+                        if (!res?.data?.length) {
+                            playlistList.innerHTML = '<h3 class="tracks__none">Music not found</h3>';
+                            return;
+                        }
+
                         res?.data?.forEach(music => {
                             trackList.insertAdjacentHTML('beforeend', musicItem(music));
                         });
@@ -429,6 +434,11 @@ initWaveSurfer();
                         console.log(playlistList);
                         playlistList.innerHTML = "";
                         console.log(res);
+
+                        if (!res?.data?.length) {
+                            playlistList.innerHTML = '<h3 class="tracks__none">Playlist not found</h3>';
+                            return;
+                        }
 
                         res?.data?.forEach(playlist => {
                             playlistList.insertAdjacentHTML('beforeend', playlistItem(playlist));

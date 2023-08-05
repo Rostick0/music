@@ -16,6 +16,7 @@ class PlaylistSeeder extends Seeder
             'playlist' => [
                 'title' => 'Тестовое',
                 'description' => 'Описание',
+                'is_active' => 1
             ],
             'relationship_playlist' => [
                 'music_id' => 1
@@ -25,6 +26,7 @@ class PlaylistSeeder extends Seeder
         [
             'playlist' => [
                 'title' => 'Нов нов',
+                'is_active' => 1
             ],
             'relationship_playlist' => [
                 'music_id' => 1

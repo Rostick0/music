@@ -19,9 +19,25 @@ class ComponentSeeder extends Seeder
                 'path' => 'banner'
             ],
             [
+                'name' => 'faq',
+                'path' => 'faq'
+            ],
+            [
                 'name' => 'main-banner',
                 'path' => 'main-banner'
-            ]
+            ],
+            [
+                'name' => 'player',
+                'path' => 'player'
+            ],
+            [
+                'name' => 'playlists_list',
+                'path' => 'playlists_list'
+            ],
+            [
+                'name' => 'tracks_list',
+                'path' => 'tracks_list'
+            ],
         ];
 
         foreach ($components as $component) {

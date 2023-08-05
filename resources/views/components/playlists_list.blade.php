@@ -1,7 +1,7 @@
 @props(['playlist_list'])
 
 @if (empty($playlist_list))
-    <h3 class="tracks__none">Playlists not founded</h3>
+    <h3 class="tracks__none">Playlists not found</h3>
 @else
     <div class="playlist__list">
         @foreach ($playlist_list as $playlist_item)

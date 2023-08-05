@@ -1,7 +1,7 @@
 @props(['music_list'])
 
 @if (empty($music_list))
-    <h3 class="tracks__none">Music not founded</h3>
+    <h3 class="tracks__none">Music not found</h3>
 @else
     <ul class="tracks__list">
         @foreach ($music_list as $music_item)

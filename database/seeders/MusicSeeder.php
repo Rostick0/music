@@ -21,7 +21,8 @@ class MusicSeeder extends Seeder
             'link_demo' => '1690208658.mp3',
             'publisher' => 'https://vk.com',
             'distr' => 'https://vk.com',
-            'duration' => '5:11'
+            'duration' => '5:11',
+            'is_active' => 1
         ],
         [
             'title' => 'Новая песня',
@@ -29,7 +30,8 @@ class MusicSeeder extends Seeder
             'link_demo' => '1690208753.mp3',
             'publisher' => 'https://vk.com',
             'distr' => 'https://vk.com',
-            'duration' => '5:11'
+            'duration' => '5:11',
+            'is_active' => 1
         ],
     ];
 
