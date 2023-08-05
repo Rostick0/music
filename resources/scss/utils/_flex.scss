@@ -3,3 +3,9 @@
         flex-grow: 1;
     }
 }
+
+.aling-items {
+    &-end {
+        align-items: flex-end;
+    }
+}

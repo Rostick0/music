@@ -366,32 +366,7 @@
             <a class="button-white-border button__all tracks__all" href="/tracks">Show more</a>
     </section>
 
-    <section class="section section-main faq">
-        <div class="container">
-            <h2 class="section-title faq__title">FAQ</h2>
-            <ul class="faq__list">
-                <li class="faq__item">
-                    <div class="faq__switch">
-                        <div class="faq__question text-big">Is Royalty Free the same as No Copyright?</div>
-                        <div class="faq__icon"></div>
-                    </div>
-                    <div class="faq__answer text-medium">13</div>
-                </li>
-                <li class="faq__item">
-                    <div class="faq__switch">
-                        <div class="faq__question text-big">Can I use Topaudio music in a YouTube video?</div>
-                        <div class="faq__icon"></div>
-                    </div>
-                    <div class="faq__answer text-medium">Yes! You are welcome to use Topaudio music in your YouTube videos,
-                        and
-                        you can even monetize them. In case you receive a copyright claim, we has provided
-                        a simple
-                        form where you can submit the link to your video and have the claim
-                        removed: https://topaudio.store/claim</div>
-                </li>
-            </ul>
-        </div>
-    </section>
+    <x-faq />
 
     <section class="section section-main introducing">
         <div class="container">

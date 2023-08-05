@@ -6,24 +6,21 @@
         <div class="admin-form__flex">
             <label class="admin-label">
                 <span>Путь к лого*</span>
-                <input class="admin-input" type="text" name="logo"
-                    value="{{ old('logo') ?? $site->logo }}" required>
+                <input class="admin-input" type="text" name="logo" value="{{ old('logo') ?? $site->logo }}" required>
                 @error('logo')
                     <span class="error">{{ $message }}</span>
                 @enderror
             </label>
             <label class="admin-label">
                 <span>Путь к иконке</span>
-                <input class="admin-input" type="text" name="favicon"
-                    value="{{ old('favicon') ?? $site->favicon }}">
+                <input class="admin-input" type="text" name="favicon" value="{{ old('favicon') ?? $site->favicon }}">
                 @error('favicon')
                     <span class="error">{{ $message }}</span>
                 @enderror
             </label>
             <label class="admin-label">
                 <span>Название*</span>
-                <input class="admin-input" type="text" name="name"
-                    value="{{ old('name') ?? $site->name }}" required>
+                <input class="admin-input" type="text" name="name" value="{{ old('name') ?? $site->name }}" required>
                 @error('name')
                     <span class="error">{{ $message }}</span>
                 @enderror
@@ -56,8 +53,7 @@
             </label>
             <label class="admin-label">
                 <span>Адрес</span>
-                <input class="admin-input" type="text" name="address"
-                    value="{{ old('address') ?? $site->address }}">
+                <input class="admin-input" type="text" name="address" value="{{ old('address') ?? $site->address }}">
                 @error('address')
                     <span class="error">{{ $message }}</span>
                 @enderror
@@ -83,4 +79,55 @@
         </div>
         <button class="admin-button">Сохранить</button>
     </form>
+    <br>
+    <div class="admin-form">
+        <form class="admin-form__flex aling-items-end" action="{{ route('faq.create') }}" method="post">
+            @csrf
+            <label class="admin-label">
+                <span>Вопрос</span>
+                <input class="admin-input" type="text" name="question">
+                @error('question')
+                    <span class="error">{{ $message }}</span>
+                @enderror
+            </label>
+            <label class="admin-label admin-form__flex_long">
+                <span>Ответ</span>
+                <textarea class="admin-input" name="answer" rows="1"></textarea>
+                @error('answer')
+                    <span class="error">{{ $message }}</span>
+                @enderror
+            </label>
+            <span>
+                <button class="admin-button">Создать</button>
+            </span>
+        </form>
+        @foreach ($faq_list as $faq_item)
+            <div class="admin-form__flex aling-items-end">
+                <label class="admin-label">
+                    <span>Вопрос</span>
+                    <input class="admin-input" type="text" value="{{ $faq_item->question }}" disabled>
+                    @error('question')
+                        <span class="error">{{ $message }}</span>
+                    @enderror
+                </label>
+                <label class="admin-label admin-form__flex_long">
+                    <span>Ответ</span>
+                    <textarea class="admin-input" rows="1" disabled>{{ $faq_item->answer }}</textarea>
+                    @error('answer')
+                        <span class="error">{{ $message }}</span>
+                    @enderror
+                </label>
+                <div>
+                    <form
+                        action="{{ route('faq.delete', [
+                            'id' => $faq_item->id,
+                        ]) }}"
+                        method="post">
+                        @csrf
+                        <button class="admin-button-red">Удалить</button>
+                    </form>
+                </div>
+            </div>
+        @endforeach
+    </div>
 @endsection

@@ -21,6 +21,7 @@ use App\Http\Controllers\RelationshipPlaylistController;
 use App\Http\Controllers\RemoveClaimController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\SiteController;
+use App\Http\Controllers\SiteFaqController;
 use App\Http\Controllers\SitePageController;
 use App\Http\Controllers\SiteSettingController;
 use App\Http\Controllers\StatisticController;
@@ -94,6 +95,12 @@ Route::group(['prefix' => 'admin'], function ($router) {
 
     Route::get('settings', [SiteSettingController::class, 'edit'])->name('settings');
     Route::post('settings', [SiteSettingController::class, 'update']);
+
+    Route::group(['prefix' => 'faq'], function ($router) {
+        Route::post('create', [SiteFaqController::class, 'store'])->name('faq.create');
+        Route::post('edit/{id}', [SiteFaqController::class, 'update'])->name('faq.edit');
+        Route::post('delete/{id}', [SiteFaqController::class, 'delete'])->name('faq.delete');
+    });
 
     Route::group(['prefix' => 'pages'], function ($router) {
         Route::get('list', [SitePageController::class, 'index'])->name('page.list');
