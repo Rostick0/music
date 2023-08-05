@@ -178,7 +178,7 @@
                         <input class="select__input" name="duration" type="hidden">
                     </div>
                     <ul class="select__list">
-                        <li class="select__item" data-id="">None</li>
+                        <li class="select__item" data-id="">All durations</li>
                         <li class="select__item"></li>
                     </ul>
                 </div>

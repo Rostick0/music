@@ -1,9 +1,10 @@
 @props(['music_list'])
 
-@if (empty($music_list))
-    <h3 class="tracks__none">Music not found</h3>
-@else
-    <ul class="tracks__list">
+<ul class="tracks__list">
+
+    @if (empty($music_list))
+        <h3 class="tracks__none">Music not found</h3>
+    @else
         @foreach ($music_list as $music_item)
             <li class="tracks__item track-item">
                 <div class="track-item__info">
@@ -47,7 +48,9 @@
                         {{ App\Http\Controllers\MusicController::normalizeTime($music_item->duration) }}</div>
                 </div>
                 <div class="track-item__audio track-item__audio_{{ $music_item->id }}"
-                    data-music="{{ $music_item->link }}">
+                    data-music="{{ $music_item->link }}" data-title="{{ $music_item->title }}"
+                    data-artist="{{ $music_item->music_artist_name }}"
+                    data-time="{{ App\Http\Controllers\MusicController::normalizeTime($music_item->duration) }}">
                 </div>
                 <div class="track-item__buttons">
                     @if (
@@ -163,5 +166,5 @@
                 </div>
             </li>
         @endforeach
-    </ul>
-@endif
+    @endif
+</ul>

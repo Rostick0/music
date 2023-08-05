@@ -1,9 +1,10 @@
 @props(['playlist_list'])
 
-@if (empty($playlist_list))
-    <h3 class="playlist__none">Playlists not found</h3>
-@else
-    <div class="playlist__list">
+<div class="playlist__list">
+
+    @if (empty($playlist_list))
+        <h3 class="playlist__none">Playlists not found</h3>
+    @else
         @foreach ($playlist_list as $playlist_item)
             <a class="playlist__link playlist-item" href="/playlist/{{ $playlist_item->id }}">
                 <img class="playlist-item__img lazy" decoding="async" loading="lazy"
@@ -38,5 +39,5 @@
                 <div class="playlist-item__title text-big">{{ $playlist_item->title }}</div>
             </a>
         @endforeach
-    </div>
-@endif
+    @endif
+</div>

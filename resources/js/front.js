@@ -1,5 +1,5 @@
 import { throttle } from './optimization';
-import { addClass, addClassOnce, objConvertUrl, removeClass } from './helpers';
+import { addClass, addClassOnce, normalizeTime, objConvertUrl, removeClass } from './helpers';
 const csrfToken = document.querySelector('meta[name="csrf-token"]');
 const STORAGE_URL = '/storage/upload';
 const MUSIC_URL = STORAGE_URL + '/music/';
@@ -96,7 +96,7 @@ function initWaveSurfer() {
             });
         };
 
-        const audioPlayerEdit = ({ name, artist, time, musicUrl }, itemDom, wavesurfer) => {
+        const audioPlayerEdit = ({ title, artist, time, musicUrl }, itemDom, wavesurfer) => {
             const playerText = document.querySelector('.player__text');
             const playerAudio = player.querySelector('.player__audio');
             const playerButton = player.querySelector('.player__button');
@@ -146,10 +146,8 @@ function initWaveSurfer() {
                 }
             };
 
-            return '';
-
             playerText.innerHTML = `
-                <div class="track-item__name" title="${name}">${name}</div>
+                <div class="track-item__name" title="${title}">${title}</div>
                 <div class="track-item__artist" title="${artist}">${artist}</div>
             `;
 
@@ -181,7 +179,12 @@ function initWaveSurfer() {
                     addClass(item, '_active');
                     wavesurfer?.play();
                     wavesurferPlayer?.unAll();
-                    audioPlayerEdit({ musicUrl: MUSIC_URL + trackItemAudio.getAttribute('data-music') }, item, wavesurfer);
+                    audioPlayerEdit({
+                        title: trackItemAudio.getAttribute('data-title'),
+                        artist: trackItemAudio.getAttribute('data-artist'),
+                        time: trackItemAudio.getAttribute('data-time'),
+                        musicUrl: MUSIC_URL + trackItemAudio.getAttribute('data-music')
+                    }, item, wavesurfer);
                     return;
                 }
 
@@ -280,7 +283,7 @@ initWaveSurfer();
                     </defs>
                 </svg>
             </button>
-            <div class="track-time track-item__time">${music?.duration}</div>
+            <div class="track-time track-item__time">${normalizeTime(music?.duration)}</div>
         </div>
         <div class="track-item__audio track-item__audio_${music?.id}" data-music="${music?.link}"></div>
         <div class="track-item__buttons">

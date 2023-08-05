@@ -147,9 +147,9 @@ class MusicController extends Controller
         return $music_list;
     }
 
-    public static function normalizeTime($time)
+    public static function normalizeTime($duration)
     {
-        $time = substr($time, 0, -3);
+        $time = substr($duration, 0, -3);
 
         if ($time[0] == '0') $time = substr($time, 1);
 
