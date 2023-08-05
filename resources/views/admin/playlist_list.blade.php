@@ -90,10 +90,10 @@
                 <li class="admin-grid__content_item admin-grid-playlist__content_item">
                     <div>{{ $playlist->id }}</div>
                     <div>{{ $playlist->title }}</div>
-                    <div>{{ App\Http\Controllers\RelationshipHelper::getNameByItems($playlist->genres) }}</div>
-                    <div>{{ App\Http\Controllers\RelationshipHelper::getNameByItems($playlist->moods) }}</div>
-                    <div>{{ App\Http\Controllers\RelationshipHelper::getNameByItems($playlist->instruments) }}</div>
-                    <div>{{ App\Http\Controllers\RelationshipHelper::getNameByItems($playlist->themes) }}</div>
+                    <div>{{ App\Http\Controllers\RelationshipHelper::getNameByItems($playlist->genres, '—') }}</div>
+                    <div>{{ App\Http\Controllers\RelationshipHelper::getNameByItems($playlist->moods, '—') }}</div>
+                    <div>{{ App\Http\Controllers\RelationshipHelper::getNameByItems($playlist->instruments, '—') }}</div>
+                    <div>{{ App\Http\Controllers\RelationshipHelper::getNameByItems($playlist->themes, '—') }}</div>
                     <div>{{ $playlist->is_active ? 'Да' : 'Нет' }}</div>
                     <div>{{ $playlist->created_at }}</div>
                     <a href="{{ route('playlist.edit', ['id' => $playlist->id]) }}">
