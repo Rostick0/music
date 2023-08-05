@@ -39,7 +39,7 @@
         </svg>
     </div>
     <div class="track-item__text player__text text-ellipsis">
-        <div class="track-item__name" title="Новая песня">Новая песня</div>
+        <div class="track-item__name player__name" title="Новая песня">Новая песня</div>
         <div class="track-item__artist" title="лучший">лучший</div>
     </div>
     <div class="track-time track-item__time player__time">5:11</div>
