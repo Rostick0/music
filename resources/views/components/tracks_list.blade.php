@@ -48,7 +48,7 @@
                         {{ App\Http\Controllers\MusicController::normalizeTime($music_item->duration) }}</div>
                 </div>
                 <div class="track-item__audio track-item__audio_{{ $music_item->id }}"
-                    data-music="{{ $music_item->link }}" data-title="{{ $music_item->title }}"
+                    data-music="{{ '/music/' . $music_item->link }}" data-title="{{ $music_item->title }}"
                     data-artist="{{ $music_item->music_artist_name }}"
                     data-time="{{ App\Http\Controllers\MusicController::normalizeTime($music_item->duration) }}">
                 </div>

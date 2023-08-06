@@ -2,8 +2,6 @@
 
 @section('php')
     @php
-        // // $playlists = App\Models\Playlist::limit(6)->orderByDesc('id')->get();
-        // $music_kit
         $music_kit = App\Http\Controllers\FrontMusicKitController::getById($id);
         $music = $music_kit->music;
         $artist_name = App\Models\MusicArtist::find($music->music_artist_id)->name;

@@ -2,8 +2,9 @@ import { throttle } from './optimization';
 import { addClass, addClassOnce, normalizeTime, objConvertUrl, removeClass, removeEmpty } from './helpers';
 const csrfToken = document.querySelector('meta[name="csrf-token"]');
 const STORAGE_URL = '/storage/upload';
-const MUSIC_URL = STORAGE_URL + '/music/';
-const MUSIC_DEMO_URL = STORAGE_URL + '/music_kit/';
+const MUSIC_URL = '/music/';
+const MUSIC_DEMO_URL = '/music_demo/';
+const MUSIC_KIT_URL = '/music_kit/';
 
 const myFetch = (url, options = {}) => {
     const bearerToken = typeof accessToken === 'string' && accessToken ? 'Bearer ' + accessToken : null;
@@ -69,7 +70,6 @@ function setSelects() {
 setSelects();
 
 (function () {
-    const trackList = document.querySelector('.tracks__list');
     let wavesurferPlayer = null;
     const player = document.querySelector('.player');
     const plays = [];
@@ -109,7 +109,7 @@ setSelects();
             container: '.' + playerAudio.classList?.value?.replace(' ', '.'),
             waveColor: 'rgba(27, 18, 30, .2)',
             progressColor: '#FF1111',
-            url: musicUrl,
+            url: STORAGE_URL + musicUrl,
             height: 40,
         });
 
@@ -161,7 +161,7 @@ setSelects();
             container: '.' + trackItemAudio.classList?.value?.replace(' ', '.'),
             waveColor: 'rgba(27, 18, 30, .2)',
             progressColor: '#FF1111',
-            url: MUSIC_URL + dataMusic,
+            url: STORAGE_URL + dataMusic,
             height: 40,
         });
 
@@ -182,7 +182,7 @@ setSelects();
                     title: trackItemAudio.getAttribute('data-title'),
                     artist: trackItemAudio.getAttribute('data-artist'),
                     time: trackItemAudio.getAttribute('data-time'),
-                    musicUrl: MUSIC_URL + dataMusic
+                    musicUrl: dataMusic
                 }, item, wavesurfer);
                 return;
             }
@@ -283,7 +283,7 @@ setSelects();
         if (
             isFree || hasSubscription
         ) {
-            return MUSIC_URL + link;
+            return STORAGE_URL + MUSIC_URL + link;
         }
 
         return MUSIC_DEMO_URL + linkDemo;
@@ -320,7 +320,7 @@ setSelects();
             </button>
             <div class="track-time track-item__time">${normalizeTime(music?.duration)}</div>
         </div>
-        <div class="track-item__audio track-item__audio_${music?.id}" data-music="${music?.link}"></div>
+        <div class="track-item__audio track-item__audio_${music?.id}" data-music="${MUSIC_URL + music?.link}"></div>
         <div class="track-item__buttons">
             ${musicButton()}
             <a class="track-item__download" href="${downloadButton(music?.link, music?.link_demo, music?.is_free)}" download>
@@ -380,65 +380,186 @@ setSelects();
         </div>
     </li>`;
     };
+    const musicKitItem = (musicKit) => {
+        return `<li class="tracks__item track-item">
+        <div class="track-item__info">
+            <img class="track-item__img"
+                src="${musicKit?.music_image ?? '/img/music.png'}"
+                alt="{{ $music_item->title }}">
+            <div class="track-item__text text-ellipsis">
+                <div class="track-item__name">${musicKit?.name}</div>
+                <div class="track-item__artist">${musicKit?.music_artist_name}</div>
+            </div>
+        </div>
+        <div class="track-item__timer">
+            <button class="track-button track-item__button">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <rect width="40" height="40" rx="20" fill="url(#paint0_linear_111_2751)" />
+                    <g class="track-item__button_start">
+                        <path
+                            d="M15 25.509C15.0004 25.9876 15.1322 26.4559 15.3798 26.8581C15.6273 27.2602 15.9801 27.5793 16.3961 27.7771C16.812 27.9749 17.2735 28.0431 17.7254 27.9735C18.1774 27.904 18.6006 27.6996 18.9447 27.3849L27 20.0032L18.9447 12.6169C18.6008 12.3015 18.1775 12.0966 17.7254 12.0267C17.2732 11.9568 16.8114 12.0249 16.3952 12.2228C15.979 12.4207 15.6261 12.7401 15.3787 13.1426C15.1312 13.5452 14.9998 14.014 15 14.4928V25.509Z"
+                            fill="white" />
+                    </g>
+                    <g class="track-item__button_pause">
+                        <path d="M15.9998 13.6665V27.0002" stroke="white" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M24 13.6665V27.0002" stroke="white" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </g>
+                    <defs>
+                        <linearGradient id="paint0_linear_111_2751" x1="40" y1="0" x2="-3.72369"
+                            y2="4.59913" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#FF9211" />
+                            <stop offset="1" stop-color="#FF1111" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </button>
+            <div class="track-time track-item__time">${normalizeTime(musicKit?.duration)}</div>
+        </div>
+        <div class="track-item__audio track-item__audio_${musicKit?.id}"
+            data-music="${MUSIC_KIT_URL + musicKit?.link}" data-title="${musicKit?.name}"
+            data-artist="${musicKit?.music_artist_name}"
+            data-time="${normalizeTime(musicKit?.duration)}">
+        </div>
+        <div class="track-item__buttons">
+            <a class="track-item__download"
+                href="${MUSIC_KIT_URL + musicKit?.link}"
+                download>
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_98_282)">
+                        <path d="M20.0007 13.125V23.125" stroke="#1B121E" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M16.2507 19.375L20.0007 23.125L23.7507 19.375" stroke="#1B121E"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                            d="M29.3757 23.125V24.375C29.3757 25.038 29.1123 25.6739 28.6435 26.1428C28.1747 26.6116 27.5388 26.875 26.8757 26.875H13.1257C12.4627 26.875 11.8268 26.6116 11.358 26.1428C10.8891 25.6739 10.6257 25.038 10.6257 24.375V23.125"
+                            stroke="#1B121E" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </g>
+                    <defs>
+                        <clipPath id="clip0_98_282">
+                            <rect width="20" height="20" fill="white" transform="translate(10 10)" />
+                        </clipPath>
+                    </defs>
+                </svg>
+            </a>
+        </div>
+    </li>`;
+    }
 
+    (function () {
+        const tracksFilter = document.querySelector('.tracks__filter');
+        const allInputs = tracksFilter?.querySelectorAll('.select__input');
+        const trackList = document.querySelector('.tracks__list');
 
+        if (!(tracksFilter && allInputs)) return;
 
-    const tracksFilter = document.querySelector('.tracks__filter');
-    const allInputs = tracksFilter?.querySelectorAll('.select__input');
+        const values = {};
 
-    if (!tracksFilter || !allInputs) return;
+        let durationQuery = '';
+        const pagination = document.querySelector('.pagination');
 
-    const values = {};
+        allInputs?.forEach(elem => {
+            if (elem.getAttribute('name') !== 'duration') values[elem?.name] = '';
 
-    let durationQuery = '';
-    const pagination = document.querySelector('.pagination');
+            Object.defineProperty(elem, 'value', {
+                set: throttle(function (newValue) {
+                    if (elem.getAttribute('name') === 'duration') {
+                        durationQuery = newValue;
+                    } else {
+                        values[this?.name] = newValue;
+                    }
 
-    allInputs?.forEach(elem => {
-        if (elem.getAttribute('name') !== 'duration') {
-            values[elem?.name] = '';
-        }
+                    const covertUrl = objConvertUrl(removeEmpty(values)) + durationQuery;
 
-        Object.defineProperty(elem, 'value', {
-            set: throttle(function (newValue) {
-                if (elem.getAttribute('name') === 'duration') {
-                    durationQuery = newValue;
-                } else {
-                    values[this?.name] = newValue;
-                }
+                    window.history.replaceState(null, null, covertUrl);
 
-                const covertUrl = objConvertUrl(removeEmpty(values)) + durationQuery;
+                    myFetch('/api/music' + covertUrl)
+                        .then(res => {
+                            if (!res?.ok) return;
 
-                window.history.replaceState(null, null, covertUrl);
+                            return res.json()
+                        })
+                        .then(res => {
+                            trackList.innerHTML = "";
 
-                myFetch('/api/music' + covertUrl)
-                    .then(res => {
-                        if (!res?.ok) {
-                            return;
-                        }
+                            const data = res?.data?.data;
 
-                        return res.json()
-                    })
-                    .then(res => {
-                        trackList.innerHTML = "";
+                            if (!data.length) {
+                                trackList.innerHTML = '<h3 class="tracks__none">Music not found</h3>';
+                                return;
+                            }
 
-                        const data = res?.data?.data;
+                            if (pagination) pagination.innerHTML = res?.links_html;
 
-                        if (!data.length) {
-                            trackList.innerHTML = '<h3 class="tracks__none">Music not found</h3>';
-                            return;
-                        }
+                            data.forEach(music => {
+                                trackList.insertAdjacentHTML('beforeend', musicItem(music));
+                            });
 
-                        if (pagination) pagination.innerHTML = res?.links_html;
-
-                        data.forEach(music => {
-                            trackList.insertAdjacentHTML('beforeend', musicItem(music));
+                            initWaveSurfer();
                         });
-
-                        initWaveSurfer();
-                    });
-            }, 500)
+                }, 500)
+            });
         });
-    });
+    })();
+
+    (function () {
+        const musicKitFilter = document.querySelector('.music-kit__filter');
+        const allInputs = musicKitFilter?.querySelectorAll('.select__input');
+        const musicKitList = document.querySelector('.music-kit__list');
+
+        if (!(musicKitFilter && allInputs)) return;
+        const values = {};
+
+        let durationQuery = '';
+        const pagination = document.querySelector('.pagination');
+
+        allInputs?.forEach(elem => {
+            if (elem.getAttribute('name') !== 'duration') values[elem?.name] = '';
+
+            Object.defineProperty(elem, 'value', {
+                set: throttle(function (newValue) {
+                    if (elem.getAttribute('name') === 'duration') {
+                        durationQuery = newValue;
+                    } else {
+                        values[this?.name] = newValue;
+                    }
+
+                    const covertUrl = objConvertUrl(removeEmpty(values)) + durationQuery;
+
+                    window.history.replaceState(null, null, covertUrl);
+
+                    myFetch('/api/music_kit' + covertUrl)
+                        .then(res => {
+                            if (!res?.ok) return;
+
+                            return res.json()
+                        })
+                        .then(res => {
+                            musicKitList.innerHTML = "";
+
+                            const data = res?.data?.data;
+
+                            if (!data.length) {
+                                musicKitList.innerHTML = '<h3 class="tracks__none">Music kit not found</h3>';
+                                return;
+                            }
+
+                            if (pagination) pagination.innerHTML = res?.links_html;
+
+                            data.forEach(music => {
+                                musicKitList.insertAdjacentHTML('beforeend', musicKitItem(music));
+                            });
+
+                            initWaveSurfer();
+                        });
+                }, 500)
+            });
+        });
+    })();
 })();
 
 (function () {

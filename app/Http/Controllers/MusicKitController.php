@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Music;
 use App\Models\MusicKit;
+use App\Models\RelationshipGenre;
+use App\Models\RelationshipInstrument;
+use App\Models\RelationshipMood;
+use App\Models\RelationshipTheme;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Validation\Rule;
 use wapmorgan\Mp3Info\Mp3Info;
 
@@ -35,6 +41,67 @@ class MusicKitController extends Controller
         return view('admin.music_kit_list', [
             'music_kits' => $music_kits
         ]);
+    }
+
+    public function search(Request $request, $type = 'json')
+    {
+        $where_sql = [];
+        if ($request->title) $where_sql[] = ['music.title', 'LIKE', '%' . $request->title . '%'];
+        if ($request->music_artists) $where_sql[] = ['music_artists.name', 'LIKE', '%' . $request->music_artists . '%'];
+        // if (!(auth()->check() && auth()->user()->is_admin)) $where_sql[] = ['music.is_active', '=', 1];
+
+        if ($request->count && $request->count > app('site')->count_front) {
+            $count = app('site')->count_front;
+        } else {
+            $count = $request->count;
+        }
+
+        $music_kit_list = Music::select(
+            'music.title as music_title',
+            'music.image as music_image',
+            'music_artists.name as music_artist_name',
+            'music_kits.*',
+        )
+            ->join('music_kits', 'music_kits.music_id', '=', 'music.id')
+            ->join('music_artists', 'music.music_artist_id', '=', 'music_artists.id')
+            ->where($where_sql)
+            ->inRandomOrder()
+            ->orderByDesc('id');
+        if ($request->genres) {
+            $music_kit_list->whereIn('music.id', RelationshipGenre::select('type_id')
+                ->where('type', 'music')
+                ->whereIn('genre_id', is_array($request->genres) ? $request->genres : [$request->genres])
+                ->get());
+        }
+        if ($request->themes) {
+            $music_kit_list->whereIn('music.id', RelationshipTheme::select('type_id')
+                ->where('type', 'music')
+                ->whereIn('theme_id', is_array($request->themes) ? $request->themes : [$request->themes])
+                ->get());
+        }
+        if ($request->instruments) {
+            $music_kit_list->whereIn('music.id', RelationshipInstrument::select('type_id')
+                ->where('type', 'music')
+                ->whereIn('instrument_id', is_array($request->instruments) ? $request->instruments : [$request->instruments])
+                ->get());
+        }
+        if ($request->moods) {
+            $music_kit_list->whereIn('music.id', RelationshipMood::select('type_id')
+                ->where('type', 'music')
+                ->whereIn('mood_id', is_array($request->moods) ? $request->moods : [$request->moods])
+                ->get());
+        }
+
+        $music_kit_list = $music_kit_list->paginate($count);
+
+        if ($type === 'json') return response(
+            [
+                'data' => $music_kit_list,
+                'links_html' => Blade::compileString($music_kit_list->appends($request->all())->links('vendor.front-pagination'))
+            ]
+        );
+
+        return $music_kit_list;
     }
 
     /**

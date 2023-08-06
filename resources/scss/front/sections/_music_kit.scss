@@ -1,0 +1,29 @@
+.music-kit {
+    &__filter {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        column-gap: .625rem;
+        margin-bottom: 4.5rem;
+
+        .select {
+            min-width: 13rem;
+        }
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        row-gap: 10px;
+    }
+
+    @media (max-width: 1120px) {
+        &__filter {
+            overflow-x: auto;
+        }
+
+        .select__list {
+            position: static;
+            margin-bottom: .75rem;
+        }
+    }
+}

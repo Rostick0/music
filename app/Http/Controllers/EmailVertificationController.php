@@ -11,10 +11,6 @@ class EmailVertificationController extends Controller
         return view('auth.verify-email');
     }
 
-    public function dd() {
-        
-    }
-
     public function notification(Request $request)
     {
         $request->user()->sendEmailVerificationNotification();
