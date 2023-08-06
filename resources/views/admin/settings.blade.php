@@ -119,7 +119,8 @@
                         <span class="error">{{ $message }}</span>
                     @enderror
                 </label>
-                <div>
+                <div class="admin-buttons">
+                    <a class="admin-button" href="{{ route('faq.edit', ['id' => $faq_item->id]) }}">Изменть</a>
                     <form
                         action="{{ route('faq.delete', [
                             'id' => $faq_item->id,

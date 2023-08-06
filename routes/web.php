@@ -101,7 +101,8 @@ Route::group(['prefix' => 'admin'], function ($router) {
 
     Route::group(['prefix' => 'faq'], function ($router) {
         Route::post('create', [SiteFaqController::class, 'store'])->name('faq.create');
-        Route::post('edit/{id}', [SiteFaqController::class, 'update'])->name('faq.edit');
+        Route::get('edit/{id}', [SiteFaqController::class, 'edit'])->name('faq.edit');
+        Route::post('edit/{id}', [SiteFaqController::class, 'update']);
         Route::post('delete/{id}', [SiteFaqController::class, 'delete'])->name('faq.delete');
     });
 

@@ -19,6 +19,15 @@ class SiteFaqController extends Controller
         return back();
     }
 
+    public function edit(int $id)
+    {
+        $faq = SiteFaq::findOrFail($id);
+
+        return view('admin.faq_edit', [
+            'faq' => $faq
+        ]);
+    }
+
     public function update(Request $request, int $id)
     {
         $validated = $request->validate([
