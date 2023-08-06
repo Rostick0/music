@@ -53,9 +53,18 @@ class UserController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
+    public function agree()
+    {
+        User::find(auth()->id())->update([
+            'is_agree' => 1
+        ]);
+
+        return response()->json([
+            'status' => true
+        ]);
+    }
+
     public function update(Request $request)
     {
         //

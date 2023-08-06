@@ -510,3 +510,27 @@ setSelects();
         removeClass(headerMobileModal, '_active');
     }
 })();
+
+(function () {
+    if (typeof userAgree !== 'number' || userAgree !== 0) return;
+
+    const modalAgree = document.querySelector('.modal-agree');
+    addClass(modalAgree, '_active');
+    const modalAgreeButton = document.querySelector('.modal-agree__button');
+
+    if (!modalAgreeButton) return;
+
+    modalAgreeButton.onclick = () => {
+        myFetch('/agree', {
+            method: 'put'
+        })
+            .then(res => {
+                if (!res?.ok) return;
+
+                return res?.json();
+            })
+            .then(() => {
+                removeClass(modalAgree, '_active');
+            });
+    };
+})();
