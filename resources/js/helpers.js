@@ -19,9 +19,13 @@ export const removeClass = (elem, className) => {
 };
 
 export const normalizeTime = (duration) => {
-    let time = duration.slice(0,-3);
+    let time = duration.slice(0, -3);
 
     if (time[0] == '0') time = time.slice(1);
 
     return time;
+}
+
+export const removeEmpty = (obj) => {
+    return Object.fromEntries(Object.entries(obj).filter(([_, v]) => !!v));
 }

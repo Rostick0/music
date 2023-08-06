@@ -179,7 +179,9 @@
                     </div>
                     <ul class="select__list">
                         <li class="select__item" data-id="">All durations</li>
-                        <li class="select__item"></li>
+                        <li class="select__item" data-id="max_time=2:00">Short</li>
+                        <li class="select__item" data-id="min_time=2:00&max_time=4:00">Medium</li>
+                        <li class="select__item" data-id="min_time=4:00">Long</li>
                     </ul>
                 </div>
             </form>

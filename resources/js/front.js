@@ -1,5 +1,5 @@
 import { throttle } from './optimization';
-import { addClass, addClassOnce, normalizeTime, objConvertUrl, removeClass } from './helpers';
+import { addClass, addClassOnce, normalizeTime, objConvertUrl, removeClass, removeEmpty } from './helpers';
 const csrfToken = document.querySelector('meta[name="csrf-token"]');
 const STORAGE_URL = '/storage/upload';
 const MUSIC_URL = STORAGE_URL + '/music/';
@@ -67,10 +67,8 @@ function setSelects() {
 }
 
 setSelects();
+
 (function () {
-    const tracksFilter = document.querySelector('.tracks__filter');
-    if (!tracksFilter) return;
-    const allInputs = tracksFilter?.querySelectorAll('.select__input');
     const trackList = document.querySelector('.tracks__list');
     let wavesurferPlayer = null;
     const player = document.querySelector('.player');
@@ -383,18 +381,29 @@ setSelects();
     </li>`;
     };
 
+    const tracksFilter = document.querySelector('.tracks__filter');
+    const allInputs = tracksFilter?.querySelectorAll('.select__input');
+
     if (!tracksFilter || !allInputs) return;
 
     const values = {};
 
+    let durationQuery = '';
+
     allInputs?.forEach(elem => {
-        values[elem?.name] = '';
+        if (elem.getAttribute('name') !== 'duration') {
+            values[elem?.name] = '';
+        }
 
         Object.defineProperty(elem, 'value', {
             set: throttle(function (newValue) {
-                values[this?.name] = newValue;
-
-                const covertUrl = objConvertUrl(values);
+                if (elem.getAttribute('name') === 'duration') {
+                    durationQuery = newValue;
+                } else {
+                    values[this?.name] = newValue;
+                }
+                
+                const covertUrl = objConvertUrl(removeEmpty(values)) + durationQuery;
 
                 window.history.replaceState(null, null, covertUrl);
 
@@ -410,7 +419,7 @@ setSelects();
                         trackList.innerHTML = "";
 
                         if (!res?.data?.length) {
-                            playlistList.innerHTML = '<h3 class="tracks__none">Music not found</h3>';
+                            trackList.innerHTML = '<h3 class="tracks__none">Music not found</h3>';
                             return;
                         }
 
