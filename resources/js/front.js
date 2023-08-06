@@ -381,6 +381,8 @@ setSelects();
     </li>`;
     };
 
+
+
     const tracksFilter = document.querySelector('.tracks__filter');
     const allInputs = tracksFilter?.querySelectorAll('.select__input');
 
@@ -389,6 +391,7 @@ setSelects();
     const values = {};
 
     let durationQuery = '';
+    const pagination = document.querySelector('.pagination');
 
     allInputs?.forEach(elem => {
         if (elem.getAttribute('name') !== 'duration') {
@@ -402,7 +405,7 @@ setSelects();
                 } else {
                     values[this?.name] = newValue;
                 }
-                
+
                 const covertUrl = objConvertUrl(removeEmpty(values)) + durationQuery;
 
                 window.history.replaceState(null, null, covertUrl);
@@ -418,12 +421,16 @@ setSelects();
                     .then(res => {
                         trackList.innerHTML = "";
 
-                        if (!res?.data?.length) {
+                        const data = res?.data?.data;
+
+                        if (!data.length) {
                             trackList.innerHTML = '<h3 class="tracks__none">Music not found</h3>';
                             return;
                         }
 
-                        res?.data?.forEach(music => {
+                        if (pagination) pagination.innerHTML = res?.links_html;
+
+                        data.forEach(music => {
                             trackList.insertAdjacentHTML('beforeend', musicItem(music));
                         });
 
@@ -467,6 +474,7 @@ setSelects();
     if (!playlistFilter || !allInputs) return;
 
     const values = {};
+    const pagination = document.querySelector('.pagination');
 
     allInputs?.forEach(elem => {
         values[elem?.name] = '';
@@ -489,12 +497,16 @@ setSelects();
                     .then(res => {
                         playlistList.innerHTML = "";
 
-                        if (!res?.data?.length) {
+                        const data = res?.data?.data;
+
+                        if (!data?.length) {
                             playlistList.innerHTML = '<h3 class="playlist__none">Playlist not found</h3>';
                             return;
                         }
 
-                        res?.data?.forEach(playlist => {
+                        if (pagination) pagination.innerHTML = res?.links_html;
+
+                        data?.forEach(playlist => {
                             playlistList.insertAdjacentHTML('beforeend', playlistItem(playlist));
                         });
 

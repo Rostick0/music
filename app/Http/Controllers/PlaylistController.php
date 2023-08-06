@@ -14,6 +14,7 @@ use App\Models\RelationshipTheme;
 use App\Models\Theme;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Validation\Rule;
 
 class PlaylistController extends Controller
@@ -102,7 +103,10 @@ class PlaylistController extends Controller
         }
         $playlists = $playlists->paginate($count);
 
-        if ($type === 'json') return response($playlists);
+        if ($type === 'json') return response([
+            'data' => $playlists,
+            'links_html' => Blade::compileString($playlists->appends($request->all())->links('vendor.front-pagination'))
+        ]);
 
         return $playlists;
     }

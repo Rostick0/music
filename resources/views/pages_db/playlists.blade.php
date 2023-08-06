@@ -143,6 +143,7 @@
                 </div>
             </form>
             <x-playlists_list :playlist_list="[...$playlist_list]" />
+            {{ $playlist_list->appends(Request::all())->links('vendor.front-pagination') }}
         </div>
     </section>
 @endsection

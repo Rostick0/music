@@ -2,7 +2,6 @@
 
 @section('php')
     @php
-        // $playlists = App\Models\Playlist::limit(6)->orderByDesc('id')->get();
         $genres = App\Models\Genre::all();
         $moods = App\Models\Mood::all();
         $themes = App\Models\Theme::all();
@@ -175,5 +174,6 @@
                 </div>
             </form>
             <x-tracks_list :music_list="[...$music_list]" />
+            {{ $music_list->appends(Request::all())->links('vendor.front-pagination') }}
     </section>
 @endsection

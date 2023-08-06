@@ -12,8 +12,10 @@ use App\Models\RelationshipInstrument;
 use App\Models\RelationshipMood;
 use App\Models\RelationshipTheme;
 use App\Models\Theme;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\File;
 use wapmorgan\Mp3Info\Mp3Info;
@@ -142,7 +144,12 @@ class MusicController extends Controller
 
         $music_list = $music_list->paginate($count);
 
-        if ($type === 'json') return response($music_list);
+        if ($type === 'json') return response(
+            [
+                'data' => $music_list,
+                'links_html' => Blade::compileString($music_list->appends($request->all())->links('vendor.front-pagination'))
+            ]
+        );
 
         return $music_list;
     }

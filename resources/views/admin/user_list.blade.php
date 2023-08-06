@@ -45,6 +45,6 @@
                 </li>
             @endforeach
         </ul>
-        {{ $users->links('vendor.admin-pagination') }}
+        {{ $users->appends(Request::all())->links('vendor.admin-pagination') }}
     </div>
 @endsection

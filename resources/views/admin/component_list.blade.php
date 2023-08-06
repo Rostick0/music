@@ -37,6 +37,6 @@
                 </li>
             @endforeach
         </ul>
-        {{ $components->links('vendor.admin-pagination') }}
+        {{ $components->appends(Request::all())->links('vendor.admin-pagination') }}
     </div>
 @endsection

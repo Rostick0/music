@@ -696,3 +696,22 @@ body,
         }
     }
 }
+
+.pagination {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    grid-gap: .5rem;
+    margin-top: 2rem;
+
+    &__link {
+        background: var(--gradient);
+        color: var(--white);
+        padding: .5rem .8rem;
+
+        &._active {
+            background: var(--white);
+            color: var(--dark);
+        }
+    }
+}

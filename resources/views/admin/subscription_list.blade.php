@@ -48,6 +48,6 @@
                 </li>
             @endforeach
         </ul>
-        {{ $subscriptions->links('vendor.admin-pagination') }}
+        {{ $subscriptions->appends(Request::all())->links('vendor.admin-pagination') }}
     </div>
 @endsection

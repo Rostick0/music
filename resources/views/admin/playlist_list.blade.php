@@ -107,6 +107,6 @@
                 </li>
             @endforeach
         </ul>
-        {{ $playlists->links('vendor.admin-pagination') }}
+        {{ $playlists->appends(Request::all())->links('vendor.admin-pagination') }}
     </div>
 @endsection
