@@ -9,17 +9,13 @@ class FeedbackController extends Controller
 {
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'email' => 'required|email|max:255',
             'theme' => 'required|max:255',
             'message' => 'required|max:65536',
         ]);
 
-        Feedback::create([
-            'email' => $request->email,
-            'theme' => $request->theme,
-            'message' => $request->message,
-        ]);
+        Feedback::create($validated);
 
         return back()->with('success', 'Thanks!');
     }

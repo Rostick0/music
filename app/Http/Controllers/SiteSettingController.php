@@ -12,10 +12,12 @@ class SiteSettingController extends Controller
     public function edit()
     {
         $faq_list = SiteFaq::all();
+        $slider_config = SliderSettingController::get();
         $slide_list = Slide::all();
 
         return view('admin.settings', [
             'faq_list' => $faq_list,
+            'slider_config' => $slider_config,
             'slide_list' => $slide_list,
         ]);
     }
@@ -28,7 +30,6 @@ class SiteSettingController extends Controller
         ]);
 
         $result = [
-            'logo' => $request->logo,
             'favicon' => $request->favicon,
             'name' => $request->name,
             'seo_title' => $request->seo_title,
@@ -39,6 +40,12 @@ class SiteSettingController extends Controller
             'count_front' => $request->count_front,
             'about' => $request->about,
         ];
+
+        $logo = ImageController::upload($request->file('logo'));
+        if ($logo) $request['logo'] = $logo;
+
+        $favicon = ImageController::upload($request->file('favicon'));
+        if ($favicon) $request['favicon'] = $favicon;
 
         File::put(public_path('config.json'), json_encode($result));
 

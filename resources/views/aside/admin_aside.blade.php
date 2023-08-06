@@ -34,6 +34,9 @@
             <li class="admin-aside__navigation_item">
                 <a class="admin-aside__navigation_link{{ Request::segment(2) === 'settings' ? ' _active' : '' }}" href="{{ route('settings') }}">Настройки</a>
             </li>
+            <li class="admin-aside__navigation_item">
+                <a class="admin-aside__navigation_link{{ Request::segment(2) === 'menu' ? ' _active' : '' }}" href="{{ route('menu.list') }}">Меню</a>
+            </li>
         </ul>
     </nav>
 </aside>

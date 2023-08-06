@@ -9,7 +9,6 @@ class RemoveClaim extends Model
 {
     use HasFactory;
 
-
     protected $fillable = [
         'link',
         'status',

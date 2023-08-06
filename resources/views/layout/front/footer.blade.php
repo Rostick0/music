@@ -1,3 +1,7 @@
+@php
+    $menu_list = App\Http\Controllers\SiteMenuController::view();
+@endphp
+
 </main>
 
 <footer class="footer">
@@ -5,13 +9,10 @@
         <div class="footer__container">
             <div class="footer__top">
                 <nav class="footer__nav">
-                    <a class="footer__nav_item a-white text-big" href="/">Home</a>
-                    <a class="footer__nav_item a-white text-big" href="/tracks">Tracks</a>
-                    <a class="footer__nav_item a-white text-big" href="/playlists">Playlists</a>
-                    <a class="footer__nav_item a-white text-big" href="/music_kits">Music kits</a>
-                    <a class="footer__nav_item a-white text-big" href="/pricing">Pricing</a>
-                    <a class="footer__nav_item a-white text-big" href="/about">About</a>
-                    <a class="footer__nav_item a-white text-big" href="/contacts">Contacts</a>
+                    @foreach ($menu_list as $menu_item)
+                        <a class="footer__nav_item a-white text-big"
+                            href="{{ $menu_item->page->path }}">{{ $menu_item->name }}</a>
+                    @endforeach
                 </nav>
             </div>
             <div class="footer__center">

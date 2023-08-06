@@ -1,3 +1,7 @@
+@php
+    $menu_list = App\Http\Controllers\SiteMenuController::view();
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -58,13 +62,10 @@
                                     </a>
                                 </div>
                                 <nav class="header-mobile__nav">
-                                    <a class="header-mobile__nav_item" href="/">Home</a>
-                                    <a class="header-mobile__nav_item" href="/tracks">Tracks</a>
-                                    <a class="header-mobile__nav_item" href="/playlists">Playlists</a>
-                                    <a class="header-mobile__nav_item" href="/music_kits">Music kits</a>
-                                    <a class="header-mobile__nav_item" href="/pricing">Pricing</a>
-                                    <a class="header-mobile__nav_item" href="/about">About</a>
-                                    <a class="header-mobile__nav_item" href="/contacts">Contacts</a>
+                                    @foreach ($menu_list as $menu_item)
+                                        <a class="header-mobile__nav_item"
+                                            href="{{ $menu_item->page->path }}">{{ $menu_item->name }}</a>
+                                    @endforeach
                                 </nav>
                                 <a class="button-gradient header-mobile__sing-in" href="/login">Sign in</a>
                             </div>
@@ -74,13 +75,10 @@
                         <img src="{{ $site->logo }}" alt="">
                     </a>
                     <nav class="header__nav">
-                        <a class="header__nav_item" href="/">Home</a>
-                        <a class="header__nav_item" href="/tracks">Tracks</a>
-                        <a class="header__nav_item" href="/playlists">Playlists</a>
-                        <a class="header__nav_item" href="/music_kits">Music kits</a>
-                        <a class="header__nav_item" href="/pricing">Pricing</a>
-                        <a class="header__nav_item" href="/about">About</a>
-                        <a class="header__nav_item" href="/contacts">Contacts</a>
+                        @foreach ($menu_list as $menu_item)
+                            <a class="header-header__nav_item"
+                                href="{{ $menu_item->page->path }}">{{ $menu_item->name }}</a>
+                        @endforeach
                     </nav>
                     <a class="header__favorite" href="/favorite">
                         @php
@@ -98,8 +96,8 @@
                                     stroke-linejoin="round" />
                             </g>
                             <defs>
-                                <linearGradient id="paint0_linear_52_186" x1="29.0668" y1="0.94281"
-                                    x2="-1.67865" y2="4.17713" gradientUnits="userSpaceOnUse">
+                                <linearGradient id="paint0_linear_52_186" x1="29.0668" y1="0.94281" x2="-1.67865"
+                                    y2="4.17713" gradientUnits="userSpaceOnUse">
                                     <stop stop-color="#FF9211" />
                                     <stop offset="1" stop-color="#FF1111" />
                                 </linearGradient>

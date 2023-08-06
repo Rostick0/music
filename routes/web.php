@@ -22,6 +22,7 @@ use App\Http\Controllers\RemoveClaimController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\SiteFaqController;
+use App\Http\Controllers\SiteMenuController;
 use App\Http\Controllers\SitePageController;
 use App\Http\Controllers\SiteSettingController;
 use App\Http\Controllers\SlideController;
@@ -136,6 +137,14 @@ Route::group(['prefix' => 'admin'], function ($router) {
     Route::get('profile_edit', [AdminUserController::class, 'edit'])->name('admin.profile.edit');
     Route::post('profile_edit', [AdminUserController::class, 'update']);
     Route::post('profile_password', [AdminUserController::class, 'password_update'])->name('admin.profile_password');
+
+    Route::group(['prefix' => 'menu'], function ($router) {
+        Route::get('list', [SiteMenuController::class, 'index'])->name('menu.list');
+        Route::post('list', [SiteMenuController::class, 'store']);
+        Route::get('edit/{id}', [SiteMenuController::class, 'edit'])->name('menu.edit');
+        Route::post('edit/{id}', [SiteMenuController::class, 'update']);
+        Route::post('delete/{id}', [SiteMenuController::class, 'destroy'])->name('menu.delete');
+    });
 });
 
 Route::group(['prefix' => 'client'], function ($router) {

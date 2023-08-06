@@ -138,42 +138,55 @@
         <h3>Настройки слайдера</h3>
         <form class="admin-form" action="{{ route('slider.setting') }}">
             @csrf
-            <label class="admin-label">
-                <span>Изображение слайдера</span>
-                <input class="admin-input" type="file" name="bg_image">
-                @error('bg_image')
-                    <span class="error">{{ $message }}</span>
-                @enderror
-            </label>
+            <div>
+                <label class="admin-label">
+                    <span>Изображение слайдера</span>
+                    <input class="admin-input" type="file" name="bg_image">
+                    @error('bg_image')
+                        <span class="error">{{ $message }}</span>
+                    @enderror
+                </label>
+                <br>
+                <img class="lazy" width="100%"
+                    data-src="{{ App\Http\Controllers\ImageController::getViewImage($slider_config->bg_image) }}"
+                    alt="">
+            </div>
             <div class="admin-form__flex">
                 <label class="admin-label">
                     <span>Количество лого при больше 1440px</span>
-                    <input class="admin-input" type="number" name="count_slide_1440">
+                    <input class="admin-input" value="{{ $slider_config->count_slide_1440 }}" type="number"
+                        name="count_slide_1440">
                     @error('count_slide_1440')
                         <span class="error">{{ $message }}</span>
                     @enderror
                 </label>
                 <label class="admin-label">
                     <span>Количество лого при больше 768px</span>
-                    <input class="admin-input" type="number" name="count_slide_768">
+                    <input class="admin-input" value="{{ $slider_config->count_slide_768 }}" type="number"
+                        name="count_slide_768">
                     @error('count_slide_768')
                         <span class="error">{{ $message }}</span>
                     @enderror
                 </label>
                 <label class="admin-label">
                     <span>Количество лого при больше 400px</span>
-                    <input class="admin-input" type="number" name="count_slide_400">
+                    <input class="admin-input" value="{{ $slider_config->count_slide_400 }}" type="number"
+                        name="count_slide_400">
                     @error('count_slide_400')
                         <span class="error">{{ $message }}</span>
                     @enderror
                 </label>
                 <label class="admin-label">
                     <span>Количество лого при меньше 400px</span>
-                    <input class="admin-input" type="number" name="count_slide_min">
+                    <input class="admin-input" value="{{ $slider_config->count_slide_min }}" type="number"
+                        name="count_slide_min">
                     @error('count_slide_min')
                         <span class="error">{{ $message }}</span>
                     @enderror
                 </label>
+            </div>
+            <div>
+                <button class="admin-button">Изменить</button>
             </div>
         </form>
         <h3>Слайды</h3>

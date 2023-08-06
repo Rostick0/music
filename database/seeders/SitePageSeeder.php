@@ -59,20 +59,6 @@ class SitePageSeeder extends Seeder
             'path' => 'pricing'
         ],
         [
-            'name' => 'sign_in',
-            'url' => 'sign_in',
-            'seo_title' => 'sign_in',
-            'seo_description' => 'sign_in',
-            'path' => 'sign_in'
-        ],
-        [
-            'name' => 'sign_up',
-            'url' => 'sign_up',
-            'seo_title' => 'sign_up',
-            'seo_description' => 'sign_up',
-            'path' => 'sign_up'
-        ],
-        [
             'name' => 'tracks',
             'url' => 'tracks',
             'seo_title' => 'tracks',
