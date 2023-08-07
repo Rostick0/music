@@ -14,6 +14,7 @@ class SitePage extends Model
         'url',
         'seo_title',
         'seo_description',
-        'path'
+        'path',
+        'is_active'
     ];
 }

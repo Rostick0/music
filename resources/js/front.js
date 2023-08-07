@@ -201,9 +201,7 @@ setSelects();
         trackItemButton.onclick = func;
     }
 
-    const checkActivePlayer = (musicActive) => {
-        return typeof musicActive === 'function' && musicActive();
-    };
+    const checkActivePlayer = musicActive => typeof musicActive === 'function' && musicActive();;
 
     const playerPrev = document.querySelector('.player__prev');
     if (playerPrev) {
@@ -448,7 +446,7 @@ setSelects();
             </a>
         </div>
     </li>`;
-    }
+    };
 
     (function () {
         const tracksFilter = document.querySelector('.tracks__filter');
@@ -609,9 +607,7 @@ setSelects();
                 window.history.replaceState(null, null, covertUrl);
                 myFetch('/api/playlist' + covertUrl)
                     .then(res => {
-                        if (!res?.ok) {
-                            return;
-                        }
+                        if (!res?.ok) return;
 
                         return res.json()
                     })

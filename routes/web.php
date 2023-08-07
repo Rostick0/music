@@ -151,8 +151,11 @@ Route::group(['prefix' => 'admin'], function ($router) {
 Route::group(['prefix' => 'client'], function ($router) {
     Route::get('subscriptions', [ClientSubscriptionController::class, 'index'])->name('client.subscriptions');
 
-    Route::get('remove_claim', [ClientRemoveClaimController::class, 'index'])->name('client.remove_claim');
-    Route::post('remove_claim', [ClientRemoveClaimController::class, 'store']);
+    Route::group(['prefix' => 'remove_claim'], function ($router) {
+        Route::get('list', [ClientRemoveClaimController::class, 'index'])->name('client.remove_claim.list');
+        Route::get('create', [ClientRemoveClaimController::class, 'create'])->name('client.remove_claim.create');
+        Route::post('create', [ClientRemoveClaimController::class, 'store']);
+    });
 
     Route::get('profile', [ClientUserController::class, 'show'])->name('client.profile');
     Route::get('profile_edit', [ClientUserController::class, 'edit'])->name('client.profile.edit');

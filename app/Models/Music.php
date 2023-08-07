@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Music extends Model
@@ -45,5 +46,10 @@ class Music extends Model
     public function themes(): HasMany
     {
         return $this->hasMany(RelationshipTheme::class, 'type_id', 'id')->select('themes.name as name', 'themes.id as id')->join('themes', 'themes.id', '=', 'relationship_themes.theme_id')->where('type', 'music');
+    }
+
+    public function artist(): BelongsTo
+    {
+        return $this->belongsTo(MusicArtist::class, 'music_artist_id', 'id')->select('music_artists.name as artist_name');
     }
 }

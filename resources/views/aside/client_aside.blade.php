@@ -23,7 +23,7 @@
                 <a class="admin-aside__navigation_link" href="{{ route('client.subscriptions') }}">Подписки</a>
             </li>
             <li class="admin-aside__navigation_item{{ Request::segment(2) === 'remove_claim' ? ' _active' : '' }}">
-                <a class="admin-aside__navigation_link" href="{{ route('client.remove_claim') }}">Удаление копирайта</a>
+                <a class="admin-aside__navigation_link" href="{{ route('client.remove_claim.list') }}">Удаление копирайта</a>
             </li>
         </ul>
     </nav>

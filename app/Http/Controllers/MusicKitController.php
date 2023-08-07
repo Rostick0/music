@@ -109,7 +109,11 @@ class MusicKitController extends Controller
      */
     public function create()
     {
-        return view('admin.music_kit_create');
+        $music_list = Music::orderByDesc('id')->limit(20)->get();
+
+        return view('admin.music_kit_create', [
+            'music_list' => $music_list
+        ]);
     }
 
     /**
@@ -140,18 +144,12 @@ class MusicKitController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(MusicKit $musicKit)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(int $id)
     {
+        $music_list = Music::orderByDesc('id')->limit(20)->get();
+
         $music_kit = MusicKit::select(
             'music_kits.*',
             'music.title as music_title',
@@ -161,7 +159,8 @@ class MusicKitController extends Controller
             ->first();
 
         return view('admin.music_kit_edit', [
-            'music_kit' => $music_kit
+            'music_kit' => $music_kit,
+            'music_list' => $music_list
         ]);
     }
 

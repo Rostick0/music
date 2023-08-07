@@ -20,7 +20,10 @@
                     <input class="admin-select-async__value" name="music_id"
                         value="{{ old('music_id') ?? $music_kit->music_id }}" required hidden>
                     <ul class="admin-select-async__list">
-                        <li class="admin-select-async__item">1</li>
+                        @foreach ($music_list as $music_item)
+                            <li data-id="{{ $music_item->id }}" class="admin-select-async__item">{{ $music_item->title }},
+                                {{ $music_item->artist->artist_name }}</li>
+                        @endforeach
                     </ul>
                 </div>
                 @error('music_id')

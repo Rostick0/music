@@ -13,7 +13,7 @@ import { asyncSelect } from './ui';
                 return res.json();
             })
             .then(res => {
-                return res?.data ?? [];
+                return res?.data?.data ?? [];
             })
     };
 

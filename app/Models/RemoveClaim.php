@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class RemoveClaim extends Model
 {
@@ -15,4 +16,9 @@ class RemoveClaim extends Model
         'music_id',
         'user_id'
     ];
+
+    function music(): BelongsTo
+    {
+        return $this->belongsTo(Music::class, 'music_id', 'id');
+    }
 }
