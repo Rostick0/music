@@ -36,6 +36,7 @@
     &__img {
         border-radius: .625rem;
         display: flex;
+        object-fit: cover;
         margin-right: 1.87rem;
         width: 3.75rem;
         min-width: 3.75rem;

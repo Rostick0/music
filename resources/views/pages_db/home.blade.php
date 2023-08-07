@@ -9,7 +9,7 @@
         $music_controller = new App\Http\Controllers\MusicController();
         $music_list = $music_controller->search($request, '');
         $playlist_controller = new App\Http\Controllers\PlaylistController();
-        $playlist_list = $playlist_controller->search($request, '');
+        $playlist_list = $playlist_controller->search(null, '');
     @endphp
 @endsection
 

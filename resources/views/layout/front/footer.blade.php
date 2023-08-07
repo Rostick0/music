@@ -11,7 +11,7 @@
                 <nav class="footer__nav">
                     @foreach ($menu_list as $menu_item)
                         <a class="footer__nav_item a-white text-big"
-                            href="{{ $menu_item->page->path }}">{{ $menu_item->name }}</a>
+                            href="/{{ $menu_item->page->path }}">{{ $menu_item->name }}</a>
                     @endforeach
                 </nav>
             </div>

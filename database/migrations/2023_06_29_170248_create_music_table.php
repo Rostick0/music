@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('link_demo')->nullable();
             $table->string('publisher')->nullable();
             $table->string('distr')->nullable();
-            $table->date('create_date')->nullable();
             $table->boolean('is_active')->default(0);
             $table->boolean('is_free')->default(0);
             $table->text('description')->nullable();

@@ -25,7 +25,7 @@
         <div class="admin-form__flex">
             <label class="admin-label">
                 <span>Трэк*</span>
-                <input class="admin-input" type="file" name="link" value="{{ old('link') }}" required>
+                <input class="admin-input" type="file" name="link" accept=".mp3" value="{{ old('link') }}">
                 @error('link')
                     <span class="error">{{ $message }}</span>
                 @enderror
@@ -36,7 +36,7 @@
             </label>
             <label class="admin-label">
                 <span>Демо трэк</span>
-                <input class="admin-input" type="file" name="link_demo" value="{{ old('link_demo') }}">
+                <input class="admin-input" type="file" name="link_demo" accept=".mp3" value="{{ old('link_demo') }}">
                 @error('link_demo')
                     <span class="error">{{ $message }}</span>
                 @enderror
@@ -65,14 +65,6 @@
         </div>
         <div class="admin-form__flex">
             <label class="admin-label">
-                <span>Дата создания</span>
-                <input class="admin-input" type="date" name="create_date"
-                    value="{{ old('create_date') ?? $music->create_date }}" maxlength="255">
-                @error('create_date')
-                    <span class="error">{{ $message }}</span>
-                @enderror   
-            </label>
-            <label class="admin-label">
                 <span>Тема (через запятую)</span>
                 <input class="admin-input" type="text" name="themes"
                     value="{{ old('themes') ?? App\Http\Controllers\RelationshipHelper::getNameByItems($music->themes) }}">
@@ -100,7 +92,8 @@
             </div>
             <label class="admin-label">
                 <span>Настроение (через запятую)</span>
-                <input class="admin-input" type="text" name="moods" value="{{ old('moods') ?? App\Http\Controllers\RelationshipHelper::getNameByItems($music->moods) }}">
+                <input class="admin-input" type="text" name="moods"
+                    value="{{ old('moods') ?? App\Http\Controllers\RelationshipHelper::getNameByItems($music->moods) }}">
                 @error('moods')
                     <span class="error">{{ $message }}</span>
                 @enderror

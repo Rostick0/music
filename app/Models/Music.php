@@ -18,7 +18,6 @@ class Music extends Model
         'link_demo',
         'publisher',
         'distr',
-        'create_date',
         'is_active',
         'is_free',
         'description',

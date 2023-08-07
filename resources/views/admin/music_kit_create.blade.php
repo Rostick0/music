@@ -33,7 +33,7 @@
             <label class="admin-label">
                 <label class="admin-label">
                     <span>Music kit*</span>
-                    <input class="admin-input" type="file" name="link" value="{{ old('link') }}" required>
+                    <input class="admin-input" type="file" name="link" accept=".mp3" value="{{ old('link') }}" required>
                     @error('link')
                         <span class="error">{{ $message }}</span>
                     @enderror

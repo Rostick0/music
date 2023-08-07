@@ -64,7 +64,7 @@
                                 <nav class="header-mobile__nav">
                                     @foreach ($menu_list as $menu_item)
                                         <a class="header-mobile__nav_item"
-                                            href="{{ $menu_item->page->path }}">{{ $menu_item->name }}</a>
+                                            href="/{{ $menu_item->page->path }}">{{ $menu_item->name }}</a>
                                     @endforeach
                                 </nav>
                                 <a class="button-gradient header-mobile__sing-in" href="/login">Sign in</a>
@@ -77,7 +77,7 @@
                     <nav class="header__nav">
                         @foreach ($menu_list as $menu_item)
                             <a class="header-header__nav_item"
-                                href="{{ $menu_item->page->path }}">{{ $menu_item->name }}</a>
+                                href="/{{ $menu_item->page->path }}">{{ $menu_item->name }}</a>
                         @endforeach
                     </nav>
                     <a class="header__favorite" href="/favorite">

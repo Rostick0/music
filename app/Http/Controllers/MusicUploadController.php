@@ -17,8 +17,7 @@ class MusicUploadController extends Controller
     {
         if (!$request) return NULL;
 
-        $extension = $request->getClientOriginalExtension();
-        $music = time() . '.' . $extension;
+        $music = $request->getClientOriginalName();
         $request->storeAs('public/' . MusicUploadController::getPath($type), $music);
 
         return $music;

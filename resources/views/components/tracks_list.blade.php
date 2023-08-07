@@ -1,13 +1,12 @@
 @props(['music_list'])
 
 <ul class="tracks__list">
-
     @if (empty($music_list))
         <h3 class="tracks__none">Music not found</h3>
     @else
         @foreach ($music_list as $music_item)
             <li class="tracks__item track-item">
-                <div class="track-item__info">
+                <a class="track-item__info" href="/track/{{ $music_item->id }}">
                     <img class="track-item__img lazy"
                         data-src="{{ App\Http\Controllers\ImageController::getViewImage($music_item->image) }}"
                         alt="{{ $music_item->title }}">
@@ -18,7 +17,7 @@
                         <div class="track-item__name">{{ $music_item->title }}</div>
                         <div class="track-item__artist">{{ $music_item->music_artist_name }}</div>
                     </div>
-                </div>
+                </a>
                 <div class="track-item__timer">
                     <button class="track-button track-item__button">
                         <svg width="40" height="40" viewBox="0 0 40 40" fill="none"

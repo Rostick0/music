@@ -24,14 +24,16 @@
         <div class="admin-form__flex">
             <label class="admin-label">
                 <span>Трэк*</span>
-                <input class="admin-input" type="file" name="link" value="{{ old('link') }}" required>
+                <input class="admin-input" type="file" name="link" accept=".mp3" value="{{ old('link') }}"
+                    required>
                 @error('link')
                     <span class="error">{{ $message }}</span>
                 @enderror
             </label>
             <label class="admin-label">
                 <span>Демо трэк</span>
-                <input class="admin-input" type="file" name="link_demo" value="{{ old('link_demo') }}">
+                <input class="admin-input" type="file" name="link_demo" accept=".mp3"
+                    value="{{ old('link_demo') }}">
                 @error('link_demo')
                     <span class="error">{{ $message }}</span>
                 @enderror
@@ -52,14 +54,6 @@
             </label>
         </div>
         <div class="admin-form__flex">
-            <label class="admin-label">
-                <span>Дата создания</span>
-                <input class="admin-input" type="date" name="create_date" value="{{ old('create_date') }}"
-                    maxlength="255">
-                @error('create_date')
-                    <span class="error">{{ $message }}</span>
-                @enderror
-            </label>
             <label class="admin-label">
                 <span>Тема (через запятую)</span>
                 <input class="admin-input" type="text" name="themes" value="{{ old('themes') }}">
@@ -110,8 +104,7 @@
                 <span>Активен?</span>
             </label>
             <label class="admin-checkbox">
-                <input class="admin-checkbox__input" type="checkbox" name="is_free"
-                    {{ old('is_free') ? 'checked' : '' }}>
+                <input class="admin-checkbox__input" type="checkbox" name="is_free" {{ old('is_free') ? 'checked' : '' }}>
                 <span class="admin-checkbox__icon"></span>
                 <span>Бесплатный?</span>
             </label>

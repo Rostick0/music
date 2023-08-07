@@ -2,6 +2,7 @@ import { throttle } from './optimization';
 import { addClass, addClassOnce, normalizeTime, objConvertUrl, removeClass, removeEmpty } from './helpers';
 const csrfToken = document.querySelector('meta[name="csrf-token"]');
 const STORAGE_URL = '/storage/upload';
+const IMAGE_URL = STORAGE_URL + '/image/';
 const MUSIC_URL = '/music/';
 const MUSIC_DEMO_URL = '/music_demo/';
 const MUSIC_KIT_URL = '/music_kit/';
@@ -99,9 +100,11 @@ setSelects();
     };
 
     const audioPlayerEdit = ({ title, artist, time, musicUrl }, itemDom, wavesurfer) => {
+        if (!player) return;
+
         const playerText = document.querySelector('.player__text');
-        const playerAudio = player.querySelector('.player__audio');
-        const playerButton = player.querySelector('.player__button');
+        const playerAudio = player?.querySelector('.player__audio');
+        const playerButton = player?.querySelector('.player__button');
 
         playerAudio.innerHTML = null;
 
@@ -288,16 +291,16 @@ setSelects();
     };
     const musicItem = (music) => {
         return `<li class="tracks__item track-item">
-        <div class="track-item__info">
+        <a class="track-item__info" href="/track/${music?.id}">
             <img decoding="async" class="track-item__img"
-                src="${music?.image ?? '/img/music.png'}"
+                src="${music?.image ? IMAGE_URL + music?.image : '/img/music.png'}"
                 alt="${music?.title}">
             <div class="track-item__text text-ellipsis">
                 ${music?.is_free ? '<div class="track-item__free">FREE</div>' : ''}
                 <div class="track-item__name">${music?.title}</div>
                 <div class="track-item__artist">${music?.music_artist_name}</div>
             </div>
-        </div>
+        </a>
         <div class="track-item__timer">
             <button class="track-button track-item__button">
                 <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
@@ -380,15 +383,15 @@ setSelects();
     };
     const musicKitItem = (musicKit) => {
         return `<li class="tracks__item track-item">
-        <div class="track-item__info">
+        <a class="track-item__info" href="/music_kit/${musicKit?.id}">
             <img class="track-item__img"
-                src="${musicKit?.music_image ?? '/img/music.png'}"
+                src="${musicKit?.music_image ? IMAGE_URL + musicKit?.music_image : '/img/music.png'}"
                 alt="{{ $music_item->title }}">
             <div class="track-item__text text-ellipsis">
                 <div class="track-item__name">${musicKit?.name}</div>
                 <div class="track-item__artist">${musicKit?.music_artist_name}</div>
             </div>
-        </div>
+        </a>
         <div class="track-item__timer">
             <button class="track-button track-item__button">
                 <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
@@ -569,7 +572,7 @@ setSelects();
 
     const playlistItem = (playlist) => {
         return `<a class="playlist__link playlist-item" href="/playlist/${playlist?.id}">
-        <img class="playlist-item__img" decoding="async" loading="lazy" src="${playlist?.image ?? '/img/playlist.png'}" alt="">
+        <img class="playlist-item__img" decoding="async" loading="lazy" src="${playlist?.image ? IMAGE_URL + playlist?.image : '/img/playlist.png'}" alt="">
         <div class="playlist-item__icon">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_52_568)">

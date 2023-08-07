@@ -6,7 +6,7 @@
     @else
         @foreach ($music_kit_list as $music_item)
             <li class="tracks__item track-item">
-                <div class="track-item__info">
+                <a class="track-item__info" href="/music_kit/{{ $music_item->id }}">
                     <img class="track-item__img lazy"
                         data-src="{{ App\Http\Controllers\ImageController::getViewImage($music_item->music_image) }}"
                         alt="{{ $music_item->title }}">
@@ -14,7 +14,7 @@
                         <div class="track-item__name">{{ $music_item->name }}</div>
                         <div class="track-item__artist">{{ $music_item->music_artist_name }}</div>
                     </div>
-                </div>
+                </a>
                 <div class="track-item__timer">
                     <button class="track-button track-item__button">
                         <svg width="40" height="40" viewBox="0 0 40 40" fill="none"

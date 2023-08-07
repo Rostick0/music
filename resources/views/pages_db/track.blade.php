@@ -58,7 +58,11 @@
                                 <div class="track-time track-item__time">
                                     {{ App\Http\Controllers\MusicController::normalizeTime($music->duration) }}</div>
                             </div>
-                            <div class="track-item__audio track-item__audio_{{ $music->id }}"></div>
+                            <div class="track-item__audio track-item__audio_{{ $music->id }}"
+                                data-music="{{ '/music/' . $music->link }}" data-title="{{ $music->music_title }}"
+                                data-artist="{{ $music->music_artist_name }}"
+                                data-time="{{ App\Http\Controllers\MusicController::normalizeTime($music->duration) }}">
+                            </div>
                             <div class="track-item__buttons">
                                 <button class="track-item__favorite">
                                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
@@ -141,30 +145,66 @@
         <div class="section-main">
             <div class="container">
                 <ul class="track__category">
-                    <li class="track__category_item category-item">
-                        <div class="category-item__name section-title">Genres</div>
-                        <ul class="category-item__list">
-                            @foreach ($music->genres as $genre)
-                                <li class="category-item__item">
-                                    <a class="category-item__link text-medium" href="/tracks?genre={{ $genre->id }}">
-                                        {{ $genre->name }}
-                                    </a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </li>
-                    <li class="track__category_item category-item">
-                        <div class="category-item__name section-title">Moods</div>
-                        <ul class="category-item__list">
-                            @foreach ($music->moods as $mood)
-                                <li class="category-item__item">
-                                    <a class="category-item__link text-medium" href="/tracks?mood={{ $mood->id }}">
-                                        {{ $mood->name }}
-                                    </a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </li>
+                    @if ($music->genres->count())
+                        <li class="track__category_item category-item">
+                            <div class="category-item__name section-title">Genres</div>
+                            <ul class="category-item__list">
+                                @foreach ($music->genres as $genre)
+                                    <li class="category-item__item">
+                                        <a class="category-item__link text-medium"
+                                            href="/tracks?genre={{ $genre->id }}">
+                                            {{ $genre->name }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </li>
+                    @endif
+                    @if ($music->moods->count())
+                        <li class="track__category_item category-item">
+                            <div class="category-item__name section-title">Moods</div>
+                            <ul class="category-item__list">
+                                @foreach ($music->moods as $mood)
+                                    <li class="category-item__item">
+                                        <a class="category-item__link text-medium"
+                                            href="/tracks?mood={{ $mood->id }}">
+                                            {{ $mood->name }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </li>
+                    @endif
+                    @if ($music->instruments->count())
+                        <li class="track__category_item category-item">
+                            <div class="category-item__name section-title">Instruments</div>
+                            <ul class="category-item__list">
+                                @foreach ($music->instruments as $instrument)
+                                    <li class="category-item__item">
+                                        <a class="category-item__link text-medium"
+                                            href="/tracks?instrument={{ $instrument->id }}">
+                                            {{ $instrument->name }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </li>
+                    @endif
+                    @if ($music->themes->count())
+                        <li class="track__category_item category-item">
+                            <div class="category-item__name section-title">Themes</div>
+                            <ul class="category-item__list">
+                                @foreach ($music->themes as $theme)
+                                    <li class="category-item__item">
+                                        <a class="category-item__link text-medium"
+                                            href="/tracks?theme={{ $theme->id }}">
+                                            {{ $theme->name }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </li>
+                    @endif
                 </ul>
             </div>
         </div>

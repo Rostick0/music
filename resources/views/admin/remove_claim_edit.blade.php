@@ -2,7 +2,6 @@
 
 @section('html')
     <div class="admin-form__flex">
-        {{-- @dd($remove_claim) --}}
         <div class="admin-label">
             <span>Ссылка*</span>
             <a href="{{ $remove_claim->link }}">{{ $remove_claim->link }}</a>

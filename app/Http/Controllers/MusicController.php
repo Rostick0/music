@@ -156,9 +156,7 @@ class MusicController extends Controller
 
     public static function normalizeTime($duration)
     {
-        $time = substr($duration, 0, -3);
-
-        if ($time[0] == '0') $time = substr($time, 1);
+        $time = substr($duration, 3);
 
         return $time;
     }
@@ -184,7 +182,6 @@ class MusicController extends Controller
             'link_demo' => 'mimes:mp3',
             'publisher' => 'max:255',
             'distr' => 'max:255',
-            'date' => 'date',
             'description' => 'max:65536',
             'image' => 'image|mimes:jpeg,png,jpg',
             'seo_title' => 'max:255',
@@ -199,8 +196,9 @@ class MusicController extends Controller
         $music = MusicUploadController::upload($request->file('link'));
         $music_demo = MusicUploadController::upload($request->file('link_demo'), 'music_demo');
 
-        $audio = new Mp3Info($request->link, true);
-        $audio_duration = gmdate("H:i:s", $audio->duration);
+        $audio = new Mp3Info($request->file('link'), true);
+        // $audio_duration = gmdate("H:i:s", $audio->duration);
+        dd($audio);
 
         $music = Music::create([
             'music_artist_id' => $music_artists->id,
@@ -209,12 +207,11 @@ class MusicController extends Controller
             'link_demo' => $music_demo,
             'publisher' => $request->publisher,
             'distr' => $request->distr,
-            'create_date' => $request->create_date,
             'is_active' => $request->has('is_active') ? 1 : 0,
             'is_free' => $request->has('is_free') ? 1 : 0,
             'description' => $request->description,
             'image' => $image,
-            'duration' => $audio_duration,
+            'duration' => $audio->duration,
             'seo_title' => $request->seo_title,
             'seo_description' => $request->seo_description,
         ]);
@@ -267,7 +264,6 @@ class MusicController extends Controller
             'link_demo' => 'mimes:mp3',
             'publisher' => 'max:255',
             'distr' => 'max:255',
-            'create_date' => 'date',
             'description' => 'max:65536',
             'image' => 'image|mimes:jpeg,png,jpg',
             'seo_title' => 'max:255',
@@ -289,7 +285,6 @@ class MusicController extends Controller
             'title' => $request->title,
             'publisher' => $request->publisher,
             'distr' => $request->distr,
-            'create_date' => $request->create_date,
             'is_active' => $request->has('is_active') ? 1 : 0,
             'is_free' => $request->has('is_free') ? 1 : 0,
             'description' => $request->description,
@@ -298,7 +293,7 @@ class MusicController extends Controller
         ];
 
         if ($upload) {
-            $audio = new Mp3Info($request->link, true);
+            $audio = new Mp3Info($request->file('link'), true);
             $audio_duration = gmdate("H:i:s", $audio->duration);
 
             $update_data['link'] = $upload;

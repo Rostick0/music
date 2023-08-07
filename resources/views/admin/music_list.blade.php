@@ -123,8 +123,8 @@
                     <a class="text-ellipsis" title="{{ $music_item->link }}" target="_blank"
                         href="{{ $music_item->link }}">{{ $music_item->link }}</a>
                     <div>{{ $music_item->music_artist_name }}</div>
-                    <div>{{ $music_item->genre_name }}</div>
-                    <div>{{ $music_item->duration }}</div>
+                    <div>{{ App\Http\Controllers\RelationshipHelper::getNameByItems($music_item->genres, '—') }}</div>
+                    <div>{{ App\Http\Controllers\MusicController::normalizeTime($music_item->duration) }}</div>
                     <div>{{ $music_item->is_active ? 'Да' : 'Нет' }}</div>
                     <div>{{ $music_item->is_free ? 'Да' : 'Нет' }}</div>
                     <div>{{ $music_item->created_at }}</div>

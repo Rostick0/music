@@ -16,7 +16,7 @@
                     <div class="track__image">
                         <div class="track__image_inner">
                             <img class="track__img lazy"
-                                data-src="{{ App\Http\Controllers\ImageController::getViewImage($playlist->image, null, '/img/playlist.png') }}"
+                                data-src="{{ App\Http\Controllers\ImageController::getViewImage($playlist->image, 'image', '/img/playlist.png') }}"
                                 alt="">
                         </div>
                     </div>
@@ -32,30 +32,63 @@
         <div class="section-main">
             <div class="container">
                 <ul class="track__category">
-                    <li class="track__category_item category-item">
-                        <div class="category-item__name section-title">Genres</div>
-                        <ul class="category-item__list">
-                            @foreach ($playlist->genres as $genre)
-                                <li class="category-item__item">
-                                    <a class="category-item__link text-medium" href="/tracks?genre={{ $genre->id }}">
-                                        {{ $genre->name }}
-                                    </a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </li>
-                    <li class="track__category_item category-item">
-                        <div class="category-item__name section-title">Moods</div>
-                        <ul class="category-item__list">
-                            @foreach ($playlist->moods as $mood)
-                                <li class="category-item__item">
-                                    <a class="category-item__link text-medium" href="/tracks?mood={{ $mood->id }}">
-                                        {{ $mood->name }}
-                                    </a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </li>
+                    @if ($playlist->genres->count())
+                        <li class="track__category_item category-item">
+                            <div class="category-item__name section-title">Genres</div>
+                            <ul class="category-item__list">
+                                @foreach ($playlist->genres as $genre)
+                                    <li class="category-item__item">
+                                        <a class="category-item__link text-medium" href="/tracks?genre={{ $genre->id }}">
+                                            {{ $genre->name }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </li>
+                    @endif
+                    @if ($playlist->moods->count())
+                        <li class="track__category_item category-item">
+                            <div class="category-item__name section-title">Moods</div>
+                            <ul class="category-item__list">
+                                @foreach ($playlist->moods as $mood)
+                                    <li class="category-item__item">
+                                        <a class="category-item__link text-medium" href="/tracks?mood={{ $mood->id }}">
+                                            {{ $mood->name }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </li>
+                    @endif
+                    @if ($playlist->instruments->count())
+                        <li class="track__category_item category-item">
+                            <div class="category-item__name section-title">Instruments</div>
+                            <ul class="category-item__list">
+                                @foreach ($playlist->instruments as $instrument)
+                                    <li class="category-item__item">
+                                        <a class="category-item__link text-medium"
+                                            href="/tracks?instrument={{ $instrument->id }}">
+                                            {{ $instrument->name }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </li>
+                    @endif
+                    @if ($playlist->themes->count())
+                        <li class="track__category_item category-item">
+                            <div class="category-item__name section-title">Themes</div>
+                            <ul class="category-item__list">
+                                @foreach ($playlist->themes as $theme)
+                                    <li class="category-item__item">
+                                        <a class="category-item__link text-medium" href="/tracks?theme={{ $theme->id }}">
+                                            {{ $theme->name }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </li>
+                    @endif
                 </ul>
             </div>
         </div>

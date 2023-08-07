@@ -47,45 +47,44 @@ class FrontMusicController extends Controller
                 'type_id' => $music_id
             ]);
 
-        $music_genre = FrontMusicController::joinArtist()
+        $music_genre = FrontMusicController::joinArtist($music_id)
             ->whereIn('music.id', RelationshipGenre::select('type_id')
                 ->where('type', 'music')
                 ->whereIn('genre_id', $genre_ids));
 
-        $music_theme = FrontMusicController::joinArtist()
+        $music_theme = FrontMusicController::joinArtist($music_id)
             ->whereIn('music.id', RelationshipTheme::select('type_id')
                 ->where('type', 'music')
                 ->whereIn('theme_id', $theme_id));
 
-        $music_instrument = FrontMusicController::joinArtist()
+        $music_instrument = FrontMusicController::joinArtist($music_id)
             ->whereIn('music.id', RelationshipInstrument::select('type_id')
                 ->where('type', 'music')
                 ->whereIn('instrument_id', $instrument_ids));
 
 
-        $music_mood = FrontMusicController::joinArtist()
+        $music_mood = FrontMusicController::joinArtist($music_id)
             ->whereIn('music.id', RelationshipMood::select('type_id')
                 ->where('type', 'music')
                 ->whereIn('mood_id', $mood_ids));
 
-
-        $music_list = FrontMusicController::joinArtist()
+        $music_list = FrontMusicController::joinArtist($music_id)
             ->union($music_genre)
             ->union($music_theme)
             ->union($music_instrument)
             ->union($music_mood)
-            ->whereNot('music.id', $music_id)
             ->paginate(8);
 
         return $music_list;
     }
 
-    public static function joinArtist()
+    public static function joinArtist(int $music_id)
     {
         return Music::select(
             'music.*',
             'music_artists.name as music_artist_name'
         )
-            ->join('music_artists', 'music.music_artist_id', '=', 'music_artists.id');
+            ->join('music_artists', 'music.music_artist_id', '=', 'music_artists.id')
+            ->whereNot('music.id', $music_id);
     }
 }
