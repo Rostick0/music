@@ -96,6 +96,11 @@ Route::group(['prefix' => 'admin'], function ($router) {
         Route::post('delete/{id}', [UserController::class, 'destroy'])->name('user.delete');
     });
 
+    Route::group(['prefix' => 'remove_claim'], function ($router) {
+        Route::get('{id}', [RemoveClaimController::class, 'edit']);
+        Route::post('{id}', [RemoveClaimController::class, 'update']);
+    });
+
     Route::get('settings', [SiteSettingController::class, 'edit'])->name('settings');
     Route::post('settings', [SiteSettingController::class, 'update']);
 

@@ -21,4 +21,9 @@ class RemoveClaim extends Model
     {
         return $this->belongsTo(Music::class, 'music_id', 'id');
     }
+
+    function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }

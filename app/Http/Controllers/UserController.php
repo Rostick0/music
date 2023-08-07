@@ -20,6 +20,7 @@ class UserController extends Controller
         if ($request->name) $where_sql[] = ['name', 'LIKE', '%' . $request->name . '%'];
         if ($request->surname) $where_sql[] = ['surname', 'LIKE', '%' . $request->surname . '%'];
         if ($request->email) $where_sql[] = ['email', 'LIKE', '%' . $request->email . '%'];
+        $where_sql[] = ['is_admin', '=', '0'];
 
         $users = User::where($where_sql)
             ->orderByDesc('id')
@@ -28,10 +29,6 @@ class UserController extends Controller
         return view('admin.user_list', [
             'users' => $users
         ]);
-    }
-
-    public function show()
-    {
     }
 
     public function edit(int $id)
