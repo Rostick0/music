@@ -31,9 +31,10 @@ class MusicPartController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'music_id' => 'required|' . Rule::exists('music', 'id'),
+            'type_id' => 'required',
             'part_name' => 'required|max:255',
             'part_link' => 'required|mimes:mp3',
+            'type' => 'in:music,music_kit'
         ]);
 
 
@@ -42,10 +43,11 @@ class MusicPartController extends Controller
         $music = MusicUploadController::upload($request->file('part_link'), 'part');
 
         MusicPart::create([
-            'music_id' => $request->music_id,
+            'type_id' => $request->type_id,
             'name' => $request->part_name,
             'link' => $music,
             'duration' => $duration,
+            'type' => $request->type
         ]);
 
         return back();

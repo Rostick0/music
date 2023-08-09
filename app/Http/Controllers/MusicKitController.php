@@ -226,8 +226,7 @@ class MusicKitController extends Controller
             'music.title as music_title',
         )
             ->join('music', 'music.id', '=', 'music_kits.music_id')
-            ->where('music_kits.id', $id)
-            ->first();
+            ->firstOrFail($id);
 
         $music_artist = MusicArtist::find($music_kit->music_artist_id);
 

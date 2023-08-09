@@ -53,7 +53,7 @@
                 @enderror
             </label>
             <label class="admin-label">
-                <span>Демо трэк</span>
+                <span>Демо трэк*</span>
                 <span class="admin-file-upload">
                     <input class="admin-file-upload__input" type="file" name="link_demo" accept=".mp3"
                         value="{{ old('link_demo') }}" required>

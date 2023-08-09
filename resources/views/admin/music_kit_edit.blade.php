@@ -205,4 +205,58 @@
                 ]) }}">Удалить</a>
         </div>
     </form>
+    <h2>Партии музыки</h2>
+    <form class="admin-form" action="{{ route('part.create') }}" method="post" enctype="multipart/form-data">
+        @csrf
+        <div class="admin-form__flex">
+            <input type="hidden" name="type" value="music_kit">
+            <input type="hidden" name="type_id" value="{{ $music_kit->id }}">
+            <label class="admin-label admin-form__flex_long">
+                <span>Название</span>
+                <input class="admin-input" type="text" name="part_name" value="{{ old('part_name') }}"
+                    maxlength="255" required>
+                @error('part_name')
+                    <span class="error">{{ $message }}</span>
+                @enderror
+            </label>
+            <label class="admin-label">
+                <span>Трэк*</span>
+                <span class="admin-file-upload">
+                    <input class="admin-file-upload__input" type="file" name="part_link" accept=".mp3"
+                        value="{{ old('part_link') }}" required>
+                    <span class="admin-input">
+                        <span class="admin-file-upload__name">Загрузить файл</span>
+                    </span>
+                </span>
+                @error('part_link')
+                    <span class="error">{{ $message }}</span>
+                @enderror
+            </label>
+        </div>
+        <div class="admin-delete__buttons">
+            <button class="admin-button">Добавить</button>
+        </div>
+    </form>
+    <br>
+    <div class="admin-form">
+        @foreach ($music_kit->parts as $part)
+            <div class="admin-form__flex aling-items-end">
+                <label class="admin-label">
+                    <span>Название</span>
+                    <input class="admin-input" type="text" value="{{ $part->name }}" disabled>
+                </label>
+                <label class="admin-label">
+                    <span>Страница</span>
+                    <input class="admin-input" type="text" value="{{ $part->link }}" disabled>
+                    <audio src=""></audio>
+                </label>
+                <div class="admin-buttons">
+                    <form action="{{ route('part.delete', ['id' => $part->id]) }}" method="post">
+                        @csrf
+                        <button class="admin-button-red">Удалить</button>
+                    </form>
+                </div>
+            </div>
+        @endforeach
+    </div>
 @endsection

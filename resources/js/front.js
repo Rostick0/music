@@ -415,7 +415,7 @@ setSelects();
                 src="${musicKit?.music_image ? IMAGE_URL + musicKit?.music_image : '/img/music.png'}"
                 alt="{{ $music_item->title }}">
             <div class="track-item__text text-ellipsis">
-                <div class="track-item__name">${musicKit?.name}</div>
+                <div class="track-item__name">${musicKit?.title}</div>
                 <div class="track-item__artist">${musicKit?.music_artist_name}</div>
             </div>
         </a>

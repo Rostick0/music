@@ -31,7 +31,7 @@
                 <span>Have an account?&nbsp;</span>
                 <a class="auth-form__link" href="{{ route('register') }}">Sing up</a>
                 or
-                <a class="auth-form__link" href="{{ route('register') }}">Recovery</a>
+                <a class="auth-form__link" href="{{ route('password.reset') }}">Recovery</a>
             </div>
         </form>
     </div>

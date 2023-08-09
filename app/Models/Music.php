@@ -49,7 +49,7 @@ class Music extends Model
 
     public function parts(): HasMany
     {
-        return $this->hasMany(MusicPart::class, 'music_id', 'id');
+        return $this->hasMany(MusicPart::class, 'type_id', 'id')->where('type', 'music');
     }
 
 

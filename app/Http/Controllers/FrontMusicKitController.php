@@ -26,69 +26,66 @@ class FrontMusicKitController extends Controller
     public static function getSimilar(int $music_id)
     {
         $genre_ids = RelationshipGenre::select('genre_id')->where([
-            'type' => 'music',
+            'type' => 'music_kit',
             'type_id' => $music_id
         ]);
 
         $theme_id = RelationshipTheme::select('theme_id')
             ->where([
-                'type' => 'music',
+                'type' => 'music_kit',
                 'type_id' => $music_id
             ]);
 
         $instrument_ids = RelationshipInstrument::select('instrument_id')
             ->where([
-                'type' => 'music',
+                'type' => 'music_kit',
                 'type_id' => $music_id
             ]);
 
         $mood_ids = RelationshipMood::select('mood_id')
             ->where([
-                'type' => 'music',
+                'type' => 'music_kit',
                 'type_id' => $music_id
             ]);
 
-        $music_genre = FrontMusicKitController::joinArtist()
-            ->whereIn('music.id', RelationshipGenre::select('type_id')
-                ->where('type', 'music')
+        $music_genre = FrontMusicKitController::joinArtist($music_id)
+            ->whereIn('music_kits.id', RelationshipGenre::select('type_id')
+                ->where('type', 'music_kit')
                 ->whereIn('genre_id', $genre_ids));
 
-        $music_theme = FrontMusicKitController::joinArtist()
-            ->whereIn('music.id', RelationshipTheme::select('type_id')
-                ->where('type', 'music')
+        $music_theme = FrontMusicKitController::joinArtist($music_id)
+            ->whereIn('music_kits.id', RelationshipTheme::select('type_id')
+                ->where('type', 'music_kit')
                 ->whereIn('theme_id', $theme_id));
 
-        $music_instrument = FrontMusicKitController::joinArtist()
-            ->whereIn('music.id', RelationshipInstrument::select('type_id')
-                ->where('type', 'music')
+        $music_instrument = FrontMusicKitController::joinArtist($music_id)
+            ->whereIn('music_kits.id', RelationshipInstrument::select('type_id')
+                ->where('type', 'music_kit')
                 ->whereIn('instrument_id', $instrument_ids));
 
 
-        $music_mood = FrontMusicKitController::joinArtist()
-            ->whereIn('music.id', RelationshipMood::select('type_id')
-                ->where('type', 'music')
+        $music_mood = FrontMusicKitController::joinArtist($music_id)
+            ->whereIn('music_kits.id', RelationshipMood::select('type_id')
+                ->where('type', 'music_kit')
                 ->whereIn('mood_id', $mood_ids));
 
-
-        $music_list = FrontMusicKitController::joinArtist()
+        $music_list = FrontMusicKitController::joinArtist($music_id)
             ->union($music_genre)
             ->union($music_theme)
             ->union($music_instrument)
             ->union($music_mood)
-            ->whereNot('music.id', $music_id)
             ->paginate(8);
 
         return $music_list;
     }
 
-    public static function joinArtist()
+    public static function joinArtist(int $music_kit_id)
     {
-        return Music::select(
-            'music.*',
+        return MusicKit::select(
             'music_artists.name as music_artist_name',
             'music_kits.*'
         )
-            ->join('music_artists', 'music.music_artist_id', '=', 'music_artists.id')
-            ->join('music_kits', 'music_kits.music_id', '=', 'music.id');
+            ->join('music_artists', 'music_kits.music_artist_id', '=', 'music_artists.id')
+            ->where('music_kits.id', '!=', $music_kit_id);
     }
 }

@@ -192,7 +192,8 @@
     <form class="admin-form" action="{{ route('part.create') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="admin-form__flex">
-            <input type="hidden" name="music_id" value="{{ $music->id }}">
+            <input type="hidden" name="type" value="music">
+            <input type="hidden" name="type_id" value="{{ $music->id }}">
             <label class="admin-label admin-form__flex_long">
                 <span>Название</span>
                 <input class="admin-input" type="text" name="part_name" value="{{ old('part_name') }}"

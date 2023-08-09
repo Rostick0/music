@@ -10,7 +10,8 @@ class MusicPart extends Model
     use HasFactory;
 
     protected $fillable = [
-        'music_id',
+        'type_id',
+        'type',
         'name',
         'link',
         'duration'
