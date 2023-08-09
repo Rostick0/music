@@ -30,16 +30,4 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
-
-    'driver' => env('MAIL_DRIVER', 'smtp'),
-    'host' => env('MAIL_HOST', 'smtp.beget.com'),
-    'port' => env('MAIL_PORT', 25),
-    'from' => [
-        'address' => 'nikitaf@topaudio.store',
-        'name' => 'TopAudio',
-    ],
-    'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-    'username' => env('MAIL_USERNAME', 'nikitaf@topaudio.store'),
-    'password' => env('MAIL_PASSWORD', 'secretpass'),
-
 ];

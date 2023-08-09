@@ -659,6 +659,34 @@ input[type=range] {
         }
     }
 
+    &__volume {
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        position: relative;
+
+        &:hover {
+            .player-volume {
+                display: block;
+            }
+        }
+
+        .player-volume {
+            display: none;
+            padding-bottom: 3.25rem;
+            position: absolute;
+
+            &__inner {
+                background-color: var(--white);
+                border-radius: .3125rem;
+                box-shadow: 0 .3125rem .93rem 0 rgba(27, 18, 30, 0.10);
+                padding: .625rem;
+                z-index: 1000;
+            }
+
+        }
+    }
+
     &._show {
         transform: translateY(0);
     }

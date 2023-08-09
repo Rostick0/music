@@ -52,22 +52,25 @@
     <div class="player__audio" data-music="1690208753.mp3"></div>
     <button class="player__volume">
         <div class="player-volume">
-            <div class="player-volume__status" dir="rtl">
-                <input type="range" orient="vertical" />
+            <div class="player-volume__inner">
+                <div class="player-volume__status" dir="rtl">
+                    <input class="player-volume__input" min="0" max="100" type="range" orient="vertical" />
+                </div>
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M12.9901 4.26984C12.7616 4.15565 12.5059 4.10735 12.2515 4.13034C11.9972 4.15333 11.7543 4.24671 11.55 4.4L5.5 8.25H2.75C2.38533 8.25 2.03559 8.39487 1.77773 8.65273C1.51987 8.91059 1.375 9.26033 1.375 9.625V12.375C1.375 12.7397 1.51987 13.0894 1.77773 13.3473C2.03559 13.6051 2.38533 13.75 2.75 13.75H5.5L11.55 17.6C11.7543 17.7532 11.9972 17.8465 12.2515 17.8694C12.5058 17.8924 12.7615 17.844 12.9899 17.7298C13.2183 17.6156 13.4104 17.4401 13.5446 17.2229C13.6789 17.0057 13.75 16.7554 13.75 16.5V5.5C13.7501 5.24461 13.679 4.99424 13.5448 4.77697C13.4106 4.55969 13.2185 4.38408 12.9901 4.26984Z"
+                        stroke="#1B121E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    <path
+                        d="M19.6743 14.4375C20.2945 13.4655 20.624 12.3364 20.624 11.1834C20.624 10.0303 20.2945 8.90126 19.6743 7.9292"
+                        stroke="#1B121E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    <path
+                        d="M17.0151 13.2376C17.4788 12.6669 17.7319 11.954 17.7319 11.2187C17.7319 10.4833 17.4788 9.77043 17.0151 9.19971"
+                        stroke="#1B121E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M5.5 8.25V13.75" stroke="#1B121E" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
             </div>
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                    d="M12.9901 4.26984C12.7616 4.15565 12.5059 4.10735 12.2515 4.13034C11.9972 4.15333 11.7543 4.24671 11.55 4.4L5.5 8.25H2.75C2.38533 8.25 2.03559 8.39487 1.77773 8.65273C1.51987 8.91059 1.375 9.26033 1.375 9.625V12.375C1.375 12.7397 1.51987 13.0894 1.77773 13.3473C2.03559 13.6051 2.38533 13.75 2.75 13.75H5.5L11.55 17.6C11.7543 17.7532 11.9972 17.8465 12.2515 17.8694C12.5058 17.8924 12.7615 17.844 12.9899 17.7298C13.2183 17.6156 13.4104 17.4401 13.5446 17.2229C13.6789 17.0057 13.75 16.7554 13.75 16.5V5.5C13.7501 5.24461 13.679 4.99424 13.5448 4.77697C13.4106 4.55969 13.2185 4.38408 12.9901 4.26984Z"
-                    stroke="#1B121E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                <path
-                    d="M19.6743 14.4375C20.2945 13.4655 20.624 12.3364 20.624 11.1834C20.624 10.0303 20.2945 8.90126 19.6743 7.9292"
-                    stroke="#1B121E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                <path
-                    d="M17.0151 13.2376C17.4788 12.6669 17.7319 11.954 17.7319 11.2187C17.7319 10.4833 17.4788 9.77043 17.0151 9.19971"
-                    stroke="#1B121E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M5.5 8.25V13.75" stroke="#1B121E" stroke-width="1.5" stroke-linecap="round"
-                    stroke-linejoin="round" />
-            </svg>
         </div>
         <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path

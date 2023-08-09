@@ -1,5 +1,5 @@
 import { throttle } from './optimization';
-import { addClass, addClassOnce, normalizeTime, objConvertUrl, removeClass, removeEmpty } from './helpers';
+import { addClass, addClassOnce, getLocalVolume, normalizeTime, objConvertUrl, removeClass, removeEmpty, setLocalVolume } from './helpers';
 const csrfToken = document.querySelector('meta[name="csrf-token"]');
 const STORAGE_URL = '/storage/upload';
 const IMAGE_URL = STORAGE_URL + '/image/';
@@ -73,10 +73,19 @@ setSelects();
 (function () {
     let wavesurferPlayer = null;
     const player = document.querySelector('.player');
+    const playerVolume = player?.querySelector('.player-volume__input');
     const plays = [];
     const musicItems = [];
     const musicList = [];
     let activeMusic = null;
+
+    if (player) {
+        playerVolume.value = getLocalVolume() * 100;
+
+        playerVolume.oninput = throttle(e => {
+            setLocalVolume(e.target.value / 100)
+        }, 20);
+    }
 
     document.querySelectorAll('.track-item__audio')?.forEach(item => {
         const dataMusic = item.getAttribute('data-music');
@@ -181,7 +190,7 @@ setSelects();
                 addClassOnce(player, '_active');
                 addClass(item, '_active');
                 wavesurfer?.play();
-                wavesurfer?.setVolume(0.3)
+                wavesurfer?.setVolume(getLocalVolume())
 
                 wavesurferPlayer?.unAll();
                 activeMusic = dataMusic;
