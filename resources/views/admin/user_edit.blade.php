@@ -71,7 +71,7 @@
             <h2 class="admin-remove-claim__title">Заявки на remove claim</h2>
             @foreach ($remove_claims as $remove_claim)
                 <ul class="admin-remove-claim__list">
-                    <li class="admin-remove-claim__item">
+                    <li class="admin-remove-claim__item aling-items-end">
                         <a class="admin-label" target="_blank" href={{ $remove_claim->link }}>
                             <span>Remove claim</span>
                             <span class="admin-input text-ellipsis"
@@ -85,6 +85,10 @@
                             <span>Статус</span>
                             <span class="admin-input">{{ $remove_claim->status }}</span>
                         </label>
+                        <div class="">
+                            <a class="admin-button"
+                                href="{{ route('remove_claim.edit', ['id' => $remove_claim->id]) }}">Изменить</a>
+                        </div>
                     </li>
                 </ul>
             @endforeach

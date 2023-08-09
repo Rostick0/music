@@ -94,6 +94,7 @@ Route::group(['prefix' => 'admin'], function ($router) {
         Route::post('create', [SubscriptionTypeController::class, 'store']);
         Route::get('{id}', [SubscriptionTypeController::class, 'edit'])->name('subscription_type.edit');
         Route::post('{id}', [SubscriptionTypeController::class, 'update']);
+        Route::post('delete/{id}', [SubscriptionTypeController::class, 'destroy'])->name('subscription_type.delete');
     });
 
     Route::group(['prefix' => 'users'], function ($router) {
@@ -104,7 +105,7 @@ Route::group(['prefix' => 'admin'], function ($router) {
     });
 
     Route::group(['prefix' => 'remove_claim'], function ($router) {
-        Route::get('{id}', [RemoveClaimController::class, 'edit']);
+        Route::get('{id}', [RemoveClaimController::class, 'edit'])->name('remove_claim.edit');
         Route::post('{id}', [RemoveClaimController::class, 'update']);
     });
 
