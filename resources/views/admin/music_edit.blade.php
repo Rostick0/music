@@ -1,5 +1,10 @@
 @extends('layout.admin.index')
 
+@php
+    $check_link = App\Http\Controllers\MusicUploadController::check($music->link);
+    $check_demo = App\Http\Controllers\MusicUploadController::check($music->link_demo, 'music_demo');
+@endphp
+
 @section('html')
     {{-- {{ dd($music->theme) }} --}}
     <form class="admin-form" action="{{ url()->current() }}" method="post" enctype="multipart/form-data">
@@ -25,22 +30,34 @@
         <div class="admin-form__flex">
             <label class="admin-label">
                 <span>Трэк*</span>
-                <input class="admin-input" type="file" name="link" accept=".mp3" value="{{ old('link') }}">
+                <span class="admin-file-upload">
+                    <input class="admin-file-upload__input" type="file" name="link" accept=".mp3"
+                        value="{{ old('link') }}" required>
+                    <span class="admin-input">
+                        <span class="admin-file-upload__name">{{ $check_link ? 'Загружен' : 'Загрузить файл' }}</span>
+                    </span>
+                </span>
                 @error('link')
                     <span class="error">{{ $message }}</span>
                 @enderror
-                @if (App\Http\Controllers\MusicUploadController::check($music->link))
+                @if ($check_link)
                     <span>{{ App\Http\Controllers\MusicUploadController::getViewLink($music->link) }}</span>
                     <audio class="admin-audio" src="{{ Storage::url('upload/music/' . $music->link) }}" controls></audio>
                 @endif
             </label>
             <label class="admin-label">
                 <span>Демо трэк</span>
-                <input class="admin-input" type="file" name="link_demo" accept=".mp3" value="{{ old('link_demo') }}">
+                <span class="admin-file-upload">
+                    <input class="admin-file-upload__input" type="file" name="link_demo" accept=".mp3"
+                        value="{{ old('link_demo') }}" required>
+                    <span class="admin-input">
+                        <span class="admin-file-upload__name">{{ $check_demo ? 'Загружен' : 'Загрузить файл' }}</span>
+                    </span>
+                </span>
                 @error('link_demo')
                     <span class="error">{{ $message }}</span>
                 @enderror
-                @if (App\Http\Controllers\MusicUploadController::check($music->link_demo, 'music_demo'))
+                @if ($check_demo)
                     <span>{{ App\Http\Controllers\MusicUploadController::getViewLink($music->link) }}</span>
                     <audio class="admin-audio" src="{{ Storage::url('upload/music_demo/' . $music->link_demo) }}"
                         controls></audio>

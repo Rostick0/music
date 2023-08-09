@@ -30,7 +30,7 @@ class SiteMenuController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|max:32',
-            'site_page_id' => 'required|' . Rule::exists('cities', 'id'),
+            'site_page_id' => 'required|' . Rule::exists('site_pages', 'id'),
             'order' => 'required|numeric'
         ]);
 
@@ -54,7 +54,7 @@ class SiteMenuController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|max:32',
-            'site_page_id' => 'required|' . Rule::exists('cities', 'id'),
+            'site_page_id' => 'required|' . Rule::exists('site_pages', 'id'),
             'order' => 'required|numeric'
         ]);
 

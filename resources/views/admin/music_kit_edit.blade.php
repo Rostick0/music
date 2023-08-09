@@ -1,5 +1,9 @@
 @extends('layout.admin.index')
 
+@php
+    $check_link = App\Http\Controllers\MusicUploadController::check($music_kit->link, 'music_kit');
+@endphp
+
 @section('html')
     <form class="admin-form" action="{{ url()->current() }}" method="post" enctype="multipart/form-data">
         @csrf
@@ -34,12 +38,18 @@
         <div class="admin-form__flex">
             <label class="admin-label">
                 <span>Трэк*</span>
-                <input class="admin-input" type="file" name="link" accept=".mp3" value="{{ old('link') }}"
-                    required>
+
+                <span class="admin-file-upload">
+                    <input class="admin-file-upload__input" type="file" name="link" accept=".mp3"
+                        value="{{ old('link') }}" required>
+                    <span class="admin-input">
+                        <span class="admin-file-upload__name">{{ $check_link ? 'Загружен' : 'Загрузить файл' }}</span>
+                    </span>
+                </span>
                 @error('link')
                     <span class="error">{{ $message }}</span>
                 @enderror
-                @if (App\Http\Controllers\MusicUploadController::check($music_kit->link, 'music_kit'))
+                @if ($check_link)
                     <span>{{ App\Http\Controllers\MusicUploadController::getViewLink($music_kit->link, 'music_kit') }}</span>
                     <audio class="admin-audio" src="{{ Storage::url('upload/music_kit/' . $music_kit->link) }}"
                         controls></audio>

@@ -114,7 +114,9 @@ setSelects();
             progressColor: '#FF1111',
             url: STORAGE_URL + musicUrl,
             height: 40,
+            volume: 0
         });
+
 
         wavesurferPlayer = wavesurferPlayerInner;
 
@@ -179,6 +181,8 @@ setSelects();
                 addClassOnce(player, '_active');
                 addClass(item, '_active');
                 wavesurfer?.play();
+                wavesurfer?.setVolume(0.3)
+
                 wavesurferPlayer?.unAll();
                 activeMusic = dataMusic;
                 audioPlayerEdit({

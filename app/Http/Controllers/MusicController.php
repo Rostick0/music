@@ -179,7 +179,7 @@ class MusicController extends Controller
             'music_artists' => 'required',
             'title' => 'required|max:255',
             'link' => 'required|mimes:mp3',
-            'link_demo' => 'mimes:mp3',
+            'link_demo' => 'required|mimes:mp3',
             'publisher' => 'max:255',
             'distr' => 'max:255',
             'description' => 'max:65536',
@@ -259,7 +259,7 @@ class MusicController extends Controller
     {
         $request->validate([
             'music_artists' => 'required',
-            'title' => 'max:255',
+            'title' => 'required|max:255',
             'link' => 'mimes:mp3',
             'link_demo' => 'mimes:mp3',
             'publisher' => 'max:255',

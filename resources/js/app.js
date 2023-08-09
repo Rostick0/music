@@ -21,6 +21,23 @@ import { asyncSelect } from './ui';
 })();
 
 (function () {
+    const adminFileUpload = document.querySelectorAll('.admin-file-upload');
+
+    if (!adminFileUpload?.length) return;
+
+    adminFileUpload.forEach(item => {
+        const adminFileUploadInput = item.querySelector('.admin-file-upload__input');
+        const adminfileUploadName = item.querySelector('.admin-file-upload__name');
+
+        adminFileUploadInput.onchange = function () {
+            const file = this.files[0]
+
+            adminfileUploadName.textContent = file?.name;
+        }
+    })
+})();
+
+(function () {
     new LazyLoad({
         elements_selector: ".lazy"
     });
