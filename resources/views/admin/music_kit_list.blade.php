@@ -9,14 +9,86 @@
         <div class="admin-filter__inputs">
             <label class="admin-label w-100">
                 <span>Название</span>
-                <input class="admin-input" type="search" placeholder="Название" name="name"
-                    value={{ Request::get('name') }}>
+                <input class="admin-input" type="search" placeholder="Название" name="music_artists"
+                    value={{ Request::get('music_artists') }}>
             </label>
             <label class="admin-label w-100">
-                <span>Ссылка</span>
-                <input class="admin-input" type="search" placeholder="Ссылка" name="link"
-                    value={{ Request::get('link') }}>
+                <span>Автор</span>
+                <input class="admin-input" type="search" placeholder="Автор" name="artists"
+                    value={{ Request::get('artists') }}>
             </label>
+            <div class="admin-label w-100">
+                <span>Тема</span>
+                <details class="admin-details">
+                    <summary class="admin-details__summary">
+                        <div class="admin-input">Тема</div>
+                    </summary>
+                    <div class="admin-details__content">
+                        @foreach ($genres as $genre)
+                            <label class="admin-checkbox">
+                                <input class="admin-checkbox__input" type="checkbox" name="genres[]"
+                                    @if (array_search($genre->id, Request::get('genres') ?? []) !== false) checked @endif value="{{ $genre->id }}">
+                                <span class="admin-checkbox__icon"></span>
+                                <span>{{ $genre->name }}</span>
+                            </label>
+                        @endforeach
+                    </div>
+                </details>
+            </div>
+            <div class="admin-label w-100">
+                <span>Тема</span>
+                <details class="admin-details">
+                    <summary class="admin-details__summary">
+                        <div class="admin-input">Тема</div>
+                    </summary>
+                    <div class="admin-details__content">
+                        @foreach ($themes as $theme)
+                            <label class="admin-checkbox">
+                                <input class="admin-checkbox__input" type="checkbox" name="themes[]"
+                                    @if (array_search($theme->id, Request::get('themes') ?? []) !== false) checked @endif value="{{ $theme->id }}">
+                                <span class="admin-checkbox__icon"></span>
+                                <span>{{ $theme->name }}</span>
+                            </label>
+                        @endforeach
+                    </div>
+                </details>
+            </div>
+            <div class="admin-label w-100">
+                <span>Инструменты</span>
+                <details class="admin-details">
+                    <summary class="admin-details__summary">
+                        <div class="admin-input">Инструменты</div>
+                    </summary>
+                    <div class="admin-details__content">
+                        @foreach ($instruments as $instrument)
+                            <label class="admin-checkbox">
+                                <input class="admin-checkbox__input" type="checkbox" name="instruments[]"
+                                    @if (array_search($instrument->id, Request::get('instruments') ?? []) !== false) checked @endif value="{{ $instrument->id }}">
+                                <span class="admin-checkbox__icon"></span>
+                                <span>{{ $instrument->name }}</span>
+                            </label>
+                        @endforeach
+                    </div>
+                </details>
+            </div>
+            <div class="admin-label w-100">
+                <span>Настроение</span>
+                <details class="admin-details">
+                    <summary class="admin-details__summary">
+                        <div class="admin-input">Настроение</div>
+                    </summary>
+                    <div class="admin-details__content">
+                        @foreach ($moods as $mood)
+                            <label class="admin-checkbox">
+                                <input class="admin-checkbox__input" type="checkbox" name="moods[]"
+                                    @if (array_search($mood->id, Request::get('moods') ?? []) !== false) checked @endif value="{{ $mood->id }}">
+                                <span class="admin-checkbox__icon"></span>
+                                <span>{{ $mood->name }}</span>
+                            </label>
+                        @endforeach
+                    </div>
+                </details>
+            </div>
             <label class="admin-label w-100">
                 <span>Минимальное время</span>
                 <input class="admin-input" type="time" name="min_time" value={{ Request::get('min_time') }}>

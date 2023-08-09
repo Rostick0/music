@@ -32,7 +32,7 @@
                 <span>Трэк*</span>
                 <span class="admin-file-upload">
                     <input class="admin-file-upload__input" type="file" name="link" accept=".mp3"
-                        value="{{ old('link') }}" required>
+                        value="{{ old('link') }}">
                     <span class="admin-input">
                         <span class="admin-file-upload__name">{{ $check_link ? 'Загружен' : 'Загрузить файл' }}</span>
                     </span>
@@ -49,7 +49,7 @@
                 <span>Демо трэк</span>
                 <span class="admin-file-upload">
                     <input class="admin-file-upload__input" type="file" name="link_demo" accept=".mp3"
-                        value="{{ old('link_demo') }}" required>
+                        value="{{ old('link_demo') }}">
                     <span class="admin-input">
                         <span class="admin-file-upload__name">{{ $check_demo ? 'Загружен' : 'Загрузить файл' }}</span>
                     </span>

@@ -2,15 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Genre;
+use App\Models\Instrument;
+use App\Models\Mood;
 use App\Models\Music;
+use App\Models\MusicArtist;
 use App\Models\MusicKit;
 use App\Models\RelationshipGenre;
 use App\Models\RelationshipInstrument;
 use App\Models\RelationshipMood;
 use App\Models\RelationshipTheme;
+use App\Models\Theme;
+use Illuminate\Database\Query\JoinClause;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Validation\Rule;
+use Psy\VersionUpdater\Installer;
 use wapmorgan\Mp3Info\Mp3Info;
 
 class MusicKitController extends Controller
@@ -21,13 +28,40 @@ class MusicKitController extends Controller
     public function index(Request $request)
     {
         $where_sql = [];
+        if ($request->title) $where_sql[] = ['music_kits.title', 'LIKE', '%' . $request->title . '%'];
+        if ($request->music_artists) $where_sql[] = ['music_artists.name', 'LIKE', '%' . $request->music_artists . '%'];
 
-        if ($request->name) $where_sql[] = ['music_kits', 'LIKE', '%' . $request->name . '%'];
-        if ($request->link) $where_sql[] = ['music_kits', 'LIKE', '%' . $request->link . '%'];
-
-        $music_kits = MusicKit::where($where_sql)
+        $music_kits = MusicKit::select(
+            'music_kits.*',
+            'music_artists.name as music_artist_name',
+        )
+            ->join('music_artists', 'music_kits.music_artist_id', '=', 'music_artists.id')
+            ->where($where_sql)
             ->orderByDesc('id');
-
+        if ($request->genres) {
+            $music_kits->whereIn('music_kits.id', RelationshipGenre::select('type_id')
+                ->where('type', 'music_kits')
+                ->whereIn('genre_id', $request->genres)
+                ->get());
+        }
+        if ($request->themes) {
+            $music_kits->whereIn('music_kits.id', RelationshipTheme::select('type_id')
+                ->where('type', 'music_kits')
+                ->whereIn('theme_id', $request->themes)
+                ->get());
+        }
+        if ($request->instruments) {
+            $music_kits->whereIn('music_kits.id', RelationshipInstrument::select('type_id')
+                ->where('type', 'music_kits')
+                ->whereIn('instrument_id', $request->instruments)
+                ->get());
+        }
+        if ($request->moods) {
+            $music_kits->whereIn('music_kits.id', RelationshipMood::select('type_id')
+                ->where('type', 'music_kits')
+                ->whereIn('mood_id', $request->moods)
+                ->get());
+        }
         if ($request->min_time && $request->max_time) {
             $music_kits->whereBetween('duration', [$request->min_time, $request->max_time]);
         } else if ($request->min_time && !$request->max_time) {
@@ -35,11 +69,19 @@ class MusicKitController extends Controller
         } else if (!$request->min_time && $request->max_time) {
             $music_kits->where('duration', '<', $request->max_time);
         }
-
         $music_kits = $music_kits->paginate(app('site')->count_admin ?? 20);
 
+        $genres = Genre::all();
+        $themes = Theme::all();
+        $instruments = Instrument::all();
+        $moods = Mood::all();
+
         return view('admin.music_kit_list', [
-            'music_kits' => $music_kits
+            'music_kits' => $music_kits,
+            'genres' => $genres,
+            'themes' => $themes,
+            'instruments' => $instruments,
+            'moods' => $moods
         ]);
     }
 
@@ -53,55 +95,51 @@ class MusicKitController extends Controller
         if ($request->count && $request->count > app('site')->count_front) {
             $count = app('site')->count_front;
         } else {
-            $count = $request->count;
+            $count = $request->count ?? app('site')->count_front;
         }
 
-        $music_kit_list = Music::select(
-            'music.title as music_title',
-            'music.image as music_image',
-            'music_artists.name as music_artist_name',
+        $music_kits = MusicKit::select(
             'music_kits.*',
+            'music_artists.name as music_artist_name',
         )
-            ->join('music_kits', 'music_kits.music_id', '=', 'music.id')
             ->join('music_artists', 'music.music_artist_id', '=', 'music_artists.id')
             ->where($where_sql)
-            ->inRandomOrder()
             ->orderByDesc('id');
         if ($request->genres) {
-            $music_kit_list->whereIn('music.id', RelationshipGenre::select('type_id')
-                ->where('type', 'music')
+            $music_kits->whereIn('music_kits.id', RelationshipGenre::select('type_id')
+                ->where('type', 'music_kit')
                 ->whereIn('genre_id', is_array($request->genres) ? $request->genres : [$request->genres])
                 ->get());
         }
         if ($request->themes) {
-            $music_kit_list->whereIn('music.id', RelationshipTheme::select('type_id')
-                ->where('type', 'music')
+            $music_kits->whereIn('music_kits.id', RelationshipTheme::select('type_id')
+                ->where('type', 'music_kit')
                 ->whereIn('theme_id', is_array($request->themes) ? $request->themes : [$request->themes])
                 ->get());
         }
         if ($request->instruments) {
-            $music_kit_list->whereIn('music.id', RelationshipInstrument::select('type_id')
-                ->where('type', 'music')
+            $music_kits->whereIn('music_kits.id', RelationshipInstrument::select('type_id')
+                ->where('type', 'music_kit')
                 ->whereIn('instrument_id', is_array($request->instruments) ? $request->instruments : [$request->instruments])
                 ->get());
         }
         if ($request->moods) {
-            $music_kit_list->whereIn('music.id', RelationshipMood::select('type_id')
-                ->where('type', 'music')
+            $music_kits->whereIn('music_kits.id', RelationshipMood::select('type_id')
+                ->where('type', 'music_kit')
                 ->whereIn('mood_id', is_array($request->moods) ? $request->moods : [$request->moods])
                 ->get());
         }
 
-        $music_kit_list = $music_kit_list->paginate($count);
+        $music_kits = $music_kits->paginate($count);
 
         if ($type === 'json') return response(
             [
-                'data' => $music_kit_list,
-                'links_html' => Blade::compileString($music_kit_list->appends($request->all())->links('vendor.front-pagination'))
+                'data' => $music_kits,
+                'links_html' => Blade::compileString($music_kits->appends($request->all())->links('vendor.front-pagination'))
             ]
         );
 
-        return $music_kit_list;
+        return $music_kits;
     }
 
     /**
@@ -110,9 +148,11 @@ class MusicKitController extends Controller
     public function create()
     {
         $music_list = Music::orderByDesc('id')->limit(20)->get();
+        $genres = Genre::all();
 
         return view('admin.music_kit_create', [
-            'music_list' => $music_list
+            'music_list' => $music_list,
+            'genres' => $genres
         ]);
     }
 
@@ -122,21 +162,52 @@ class MusicKitController extends Controller
     public function store(Request $request)
     {
         $validator = $request->validate([
-            'name' => 'required|max:255',
+            'music_artists' => 'required',
+            'title' => 'required|max:255',
             'link' => 'required|mimes:mp3',
+            'link_demo' => 'required|mimes:mp3',
+            'publisher' => 'max:255',
+            'distr' => 'max:255',
+            'description' => 'max:65536',
+            'image' => 'image|mimes:jpeg,png,jpg',
+            'seo_title' => 'max:255',
+            'seo_description' => 'max:255',
             'music_id' => 'required|' . Rule::exists('music', 'id'),
         ]);
+
+        $music_artists = MusicArtist::firstOrCreate([
+            'name' => trim($request->music_artists)
+        ]);
+
+        $image = ImageController::upload($request->file('image'));
 
         $audio = new Mp3Info($request->link, true);
         $duration = gmdate("H:i:s", $audio->duration);
         $music = MusicUploadController::upload($request->file('link'), 'music_kit');
+        $music_demo = MusicUploadController::upload($request->file('link_demo'), 'music_kit_demo');
 
         $music_kit = MusicKit::create([
-            'name' => $request->name,
+            'music_artist_id' => $music_artists->id,
+            'title' => $request->title,
             'link' => $music,
+            'link_demo' => $music_demo,
+            'publisher' => $request->publisher,
+            'distr' => $request->distr,
+            'is_active' => $request->has('is_active') ? 1 : 0,
+            'is_free' => $request->has('is_free') ? 1 : 0,
+            'description' => $request->description,
+            'image' => $image,
+            'seo_title' => $request->seo_title,
+            'seo_description' => $request->seo_description,
             'music_id' => $request->music_id,
             'duration' => $duration
+
         ]);
+
+        RelationshipGenreController::createAndDeleteRelationship($request->genres, $music_kit->id, 'music_kit');
+        RelationshipInstrumentController::createRelationship($request->instruments, $music_kit->id, 'music_kit');
+        RelationshipMoodController::createRelationship($request->moods, $music_kit->id, 'music_kit');
+        RelationshipThemeController::createRelationship($request->themes, $music_kit->id, 'music_kit');
 
         return redirect()->route('music_kit.edit', [
             'id' => $music_kit->id
@@ -158,9 +229,15 @@ class MusicKitController extends Controller
             ->where('music_kits.id', $id)
             ->first();
 
+        $music_artist = MusicArtist::find($music_kit->music_artist_id);
+
+        $genres = Genre::all();
+
         return view('admin.music_kit_edit', [
             'music_kit' => $music_kit,
-            'music_list' => $music_list
+            'music_list' => $music_list,
+            'genres' => $genres,
+            'music_artist' => $music_artist
         ]);
     }
 
@@ -170,22 +247,44 @@ class MusicKitController extends Controller
     public function update(Request $request, int $id)
     {
         $validator = $request->validate([
-            'name' => 'required|max:255',
+            'music_artists' => 'required',
+            'title' => 'required|max:255',
             'link' => 'mimes:mp3',
+            'link_demo' => 'mimes:mp3',
+            'publisher' => 'max:255',
+            'distr' => 'max:255',
+            'description' => 'max:65536',
+            'image' => 'image|mimes:jpeg,png,jpg',
+            'seo_title' => 'max:255',
+            'seo_description' => 'max:255',
             'music_id' => 'required|' . Rule::exists('music', 'id'),
         ]);
 
         $music_kit_old = MusicKit::find($id);
 
+        $music_artists = MusicArtist::firstOrCreate([
+            'name' => trim($request->music_artists)
+        ]);
+
         $update_data = [
-            'name' => $request->name,
+            'music_artist_id' => $music_artists->id,
+            'title' => $request->title,
+            'publisher' => $request->publisher,
+            'distr' => $request->distr,
+            'is_active' => $request->has('is_active') ? 1 : 0,
+            'is_free' => $request->has('is_free') ? 1 : 0,
+            'description' => $request->description,
+            'seo_title' => $request->seo_title,
+            'seo_description' => $request->seo_description,
             'music_id' => $request->music_id,
         ];
 
+        $image = ImageController::upload($request->file('image'));
         $upload = MusicUploadController::upload($request->file('link'), 'music_kit');
+        $upload_demo = MusicUploadController::upload($request->file('link_demo'), 'music_kit_demo');
 
         if ($upload) {
-            $audio = new Mp3Info($request->link, true);
+            $audio = new Mp3Info($request->file('link'), true);
             $audio_duration = gmdate("H:i:s", $audio->duration);
 
             $update_data['link'] = $upload;
@@ -193,6 +292,23 @@ class MusicKitController extends Controller
 
             MusicUploadController::destroy($music_kit_old->link, 'music_kit');
         }
+
+        if ($upload_demo) {
+            $update_data['link_demo'] = $upload_demo;
+
+            if ($music_kit_old->link_demo) MusicUploadController::destroy($music_kit_old->link_demo, 'music_kit_demo');
+        }
+
+        if ($image) {
+            $update_data['image'] = $image;
+
+            if ($music_kit_old->image) ImageController::destroy($music_kit_old->image);
+        }
+
+        RelationshipGenreController::createAndDeleteRelationship($request->genres, $id, 'music_kit');
+        RelationshipInstrumentController::createAndDeleteRelationship($request->instruments, $id, 'music_kit');
+        RelationshipMoodController::createAndDeleteRelationship($request->moods, $id, 'music_kit');
+        RelationshipThemeController::createAndDeleteRelationship($request->themes, $id, 'music_kit');
 
         $music_kit_old->update($update_data);
 
