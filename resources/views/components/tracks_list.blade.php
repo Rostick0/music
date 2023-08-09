@@ -1,5 +1,12 @@
 @props(['music_list'])
 
+@php
+    function favorite($favorite_id, $music_item_id)
+    {
+        return $favorite_id || (is_array(json_decode(Cookie::get('favorite'))) && in_array($music_item_id, json_decode(Cookie::get('favorite'))));
+    }
+@endphp
+
 <ul class="tracks__list">
     @if (empty($music_list))
         <h3 class="tracks__none">Music not found</h3>
@@ -46,16 +53,17 @@
                     <div class="track-time track-item__time">
                         {{ App\Http\Controllers\MusicController::normalizeTime($music_item->duration) }}</div>
                 </div>
+                @php
+                    $music_item_favorite = favorite($music_item->favorite_id, $music_item->id);
+                @endphp
                 <div class="track-item__audio track-item__audio_{{ $music_item->id }}"
                     data-music="{{ '/music/' . $music_item->link }}" data-title="{{ $music_item->title }}"
-                    data-artist="{{ $music_item->music_artist_name }}"
-                    data-time="{{ App\Http\Controllers\MusicController::normalizeTime($music_item->duration) }}">
+                    data-artist="{{ $music_item->music_artist_name }}" data-favorite="{{ $music_item_favorite }}"
+                    data-time="{{ App\Http\Controllers\MusicController::normalizeTime($music_item->duration) }}"
+                    data-id="{{ $music_item->id }}">
                 </div>
                 <div class="track-item__buttons">
-                    @if (
-                        $music_item->favorite_id ||
-                            (is_array(json_decode(Cookie::get('favorite'))) &&
-                                in_array($music_item->id, json_decode(Cookie::get('favorite')))))
+                    @if ($music_item_favorite)
                         <form
                             action="{{ route('favorite.delete', [
                                 'id' => $music_item->id,

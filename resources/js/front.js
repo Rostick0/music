@@ -1,6 +1,6 @@
 import { throttle } from './optimization';
 import { addClass, addClassOnce, getLocalVolume, normalizeTime, objConvertUrl, removeClass, removeEmpty, setLocalVolume } from './helpers';
-const csrfToken = document.querySelector('meta[name="csrf-token"]');
+const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content;
 const STORAGE_URL = '/storage/upload';
 const IMAGE_URL = STORAGE_URL + '/image/';
 const MUSIC_URL = '/music/';
@@ -74,17 +74,26 @@ setSelects();
     let wavesurferPlayer = null;
     const player = document.querySelector('.player');
     const playerVolume = player?.querySelector('.player-volume__input');
+    const playerCopy = player?.querySelector('.player__copy');
     const plays = [];
     const musicItems = [];
     const musicList = [];
     let activeMusic = null;
 
-    if (player) {
+    if (player && playerVolume) {
         playerVolume.value = getLocalVolume() * 100;
 
         playerVolume.oninput = throttle(e => {
             setLocalVolume(e.target.value / 100)
         }, 20);
+    }
+
+    if (player && playerCopy) {
+        playerCopy.onclick = () => {
+            const urlMusic = location.protocol + '//' + location.host + location.pathname + '/track/' + activeMusic.substr(7)
+
+            navigator.clipboard.writeText(urlMusic);
+        }
     }
 
     document.querySelectorAll('.track-item__audio')?.forEach(item => {
@@ -108,12 +117,49 @@ setSelects();
         });
     };
 
-    const audioPlayerEdit = ({ title, artist, time, musicUrl }, itemDom, wavesurfer) => {
+    const musicButton = (musicId, favoriteId) => {
+        if (favoriteId) {
+            return `
+            <form action="/favorite/delete/${musicId}" method="post">
+                <input type="hidden" name="_token" value="${csrfToken}">
+                <button class="track-item__favorite _active">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_98_283)">
+                            <path d="M20.6076 11L23.3959 16.5242L28.7626 17.0558C28.8903 17.0664 29.0124 17.1134 29.1143 17.1913C29.2161 17.2691 29.2936 17.3745 29.3374 17.495C29.3813 17.6154 29.3897 17.7459 29.3616 17.871C29.3336 17.9961 29.2703 18.1106 29.1792 18.2008L24.7626 22.5783L26.4001 28.5267C26.4336 28.6528 26.4299 28.786 26.3895 28.9101C26.3492 29.0343 26.2738 29.1441 26.1724 29.2264C26.0711 29.3087 25.9482 29.36 25.8184 29.3741C25.6886 29.3882 25.5575 29.3645 25.4409 29.3058L20.0001 26.6117L14.5667 29.3025C14.4501 29.3611 14.319 29.3848 14.1893 29.3708C14.0595 29.3567 13.9365 29.3054 13.8352 29.2231C13.7339 29.1408 13.6585 29.0309 13.6181 28.9068C13.5777 28.7827 13.5741 28.6495 13.6076 28.5233L15.2451 22.575L10.8251 18.1975C10.734 18.1072 10.6707 17.9928 10.6427 17.8677C10.6147 17.7426 10.6231 17.6121 10.6669 17.4916C10.7107 17.3712 10.7882 17.2658 10.8901 17.1879C10.9919 17.1101 11.114 17.0631 11.2417 17.0525L16.6084 16.5208L19.3926 11C19.4498 10.8882 19.5369 10.7943 19.644 10.7288C19.7512 10.6632 19.8744 10.6285 20.0001 10.6285C20.1257 10.6285 20.2489 10.6632 20.3561 10.7288C20.4633 10.7943 20.5503 10.8882 20.6076 11Z" stroke="#1B121E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_98_283">
+                                <rect width="20" height="20" fill="white" transform="translate(10 10)"></rect>
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </button>
+            </form>`;
+        }
+
+        return `<form action="http://localhost/favorite/create/${musicId}" method="post">
+        <input type="hidden" name="_token" value="${csrfToken}">
+        <button class="track-item__favorite">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_98_283)">
+                    <path d="M20.6076 11L23.3959 16.5242L28.7626 17.0558C28.8903 17.0664 29.0124 17.1134 29.1143 17.1913C29.2161 17.2691 29.2936 17.3745 29.3374 17.495C29.3813 17.6154 29.3897 17.7459 29.3616 17.871C29.3336 17.9961 29.2703 18.1106 29.1792 18.2008L24.7626 22.5783L26.4001 28.5267C26.4336 28.6528 26.4299 28.786 26.3895 28.9101C26.3492 29.0343 26.2738 29.1441 26.1724 29.2264C26.0711 29.3087 25.9482 29.36 25.8184 29.3741C25.6886 29.3882 25.5575 29.3645 25.4409 29.3058L20.0001 26.6117L14.5667 29.3025C14.4501 29.3611 14.319 29.3848 14.1893 29.3708C14.0595 29.3567 13.9365 29.3054 13.8352 29.2231C13.7339 29.1408 13.6585 29.0309 13.6181 28.9068C13.5777 28.7827 13.5741 28.6495 13.6076 28.5233L15.2451 22.575L10.8251 18.1975C10.734 18.1072 10.6707 17.9928 10.6427 17.8677C10.6147 17.7426 10.6231 17.6121 10.6669 17.4916C10.7107 17.3712 10.7882 17.2658 10.8901 17.1879C10.9919 17.1101 11.114 17.0631 11.2417 17.0525L16.6084 16.5208L19.3926 11C19.4498 10.8882 19.5369 10.7943 19.644 10.7288C19.7512 10.6632 19.8744 10.6285 20.0001 10.6285C20.1257 10.6285 20.2489 10.6632 20.3561 10.7288C20.4633 10.7943 20.5503 10.8882 20.6076 11Z" stroke="#1B121E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                </g>
+                <defs>
+                    <clipPath id="clip0_98_283">
+                        <rect width="20" height="20" fill="white" transform="translate(10 10)"></rect>
+                    </clipPath>
+                </defs>
+            </svg>
+        </button>
+    </form>`;
+    };
+    const audioPlayerEdit = ({ title, artist, time, musicUrl, favoriteId, musicId }, itemDom, wavesurfer) => {
         if (!player) return;
 
         const playerText = document.querySelector('.player__text');
         const playerAudio = player?.querySelector('.player__audio');
         const playerButton = player?.querySelector('.player__button');
+        const playerFavorite = player?.querySelector('.player__favorite');
 
         playerAudio.innerHTML = null;
 
@@ -158,6 +204,8 @@ setSelects();
             }
         };
 
+        playerFavorite.innerHTML = musicButton(musicId, favoriteId);
+
         playerText.innerHTML = `
             <div class="track-item__name" title="${title}">${title}</div>
             <div class="track-item__artist" title="${artist}">${artist}</div>`;
@@ -198,6 +246,8 @@ setSelects();
                     title: trackItemAudio.getAttribute('data-title'),
                     artist: trackItemAudio.getAttribute('data-artist'),
                     time: trackItemAudio.getAttribute('data-time'),
+                    favoriteId: trackItemAudio.getAttribute('data-favorite'),
+                    musicId: trackItemAudio.getAttribute('data-id'),
                     musicUrl: dataMusic
                 }, item, wavesurfer);
                 return;
@@ -257,42 +307,6 @@ setSelects();
 
     initWaveSurfer();
 
-    const musicButton = (musicId, favoriteId) => {
-        if (favoriteId) {
-            return `
-            <form action="/favorite/delete/${musicId}" method="post">
-                <input type="hidden" name="_token" value="${csrfToken}">
-                <button class="track-item__favorite _active">
-                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_98_283)">
-                            <path d="M20.6076 11L23.3959 16.5242L28.7626 17.0558C28.8903 17.0664 29.0124 17.1134 29.1143 17.1913C29.2161 17.2691 29.2936 17.3745 29.3374 17.495C29.3813 17.6154 29.3897 17.7459 29.3616 17.871C29.3336 17.9961 29.2703 18.1106 29.1792 18.2008L24.7626 22.5783L26.4001 28.5267C26.4336 28.6528 26.4299 28.786 26.3895 28.9101C26.3492 29.0343 26.2738 29.1441 26.1724 29.2264C26.0711 29.3087 25.9482 29.36 25.8184 29.3741C25.6886 29.3882 25.5575 29.3645 25.4409 29.3058L20.0001 26.6117L14.5667 29.3025C14.4501 29.3611 14.319 29.3848 14.1893 29.3708C14.0595 29.3567 13.9365 29.3054 13.8352 29.2231C13.7339 29.1408 13.6585 29.0309 13.6181 28.9068C13.5777 28.7827 13.5741 28.6495 13.6076 28.5233L15.2451 22.575L10.8251 18.1975C10.734 18.1072 10.6707 17.9928 10.6427 17.8677C10.6147 17.7426 10.6231 17.6121 10.6669 17.4916C10.7107 17.3712 10.7882 17.2658 10.8901 17.1879C10.9919 17.1101 11.114 17.0631 11.2417 17.0525L16.6084 16.5208L19.3926 11C19.4498 10.8882 19.5369 10.7943 19.644 10.7288C19.7512 10.6632 19.8744 10.6285 20.0001 10.6285C20.1257 10.6285 20.2489 10.6632 20.3561 10.7288C20.4633 10.7943 20.5503 10.8882 20.6076 11Z" stroke="#1B121E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_98_283">
-                                <rect width="20" height="20" fill="white" transform="translate(10 10)"></rect>
-                            </clipPath>
-                        </defs>
-                    </svg>
-                </button>
-            </form>`;
-        }
-
-        return `<form action="http://localhost/favorite/create/${musicId}" method="post">
-        <input type="hidden" name="_token" value="${csrfToken}">
-        <button class="track-item__favorite">
-            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g clip-path="url(#clip0_98_283)">
-                    <path d="M20.6076 11L23.3959 16.5242L28.7626 17.0558C28.8903 17.0664 29.0124 17.1134 29.1143 17.1913C29.2161 17.2691 29.2936 17.3745 29.3374 17.495C29.3813 17.6154 29.3897 17.7459 29.3616 17.871C29.3336 17.9961 29.2703 18.1106 29.1792 18.2008L24.7626 22.5783L26.4001 28.5267C26.4336 28.6528 26.4299 28.786 26.3895 28.9101C26.3492 29.0343 26.2738 29.1441 26.1724 29.2264C26.0711 29.3087 25.9482 29.36 25.8184 29.3741C25.6886 29.3882 25.5575 29.3645 25.4409 29.3058L20.0001 26.6117L14.5667 29.3025C14.4501 29.3611 14.319 29.3848 14.1893 29.3708C14.0595 29.3567 13.9365 29.3054 13.8352 29.2231C13.7339 29.1408 13.6585 29.0309 13.6181 28.9068C13.5777 28.7827 13.5741 28.6495 13.6076 28.5233L15.2451 22.575L10.8251 18.1975C10.734 18.1072 10.6707 17.9928 10.6427 17.8677C10.6147 17.7426 10.6231 17.6121 10.6669 17.4916C10.7107 17.3712 10.7882 17.2658 10.8901 17.1879C10.9919 17.1101 11.114 17.0631 11.2417 17.0525L16.6084 16.5208L19.3926 11C19.4498 10.8882 19.5369 10.7943 19.644 10.7288C19.7512 10.6632 19.8744 10.6285 20.0001 10.6285C20.1257 10.6285 20.2489 10.6632 20.3561 10.7288C20.4633 10.7943 20.5503 10.8882 20.6076 11Z" stroke="#1B121E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                </g>
-                <defs>
-                    <clipPath id="clip0_98_283">
-                        <rect width="20" height="20" fill="white" transform="translate(10 10)"></rect>
-                    </clipPath>
-                </defs>
-            </svg>
-        </button>
-    </form>`;
-    };
     const downloadButton = (link, linkDemo, isFree) => {
         if (
             isFree || hasSubscription

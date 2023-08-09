@@ -23,5 +23,9 @@
         <div class="admin-buttons">
             <button class="admin-button">Изменить</button>
         </div>
+        @if (Session::has('success'))
+            <div class="feedback__success success">{{ Session::get('success') }}</div>
+            <meta http-equiv="refresh" content="2; url={{route('settings')}}">
+        @endif
     </form>
 @endsection

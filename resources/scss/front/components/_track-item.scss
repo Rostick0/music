@@ -104,6 +104,8 @@
     }
 
     &__favorite {
+        display: flex;
+
         &._active {
             svg {
                 fill: var(--main-color);

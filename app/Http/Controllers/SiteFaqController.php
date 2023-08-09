@@ -37,7 +37,7 @@ class SiteFaqController extends Controller
 
         SiteFaq::find($id)->update($validated);
 
-        return back();
+        return back()->with('success', 'Успешно измененно');
     }
 
     public function destroy(int $id)
