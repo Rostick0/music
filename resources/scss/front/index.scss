@@ -659,6 +659,10 @@ input[type=range] {
         }
     }
 
+    &__time {
+        margin-right: 1.25rem;
+    }
+
     &__volume {
         display: flex;
         align-items: flex-end;
