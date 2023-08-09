@@ -128,9 +128,9 @@ Route::group(['prefix' => 'admin'], function ($router) {
         Route::get('list', [SitePageController::class, 'index'])->name('page.list');
         Route::get('create', [SitePageController::class, 'create'])->name('page.create');
         Route::post('create', [SitePageController::class, 'store']);
-        Route::get('{id}', [SitePageController::class, 'edit'])->name('page.edit');
+        Route::get('{id}', [SitePageController::class, 'edit'])->name('site_page.edit');
         Route::post('{id}', [SitePageController::class, 'update']);
-        Route::post('delete/{id}', [SitePageController::class, 'destroy'])->name('page.delete');
+        Route::post('delete/{id}', [SitePageController::class, 'destroy'])->name('site_page.delete');
     });
 
     Route::group(['prefix' => 'components'], function ($router) {

@@ -65,15 +65,24 @@
             </div>
         </div>
         <div class="admin-delete__buttons">
-            <button class="admin-button">Сохранить</button>
-            <a class="admin-button-red"
+            <button class="admin-button admin-delete__button">Сохранить</button>
+            <a class="admin-button-red admin-delete__button"
                 href="{{ route('delete_confirm', [
-                    'type' => 'pages',
+                    'type' => 'site_pages',
                     'type_id' => $page->id,
                 ]) }}">Удалить</a>
         </div>
     </form>
+    <style>
+        .admin-delete__buttons {
+            display: flex;
+            column-gap: 10px;
+        }
 
+        .admin-delete__button {
+            font-size: 16px;
+        }
+    </style>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>

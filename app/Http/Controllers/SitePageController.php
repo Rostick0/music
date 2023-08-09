@@ -72,7 +72,7 @@ class SitePageController extends Controller
             'is_active' => $request->has('is_active') ? 1 : 0
         ]);
 
-        return redirect()->route('page.edit', [
+        return redirect()->route('admin.page_edit', [
             'id' => $site_page->id
         ]);
     }
@@ -160,10 +160,11 @@ class SitePageController extends Controller
      */
     public function destroy(int $id)
     {
-        $site_page = SitePage::find($id)->delete();
+        $site_page = SitePage::find($id);
+        SitePage::destroy($id);
 
         return redirect(route('deleted', [
-            'text' => 'Страница удалена ' . $site_page->name
+            'text' => 'Страница удалена ' . $site_page?->name
         ]));
     }
 }

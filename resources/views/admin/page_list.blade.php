@@ -30,7 +30,7 @@
                     <div>{{ $page->name }}</div>
                     <a target="_blank" href="{{ url($page->url) }}">{{ url($page->url) }}</a>
                     <div>{{ $page->created_at }}</div>
-                    <a href="{{ route('page.edit', ['id' => $page->id]) }}">
+                    <a href="{{ route('site_page.edit', ['id' => $page->id]) }}">
                         <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
                             <path
                                 style="text-indent:0;text-align:start;line-height:normal;text-transform:none;block-progression:tb;-inkscape-font-specification:Bitstream Vera Sans"

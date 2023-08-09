@@ -114,7 +114,7 @@ class ComponentController extends Controller
      */
     public function destroy(int $id)
     {
-        $component = Component::find($id)->name;
+        $component = Component::find($id);
         File::delete($this->get_path($component->path));
 
         Component::destroy($id);
