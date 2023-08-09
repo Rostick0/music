@@ -105,7 +105,7 @@
             <button class="admin-button">Сохранить</button>
             <a class="admin-button-red"
                 href="{{ route('delete_confirm', [
-                    'type' => 'pages',
+                    'type' => 'playlists',
                     'type_id' => $playlist->id,
                 ]) }}">Удалить</a>
         </div>

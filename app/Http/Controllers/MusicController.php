@@ -39,7 +39,7 @@ class MusicController extends Controller
             ->where($where_sql)
             ->orderByDesc('id');
         if ($request->genres) {
-            $music_list->whereIn('music.id', RelationshipTheme::select('type_id')
+            $music_list->whereIn('music.id', RelationshipGenre::select('type_id')
                 ->where('type', 'music')
                 ->whereIn('genre_id', $request->genres)
                 ->get());
@@ -197,8 +197,7 @@ class MusicController extends Controller
         $music_demo = MusicUploadController::upload($request->file('link_demo'), 'music_demo');
 
         $audio = new Mp3Info($request->file('link'), true);
-        // $audio_duration = gmdate("H:i:s", $audio->duration);
-        dd($audio);
+        $audio_duration = gmdate("H:i:s", $audio->duration);
 
         $music = Music::create([
             'music_artist_id' => $music_artists->id,
@@ -211,7 +210,7 @@ class MusicController extends Controller
             'is_free' => $request->has('is_free') ? 1 : 0,
             'description' => $request->description,
             'image' => $image,
-            'duration' => $audio->duration,
+            'duration' => $audio_duration,
             'seo_title' => $request->seo_title,
             'seo_description' => $request->seo_description,
         ]);

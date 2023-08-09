@@ -65,7 +65,7 @@ class SiteMenuController extends Controller
 
     public function destroy(int $id)
     {
-        SiteFaq::destroy($id);
+        SiteMenu::destroy($id);
 
         return back();
     }
