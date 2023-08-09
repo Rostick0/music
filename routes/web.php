@@ -99,6 +99,7 @@ Route::group(['prefix' => 'admin'], function ($router) {
     Route::group(['prefix' => 'users'], function ($router) {
         Route::get('/', [UserController::class, 'index'])->name('user.list');
         Route::get('{id}', [UserController::class, 'edit'])->name('user.edit');
+        Route::post('{id}', [UserController::class, 'update']);
         Route::post('delete/{id}', [UserController::class, 'destroy'])->name('user.delete');
     });
 
@@ -168,7 +169,6 @@ Route::group(['prefix' => 'client'], function ($router) {
         Route::post('create', [ClientRemoveClaimController::class, 'store']);
     });
 
-    Route::get('profile', [ClientUserController::class, 'show'])->name('client.profile');
     Route::get('profile_edit', [ClientUserController::class, 'edit'])->name('client.profile.edit');
     Route::post('profile_edit', [ClientUserController::class, 'update']);
     Route::post('profile_password', [ClientUserController::class, 'password_update'])->name('client.profile_password');

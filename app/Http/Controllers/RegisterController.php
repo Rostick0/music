@@ -40,6 +40,6 @@ class RegisterController extends Controller
 
         if ($user->is_admin) return redirect()->route('admin.music');
 
-        return redirect()->route('client.profile');
+        return redirect()->route('client.profile_edit');
     }
 }

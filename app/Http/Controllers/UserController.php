@@ -62,9 +62,20 @@ class UserController extends Controller
         ]);
     }
 
-    public function update(Request $request)
+    public function update(Request $request, int $id)
     {
-        //
+        $valid = $request->validate([
+            'name' => 'required|max:255',
+            'surname' => 'max:255',
+            'email' => 'required|email|max:255|unique:users,email,' . $id,
+        ]);
+
+        User::find($id)->update([
+            ...$valid,
+            'telephone' => $request->telephone,
+        ]);
+
+        return back();
     }
 
     public function destroy(int $id)

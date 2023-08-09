@@ -25,27 +25,36 @@ class SiteSettingController extends Controller
     public function update(Request $request)
     {
         $validator = $request->validate([
-            'logo' => 'required',
+            'logo' => 'required|mimes:jpeg,png,jpg,svg',
             'name' => 'required',
         ]);
 
+        $old = json_decode(File::get(public_path('config.json')));
+
         $result = [
-            'favicon' => $request->favicon,
             'name' => $request->name,
-            'seo_title' => $request->seo_title,
-            'seo_description' => $request->seo_description,
-            'email' => $request->email,
-            'address' => $request->address,
-            'count_admin' => $request->count_admin,
-            'count_front' => $request->count_front,
-            'about' => $request->about,
+            'seo_title' => $request->seo_title ?? null,
+            'seo_description' => $request->seo_description ?? null,
+            'email' => $request->email ?? null,
+            'address' => $request->address ?? null,
+            'count_admin' => $request->count_admin ?? null,
+            'count_front' => $request->count_front ?? null,
+            'about' => $request->about ?? null,
         ];
 
         $logo = ImageController::upload($request->file('logo'));
-        if ($logo) $request['logo'] = $logo;
+        if ($logo) {
+            $result['logo'] = '/storage/upload/image/' . $logo;
+        } else {
+            $result['logo'] = '/storage/upload/image/' . $old?->logo ?? null;
+        }
 
         $favicon = ImageController::upload($request->file('favicon'));
-        if ($favicon) $request['favicon'] = $favicon;
+        if ($favicon) {
+            $result['favicon'] = $favicon;
+        } else {
+            $result['favicon'] = $old?->favicon ?? null;
+        }
 
         File::put(public_path('config.json'), json_encode($result));
 

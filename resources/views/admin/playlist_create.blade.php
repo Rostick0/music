@@ -20,7 +20,7 @@
             </label>
             <label class="admin-label">
                 <span>Изображение</span>
-                <input class="admin-input" type="file" name="image" value="{{ old('image') }}">
+                <input class="admin-input" type="file" name="image" value="{{ old('image') }}" accept="image/png, image/gif, image/jpeg">
                 @error('image')
                     <span class="error">{{ $message }}</span>
                 @enderror

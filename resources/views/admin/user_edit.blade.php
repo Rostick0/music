@@ -57,14 +57,6 @@
                 <span>Автопродление подписки?</span>
             </label>
         </div>
-        <div class="admin-form__flex">
-            <label class="admin-checkbox">
-                <input class="admin-checkbox__input" type="checkbox" name="is_active"
-                    {{ old('is_active') ?? $user->is_active ? 'checked' : '' }}>
-                <span class="admin-checkbox__icon"></span>
-                <span>Активен?</span>
-            </label>
-        </div>
         <div class="admin-delete__buttons">
             <button class="admin-button">Сохранить</button>
             <a class="admin-button-red"

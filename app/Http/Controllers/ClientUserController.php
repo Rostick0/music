@@ -8,15 +8,9 @@ use Illuminate\Support\Facades\Hash;
 
 class ClientUserController extends Controller
 {
-    public function show()
-    {
-
-        return view('client.profile');
-    }
-
     public function edit()
     {
-        $user = User::find(1);
+        $user = User::find(auth()->id());
 
         return view('client.profile_edit', [
             'user' => $user
@@ -29,12 +23,12 @@ class ClientUserController extends Controller
             'name' => 'required|max:255',
             'surname' => 'max:255',
             'nickname' => 'required|unique:users|max:255|regex:/^[a-z-_A-Z\d]+/',
-            'email' => 'required|email|max:255|unique:users,email,' . $this->user()->id,
+            'email' => 'required|email|max:255|unique:users,email,' . auth()->id(),
             'password' => 'required|confirmed|min:6|max:255',
         ]);
 
         // if (auth()->user()->email != $request->email) {
-        
+
         // }
 
         User::find()->update([
@@ -48,7 +42,7 @@ class ClientUserController extends Controller
         return back();
     }
 
-    public function passwordUpdate(Request $request)
+    public function password_update(Request $request)
     {
         $request->validate([
             'old_password' => 'required',

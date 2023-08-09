@@ -2,19 +2,32 @@
 
 @section('html')
     <h2>Настройки</h2>
-    <form class="admin-form" action="{{ url()->current() }}" method="post">
+    <form class="admin-form" action="{{ url()->current() }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="admin-form__flex">
             <label class="admin-label">
                 <span>Путь к лого*</span>
-                <input class="admin-input" type="text" name="logo" value="{{ old('logo') ?? $site->logo }}" required>
+                <span class="admin-file-upload">
+                    <input class="admin-file-upload__input" type="file" name="logo"
+                        accept="image/png, image/gif, image/jpeg, image/svg+xml" value="{{ old('logo') ?? $site->logo }}" required>
+                    <span class="admin-input">
+                        <span class="admin-file-upload__name">{{ $site->logo ? 'Загружено' : 'Загрузить файл' }}</span>
+                    </span>
+                </span>
                 @error('logo')
                     <span class="error">{{ $message }}</span>
                 @enderror
             </label>
             <label class="admin-label">
                 <span>Путь к иконке</span>
-                <input class="admin-input" type="text" name="favicon" value="{{ old('favicon') ?? $site->favicon }}">
+                <span class="admin-file-upload">
+                    <input class="admin-file-upload__input" type="file"
+                        name="favicon"accept="image/png, image/gif, image/jpeg, image/svg+xml"
+                        value="{{ old('favicon') ?? $site->favicon }}">
+                    <span class="admin-input">
+                        <span class="admin-file-upload__name">{{ $site->favicon ? 'Загружено' : 'Загрузить файл' }}</span>
+                    </span>
+                </span>
                 @error('favicon')
                     <span class="error">{{ $message }}</span>
                 @enderror
@@ -87,14 +100,14 @@
             @csrf
             <label class="admin-label">
                 <span>Вопрос</span>
-                <input class="admin-input" type="text" name="question">
+                <input class="admin-input" type="text" name="question" value="{{ old('question') }}">
                 @error('question')
                     <span class="error">{{ $message }}</span>
                 @enderror
             </label>
             <label class="admin-label admin-form__flex_long">
                 <span>Ответ</span>
-                <textarea class="admin-input" name="answer" rows="1"></textarea>
+                <textarea class="admin-input" name="answer" rows="1">{{ old('answer') }}</textarea>
                 @error('answer')
                     <span class="error">{{ $message }}</span>
                 @enderror
@@ -137,12 +150,12 @@
     <h2>Слайдер</h2>
     <div class="admin-form">
         <h3>Настройки слайдера</h3>
-        <form class="admin-form" action="{{ route('slider.setting') }}">
+        <form class="admin-form" action="{{ route('slider.setting') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div>
                 <label class="admin-label">
                     <span>Изображение слайдера</span>
-                    <input class="admin-input" type="file" name="bg_image">
+                    <input class="admin-input" type="file" name="bg_image" accept="image/png, image/gif, image/jpeg">
                     @error('bg_image')
                         <span class="error">{{ $message }}</span>
                     @enderror
@@ -191,7 +204,8 @@
             </div>
         </form>
         <h3>Слайды</h3>
-        <form class="admin-form__flex aling-items-end" action="{{ route('slide.create') }}" method="post">
+        <form class="admin-form__flex aling-items-end" action="{{ route('slide.create') }}" method="post"
+            enctype="multipart/form-data">
             @csrf
             <label class="admin-label">
                 <span>Название</span>
@@ -202,7 +216,7 @@
             </label>
             <label class="admin-label">
                 <span>Картинка</span>
-                <input class="admin-input" type="file" name="image">
+                <input class="admin-input" type="file" name="image" accept="image/png, image/gif, image/jpeg">
                 @error('image')
                     <span class="error">{{ $message }}</span>
                 @enderror

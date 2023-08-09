@@ -13,7 +13,7 @@ class SlideController extends Controller
             return (int) $value + '%';
         }
 
-        return (int) $value + 'px';
+        return (int) $value . 'px';
     }
 
     public function store(Request $request)

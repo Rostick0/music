@@ -17,7 +17,20 @@ class SliderSettingController extends Controller
             'count_slide_min' => 'required|numeric'
         ]);
 
-        File::put(public_path('slider.json'), json_encode($validated));
+        $image = ImageController::upload($request->file('bg_image'));
+
+        $data_update = [
+            'count_slide_1440' => $request->count_slide_1440,
+            'count_slide_768' => $request->count_slide_768,
+            'count_slide_400' => $request->count_slide_400,
+            'count_slide_min' => $request->count_slide_min
+        ];
+
+        if ($image) $data_update['bg_image'] = $image;
+
+        File::put(public_path('slider.json'), json_encode($data_update));
+
+        return back();
     }
 
     public static function get()
