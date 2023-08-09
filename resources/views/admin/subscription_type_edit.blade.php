@@ -49,4 +49,7 @@
             <button class="admin-button">Изменить</button>
         </div>
     </form>
+    <form action="">
+        <button class="admin-button-red">Удалить</button>
+    </form>
 @endsection

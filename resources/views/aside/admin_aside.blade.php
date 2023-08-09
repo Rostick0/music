@@ -23,6 +23,9 @@
                 <a class="admin-aside__navigation_link{{ Request::segment(2) === 'subscriptions' ? ' _active' : '' }}" href="{{ route('subscriptions') }}">Подписки</a>
             </li>
             <li class="admin-aside__navigation_item">
+                <a class="admin-aside__navigation_link{{ Request::segment(2) === 'subscription_type' ? ' _active' : '' }}" href="{{ route('subscription_type.list') }}">Виды подписок</a>
+            </li>
+            <li class="admin-aside__navigation_item">
                 <a class="admin-aside__navigation_link{{ Request::segment(2) === 'users' ? ' _active' : '' }}" href="{{ route('user.list') }}">Клиенты</a>
             </li>
             <li class="admin-aside__navigation_item">

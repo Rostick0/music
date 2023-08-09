@@ -45,7 +45,7 @@
             </label>
         </div>
         <div class="admin-delete__buttons">
-            <button class="admin-button">Изменить</button>
+            <button class="admin-button">Создать</button>
         </div>
     </form>
 @endsection
