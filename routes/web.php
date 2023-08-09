@@ -14,6 +14,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\MusicController;
 use App\Http\Controllers\MusicKitController;
+use App\Http\Controllers\MusicPartController;
 use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\RegisterController;
@@ -55,6 +56,11 @@ Route::group(['prefix' => 'admin'], function ($router) {
         Route::get('{id}', [MusicController::class, 'edit'])->name('music.edit');
         Route::post('{id}', [MusicController::class, 'update']);
         Route::post('delete/{id}', [MusicController::class, 'destroy'])->name('music.delete');
+    });
+
+    Route::group(['prefix' => 'part'], function ($router) {
+        Route::post('create', [MusicPartController::class, 'store'])->name('part.create');
+        Route::post('delete/{id}', [MusicPartController::class, 'destroy'])->name('part.delete');
     });
 
     Route::group(['prefix' => 'music_kit'], function ($router) {

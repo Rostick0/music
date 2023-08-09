@@ -47,6 +47,12 @@ class Music extends Model
         return $this->hasMany(RelationshipTheme::class, 'type_id', 'id')->select('themes.name as name', 'themes.id as id')->join('themes', 'themes.id', '=', 'relationship_themes.theme_id')->where('type', 'music');
     }
 
+    public function parts(): HasMany
+    {
+        return $this->hasMany(MusicPart::class, 'music_id', 'id');
+    }
+
+
     public function artist(): BelongsTo
     {
         return $this->belongsTo(MusicArtist::class, 'music_artist_id', 'id')->select('music_artists.name as artist_name');

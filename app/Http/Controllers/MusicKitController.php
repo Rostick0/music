@@ -102,7 +102,7 @@ class MusicKitController extends Controller
             'music_kits.*',
             'music_artists.name as music_artist_name',
         )
-            ->join('music_artists', 'music.music_artist_id', '=', 'music_artists.id')
+            ->join('music_artists', 'music_kits.music_artist_id', '=', 'music_artists.id')
             ->where($where_sql)
             ->orderByDesc('id');
         if ($request->genres) {
