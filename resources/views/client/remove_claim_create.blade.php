@@ -12,8 +12,7 @@
                     <input class="admin-select-async__value" name="music_id" value="{{ old('music_id') }}" required hidden>
                     <ul class="admin-select-async__list">
                         @foreach ($music_list as $music_item)
-                            <li data-id="{{ $music_item->id }}" class="admin-select-async__item">{{ $music_item->title }},
-                                {{ $music_item->artist->artist_name }}</li>
+                            <li data-id="{{ $music_item->id }}" class="admin-select-async__item">{{ $music_item->title . ', ' . $music_item->artist->artist_name }}</li>
                         @endforeach
                     </ul>
                 </div>

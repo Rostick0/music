@@ -48,7 +48,7 @@ use Illuminate\Routing\RouteGroup;
 */
 
 // ,'middleware' => 'admin'
-Route::group(['prefix' => 'admin'], function ($router) {
+Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function ($router) {
     Route::group(['prefix' => 'music'], function ($router) {
         Route::get('list', [MusicController::class, 'index'])->name('music.list');
         Route::get('create', [MusicController::class, 'create'])->name('music.create');
@@ -161,7 +161,7 @@ Route::group(['prefix' => 'admin'], function ($router) {
     });
 });
 
-Route::group(['prefix' => 'client'], function ($router) {
+Route::group(['prefix' => 'client', 'middleware' => 'auth'], function ($router) {
     Route::get('subscriptions', [ClientSubscriptionController::class, 'index'])->name('client.subscriptions');
 
     Route::group(['prefix' => 'remove_claim'], function ($router) {

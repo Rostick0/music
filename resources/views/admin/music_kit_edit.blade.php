@@ -26,8 +26,7 @@
                         value="{{ old('music_id') ?? $music_kit->music_id }}" required hidden>
                     <ul class="admin-select-async__list">
                         @foreach ($music_list as $music_item)
-                            <li data-id="{{ $music_item->id }}" class="admin-select-async__item">{{ $music_item->title }},
-                                {{ $music_item->artist->artist_name }}</li>
+                            <li data-id="{{ $music_item->id }}" class="admin-select-async__item">{{ $music_item->title . ', ' . $music_item->artist->artist_name }}</li>
                         @endforeach
                     </ul>
                 </div>
@@ -76,7 +75,7 @@
                     <span class="error">{{ $message }}</span>
                 @enderror
                 @if ($check_demo)
-                    <span>{{ App\Http\Controllers\MusicUploadController::getViewLink($music_kit->link, 'music_kit_demo') }}</span>
+                    <span>{{ App\Http\Controllers\MusicUploadController::getViewLink($music_kit->link_demo, 'music_kit_demo') }}</span>
                     <audio class="admin-audio" src="{{ Storage::url('upload/music_kit_demo/' . $music_kit->link_demo) }}"
                         controls></audio>
                 @endif

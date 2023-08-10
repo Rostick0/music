@@ -15,7 +15,7 @@ class FrontMusicController extends Controller
     {
         $music_model = Music::where('id', $id);
 
-        // if (!(auth()->check() && auth()->user()->is_admin)) $music_model->where('is_active', 1);
+        if (!(auth()->check() && auth()->user()->is_admin)) $music_model->where('is_active', 1);
 
         $music = $music_model->first();
 

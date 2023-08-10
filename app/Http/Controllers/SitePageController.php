@@ -72,7 +72,7 @@ class SitePageController extends Controller
             'is_active' => $request->has('is_active') ? 1 : 0
         ]);
 
-        return redirect()->route('admin.page_edit', [
+        return redirect()->route('site_page.edit', [
             'id' => $site_page->id
         ]);
     }

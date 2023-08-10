@@ -50,7 +50,7 @@ export const asyncSelect = (selectDom, asyncFunction) => {
         selectItems?.forEach(item => {
             item.onclick = function () {
                 setActiveFalse();
-                selectInput.value = item.textContent;
+                selectInput.value = item.textContent?.trim();
                 selectValue.value = item.getAttribute('data-id');
             };
         })

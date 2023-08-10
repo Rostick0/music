@@ -20,8 +20,8 @@
                     <input class="admin-select-async__value" name="music_id" value="{{ old('music_id') }}" required hidden>
                     <ul class="admin-select-async__list">
                         @foreach ($music_list as $music_item)
-                            <li data-id="{{ $music_item->id }}" class="admin-select-async__item">{{ $music_item->title }},
-                                {{ $music_item->artist->artist_name }}</li>
+                            <li data-id="{{ $music_item->id }}" class="admin-select-async__item">
+                                {{ $music_item->title . ', ' . $music_item->artist->artist_name }}</li>
                         @endforeach
                     </ul>
                 </div>
@@ -147,7 +147,8 @@
             </label>
             <label class="admin-label">
                 <span>Изображение</span>
-                <input class="admin-input" type="file" name="image" value="{{ old('image') }}" accept="image/png, image/gif, image/jpeg">
+                <input class="admin-input" type="file" name="image" value="{{ old('image') }}"
+                    accept="image/png, image/gif, image/jpeg">
                 @error('image')
                     <span class="error">{{ $message }}</span>
                 @enderror

@@ -16,7 +16,7 @@ class FrontMusicKitController extends Controller
     {
         $music_kit_model = MusicKit::where('id', $id);
 
-        // if (!(auth()->check() && auth()->user()->is_admin)) $music_model->where('is_active', 1);
+        if (!(auth()->check() && auth()->user()->is_admin)) $music_kit_model->where('is_active', 1);
 
         $music_kit = $music_kit_model->first();
 
