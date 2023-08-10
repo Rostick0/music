@@ -12,11 +12,12 @@ const myFetch = (url, options = {}) => {
 
     const { headers, ...other } = options;
 
-    if (bearerToken) headers.Authorization = bearerToken;
-
     return fetch(url, {
         ...other,
-        headers
+        headers: {
+            Authorization: bearerToken,
+            'X-CSRF-TOKEN': csrfToken
+        }
     })
 }
 
@@ -677,28 +678,4 @@ setSelects();
     headerMobileClose.onclick = () => {
         removeClass(headerMobileModal, '_active');
     }
-})();
-
-(function () {
-    if (typeof userAgree !== 'number' || userAgree !== 0) return;
-
-    const modalAgree = document.querySelector('.modal-agree');
-    addClass(modalAgree, '_active');
-    const modalAgreeButton = document.querySelector('.modal-agree__button');
-
-    if (!modalAgreeButton) return;
-
-    modalAgreeButton.onclick = () => {
-        myFetch('/agree', {
-            method: 'put'
-        })
-            .then(res => {
-                if (!res?.ok) return;
-
-                return res?.json();
-            })
-            .then(() => {
-                removeClass(modalAgree, '_active');
-            });
-    };
 })();

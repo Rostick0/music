@@ -23,13 +23,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group(['middleware' => 'auth'], function ($router) {
-    Route::put('agree', [UserController::class, 'agree']);
+    Route::post('agree', [UserController::class, 'agree']);
 });
 
 Route::get('music', [MusicController::class, 'search']);
 Route::get('playlist', [PlaylistController::class, 'search']);
 Route::get('music_kit', [MusicKitController::class, 'search']);
-
 
 Route::get('test', function ($request) {
     return response()->json(auth());

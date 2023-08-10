@@ -2,7 +2,6 @@
 
 @section('php')
     @php
-        // $playlists = App\Models\Playlist::limit(6)->orderByDesc('id')->get();
         $music_list = App\Http\Controllers\FavoriteController::getMusic();
     @endphp
 @endsection
