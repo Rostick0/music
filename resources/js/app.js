@@ -1,3 +1,4 @@
+import { myFetch } from './front';
 import { asyncSelect } from './ui';
 
 (function () {
@@ -6,7 +7,7 @@ import { asyncSelect } from './ui';
     if (!musicSelectAsync) return;
 
     const asyncGetMusic = (value) => {
-        return fetch('/api/music?title=' + value)
+        return myFetch('/api/music?title=' + value)
             .then(res => {
                 if (!res?.ok) throw new Error();
 

@@ -7,7 +7,7 @@ const MUSIC_URL = '/music/';
 const MUSIC_DEMO_URL = '/music_demo/';
 const MUSIC_KIT_URL = '/music_kit/';
 
-const myFetch = (url, options = {}) => {
+export const myFetch = (url, options = {}) => {
     const bearerToken = typeof accessToken === 'string' && accessToken ? 'Bearer ' + accessToken : null;
 
     const { headers, ...other } = options;
