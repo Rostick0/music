@@ -3,17 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Subscription;
+use App\Models\SubscriptionType;
 use Illuminate\Http\Request;
 
 class ClientSubscriptionController extends Controller
 {
     public function index(Request $request)
     {
-        $subscription_types = Subscription::all();
+        $subscription_types = SubscriptionType::all();
 
         $where_sql = [];
         // if ($request->email)  $where_sql[] = ['users.email', 'LIKE', '%' . $request->email . '%'];
-        $where_sql[] = ['users.id', '=' , 2];
+        $where_sql[] = ['users.id', '=', auth()->id()];
 
         $subscriptions = Subscription::select(
             'subscriptions.*',
