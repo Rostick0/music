@@ -107,7 +107,11 @@
                             </defs>
                         </svg>
                     </a>
-                    <a class="button-gradient header__sing-in" href="/login">Sign in</a>
+                    @if (auth()->check())
+                        <a class="button-gradient header__sing-in" href="{{route('client.profile_edit')}}">Profile</a>
+                    @else
+                        <a class="button-gradient header__sing-in" href="/login">Sign in</a>
+                    @endif
                 </div>
             </div>
         </header>
