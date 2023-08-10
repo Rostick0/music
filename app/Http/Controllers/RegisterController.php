@@ -19,8 +19,8 @@ class RegisterController extends Controller
         $credentials = $request->validate([
             'name' => 'required|max:255',
             'surname' => 'max:255',
-            'nickname' => 'required|unique:users|max:255|regex:/^[a-z-_A-Z\d]+/',
-            'email' => 'required|email|unique:users|max:255',
+            'nickname' => 'required|unique:users,nickname|max:255|regex:/^[a-z-_A-Z\d]+/',
+            'email' => 'required|email|unique:users,email|max:255',
             'password' => 'required|confirmed|min:6|max:255',
             // 'telephone' => ''
             // password_confirmation
@@ -40,6 +40,8 @@ class RegisterController extends Controller
 
         if ($user->is_admin) return redirect()->route('admin.music');
 
-        return redirect()->route('client.profile_edit');
+        return redirect()->route('client.profile_edit', [
+            'user' => $user
+        ]);
     }
 }

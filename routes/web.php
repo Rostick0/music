@@ -170,7 +170,7 @@ Route::group(['prefix' => 'client'], function ($router) {
         Route::post('create', [ClientRemoveClaimController::class, 'store']);
     });
 
-    Route::get('profile_edit', [ClientUserController::class, 'edit'])->name('client.profile.edit');
+    Route::get('profile_edit', [ClientUserController::class, 'edit'])->name('client.profile_edit');
     Route::post('profile_edit', [ClientUserController::class, 'update']);
     Route::post('profile_password', [ClientUserController::class, 'password_update'])->name('client.profile_password');
 });

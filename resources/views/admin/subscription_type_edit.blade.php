@@ -49,7 +49,9 @@
             <button class="admin-button">Изменить</button>
         </div>
     </form>
-    <form action="">
+    <br>
+    <form action="{{ route('subscription_type.delete', ['id' => $subscription_type->id]) }}" method="post">
+        @csrf
         <button class="admin-button-red">Удалить</button>
     </form>
 @endsection

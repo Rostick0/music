@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -40,6 +41,8 @@ class LoginController extends Controller
 
     public function redirectProfile()
     {
-        return Auth::user()->is_admin ? redirect()->route('music.list') : redirect()->route('client.profile_edit');
+        return Auth::user()->is_admin ? redirect()->route('music.list') : redirect()->route('client.profile_edit', [
+            'user' => User::find(auth()->id())
+        ]);
     }
 }

@@ -63,6 +63,7 @@ class FavoriteController extends Controller
             $music_list = Music::select(
                 'music.*',
                 'music_artists.name as music_artist_name',
+                'favorites.id as favorite_id'
             )
                 ->join('music_artists', 'music.music_artist_id', '=', 'music_artists.id')
                 ->join('favorites', function (JoinClause $join) {

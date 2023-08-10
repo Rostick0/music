@@ -63,6 +63,7 @@
                     data-id="{{ $music_item->id }}">
                 </div>
                 <div class="track-item__buttons">
+
                     @if ($music_item_favorite)
                         <form
                             action="{{ route('favorite.delete', [

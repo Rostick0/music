@@ -78,4 +78,10 @@ class SubscriptionTypeController extends Controller
 
         return back();
     }
+
+    public function destroy(int $id) {
+        SubscriptionType::destroy($id);
+
+        return redirect()->route('subscription_type.list');
+    }
 }
