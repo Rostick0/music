@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             SitePageSeeder::class,
             SiteMenuSeeder::class,
             ComponentSeeder::class,
-            RemoveClaimSeeder::class,
+            // RemoveClaimSeeder::class,
             SubscriptionTypeSeeder::class,
             SubscriptionSeeder::class,
             NoticeSeeder::class,

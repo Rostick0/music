@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Notice;
+use App\Models\RemoveClaim;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Http\Request;
 
@@ -17,16 +18,17 @@ class NoticeController extends Controller
             'notices.*',
             'remove_claims.link as remove_claim_link',
             'remove_claims.status as remove_claim_status',
+            'remove_claims.id as remove_claim_id',
             'users.name as user_name',
             'users.email as user_email',
             'music.id as music_id',
             'music.title as music_title'
         )
-            ->join('remove_claims', function (JoinClause $join) {
+            ->leftJoin('remove_claims', function (JoinClause $join) {
                 $join->on('notices.type_id', '=', 'remove_claims.id')
-                    ->where('notices.type', '=', 'remove_claims')
                     ->join('users', 'users.id', '=', 'remove_claims.user_id')
-                    ->join('music', 'music.id', '=', 'remove_claims.music_id');
+                    ->join('music', 'music.id', '=', 'remove_claims.music_id')
+                    ->where('notices.type', '=', 'remove_сlaim');
             })
             ->orderByDesc('notices.id')
             ->paginate(app('site')->count_admin ?? 20);
