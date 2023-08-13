@@ -24,4 +24,41 @@
             column-gap: 4px;
         }
     }
+
+    @media (max-width: 1100px) {
+        &__inputs {
+
+            &>* {
+                flex-basis: calc(33% - 5px);
+            }
+        }
+
+        &__button {
+            &s {
+                flex-direction: column;
+                row-gap: 8px;
+            }
+        }
+    }
+
+    @media (max-width: 620px) {
+        &__inputs {
+
+            &>* {
+                flex-basis: calc(50% - 5px);
+            }
+        }
+    }
+
+    @media (max-width: 500px) {
+        flex-direction: column;
+
+
+        &__button {
+            &s {
+                flex-direction: row;
+                margin-top: 12px;
+            }
+        }
+    }
 }

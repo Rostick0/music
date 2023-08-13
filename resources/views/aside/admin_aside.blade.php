@@ -1,6 +1,9 @@
 <aside class="admin-aside">
-    <div class="admin-aside__logo">
-        <img src="{{ $site->logo }}" alt="">
+    <div class="admin-aside__top">
+        <div class="admin-aside__logo">
+            <img src="{{ $site->logo }}" alt="">
+        </div>
+        <div class="admin-aside__burger-close"></div>
     </div>
     <nav class="admin-aside__nav">
         <ul class="admin-aside__navigation">

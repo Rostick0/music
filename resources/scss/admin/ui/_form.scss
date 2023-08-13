@@ -5,7 +5,7 @@
 
     &__flex {
         display: flex;
-        column-gap: .625rem;
+        grid-gap: .625rem;
 
         &>* {
             flex-basis: calc(25% - .625rem);
@@ -59,6 +59,25 @@
 
         img {
             max-height: 4.25rem;
+        }
+    }
+
+    @media (max-width: 1200px) {
+        &__flex {
+            flex-wrap: wrap;
+
+            &>* {
+                flex-basis: calc(33% - .625rem);
+            }
+        }
+    }
+
+    @media (max-width: 900px) {
+        &__flex {
+
+            &>* {
+                flex-basis: calc(50% - .625rem);
+            }
         }
     }
 }

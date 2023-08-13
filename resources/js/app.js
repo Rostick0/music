@@ -1,4 +1,5 @@
 import { myFetch } from './front';
+import { addClass, removeClass } from './helpers';
 import { asyncSelect } from './ui';
 
 (function () {
@@ -42,4 +43,15 @@ import { asyncSelect } from './ui';
     new LazyLoad({
         elements_selector: ".lazy"
     });
+})();
+
+(function () {
+    const adminAside = document.querySelector('.admin-aside');
+    const adminAsideBurgerClose = document.querySelector('.admin-aside__burger-close');
+    const adminContentBurger = document.querySelector('.admin-content__burger');
+
+    if (!(adminAside && adminAsideBurgerClose && adminContentBurger)) return;
+
+    adminAsideBurgerClose.onclick = () => removeClass(adminAside, '_active');
+    adminContentBurger.onclick = () => addClass(adminAside, '_active');
 })();

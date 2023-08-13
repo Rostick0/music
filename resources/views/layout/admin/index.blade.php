@@ -5,8 +5,11 @@
     @include('aside.admin_aside')
     <div class="admin-content">
         <div class="admin-content__top">
+            <div class="admin-content__burger">
+                <span></span>
+            </div>
             <a class="admin-content__top_item" href="{{ route('notices') }}">
-                <span>уведомления</span>
+                <span>Уведомления</span>
                 <span class="admin-content__top_alert">
                     <span
                         class="admin-content__top_alert_count">{{ App\Models\Notice::where('is_read', 0)->count() }}</span>
@@ -17,7 +20,7 @@
                     </svg>
                 </span>
             </a>
-            <a class="admin-content__top_item" href="{{ route('admin.profile.edit') }}">личный кабинет</a>
+            <a class="admin-content__top_item" href="{{ route('admin.profile.edit') }}">Личный кабинет</a>
             <a class="admin-content__top_item" href="{{ route('logout') }}">Выход</a>
         </div>
         <div class="admin-content__inner">

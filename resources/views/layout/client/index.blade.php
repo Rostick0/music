@@ -5,7 +5,10 @@
     @include('aside.client_aside')
     <div class="admin-content">
         <div class="admin-content__top">
-            <a class="admin-content__top_item" href="{{ route('client.profile_edit') }}">личный кабинет</a>
+            <div class="admin-content__burger">
+                <span></span>
+            </div>
+            <a class="admin-content__top_item" href="{{ route('client.profile_edit') }}">Личный кабинет</a>
             <a class="admin-content__top_item" href="{{ route('logout') }}">Выход</a>
         </div>
         <div class="admin-content__inner">
@@ -48,7 +51,7 @@
             ...other,
             headers: {
                 Authorization: bearerToken,
-                'X-CSRF-TOKEN': {{ "`" . csrf_token() . "`" }}
+                'X-CSRF-TOKEN': {{ '`' . csrf_token() . '`' }}
             }
         })
     }
