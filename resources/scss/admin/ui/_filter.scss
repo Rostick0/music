@@ -9,8 +9,10 @@
         display: flex;
         flex-wrap: wrap;
         grid-gap: 10px;
+        width: 100%;
 
         &>* {
+            flex-grow: 1;
             flex-basis: calc(25% - 10px);
         }
     }

@@ -45,8 +45,9 @@
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         grid-gap: .625rem;
-        
+
         &_item {
+            flex-wrap: nowrap;
             flex-direction: column;
             row-gap: .75rem;
         }
@@ -70,6 +71,14 @@
                 flex-basis: calc(33% - .625rem);
             }
         }
+
+        &__slides {
+            grid-template-columns: repeat(3, 1fr);
+
+            &_item {
+                flex-wrap: nowrap;
+            }
+        }
     }
 
     @media (max-width: 900px) {
@@ -78,6 +87,10 @@
             &>* {
                 flex-basis: calc(50% - .625rem);
             }
+        }
+
+        &__slides {
+            grid-template-columns: repeat(2, 1fr);
         }
     }
 }
