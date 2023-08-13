@@ -7,59 +7,50 @@ use Illuminate\Http\Request;
 
 class GenreController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $genre_list = Genre::all();
+
+        return view('admin.genre_list', [
+            'genre_list' => $genre_list,
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:255|unique:genres,name',
+        ]);
+
+        Genre::create($validated);
+
+        return back();
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Genre $genre)
+    public function edit(int $id)
     {
-        //
+        $genre = Genre::findOrFail($id);
+
+        return view('admin.genre_edit', [
+            'genre' => $genre,
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Genre $genre)
+    public function update(Request $request, int $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:255|unique:genres,name,' . $id,
+        ]);
+
+        Genre::find($id)->update($validated);
+
+        return back();
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Genre $genre)
+    public function destroy(int $id)
     {
-        //
-    }
+        Genre::destroy($id);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Genre $genre)
-    {
-        //
+        return redirect()->route('genre.list');
     }
 }

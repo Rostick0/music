@@ -10,6 +10,7 @@ use App\Http\Controllers\DeletedController;
 use App\Http\Controllers\EmailVertificationController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\GenreController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\MusicController;
@@ -158,6 +159,14 @@ Route::group(['prefix' => 'admin'], function ($router) {
         Route::get('edit/{id}', [SiteMenuController::class, 'edit'])->name('menu.edit');
         Route::post('edit/{id}', [SiteMenuController::class, 'update']);
         Route::post('delete/{id}', [SiteMenuController::class, 'destroy'])->name('menu.delete');
+    });
+
+    Route::group(['prefix' => 'genre'], function ($router) {
+        Route::get('list', [GenreController::class, 'index'])->name('genre.list');
+        Route::post('list', [GenreController::class, 'store']);
+        Route::get('edit/{id}', [GenreController::class, 'edit'])->name('genre.edit');
+        Route::post('edit/{id}', [GenreController::class, 'update']);
+        Route::post('delete/{id}', [GenreController::class, 'destroy'])->name('genre.delete');
     });
 });
 
