@@ -106,8 +106,8 @@ class MusicController extends Controller
             ->join('music_artists', 'music.music_artist_id', '=', 'music_artists.id')
             ->leftJoin('favorites', function (JoinClause $join) {
                 $join->on('favorites.type_id', '=', 'music.id')
-                ->where('favorites.type', 'music')
-                ->where('favorites.user_id', auth()->id());
+                    ->where('favorites.type', 'music')
+                    ->where('favorites.user_id', auth()->id());
             })
             ->where($where_sql)
             ->orderByDesc('id');
@@ -165,9 +165,11 @@ class MusicController extends Controller
     public function create()
     {
         $genres = Genre::all();
+        $themes = Theme::all();
 
         return view('admin.music_create', [
-            'genres' => $genres
+            'genres' => $genres,
+            'themes' => $themes
         ]);
     }
 
@@ -219,7 +221,7 @@ class MusicController extends Controller
         RelationshipGenreController::createAndDeleteRelationship($request->genres, $music->id, 'music');
         RelationshipInstrumentController::createRelationship($request->instruments, $music->id, 'music');
         RelationshipMoodController::createRelationship($request->moods, $music->id, 'music');
-        RelationshipThemeController::createRelationship($request->themes, $music->id, 'music');
+        RelationshipThemeController::createAndDeleteRelationship($request->themes, $music->id, 'music');
 
         return redirect()->route('music.edit', [
             'id' => $music->id
@@ -245,10 +247,22 @@ class MusicController extends Controller
                 ]);
         })->get();
 
+        $themes = Theme::select(
+            'themes.*',
+            'relationship_themes.id as relationship_id'
+        )->leftJoin('relationship_themes', function ($join) use ($music) {
+            $join->on('relationship_themes.theme_id', '=', 'themes.id')
+                ->where([
+                    ['type_id', '=', $music->id],
+                    ['type', '=', 'music']
+                ]);
+        })->get();;
+
         return view('admin.music_edit', [
             'music' => $music,
             'music_artist' => $music_artist,
             'genres' => $genres,
+            'themes' => $themes,
         ]);
     }
 

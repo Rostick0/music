@@ -13,7 +13,7 @@
                 <label class="admin-label">
                     <span>Исполнитель*</span>
                     <input class="admin-input" type="text" name="music_artists" maxlength="255"
-                        value="{{ old('music_artists') ?? $music_artist->name }}" required>
+                        value="{{ old('music_artists') ?? $music_artist->artist_name }}" required>
                     @error('music_artists')
                         <span class="error">{{ $message }}</span>
                     @enderror
@@ -83,12 +83,22 @@
             </div>
             <div class="admin-form__flex">
                 <label class="admin-label">
-                    <span>Тема (через запятую)</span>
-                    <input class="admin-input" type="text" name="themes"
-                        value="{{ old('themes') ?? App\Http\Controllers\RelationshipHelper::getNameByItems($music_kit->themes) }}">
-                    @error('themes')
-                        <span class="error">{{ $message }}</span>
-                    @enderror
+                    <span>Тема</span>
+                    <details class="admin-details">
+                        <summary class="admin-details__summary">
+                            <div class="admin-input">Тема</div>
+                        </summary>
+                        <div class="admin-details__content">
+                            @foreach ($themes as $theme)
+                                <label class="admin-checkbox">
+                                    <input class="admin-checkbox__input" type="checkbox" name="themes[]"
+                                        @if (array_search($theme->id, Request::get('themes') ?? []) !== false || isset($theme->relationship_id)) checked @endif value="{{ $theme->id }}">
+                                    <span class="admin-checkbox__icon"></span>
+                                    <span>{{ $theme->name }}</span>
+                                </label>
+                            @endforeach
+                        </div>
+                    </details>
                 </label>
                 <div class="admin-label w-100">
                     <span>Жанр</span>

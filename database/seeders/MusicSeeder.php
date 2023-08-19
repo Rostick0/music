@@ -78,7 +78,7 @@ class MusicSeeder extends Seeder
             RelationshipGenreController::createAndDeleteRelationship($this->genres[$i], $music->id, 'music');
             RelationshipInstrumentController::createRelationship($this->instruments[$i], $music->id, 'music');
             RelationshipMoodController::createRelationship($this->moods[$i], $music->id, 'music');
-            RelationshipThemeController::createRelationship($this->themes[$i], $music->id, 'music');
+            RelationshipThemeController::createAndDeleteRelationship($this->themes[$i], $music->id, 'music');
         }
     }
 }

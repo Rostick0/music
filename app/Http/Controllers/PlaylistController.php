@@ -117,9 +117,11 @@ class PlaylistController extends Controller
     public function create()
     {
         $genres = Genre::all();
+        $themes = Theme::all();
 
         return view('admin.playlist_create', [
-            'genres' => $genres
+            'genres' => $genres,
+            'themes' => $themes
         ]);
     }
 
@@ -175,9 +177,21 @@ class PlaylistController extends Controller
                 ]);
         })->get();
 
+        $themes = Theme::select(
+            'themes.*',
+            'relationship_themes.id as relationship_id'
+        )->leftJoin('relationship_themes', function ($join) use ($playlist) {
+            $join->on('relationship_themes.theme_id', '=', 'themes.id')
+                ->where([
+                    ['type_id', '=', $playlist->id],
+                    ['type', '=', 'playlist']
+                ]);
+        })->get();
+
         return view('admin.playlist_edit', [
             'playlist' => $playlist,
             'genres' => $genres,
+            'themes' => $themes,
         ]);
     }
 

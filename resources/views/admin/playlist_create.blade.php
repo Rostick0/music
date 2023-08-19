@@ -20,7 +20,8 @@
             </label>
             <label class="admin-label">
                 <span>Изображение</span>
-                <input class="admin-input" type="file" name="image" value="{{ old('image') }}" accept="image/png, image/gif, image/jpeg">
+                <input class="admin-input" type="file" name="image" value="{{ old('image') }}"
+                    accept="image/png, image/gif, image/jpeg">
                 @error('image')
                     <span class="error">{{ $message }}</span>
                 @enderror
@@ -46,11 +47,22 @@
                 </details>
             </div>
             <label class="admin-label">
-                <span>Тема (через запятую)</span>
-                <input class="admin-input" type="text" name="themes" value="{{ old('themes') }}">
-                @error('themes')
-                    <span class="error">{{ $message }}</span>
-                @enderror
+                <span>Тема</span>
+                <details class="admin-details">
+                    <summary class="admin-details__summary">
+                        <div class="admin-input">Тема</div>
+                    </summary>
+                    <div class="admin-details__content">
+                        @foreach ($themes as $theme)
+                            <label class="admin-checkbox">
+                                <input class="admin-checkbox__input" type="checkbox" name="themes[]"
+                                    @if (array_search($theme->id, Request::get('themes') ?? []) !== false) checked @endif value="{{ $theme->id }}">
+                                <span class="admin-checkbox__icon"></span>
+                                <span>{{ $theme->name }}</span>
+                            </label>
+                        @endforeach
+                    </div>
+                </details>
             </label>
             <label class="admin-label">
                 <span>Настроение (через запятую)</span>

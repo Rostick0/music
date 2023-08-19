@@ -8,41 +8,21 @@ use Illuminate\Http\Request;
 
 class RelationshipThemeController extends Controller
 {
-    // @param 'music|playlist' $type
-    static public function createRelationship($request_theme, int $type_id, string $type)
-    {
-        $themes = explode(',', $request_theme);
-        foreach ($themes as $theme) {
-            if (!trim($theme)) continue;
-
-            $value_theme = Theme::firstOrCreate([
-                'name' => trim(mb_strtolower($theme))
-            ]);
-
-            RelationshipTheme::firstOrCreate([
-                'type' => $type,
-                'type_id' => $type_id,
-                'theme_id' => $value_theme->id
-            ]);
-        }
-    }
-
     static public function createAndDeleteRelationship($request_theme, int $type_id, string $type)
     {
-        $themes = explode(',', $request_theme);
+        $themes = $request_theme;
+
+        if (!$themes) return;
+
+        if (!is_array($themes)) $themes = [$themes];
+
         $array_id = [];
 
         foreach ($themes as $theme) {
-            if (!trim($theme)) continue;
-
-            $value_theme = Theme::firstOrCreate([
-                'name' => trim(mb_strtolower($theme))
-            ]);
-
             $relationship = RelationshipTheme::firstOrCreate([
                 'type' => $type,
                 'type_id' => $type_id,
-                'theme_id' => $value_theme->id
+                'theme_id' => $theme
             ]);
 
             $array_id[] = $relationship->id;
