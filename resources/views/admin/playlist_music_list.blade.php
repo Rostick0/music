@@ -18,10 +18,10 @@
                     value={{ Request::get('artists') }}>
             </label>
             <div class="admin-label w-100">
-                <span>Тема</span>
+                <span>Жанры</span>
                 <details class="admin-details">
                     <summary class="admin-details__summary">
-                        <div class="admin-input">Тема</div>
+                        <div class="admin-input">Жанры</div>
                     </summary>
                     <div class="admin-details__content">
                         @foreach ($genres as $genre)

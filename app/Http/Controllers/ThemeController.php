@@ -7,59 +7,50 @@ use Illuminate\Http\Request;
 
 class ThemeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $theme_list = Theme::all();
+
+        return view('admin.theme_list', [
+            'theme_list' => $theme_list,
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:255|unique:genres,name',
+        ]);
+
+        Theme::create($validated);
+
+        return back();
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Theme $theme)
+    public function edit(int $id)
     {
-        //
+        $theme = Theme::findOrFail($id);
+
+        return view('admin.theme_edit', [
+            'theme' => $theme,
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Theme $theme)
+    public function update(Request $request, int $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:255|unique:themes,name,' . $id,
+        ]);
+
+        Theme::find($id)->update($validated);
+
+        return back();
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Theme $theme)
+    public function destroy(int $id)
     {
-        //
-    }
+        Theme::destroy($id);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Theme $theme)
-    {
-        //
+        return redirect()->route('theme.list');
     }
 }

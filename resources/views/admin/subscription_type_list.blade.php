@@ -1,23 +1,26 @@
 @extends('layout.admin.index')
 
 @section('html')
-    <a class="admin-button admin-button-add" href="{{ route('subscription_type.create') }}">
-        <span>Добавить</span>
-        <span class="admin-button-add__plus">+</span>
-    </a>
-    <form class="admin-filter" action="{{ url()->current() }}">
-        <div class="admin-filter__inputs">
-            <input class="admin-input" type="search" placeholder="Название" name="name" value="{{ Request::get('name') }}">
-            <input class="admin-input" type="number" step="0.01" placeholder="Цена от" name="price_min"
-                value="{{ Request::get('price_min') }}">
-            <input class="admin-input" type="number" step="0.01" placeholder="Цена до" name="price_max"
-                value="{{ Request::get('price_max') }}">
-        </div>
-        <div class="admin-filter__buttons">
-            <button class="admin-button admin-filter__button">Поиск</button>
-            <a class="admin-button-red admin-filter__button" href="{{ url()->current() }}">Сброс</a>
-        </div>
-    </form>
+    <div class="">
+        <a class="admin-button admin-button-add" href="{{ route('subscription_type.create') }}">
+            <span>Добавить</span>
+            <span class="admin-button-add__plus">+</span>
+        </a>
+        <form class="admin-filter" action="{{ url()->current() }}">
+            <div class="admin-filter__inputs">
+                <input class="admin-input" type="search" placeholder="Название" name="name"
+                    value="{{ Request::get('name') }}">
+                <input class="admin-input" type="number" step="0.01" placeholder="Цена от" name="price_min"
+                    value="{{ Request::get('price_min') }}">
+                <input class="admin-input" type="number" step="0.01" placeholder="Цена до" name="price_max"
+                    value="{{ Request::get('price_max') }}">
+            </div>
+            <div class="admin-filter__buttons">
+                <button class="admin-button admin-filter__button">Поиск</button>
+                <a class="admin-button-red admin-filter__button" href="{{ url()->current() }}">Сброс</a>
+            </div>
+        </form>
+    </div>
     <div class="admin-grid">
         <div class="admin-grid__titles admin-grid-subscription_type__titles">
             <div>ID</div>

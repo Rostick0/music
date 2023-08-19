@@ -10,7 +10,8 @@ class Favorite extends Model
     use HasFactory;
 
     protected $fillable = [
-        'music_id',
+        'type_id',
+        'type',
         'user_id',
     ];
 }

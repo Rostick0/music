@@ -27,26 +27,28 @@ class SiteSettingController extends Controller
         $validator = $request->validate([
             'logo' => 'required|mimes:jpeg,png,jpg,svg',
             'name' => 'required',
+            'count_admin' => 'required',
+            'count_front' => 'required'
         ]);
 
         $old = json_decode(File::get(public_path('config.json')));
 
         $result = [
             'name' => $request->name,
-            'seo_title' => $request->seo_title ?? null,
-            'seo_description' => $request->seo_description ?? null,
-            'email' => $request->email ?? null,
-            'address' => $request->address ?? null,
-            'count_admin' => $request->count_admin ?? null,
-            'count_front' => $request->count_front ?? null,
-            'about' => $request->about ?? null,
+            'seo_title' => $request->seo_title,
+            'seo_description' => $request->seo_description,
+            'email' => $request->email,
+            'address' => $request->address,
+            'count_admin' => (int) $request->count_admin,
+            'count_front' => (int) $request->count_front,
+            'about' => $request->about,
         ];
 
         $logo = ImageController::upload($request->file('logo'));
         if ($logo) {
             $result['logo'] = '/storage/upload/image/' . $logo;
         } else {
-            $result['logo'] = '/storage/upload/image/' . $old?->logo ?? null;
+            $result['logo'] = '/storage/upload/image/' . $old?->logo;
         }
 
         $favicon = ImageController::upload($request->file('favicon'));

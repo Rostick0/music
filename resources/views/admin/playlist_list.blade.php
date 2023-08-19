@@ -1,79 +1,82 @@
 @extends('layout.admin.index')
 
 @section('html')
-    <a class="admin-button admin-button-add" href="{{ route('playlist.create') }}">
-        <span>Добавить</span>
-        <span class="admin-button-add__plus">+</span>
-    </a>
-    <form class="admin-filter" action="{{ url()->current() }}">
-        <div class="admin-filter__inputs">
-            <input class="admin-input" type="search" placeholder="Название" name="title" value={{ Request::get('title') }}>
-            <details class="admin-details">
-                <summary class="admin-details__summary">
-                    <div class="admin-input">Жанр</div>
-                </summary>
-                <div class="admin-details__content">
-                    @foreach ($genres as $genre)
-                        <label class="admin-checkbox">
-                            <input class="admin-checkbox__input" type="checkbox" name="genres[]"
-                                @if (array_search($genre->id, Request::get('genres') ?? []) !== false) checked @endif value="{{ $genre->id }}">
-                            <span class="admin-checkbox__icon"></span>
-                            <span>{{ $genre->name }}</span>
-                        </label>
-                    @endforeach
-                </div>
-            </details>
-            <details class="admin-details">
-                <summary class="admin-details__summary">
-                    <div class="admin-input">Тема</div>
-                </summary>
-                <div class="admin-details__content">
-                    @foreach ($themes as $theme)
-                        <label class="admin-checkbox">
-                            <input class="admin-checkbox__input" type="checkbox" name="themes[]"
-                                @if (array_search($theme->id, Request::get('themes') ?? []) !== false) checked @endif value="{{ $theme->id }}">
-                            <span class="admin-checkbox__icon"></span>
-                            <span>{{ $theme->name }}</span>
-                        </label>
-                    @endforeach
-                </div>
-            </details>
-            <details class="admin-details">
-                <summary class="admin-details__summary">
-                    <div class="admin-input">Инструменты</div>
-                </summary>
-                <div class="admin-details__content">
-                    @foreach ($instruments as $instrument)
-                        <label class="admin-checkbox">
-                            <input class="admin-checkbox__input" type="checkbox" name="instruments[]"
-                                @if (array_search($instrument->id, Request::get('instruments') ?? []) !== false) checked @endif value="{{ $instrument->id }}">
-                            <span class="admin-checkbox__icon"></span>
-                            <span>{{ $instrument->name }}</span>
-                        </label>
-                    @endforeach
-                </div>
-            </details>
-            <details class="admin-details">
-                <summary class="admin-details__summary">
-                    <div class="admin-input">Настроение</div>
-                </summary>
-                <div class="admin-details__content">
-                    @foreach ($moods as $mood)
-                        <label class="admin-checkbox">
-                            <input class="admin-checkbox__input" type="checkbox" name="moods[]"
-                                @if (array_search($mood->id, Request::get('moods') ?? []) !== false) checked @endif value="{{ $mood->id }}">
-                            <span class="admin-checkbox__icon"></span>
-                            <span>{{ $mood->name }}</span>
-                        </label>
-                    @endforeach
-                </div>
-            </details>
-        </div>
-        <div class="admin-filter__buttons">
-            <button class="admin-button admin-filter__button">Поиск</button>
-            <a class="admin-button-red admin-filter__button" href="{{ url()->current() }}">Сброс</a>
-        </div>
-    </form>
+    <div class="">
+        <a class="admin-button admin-button-add" href="{{ route('playlist.create') }}">
+            <span>Добавить</span>
+            <span class="admin-button-add__plus">+</span>
+        </a>
+        <form class="admin-filter" action="{{ url()->current() }}">
+            <div class="admin-filter__inputs">
+                <input class="admin-input" type="search" placeholder="Название" name="title"
+                    value={{ Request::get('title') }}>
+                <details class="admin-details">
+                    <summary class="admin-details__summary">
+                        <div class="admin-input">Жанр</div>
+                    </summary>
+                    <div class="admin-details__content">
+                        @foreach ($genres as $genre)
+                            <label class="admin-checkbox">
+                                <input class="admin-checkbox__input" type="checkbox" name="genres[]"
+                                    @if (array_search($genre->id, Request::get('genres') ?? []) !== false) checked @endif value="{{ $genre->id }}">
+                                <span class="admin-checkbox__icon"></span>
+                                <span>{{ $genre->name }}</span>
+                            </label>
+                        @endforeach
+                    </div>
+                </details>
+                <details class="admin-details">
+                    <summary class="admin-details__summary">
+                        <div class="admin-input">Тема</div>
+                    </summary>
+                    <div class="admin-details__content">
+                        @foreach ($themes as $theme)
+                            <label class="admin-checkbox">
+                                <input class="admin-checkbox__input" type="checkbox" name="themes[]"
+                                    @if (array_search($theme->id, Request::get('themes') ?? []) !== false) checked @endif value="{{ $theme->id }}">
+                                <span class="admin-checkbox__icon"></span>
+                                <span>{{ $theme->name }}</span>
+                            </label>
+                        @endforeach
+                    </div>
+                </details>
+                <details class="admin-details">
+                    <summary class="admin-details__summary">
+                        <div class="admin-input">Инструменты</div>
+                    </summary>
+                    <div class="admin-details__content">
+                        @foreach ($instruments as $instrument)
+                            <label class="admin-checkbox">
+                                <input class="admin-checkbox__input" type="checkbox" name="instruments[]"
+                                    @if (array_search($instrument->id, Request::get('instruments') ?? []) !== false) checked @endif value="{{ $instrument->id }}">
+                                <span class="admin-checkbox__icon"></span>
+                                <span>{{ $instrument->name }}</span>
+                            </label>
+                        @endforeach
+                    </div>
+                </details>
+                <details class="admin-details">
+                    <summary class="admin-details__summary">
+                        <div class="admin-input">Настроение</div>
+                    </summary>
+                    <div class="admin-details__content">
+                        @foreach ($moods as $mood)
+                            <label class="admin-checkbox">
+                                <input class="admin-checkbox__input" type="checkbox" name="moods[]"
+                                    @if (array_search($mood->id, Request::get('moods') ?? []) !== false) checked @endif value="{{ $mood->id }}">
+                                <span class="admin-checkbox__icon"></span>
+                                <span>{{ $mood->name }}</span>
+                            </label>
+                        @endforeach
+                    </div>
+                </details>
+            </div>
+            <div class="admin-filter__buttons">
+                <button class="admin-button admin-filter__button">Поиск</button>
+                <a class="admin-button-red admin-filter__button" href="{{ url()->current() }}">Сброс</a>
+            </div>
+        </form>
+    </div>
     <div class="admin-grid">
         <div class="admin-grid__inner">
             <div class="admin-grid__titles admin-grid-playlist__titles">

@@ -7,12 +7,11 @@
 <section class="banner-main lazy"
     data-bg="{{ App\Http\Controllers\ImageController::getViewImage($config_slider->bg_image) }}">
     <div class="container">
-        <h1 class="banner-main__title">No Copyright music for creator</h1>
-        <div class="banner-main__description text-medium">Royalty free YouTube safe tracks for your vlogs, clips and
-            commercials</div>
+        <h1 class="banner-main__title">{{ $config_slider->slider_title }}</h1>
+        <div class="banner-main__description text-medium">{{ $config_slider->slider_description }}</div>
         <div class="banner-main__buttons">
-            <a class="button-gradient banner-main__button" href="">Browse now</a>
-            <a class="button-white banner-main__button" href="/playlists">Playlists</a>
+            <a class="button-gradient banner-main__button" href="{{$config_slider->button_first_link}}">{{ $config_slider->button_first_text }}</a>
+            <a class="button-white banner-main__button" href="{{$config_slider->button_second_link}}">{{ $config_slider->button_second_text }}</a>
         </div>
         <div class="banner-main__slider mySwiper swipper">
             <div class="swiper-wrapper">

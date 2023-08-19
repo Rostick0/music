@@ -55,7 +55,7 @@ class RelationshipPlaylistController extends Controller
     {
         $relationship_playlist = RelationshipPlaylist::find($id);
         $relationship_playlist->destroy($id);
-        
+
         return redirect()->route('playlist.edit', [
             'id' => $relationship_playlist->playlist_id
         ]);
@@ -74,7 +74,8 @@ class RelationshipPlaylistController extends Controller
         )
             ->join('music_artists', 'music.music_artist_id', '=', 'music_artists.id')
             ->leftJoin('favorites', function (JoinClause $join) {
-                $join->on('favorites.music_id', '=', 'music.id')
+                $join->on('favorites.type_id', '=', 'music.id')
+                    ->where('favorites.type', 'type')
                     ->where('favorites.user_id', auth()->id());
             })
             ->where($where_sql)

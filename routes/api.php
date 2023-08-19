@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\MusicController;
-use App\Http\Controllers\MusicKitController;
+use App\Http\Controllers\FrontMusicKitController;
 use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -28,7 +28,7 @@ Route::group(['middleware' => 'auth'], function ($router) {
 
 Route::get('music', [MusicController::class, 'search']);
 Route::get('playlist', [PlaylistController::class, 'search']);
-Route::get('music_kit', [MusicKitController::class, 'search']);
+Route::get('music_kit', [FrontMusicKitController::class, 'search']);
 
 Route::get('test', function ($request) {
     return response()->json(auth());

@@ -33,7 +33,7 @@ class MusicPartController extends Controller
         $request->validate([
             'type_id' => 'required',
             'part_name' => 'required|max:255',
-            'part_link' => 'required|mimes:mp3',
+            'part_link' => 'required|mimes:mp3,wav',
             'type' => 'in:music,music_kit'
         ]);
 

@@ -123,6 +123,7 @@ setSelects();
             return `
             <form action="/favorite/delete/${musicId}" method="post">
                 <input type="hidden" name="_token" value="${csrfToken}">
+                <input type="hidden" name="type" value="music">
                 <button class="track-item__favorite _active">
                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_98_283)">
@@ -140,6 +141,7 @@ setSelects();
 
         return `<form action="http://localhost/favorite/create/${musicId}" method="post">
         <input type="hidden" name="_token" value="${csrfToken}">
+        <input type="hidden" name="type" value="music">
         <button class="track-item__favorite">
             <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_98_283)">
@@ -549,44 +551,46 @@ setSelects();
         allInputs?.forEach(elem => {
             if (elem.getAttribute('name') !== 'duration') values[elem?.name] = '';
 
-            Object.defineProperty(elem, 'value', {
-                set: throttle(function (newValue) {
-                    if (elem.getAttribute('name') === 'duration') {
-                        durationQuery = newValue;
-                    } else {
-                        values[this?.name] = newValue;
-                    }
+            try {
+                Object.defineProperty(elem, 'value', {
+                    set: throttle(function (newValue) {
+                        if (elem.getAttribute('name') === 'duration') {
+                            durationQuery = newValue;
+                        } else {
+                            values[this?.name] = newValue;
+                        }
 
-                    const covertUrl = objConvertUrl(removeEmpty(values)) + durationQuery;
+                        const covertUrl = objConvertUrl(removeEmpty(values)) + durationQuery;
 
-                    window.history.replaceState(null, null, covertUrl);
+                        window.history.replaceState(null, null, covertUrl);
 
-                    myFetch('/api/music_kit' + covertUrl)
-                        .then(res => {
-                            if (!res?.ok) return;
+                        myFetch('/api/music_kit' + covertUrl)
+                            .then(res => {
+                                if (!res?.ok) return;
 
-                            return res.json()
-                        })
-                        .then(res => {
-                            musicKitList.innerHTML = "";
+                                return res.json()
+                            })
+                            .then(res => {
+                                musicKitList.innerHTML = "";
 
-                            const data = res?.data?.data;
+                                const data = res?.data?.data;
 
-                            if (!data.length) {
-                                musicKitList.innerHTML = '<h3 class="tracks__none">Music kit not found</h3>';
-                                return;
-                            }
+                                if (!data.length) {
+                                    musicKitList.innerHTML = '<h3 class="tracks__none">Music kit not found</h3>';
+                                    return;
+                                }
 
-                            if (pagination) pagination.innerHTML = res?.links_html;
+                                if (pagination) pagination.innerHTML = res?.links_html;
 
-                            data.forEach(music => {
-                                musicKitList.insertAdjacentHTML('beforeend', musicKitItem(music));
+                                data.forEach(music => {
+                                    musicKitList.insertAdjacentHTML('beforeend', musicKitItem(music));
+                                });
+
+                                initWaveSurfer();
                             });
-
-                            initWaveSurfer();
-                        });
-                }, 500)
-            });
+                    }, 500)
+                });
+            } catch (e) { }
         });
     })();
 })();

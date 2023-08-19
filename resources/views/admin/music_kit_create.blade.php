@@ -12,23 +12,6 @@
                     <span class="error">{{ $message }}</span>
                 @enderror
             </label>
-            <div class="admin-label" tabindex="0">
-                <span>Название музыки*</span>
-                <div class="admin-select-async music-select-async">
-                    <input class="admin-input admin-select-async__input" type="text" maxlength="255" name="music_name"
-                        placeholder="Введите название" required>
-                    <input class="admin-select-async__value" name="music_id" value="{{ old('music_id') }}" required hidden>
-                    <ul class="admin-select-async__list">
-                        @foreach ($music_list as $music_item)
-                            <li data-id="{{ $music_item->id }}" class="admin-select-async__item">
-                                {{ $music_item->title . ', ' . $music_item->artist->artist_name }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-                @error('music_id')
-                    <span class="error">{{ $message }}</span>
-                @enderror
-            </div>
             <label class="admin-label">
                 <span>Название*</span>
                 <input class="admin-input" type="text" name="title" maxlength="255" value="{{ old('title') }}"
@@ -42,7 +25,7 @@
             <label class="admin-label">
                 <span>Трэк*</span>
                 <span class="admin-file-upload">
-                    <input class="admin-file-upload__input" type="file" name="link" accept=".mp3"
+                    <input class="admin-file-upload__input" type="file" name="link" accept=".mp3,.wav"
                         value="{{ old('link') }}" required>
                     <span class="admin-input">
                         <span class="admin-file-upload__name">Загрузить файл</span>
@@ -55,7 +38,7 @@
             <label class="admin-label">
                 <span>Демо трэк*</span>
                 <span class="admin-file-upload">
-                    <input class="admin-file-upload__input" type="file" name="link_demo" accept=".mp3"
+                    <input class="admin-file-upload__input" type="file" name="link_demo" accept=".mp3,.wav"
                         value="{{ old('link_demo') }}" required>
                     <span class="admin-input">
                         <span class="admin-file-upload__name">Загрузить файл</span>
@@ -66,7 +49,7 @@
                 @enderror
             </label>
             <label class="admin-label">
-                <span>Ссылка на публикатор</span>
+                <span>Ссылка на паблишер</span>
                 <input class="admin-input" type="text" name="publisher" maxlength="255" value="{{ old('publisher') }}">
                 @error('publisher')
                     <span class="error">{{ $message }}</span>
@@ -89,10 +72,10 @@
                 @enderror
             </label>
             <div class="admin-label w-100">
-                <span>Тема</span>
+                <span>Жанры</span>
                 <details class="admin-details">
                     <summary class="admin-details__summary">
-                        <div class="admin-input">Тема</div>
+                        <div class="admin-input">Жанры</div>
                     </summary>
                     <div class="admin-details__content">
                         @foreach ($genres as $genre)

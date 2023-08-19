@@ -105,8 +105,9 @@ class MusicController extends Controller
         )
             ->join('music_artists', 'music.music_artist_id', '=', 'music_artists.id')
             ->leftJoin('favorites', function (JoinClause $join) {
-                $join->on('favorites.music_id', '=', 'music.id')
-                    ->where('favorites.user_id', auth()->id());
+                $join->on('favorites.type_id', '=', 'music.id')
+                ->where('favorites.type', 'music')
+                ->where('favorites.user_id', auth()->id());
             })
             ->where($where_sql)
             ->orderByDesc('id');
@@ -178,8 +179,8 @@ class MusicController extends Controller
         $request->validate([
             'music_artists' => 'required',
             'title' => 'required|max:255',
-            'link' => 'required|mimes:mp3',
-            'link_demo' => 'required|mimes:mp3',
+            'link' => 'required|mimes:mp3,wav',
+            'link_demo' => 'required|mimes:mp3,wav',
             'publisher' => 'max:255',
             'distr' => 'max:255',
             'description' => 'max:65536',
@@ -259,8 +260,8 @@ class MusicController extends Controller
         $request->validate([
             'music_artists' => 'required',
             'title' => 'required|max:255',
-            'link' => 'mimes:mp3',
-            'link_demo' => 'mimes:mp3',
+            'link' => 'mimes:mp3,wav',
+            'link_demo' => 'mimes:mp3,wav',
             'publisher' => 'max:255',
             'distr' => 'max:255',
             'description' => 'max:65536',

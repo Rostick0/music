@@ -12,7 +12,6 @@ class MusicKit extends Model
     use HasFactory;
 
     protected $fillable = [
-        'music_id',
         'music_artist_id',
         'title',
         'link',

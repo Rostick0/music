@@ -23,7 +23,15 @@ class RemoveClaimObserver
      */
     public function updated(RemoveClaim $removeClaim): void
     {
-        //
+        if ($removeClaim->status == 'closed') {
+            Notice::where([
+                'type' => 'remove_сlaim',
+                'type_id' => $removeClaim->id,
+            ])
+            ->update([
+                'is_read' => 1
+            ]);
+        }
     }
 
     /**

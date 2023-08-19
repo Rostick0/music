@@ -1,1 +1,13 @@
-{"bg_image":"1691620726.png","count_slide_1440":"5","count_slide_768":"4","count_slide_400":"2","count_slide_min":"1"}
+{
+    "slider_title": "No Copyright music for creator",
+    "slider_description": "Royalty free YouTube safe tracks for your vlogs, clips and commercials",
+    "bg_image": "1691620726.png",
+    "button_first_text": "Browse now",
+    "button_first_link": "#tracks",
+    "button_second_text": "Playlists",
+    "button_second_link": "/playlists",
+    "count_slide_1440": "5",
+    "count_slide_768": "4",
+    "count_slide_400": "2",
+    "count_slide_min": "1"
+}

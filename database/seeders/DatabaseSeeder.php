@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             GenreSeeder::class,
             MusicSeeder::class,
-            // MusicKitSeeder::class,
+            MusicKitSeeder::class,
             PlaylistSeeder::class,
             StatisticSeeder::class,
             SitePageSeeder::class,
@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             // RemoveClaimSeeder::class,
             SubscriptionTypeSeeder::class,
             SubscriptionSeeder::class,
-            NoticeSeeder::class,
+            // NoticeSeeder::class,
             SlideSeeder::class
         ]);
     }

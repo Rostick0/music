@@ -25,7 +25,7 @@
         </div>
     </section>
 
-    <section class="section section-main tracks">
+    <section class="section section-main tracks" id="tracks">
         <div class="container">
             <h2 class="section-title tracks__title">Tracks</h2>
             <form class="tracks__filter">

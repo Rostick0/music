@@ -26,7 +26,6 @@ return new class extends Migration
             $table->time('duration')->nullable();
             $table->string('seo_title')->nullable();
             $table->string('seo_description')->nullable();
-            $table->foreignId('music_id')->references('id')->on('music')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -46,6 +46,9 @@
             <li class="admin-aside__navigation_item">
                 <a class="admin-aside__navigation_link{{ Request::segment(2) === 'genre' ? ' _active' : '' }}" href="{{ route('genre.list') }}">Жанры</a>
             </li>
+            <li class="admin-aside__navigation_item">
+                <a class="admin-aside__navigation_link{{ Request::segment(2) === 'theme' ? ' _active' : '' }}" href="{{ route('theme.list') }}">Темы</a>
+            </li>
         </ul>
     </nav>
 </aside>

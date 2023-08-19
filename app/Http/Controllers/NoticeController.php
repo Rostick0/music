@@ -33,15 +33,6 @@ class NoticeController extends Controller
             ->orderByDesc('notices.id')
             ->paginate(app('site')->count_admin ?? 20);
 
-        $array_ids = array_map(
-            fn ($item) => $item['id'],
-            [...$notices]
-        );
-
-        $reads = Notice::whereIn('id', $array_ids)->update([
-            'is_read' => 1
-        ]);
-
         return view('admin.notice_list', [
             'notices' => $notices
         ]);

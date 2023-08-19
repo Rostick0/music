@@ -18,10 +18,10 @@
                     value={{ Request::get('artists') }}>
             </label>
             <div class="admin-label w-100">
-                <span>Тема</span>
+                <span>Жанры</span>
                 <details class="admin-details">
                     <summary class="admin-details__summary">
-                        <div class="admin-input">Тема</div>
+                        <div class="admin-input">Жанры</div>
                     </summary>
                     <div class="admin-details__content">
                         @foreach ($genres as $genre)
@@ -120,8 +120,8 @@
                 <li class="admin-grid__content_item admin-grid-music__content_item">
                     <div>{{ $music_item->id }}</div>
                     <div>{{ $music_item->title }}</div>
-                    <a class="text-ellipsis" title="{{ $music_item->link }}" target="_blank"
-                        href="{{ $music_item->link }}">{{ $music_item->link }}</a>
+                    <a class="text-ellipsis" title="{{ App\Http\Controllers\MusicUploadController::getViewLink($music_item->link) }}" target="_blank"
+                        href="{{ App\Http\Controllers\MusicUploadController::getViewLink($music_item->link) }}">{{ $music_item->link }}</a>
                     <div>{{ $music_item->music_artist_name }}</div>
                     <div>{{ App\Http\Controllers\RelationshipHelper::getNameByItems($music_item->genres, '—') }}</div>
                     <div>{{ App\Http\Controllers\MusicController::normalizeTime($music_item->duration) }}</div>

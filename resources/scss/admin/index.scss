@@ -40,15 +40,27 @@
                 position: absolute;
                 right: 0;
                 transform: translateY(-25%);
-                padding: 0 5px;
+                padding: 0px 4px;
                 min-width: 12px;
             }
         }
     }
 
     &__inner {
+        display: flex;
+        flex-direction: column;
         flex-grow: 1;
         padding: 24px 20px;
+
+        &_gap {
+            display: flex;
+            flex-direction: column;
+            row-gap: 60px;
+        }
+    }
+
+    &__title {
+        margin-bottom: 20px;
     }
 
     &__burger {
@@ -79,12 +91,20 @@
             padding: 12px;
         }
 
+        &__title {
+            margin-bottom: 12px;
+        }
+
         &__burger {
             display: flex;
         }
 
         &__inner {
             padding: 12px;
+
+            &_gap {
+                row-gap: 24px;
+            }
         }
     }
 

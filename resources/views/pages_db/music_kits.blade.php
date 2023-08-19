@@ -6,7 +6,7 @@
         $moods = App\Models\Mood::all();
         $themes = App\Models\Theme::all();
         $instruments = App\Models\Instrument::all();
-        $music_kit_controller = new App\Http\Controllers\MusicKitController();
+        $music_kit_controller = new App\Http\Controllers\FrontMusicKitController();
         $music_kit_list = $music_kit_controller->search($request, '');
     @endphp
 @endsection

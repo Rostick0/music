@@ -11,8 +11,12 @@
             <a class="admin-content__top_item" href="{{ route('notices') }}">
                 <span>Уведомления</span>
                 <span class="admin-content__top_alert">
-                    <span
-                        class="admin-content__top_alert_count">{{ App\Models\Notice::where('is_read', 0)->count() }}</span>
+                    @php
+                        $count = App\Models\Notice::where('is_read', 0)->count();
+                    @endphp
+                    @if ($count > 0)
+                        <span class="admin-content__top_alert_count">{{ $count }}</span>
+                    @endif
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#fff"
                         viewBox="0 0 16 16">
                         <path

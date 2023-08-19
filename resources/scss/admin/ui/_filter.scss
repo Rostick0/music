@@ -28,6 +28,8 @@
     }
 
     @media (max-width: 1100px) {
+        margin-bottom: 32px;
+
         &__inputs {
 
             &>* {
@@ -44,6 +46,8 @@
     }
 
     @media (max-width: 620px) {
+        margin-bottom: 20px;
+
         &__inputs {
 
             &>* {
@@ -54,7 +58,6 @@
 
     @media (max-width: 500px) {
         flex-direction: column;
-
 
         &__button {
             &s {

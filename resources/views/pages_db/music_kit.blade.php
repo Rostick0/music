@@ -43,9 +43,17 @@
                                         xmlns="http://www.w3.org/2000/svg">
                                         <rect width="40" height="40" rx="20"
                                             fill="url(#paint0_linear_111_2751)" />
-                                        <path
-                                            d="M15 25.509C15.0004 25.9876 15.1322 26.4559 15.3798 26.8581C15.6273 27.2602 15.9801 27.5793 16.3961 27.7771C16.812 27.9749 17.2735 28.0431 17.7254 27.9735C18.1774 27.904 18.6006 27.6996 18.9447 27.3849L27 20.0032L18.9447 12.6169C18.6008 12.3015 18.1775 12.0966 17.7254 12.0267C17.2732 11.9568 16.8114 12.0249 16.3952 12.2228C15.979 12.4207 15.6261 12.7401 15.3787 13.1426C15.1312 13.5452 14.9998 14.014 15 14.4928V25.509Z"
-                                            fill="white" />
+                                        <g class="track-item__button_start">
+                                            <path
+                                                d="M15 25.509C15.0004 25.9876 15.1322 26.4559 15.3798 26.8581C15.6273 27.2602 15.9801 27.5793 16.3961 27.7771C16.812 27.9749 17.2735 28.0431 17.7254 27.9735C18.1774 27.904 18.6006 27.6996 18.9447 27.3849L27 20.0032L18.9447 12.6169C18.6008 12.3015 18.1775 12.0966 17.7254 12.0267C17.2732 11.9568 16.8114 12.0249 16.3952 12.2228C15.979 12.4207 15.6261 12.7401 15.3787 13.1426C15.1312 13.5452 14.9998 14.014 15 14.4928V25.509Z"
+                                                fill="white" />
+                                        </g>
+                                        <g class="track-item__button_pause">
+                                            <path d="M15.9998 13.6665V27.0002" stroke="white" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M24 13.6665V27.0002" stroke="white" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </g>
                                         <defs>
                                             <linearGradient id="paint0_linear_111_2751" x1="40" y1="0"
                                                 x2="-3.72369" y2="4.59913" gradientUnits="userSpaceOnUse">
@@ -65,21 +73,25 @@
                                     href="{{ Storage::url('upload/music_kit/' . $music_kit->link) }}" download>
                                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
-                                        <g clip-path="url(#clip0_98_282)">
-                                            <path d="M20.0007 13.125V23.125" stroke="#1B121E" stroke-width="1.5"
-                                                stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M16.2507 19.375L20.0007 23.125L23.7507 19.375" stroke="#1B121E"
-                                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                        <rect width="40" height="40" rx="20"
+                                            fill="url(#paint0_linear_111_2751)" />
+                                        <g class="track-item__button_start">
                                             <path
-                                                d="M29.3757 23.125V24.375C29.3757 25.038 29.1123 25.6739 28.6435 26.1428C28.1747 26.6116 27.5388 26.875 26.8757 26.875H13.1257C12.4627 26.875 11.8268 26.6116 11.358 26.1428C10.8891 25.6739 10.6257 25.038 10.6257 24.375V23.125"
-                                                stroke="#1B121E" stroke-width="1.5" stroke-linecap="round"
-                                                stroke-linejoin="round" />
+                                                d="M15 25.509C15.0004 25.9876 15.1322 26.4559 15.3798 26.8581C15.6273 27.2602 15.9801 27.5793 16.3961 27.7771C16.812 27.9749 17.2735 28.0431 17.7254 27.9735C18.1774 27.904 18.6006 27.6996 18.9447 27.3849L27 20.0032L18.9447 12.6169C18.6008 12.3015 18.1775 12.0966 17.7254 12.0267C17.2732 11.9568 16.8114 12.0249 16.3952 12.2228C15.979 12.4207 15.6261 12.7401 15.3787 13.1426C15.1312 13.5452 14.9998 14.014 15 14.4928V25.509Z"
+                                                fill="white" />
+                                        </g>
+                                        <g class="track-item__button_pause">
+                                            <path d="M15.9998 13.6665V27.0002" stroke="white" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M24 13.6665V27.0002" stroke="white" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
                                         </g>
                                         <defs>
-                                            <clipPath id="clip0_98_282">
-                                                <rect width="20" height="20" fill="white"
-                                                    transform="translate(10 10)" />
-                                            </clipPath>
+                                            <linearGradient id="paint0_linear_111_2751" x1="40" y1="0"
+                                                x2="-3.72369" y2="4.59913" gradientUnits="userSpaceOnUse">
+                                                <stop stop-color="#FF9211" />
+                                                <stop offset="1" stop-color="#FF1111" />
+                                            </linearGradient>
                                         </defs>
                                     </svg>
                                 </a>
@@ -113,7 +125,8 @@
                             <ul class="category-item__list">
                                 @foreach ($music_kit->moods as $mood)
                                     <li class="category-item__item">
-                                        <a class="category-item__link text-medium" href="/tracks?mood={{ $mood->id }}">
+                                        <a class="category-item__link text-medium"
+                                            href="/tracks?mood={{ $mood->id }}">
                                             {{ $mood->name }}
                                         </a>
                                     </li>

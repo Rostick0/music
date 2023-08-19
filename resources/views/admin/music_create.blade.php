@@ -25,7 +25,7 @@
             <label class="admin-label">
                 <span>Трэк*</span>
                 <span class="admin-file-upload">
-                    <input class="admin-file-upload__input" type="file" name="link" accept=".mp3"
+                    <input class="admin-file-upload__input" type="file" name="link" accept=".mp3,.wav"
                         value="{{ old('link') }}" required>
                     <span class="admin-input">
                         <span class="admin-file-upload__name">Загрузить файл</span>
@@ -38,7 +38,7 @@
             <label class="admin-label">
                 <span>Демо трэк</span>
                 <span class="admin-file-upload">
-                    <input class="admin-file-upload__input" type="file" name="link_demo" accept=".mp3"
+                    <input class="admin-file-upload__input" type="file" name="link_demo" accept=".mp3,.wav"
                         value="{{ old('link_demo') }}" required>
                     <span class="admin-input">
                         <span class="admin-file-upload__name">Загрузить файл</span>
@@ -49,7 +49,7 @@
                 @enderror
             </label>
             <label class="admin-label">
-                <span>Ссылка на публикатор</span>
+                <span>Ссылка на паблишер</span>
                 <input class="admin-input" type="text" name="publisher" maxlength="255" value="{{ old('publisher') }}">
                 @error('publisher')
                     <span class="error">{{ $message }}</span>
@@ -72,10 +72,10 @@
                 @enderror
             </label>
             <div class="admin-label w-100">
-                <span>Тема</span>
+                <span>Жанры</span>
                 <details class="admin-details">
                     <summary class="admin-details__summary">
-                        <div class="admin-input">Тема</div>
+                        <div class="admin-input">Жанры</div>
                     </summary>
                     <div class="admin-details__content">
                         @foreach ($genres as $genre)

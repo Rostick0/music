@@ -32,6 +32,7 @@ use App\Http\Controllers\SliderSettingController;
 use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\SubscriptionTypeController;
+use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -168,6 +169,14 @@ Route::group(['prefix' => 'admin'], function ($router) {
         Route::post('edit/{id}', [GenreController::class, 'update']);
         Route::post('delete/{id}', [GenreController::class, 'destroy'])->name('genre.delete');
     });
+
+    Route::group(['prefix' => 'theme'], function ($router) {
+        Route::get('list', [ThemeController::class, 'index'])->name('theme.list');
+        Route::post('list', [ThemeController::class, 'store']);
+        Route::get('edit/{id}', [ThemeController::class, 'edit'])->name('theme.edit');
+        Route::post('edit/{id}', [ThemeController::class, 'update']);
+        Route::post('delete/{id}', [ThemeController::class, 'destroy'])->name('theme.delete');
+    });
 });
 
 Route::group(['prefix' => 'client', 'middleware' => 'auth'], function ($router) {
@@ -210,8 +219,8 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 Route::post('/email/verification-notification', [EmailVertificationController::class, 'notification'])->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 Route::group(['prefix' => 'favorite'], function ($router) {
-    Route::post('create/{music_id}', [FavoriteController::class, 'create'])->name('favorite.create');
-    Route::post('delete/{id}', [FavoriteController::class, 'destroy'])->name('favorite.delete');
+    Route::post('create', [FavoriteController::class, 'create'])->name('favorite.create');
+    Route::post('delete', [FavoriteController::class, 'destroy'])->name('favorite.delete');
 });
 
 Route::get('/', [SitePageController::class, 'show']);
