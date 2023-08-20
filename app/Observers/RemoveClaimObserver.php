@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Models\Notice;
 use App\Models\RemoveClaim;
+use Illuminate\Support\Facades\Mail;
 
 class RemoveClaimObserver
 {
@@ -16,6 +17,10 @@ class RemoveClaimObserver
             'type' => 'remove_сlaim',
             'type_id' => $removeClaim->id,
         ]);
+
+        Mail::raw('Поступила новая заявка remove claim ссылка: ' . $removeClaim->link . ', на музыку: ' . $removeClaim->music->title .', ' . $removeClaim->music->artist->artist_name, function ($m) {
+            $m->to('rostik057@gmail.com', '')->subject('Новая заявка remove claim');
+        });
     }
 
     /**
@@ -28,9 +33,9 @@ class RemoveClaimObserver
                 'type' => 'remove_сlaim',
                 'type_id' => $removeClaim->id,
             ])
-            ->update([
-                'is_read' => 1
-            ]);
+                ->update([
+                    'is_read' => 1
+                ]);
         }
     }
 
