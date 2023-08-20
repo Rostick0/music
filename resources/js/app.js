@@ -86,12 +86,9 @@ import { asyncSelect } from './ui';
         item.addEventListener('click', function (e) {
             e.preventDefault();
 
-            const coordY = document.querySelector(item.getAttribute('href')).getBoundingClientRect().top;
-
-            window.scroll({
-                top: coordY,
+            document.querySelector(item.getAttribute('href')).scrollIntoView({
                 behavior: 'smooth'
-              });
+            });
         });
     });
 })();
