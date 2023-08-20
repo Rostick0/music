@@ -36,7 +36,7 @@
 
         &__titles,
         &__content_item {
-            grid-template-columns: auto 0.7fr 2fr .5fr .5fr 1fr 1fr 152px 16px;
+            grid-template-columns: auto 0.7fr 2fr .5fr .5fr 1fr 1fr 152px 20px;
         }
     }
 
@@ -44,7 +44,7 @@
 
         &__titles,
         &__content_item {
-            grid-template-columns: auto 1fr 1.8fr 1fr .5fr .7fr .6fr .6fr 152px 16px;
+            grid-template-columns: auto 1fr 1.8fr 1fr .5fr .7fr .6fr .6fr 152px 20px;
         }
     }
 
@@ -52,7 +52,7 @@
 
         &__titles,
         &__content_item {
-            grid-template-columns: auto repeat(4, 1fr) .7fr 152px 16px;
+            grid-template-columns: auto repeat(4, 1fr) .7fr 152px 20px;
         }
     }
 
@@ -85,7 +85,7 @@
 
         &__titles,
         &__content_item {
-            grid-template-columns: auto .5fr 1fr 152px 16px;
+            grid-template-columns: auto .5fr 1fr 152px 20px;
         }
     }
 
@@ -93,7 +93,7 @@
 
         &__titles,
         &__content_item {
-            grid-template-columns: auto 1.3fr repeat(4, 1fr) .5fr 152px 16px;
+            grid-template-columns: auto 1.3fr repeat(4, 1fr) .5fr 152px 20px;
         }
     }
 
@@ -101,7 +101,7 @@
 
         &__titles,
         &__content_item {
-            grid-template-columns: auto 1fr 1.75fr 1fr .5fr 152px 16px;
+            grid-template-columns: auto 1fr 1.75fr 1fr .5fr 152px 20px;
         }
     }
 
@@ -109,7 +109,7 @@
 
         &__titles,
         &__content_item {
-            grid-template-columns: auto 1fr 152px 16px;
+            grid-template-columns: auto 1fr 152px 20px;
         }
     }
 
@@ -117,7 +117,7 @@
 
         &__titles,
         &__content_item {
-            grid-template-columns: auto 2fr 1fr 80px 152px 16px;
+            grid-template-columns: auto 2fr 1fr 80px 152px 20px;
         }
     }
 

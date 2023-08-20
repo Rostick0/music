@@ -54,6 +54,19 @@
         }
     }
 
+    &-edit {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        width: 20px;
+        height: 20px;
+
+        svg {
+            flex-shrink: 0;
+        }
+    }
+
     &__margin-top {
         margin-top: 1.25rem;
     }

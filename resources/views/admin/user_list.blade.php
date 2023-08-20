@@ -34,7 +34,7 @@
                     <div>{{ $user->email }}</div>
                     <div>{{ $user->telephone ?? '-' }}</div>
                     <div>{{ $user->created_at }}</div>
-                    <a href="{{ route('user.edit', ['id' => $user->id]) }}">
+                    <a class="admin-button admin-button-edit" href="{{ route('user.edit', ['id' => $user->id]) }}">
                         <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
                             <path
                                 style="text-indent:0;text-align:start;line-height:normal;text-transform:none;block-progression:tb;-inkscape-font-specification:Bitstream Vera Sans"
