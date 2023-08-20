@@ -24,6 +24,8 @@ class DeletedController extends Controller
                 return 'Плейлист';
             case 'genres':
                 return 'Жанр';
+            case 'themes':
+                return 'Тему';
             default:
                 return '';
         }
@@ -33,7 +35,7 @@ class DeletedController extends Controller
     {
         $request->validate([
             'type_id' => 'required|numeric',
-            'type' => 'required|in:music,components,site_pages,users,music_kits,playlists,genres'
+            'type' => 'required|in:music,components,site_pages,users,music_kits,playlists,genres,themes'
         ]);
 
         $data = DB::table($request->type)->where('id', $request->type_id)->first();
