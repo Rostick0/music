@@ -100,9 +100,6 @@
                         </a>
                     </li>
                 </ul>
-                @if (Session::has('success'))
-                    <div class="feedback__success success">{{ Session::get('success') }}</div>
-                @endif
                 <form class="feedback__form" action="{{ url()->current() }}" method="post">
                     @csrf
                     <label class="label">
@@ -128,6 +125,11 @@
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </label>
+                    @if (Session::has('success'))
+                        <br />
+                        <div class="feedback__success success">{{ Session::get('success') }}</div>
+                        <br />
+                    @endif
                     <button class="button-gradient feedback__button">Отправить</button>
                 </form>
             </div>

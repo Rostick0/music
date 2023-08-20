@@ -236,6 +236,10 @@ input[type=range][orient=vertical] {
         &__form {
             row-gap: .33rem;
         }
+
+        &__button {
+            width: 100%;
+        }
     }
 }
 

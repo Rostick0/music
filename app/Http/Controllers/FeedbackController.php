@@ -17,6 +17,6 @@ class FeedbackController extends Controller
 
         Feedback::create($validated);
 
-        return back()->with('success', 'Thanks!');
+        return back()->with('success', 'Thanks, successfully sent!');
     }
 }
