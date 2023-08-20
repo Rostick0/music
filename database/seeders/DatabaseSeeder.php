@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             StatisticTypeSeeder::class,
             UserSeeder::class,
             GenreSeeder::class,
+            ThemeSeeder::class,
             MusicSeeder::class,
             MusicKitSeeder::class,
             PlaylistSeeder::class,

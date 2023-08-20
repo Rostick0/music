@@ -46,8 +46,8 @@ class MusicSeeder extends Seeder
     ];
 
     private $themes = [
-        'О себе',
-        'О любви'
+        1,
+        2,
     ];
 
     private $music_artists = [
