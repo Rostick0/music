@@ -36,7 +36,25 @@
                 </details>
             </div>
             <div class="admin-label w-100">
-                <span>Тема</span>
+                <span>Настроение</span>
+                <details class="admin-details">
+                    <summary class="admin-details__summary">
+                        <div class="admin-input">Настроение</div>
+                    </summary>
+                    <div class="admin-details__content">
+                        @foreach ($moods as $mood)
+                            <label class="admin-checkbox">
+                                <input class="admin-checkbox__input" type="checkbox" name="moods[]"
+                                    @if (array_search($mood->id, Request::get('moods') ?? []) !== false) checked @endif value="{{ $mood->id }}">
+                                <span class="admin-checkbox__icon"></span>
+                                <span>{{ $mood->name }}</span>
+                            </label>
+                        @endforeach
+                    </div>
+                </details>
+            </div>
+            <div class="admin-label w-100">
+                <span>Темы</span>
                 <details class="admin-details">
                     <summary class="admin-details__summary">
                         <div class="admin-input">Тема</div>
@@ -66,24 +84,6 @@
                                     @if (array_search($instrument->id, Request::get('instruments') ?? []) !== false) checked @endif value="{{ $instrument->id }}">
                                 <span class="admin-checkbox__icon"></span>
                                 <span>{{ $instrument->name }}</span>
-                            </label>
-                        @endforeach
-                    </div>
-                </details>
-            </div>
-            <div class="admin-label w-100">
-                <span>Настроение</span>
-                <details class="admin-details">
-                    <summary class="admin-details__summary">
-                        <div class="admin-input">Настроение</div>
-                    </summary>
-                    <div class="admin-details__content">
-                        @foreach ($moods as $mood)
-                            <label class="admin-checkbox">
-                                <input class="admin-checkbox__input" type="checkbox" name="moods[]"
-                                    @if (array_search($mood->id, Request::get('moods') ?? []) !== false) checked @endif value="{{ $mood->id }}">
-                                <span class="admin-checkbox__icon"></span>
-                                <span>{{ $mood->name }}</span>
                             </label>
                         @endforeach
                     </div>

@@ -8,8 +8,6 @@
         </a>
         <form class="admin-filter" action="{{ url()->current() }}">
             <div class="admin-filter__inputs">
-                <input class="admin-input" type="search" placeholder="Название" name="title"
-                    value={{ Request::get('title') }}>
                 <details class="admin-details">
                     <summary class="admin-details__summary">
                         <div class="admin-input">Жанр</div>
@@ -21,6 +19,21 @@
                                     @if (array_search($genre->id, Request::get('genres') ?? []) !== false) checked @endif value="{{ $genre->id }}">
                                 <span class="admin-checkbox__icon"></span>
                                 <span>{{ $genre->name }}</span>
+                            </label>
+                        @endforeach
+                    </div>
+                </details>
+                <details class="admin-details">
+                    <summary class="admin-details__summary">
+                        <div class="admin-input">Настроение</div>
+                    </summary>
+                    <div class="admin-details__content">
+                        @foreach ($moods as $mood)
+                            <label class="admin-checkbox">
+                                <input class="admin-checkbox__input" type="checkbox" name="moods[]"
+                                    @if (array_search($mood->id, Request::get('moods') ?? []) !== false) checked @endif value="{{ $mood->id }}">
+                                <span class="admin-checkbox__icon"></span>
+                                <span>{{ $mood->name }}</span>
                             </label>
                         @endforeach
                     </div>
@@ -55,21 +68,8 @@
                         @endforeach
                     </div>
                 </details>
-                <details class="admin-details">
-                    <summary class="admin-details__summary">
-                        <div class="admin-input">Настроение</div>
-                    </summary>
-                    <div class="admin-details__content">
-                        @foreach ($moods as $mood)
-                            <label class="admin-checkbox">
-                                <input class="admin-checkbox__input" type="checkbox" name="moods[]"
-                                    @if (array_search($mood->id, Request::get('moods') ?? []) !== false) checked @endif value="{{ $mood->id }}">
-                                <span class="admin-checkbox__icon"></span>
-                                <span>{{ $mood->name }}</span>
-                            </label>
-                        @endforeach
-                    </div>
-                </details>
+                <input class="admin-input" type="search" placeholder="Название" name="title"
+                    value={{ Request::get('title') }}>
             </div>
             <div class="admin-filter__buttons">
                 <button class="admin-button admin-filter__button">Поиск</button>

@@ -28,8 +28,8 @@
             </label>
         </div>
         <div class="admin-form__flex">
-            <div class="admin-label w-100">
-                <span>Жанры</span>
+            <div class="admin-label">
+                <span>Genres</span>
                 <details class="admin-details">
                     <summary class="admin-details__summary">
                         <div class="admin-input">Жанры</div>
@@ -47,7 +47,14 @@
                 </details>
             </div>
             <label class="admin-label">
-                <span>Тема</span>
+                <span>Moods (через запятую)</span>
+                <input class="admin-input" type="text" name="moods" value="{{ old('moods') }}">
+                @error('moods')
+                    <span class="error">{{ $message }}</span>
+                @enderror
+            </label>
+            <div class="admin-label">
+                <span>Themes</span>
                 <details class="admin-details">
                     <summary class="admin-details__summary">
                         <div class="admin-input">Тема</div>
@@ -63,16 +70,9 @@
                         @endforeach
                     </div>
                 </details>
-            </label>
+            </div>
             <label class="admin-label">
-                <span>Настроение (через запятую)</span>
-                <input class="admin-input" type="text" name="moods" value="{{ old('moods') }}">
-                @error('moods')
-                    <span class="error">{{ $message }}</span>
-                @enderror
-            </label>
-            <label class="admin-label">
-                <span>Инструменты (через запятую)</span>
+                <span>Instruments (через запятую)</span>
                 <input class="admin-input" type="text" name="instruments" value="{{ old('instruments') }}">
                 @error('instruments')
                     <span class="error">{{ $message }}</span>

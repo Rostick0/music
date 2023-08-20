@@ -35,8 +35,8 @@
                 </div>
             @endif
             <div class="admin-form__flex">
-                <div class="admin-label w-100">
-                    <span>Жанр</span>
+                <div class="admin-label">
+                    <span>Genres</span>
                     <details class="admin-details">
                         <summary class="admin-details__summary">
                             <div class="admin-input">Жанр</div>
@@ -54,7 +54,15 @@
                     </details>
                 </div>
                 <label class="admin-label">
-                    <span>Тема</span>
+                    <span>Moods (через запятую)</span>
+                    <input class="admin-input" type="text" name="moods"
+                        value="{{ old('moods') ?? App\Http\Controllers\RelationshipHelper::getNameByItems($playlist->moods) }}">
+                    @error('moods')
+                        <span class="error">{{ $message }}</span>
+                    @enderror
+                </label>
+                <label class="admin-label">
+                    <span>Themes</span>
                     <details class="admin-details">
                         <summary class="admin-details__summary">
                             <div class="admin-input">Тема</div>
@@ -72,15 +80,7 @@
                     </details>
                 </label>
                 <label class="admin-label">
-                    <span>Настроение (через запятую)</span>
-                    <input class="admin-input" type="text" name="moods"
-                        value="{{ old('moods') ?? App\Http\Controllers\RelationshipHelper::getNameByItems($playlist->moods) }}">
-                    @error('moods')
-                        <span class="error">{{ $message }}</span>
-                    @enderror
-                </label>
-                <label class="admin-label">
-                    <span>Инструменты (через запятую)</span>
+                    <span>Instruments (через запятую)</span>
                     <input class="admin-input" type="text" name="instruments"
                         value="{{ old('instruments') ?? App\Http\Controllers\RelationshipHelper::getNameByItems($playlist->instruments) }}">
                     @error('instruments')
