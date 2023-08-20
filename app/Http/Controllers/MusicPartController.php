@@ -17,17 +17,6 @@ class MusicPartController extends Controller
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -37,15 +26,14 @@ class MusicPartController extends Controller
             'type' => 'in:music,music_kit'
         ]);
 
-
         $audio = new Mp3Info($request->part_link, true);
         $duration = gmdate("H:i:s", $audio->duration);
-        $music = MusicUploadController::upload($request->file('part_link'), 'part');
+        $link = MusicUploadController::upload($request->file('part_link'), 'part');
 
         MusicPart::create([
             'type_id' => $request->type_id,
             'name' => $request->part_name,
-            'link' => $music,
+            'link' => $link,
             'duration' => $duration,
             'type' => $request->type
         ]);
@@ -53,33 +41,43 @@ class MusicPartController extends Controller
         return back();
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(MusicPart $musicPart)
+    public function edit(int $id)
     {
-        //
+        $music_part = MusicPart::findOrFail($id);
+
+        return view('admin.music_part_edit', [
+            'music_part' => $music_part
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(MusicPart $musicPart)
+    public function update(Request $request, int $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:255',
+            'link' => 'mimes:mp3,wav',
+        ]);
+
+        $link = null;
+        $duration = null;
+
+        if ($request->file('link')) {
+            $audio = new Mp3Info($request->link, true);
+            $duration = gmdate("H:i:s", $audio->duration);
+            $link = MusicUploadController::upload($request->file('link'), 'part');
+        }
+
+        $update_date = [
+            'name' => $request->name
+        ];
+
+        if ($link) $update_date['link'] = $link;
+        if ($duration) $update_date['duration'] = $duration;
+
+        MusicPart::find($id)->update($update_date);
+
+        return back();
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, MusicPart $musicPart)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(int $id)
     {
         MusicPart::destroy($id);

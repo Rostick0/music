@@ -19,7 +19,7 @@ class RemoveClaimObserver
         ]);
 
         Mail::raw('Поступила новая заявка remove claim ссылка: ' . $removeClaim->link . ', на музыку: ' . $removeClaim->music->title .', ' . $removeClaim->music->artist->artist_name, function ($m) {
-            $m->to('rostik057@gmail.com', '')->subject('Новая заявка remove claim');
+            $m->to('Avs29rus@mail.ru', '')->subject('Новая заявка remove claim');
         });
     }
 

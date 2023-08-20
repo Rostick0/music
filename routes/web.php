@@ -62,6 +62,8 @@ Route::group(['prefix' => 'admin'], function ($router) {
 
     Route::group(['prefix' => 'part'], function ($router) {
         Route::post('create', [MusicPartController::class, 'store'])->name('part.create');
+        Route::get('edit/{id}', [MusicPartController::class, 'edit'])->name('part.edit');
+        Route::post('edit/{id}', [MusicPartController::class, 'update']);
         Route::post('delete/{id}', [MusicPartController::class, 'destroy'])->name('part.delete');
     });
 

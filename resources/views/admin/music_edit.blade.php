@@ -244,6 +244,7 @@
                         <audio src=""></audio>
                     </label>
                     <div class="admin-buttons">
+                        <a class="admin-button" href="{{ route('part.edit', ['id' => $part->id]) }}">Изменить</a>
                         <form action="{{ route('part.delete', ['id' => $part->id]) }}" method="post">
                             @csrf
                             <button class="admin-button-red">Удалить</button>

@@ -12,7 +12,7 @@
                         <span class="admin-file-upload">
                             <input class="admin-file-upload__input" type="file" name="logo"
                                 accept="image/png, image/gif, image/jpeg, image/svg+xml"
-                                value="{{ old('logo') ?? $site->logo }}" required>
+                                value="{{ old('logo') ?? $site->logo }}">
                             <span class="admin-input">
                                 <span
                                     class="admin-file-upload__name">{{ $site->logo ? 'Загружено' : 'Загрузить файл' }}</span>

@@ -24,8 +24,8 @@ class SiteSettingController extends Controller
 
     public function update(Request $request)
     {
-        $validator = $request->validate([
-            'logo' => 'required|mimes:jpeg,png,jpg,svg',
+        $request->validate([
+            'logo' => 'mimes:jpeg,png,jpg,svg',
             'name' => 'required',
             'count_admin' => 'required',
             'count_front' => 'required'
@@ -44,18 +44,17 @@ class SiteSettingController extends Controller
             'about' => $request->about,
         ];
 
-        $logo = ImageController::upload($request->file('logo'));
-        if ($logo) {
-            $result['logo'] = '/storage/upload/image/' . $logo;
-        } else {
-            $result['logo'] = '/storage/upload/image/' . $old?->logo;
+        $result['logo'] = $old?->logo;
+        if ($request->file('logo')) {
+            $new_logo = ImageController::upload($request->file('logo'));
+            $result['logo'] = '/storage/upload/image/' . $new_logo;
         }
 
-        $favicon = ImageController::upload($request->file('favicon'));
-        if ($favicon) {
-            $result['favicon'] = $favicon;
-        } else {
-            $result['favicon'] = $old?->favicon ?? null;
+        $result['favicon'] = $old?->favicon;
+
+        if ($request->file('favicon')) {
+            $new_favicon = ImageController::upload($request->file('favicon'));
+            $result['favicon'] = $new_favicon;
         }
 
         File::put(public_path('config.json'), json_encode($result));
