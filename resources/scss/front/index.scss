@@ -32,45 +32,10 @@ input[type=range][orient=vertical] {
     padding: 0 8px;
 }
 
-input[type=range] {
-    background: #ff4500;
-    accent-color: #f11;
-
-    // &::-webkit-slider-thumb {
-    //     -webkit-appearance: none;
-    //     border: 1px solid #000000;
-    //     border-radius: 50%;
-    //     height: 36px;
-    //     width: 16px;
-    //     border-radius: 3px;
-    //     background: #ffffff;
-    //     cursor: pointer;
-    //     margin-top: -14px;
-    //     box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-    // }
-
-    // &::-moz-range-thumb {
-    //     box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-    //     border: 1px solid #000000;
-    //     border-radius: 50%;
-    //     height: 36px;
-    //     width: 16px;
-    //     border-radius: 3px;
-    //     background: #ffffff;
-    //     cursor: pointer;
-    // }
-
-    // &::-ms-thumb {
-    //     box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-    //     border: 1px solid #000000;
-    //     border-radius: 50%;
-    //     height: 36px;
-    //     width: 16px;
-    //     border-radius: 3px;
-    //     background: #ffffff;
-    //     cursor: pointer;
-    // }
-}
+// input[type=range] {
+//     background: #ff4500;
+//     accent-color: #f11;
+// }
 
 .wrapper {
     display: flex;
@@ -467,6 +432,12 @@ input[type=range] {
     }
 
     @media (max-width: 1024px) {
+        padding-bottom: 1.56rem;
+
+        &__top {
+            padding: 1.56rem;
+        }
+
         &__info {
             column-gap: 2rem;
         }
@@ -484,12 +455,14 @@ input[type=range] {
 
     @media (max-width: 600px) {
         &__image {
-            margin: 0 auto;
+            margin-right: auto;
+            max-width: 150px;
         }
 
         &__info {
-            row-gap: 3rem;
+            row-gap: 1.87rem;
             flex-direction: column;
+            margin-bottom: 2.25rem;
         }
     }
 }
@@ -594,6 +567,12 @@ input[type=range] {
         &::before {
             background: #fff;
             opacity: 1;
+        }
+    }
+
+    @media (max-width: 1024px) {
+        &__name {
+            margin-bottom: 1.25rem;
         }
     }
 }
