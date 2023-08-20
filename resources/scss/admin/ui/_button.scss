@@ -3,8 +3,8 @@
     border-radius: 5px;
     color: #fff;
     display: inline-block;
-    font-size: .875rem;
-    padding: .5rem .75rem;
+    font-size: 16px;
+    padding: 8px 12px;
     transition: 200ms;
     text-decoration: none;
 
@@ -50,6 +50,16 @@
             @extend .admin-button-add;
             margin-left: 0;
             max-width: 9.5rem;
+        }
+    }
+
+    &__margin-top {
+        margin-top: 1.25rem;
+    }
+
+    @media (max-width: 1024px) {
+        &__margin-top {
+            margin-top: .33rem;
         }
     }
 }

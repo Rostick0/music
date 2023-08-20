@@ -57,7 +57,7 @@
                 <span>Автопродление подписки?</span>
             </label>
         </div>
-        <div class="admin-delete__buttons">
+        <div class="admin-delete__buttons admin-button__margin-top">
             <button class="admin-button">Сохранить</button>
             <a class="admin-button-red"
                 href="{{ route('delete_confirm', [

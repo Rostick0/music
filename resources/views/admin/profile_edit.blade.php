@@ -39,7 +39,7 @@
                 @enderror
             </label>
         </div>
-        <div class="admin-delete__buttons">
+        <div class="admin-delete__buttons admin-button__margin-top">
             <button class="admin-button">Изменить</button>
         </div>
     </form>
@@ -72,7 +72,7 @@
                 @enderror
             </label>
         </div>
-        <div class="admin-delete__buttons">
+        <div class="admin-delete__buttons admin-button__margin-top">
             <button class="admin-button">Изменить</button>
         </div>
     </form>

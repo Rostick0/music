@@ -64,7 +64,7 @@
                 @enderror
             </div>
         </div>
-        <div class="admin-delete__buttons">
+        <div class="admin-delete__buttons admin-button__margin-top">
             <button class="admin-button admin-delete__button">Сохранить</button>
             <a class="admin-button-red admin-delete__button"
                 href="{{ route('delete_confirm', [

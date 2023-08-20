@@ -15,7 +15,7 @@
                     'id' => $type_id,
                 ]) }}">{{ $data->title ?? ($data->email ?? $data->name) }}</a>
         </div>
-        <div class="admin-delete__buttons">
+        <div class="admin-delete__buttons admin-button__margin-top">
             <button class="admin-button">Удалить</button>
             <a class="admin-button-red" href="javascript:history.back()">Отмена</a>
         </div>

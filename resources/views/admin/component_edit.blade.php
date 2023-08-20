@@ -31,7 +31,7 @@
                 @enderror
             </div>
         </div>
-        <div class="admin-buttons">
+        <div class="admin-buttons admin-button__margin-top">
             <button class="admin-button">Сохранить</button>
             <a class="admin-button-red" href="{{ route('delete_confirm', [
                 'type' => 'components',

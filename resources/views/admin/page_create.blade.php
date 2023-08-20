@@ -61,7 +61,9 @@
                 @enderror
             </label>
         </div>
-        <button class="admin-button">Сохранить</button>
+        <div class="admin-button__margin-top">
+            <button class="admin-button">Сохранить</button>
+        </div>
     </form>
 
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">

@@ -160,6 +160,8 @@
                 @enderror
             </label>
         </div>
-        <button class="admin-button">Сохранить</button>
+        <div class="admin-button__margin-top">
+            <button class="admin-button">Сохранить</button>
+        </div>
     </form>
 @endsection

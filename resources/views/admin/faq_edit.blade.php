@@ -20,7 +20,7 @@
                 @enderror
             </label>
         </div>
-        <div class="admin-buttons">
+        <div class="admin-buttons admin-button__margin-top">
             <button class="admin-button">Изменить</button>
         </div>
         @if (Session::has('success'))

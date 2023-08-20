@@ -99,7 +99,9 @@
                         @enderror
                     </label>
                 </div>
-                <button class="admin-button">Сохранить</button>
+                <div class="admin-button__margin-top">
+                    <button class="admin-button">Сохранить</button>
+                </div>
             </form>
         </div>
         <div>
@@ -263,7 +265,7 @@
                             @enderror
                         </label>
                     </div>
-                    <div>
+                    <div class="admin-button__margin-top">
                         <button class="admin-button">Изменить</button>
                     </div>
                 </form>
