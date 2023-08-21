@@ -29,8 +29,6 @@
     $token_controller = new App\Http\Controllers\TokenController();
 @endphp
 
-
-
 @include('layout.footer')
 
 <script defer>
@@ -70,7 +68,7 @@
                     method: 'post'
                 })
                 .then(res => {
-                    if (!res?.ok) return;
+                    if (res?.status < 200 && res?.status >= 400) throw null;
 
                     return res?.json();
                 })

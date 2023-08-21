@@ -13,7 +13,7 @@
                 <label class="admin-label">
                     <span>Исполнитель*</span>
                     <input class="admin-input" type="text" name="music_artists" maxlength="255"
-                        value="{{ old('music_artists') ?? $music_artist->artist_name }}" required>
+                        value="{{ old('music_artists') ?? $music->artist->artist_name }}" required>
                     @error('music_artists')
                         <span class="error">{{ $message }}</span>
                     @enderror

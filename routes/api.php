@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['middleware' => 'auth'], function ($router) {
+Route::group(['middleware' => 'auth.api'], function ($router) {
     Route::post('agree', [UserController::class, 'agree']);
 });
 
