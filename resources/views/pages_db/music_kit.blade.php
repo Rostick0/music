@@ -136,8 +136,8 @@
                                         </div>
                                     </div>
                                     <div class="track-item__audio track-item__audio_{{ $part->id . random_int(100, 1000) }}"
-                                        data-music="{{ '/music/' . $music->link }}" data-title="{{ $part->name }}"
-                                        data-artist="{{ $music->music_artist_name }}"
+                                        data-music="{{ '/part/' . $part->link }}" data-title="{{ $part->name }}"
+                                        data-artist="{{ $music_kit->music_artist_name }}"
                                         data-time="{{ App\Http\Controllers\MusicController::normalizeTime($part->duration) }}">
                                     </div>
                                 </div>

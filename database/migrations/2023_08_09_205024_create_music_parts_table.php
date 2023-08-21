@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('music_parts', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('music_artist_id')->references('id')->on('music_artists')->onDelete('cascade');
             $table->integer('type_id');
             $table->string('type');
-            $table->string('name');
+            $table->string('title');
             $table->string('link');
             $table->time('duration');
             $table->timestamps();

@@ -11,12 +11,22 @@
             <div class="admin-form__flex">
                 <label class="admin-label">
                     <span>Название*</span>
-                    <input class="admin-input" type="text" name="name" maxlength="255"
-                        value="{{ old('name') ?? $music_part->name }}" required>
-                    @error('name')
+                    <input class="admin-input" type="text" name="title" maxlength="255"
+                        value="{{ old('title') ?? $music_part->title }}" required>
+                    @error('title')
                         <span class="error">{{ $message }}</span>
                     @enderror
                 </label>
+                <label class="admin-label">
+                    <span>Автор*</span>
+                    <input class="admin-input" type="text" name="music_artists" maxlength="255"
+                        value="{{ old('music_artists') ?? $music_part->music_artists }}" required>
+                    @error('music_artists')
+                        <span class="error">{{ $message }}</span>
+                    @enderror
+                </label>
+            </div>
+            <div class="admin-form__flex">
                 <label class="admin-label">
                     <span>Трэк*</span>
                     <span class="admin-file-upload">

@@ -204,11 +204,19 @@
                 <div class="admin-form__flex">
                     <input type="hidden" name="type" value="music_kit">
                     <input type="hidden" name="type_id" value="{{ $music_kit->id }}">
-                    <label class="admin-label admin-form__flex_long">
+                    <label class="admin-label">
                         <span>Название</span>
-                        <input class="admin-input" type="text" name="part_name" value="{{ old('part_name') }}"
+                        <input class="admin-input" type="text" name="part_title" value="{{ old('part_title') }}"
                             maxlength="255" required>
-                        @error('part_name')
+                        @error('part_title')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </label>
+                    <label class="admin-label">
+                        <span>Автор</span>
+                        <input class="admin-input" type="text" name="part_artist" value="{{ old('part_artist') }}"
+                            maxlength="255" required>
+                        @error('part_artist')
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </label>
@@ -236,10 +244,15 @@
                 <div class="admin-form__flex aling-items-end">
                     <label class="admin-label">
                         <span>Название</span>
-                        <input class="admin-input" type="text" value="{{ $part->name }}" disabled>
+                        <input class="admin-input" type="text" value="{{ $part->title }}" disabled>
                     </label>
                     <label class="admin-label">
-                        <span>Страница</span>
+                        <span>Автор</span>
+                        <input class="admin-input" type="text" value="{{ $part->artist->artist_name }}" disabled>
+                        <audio src=""></audio>
+                    </label>
+                    <label class="admin-label">
+                        <span>Файл</span>
                         <input class="admin-input" type="text" value="{{ $part->link }}" disabled>
                         <audio src=""></audio>
                     </label>
