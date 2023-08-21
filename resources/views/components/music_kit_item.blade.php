@@ -40,7 +40,7 @@
     @php
         $music_item_favorite = $favorite($music_item->favorite_id, $music_item->id, 'music_kit');
     @endphp
-    <div class="track-item__audio track-item__audio_{{ $music_item->id }}"
+    <div class="track-item__audio track-item__music_kit track-item__audio_{{ $music_item->id }}"
         data-music="{{ '/music_kit/' . $music_item->link }}" data-title="{{ $music_item->music_title }}"
         data-artist="{{ $music_item->music_artist_name }}" data-favorite="{{ $music_item_favorite }}"
         data-time="{{ App\Http\Controllers\MusicController::normalizeTime($music_item->duration) }}">

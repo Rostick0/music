@@ -67,91 +67,24 @@ class FavoriteController extends Controller
         return $response;
     }
 
-    public static function selectNoAuth(Model $model, $table_name, $table_type, $ids)
-    {
-        return $model::select(
-            "$table_name.*",
-            'music_artists.name as music_artist_name',
-            DB::raw("NULL as `type`"),
-            DB::raw("NULL as `type_id`"),
-            DB::raw("'$table_type' as `table_type`"),
-        )
-            ->join('music_artists', "$table_name.music_artist_id", '=', 'music_artists.id')
-            ->whereIn("$table_name.id", $ids);
-    }
-
-    public static function selectMusicPartNoAuth(string $table_name, $table_type, $ids)
-    {
-        return MusicPart::select(
-            "music_parts.id as id",
-            "music_parts.music_artist_id as music_artist_id",
-            "music_parts.title as title",
-            "music_parts.link as link",
-            DB::raw("NULL as `link_demo`"),
-            DB::raw("NULL as `publisher`"),
-            DB::raw("NULL as `distr`"),
-            DB::raw("NULL as `is_active`"),
-            DB::raw("NULL as `is_free`"),
-            DB::raw("NULL as `description`"),
-            "$table_name.image as image",
-            "music_parts.duration as duration",
-            DB::raw("NULL as `seo_title`"),
-            DB::raw("NULL as `seo_description`"),
-            "music_parts.created_at as created_at",
-            "music_parts.updated_at as updated_at",
-            'music_artists.name as music_artist_name',
-            "music_parts.type as type",
-            "music_parts.type_id as type_id",
-            DB::raw("'muisc_part' as `table_type`"),
-        )
-            ->join('music_artists', "music_parts.music_artist_id", '=', 'music_artists.id')
-            ->join($table_name, "$table_name.id", '=', 'music_parts.type_id')
-            ->whereIn("music_parts.id", $ids)
-            ->where('music_parts.type', $table_type);
-    }
-
     public static function getMusic()
     {
         if (auth()->check()) {
-            $music_list = Music::select(
-                'music.*',
-                'music_artists.name as music_artist_name',
-                'favorites.id as favorite_id'
-            )
-                ->join('music_artists', 'music.music_artist_id', '=', 'music_artists.id')
-                ->join('favorites', function (JoinClause $join) {
-                    $join->on('favorites.type_id', '=', 'music.id')
-                        ->where('favorites.type', 'music')
-                        ->where('favorites.user_id', auth()->id());
-                })
+            $music_list = Favorite::selectMusic(new Music, 'music', 'music')
                 ->union(
-                    MusicKit::select(
-                        'music_kits.*',
-                        'music_artists.name as music_artist_name',
-                        'favorites.id as favorite_id'
-                    )
-                        ->join('music_artists', 'music_kits.music_artist_id', '=', 'music_artists.id')
-                        ->join('favorites', function (JoinClause $join) {
-                            $join->on('favorites.type_id', '=', 'music_kits.id')
-                                ->where('favorites.type', 'music_kit')
-                                ->where('favorites.user_id', auth()->id());
-                        })
+                    Favorite::selectMusic(new MusicKit, 'music_kits', 'music_kit')
                 )
                 ->union(
-                    MusicPart::select(
-                        'music_parts.*',
-                        'music_artists.name as music_artist_name',
-                        'favorites.id as favorite_id'
-                    )
-                        ->join('music_artists', 'music_parts.music_artist_id', '=', 'music_artists.id')
-                        ->join('favorites', function (JoinClause $join) {
-                            $join->on('favorites.type_id', '=', 'music_parts.id')
-                                ->where('favorites.type', 'music_parts')
-                                ->where('favorites.user_id', auth()->id());
-                        })
+                    Favorite::selectMusicPart('music', 'music')
                 )
+                ->union(
+                    Favorite::selectMusicPart('music_kits', 'music_kit')
+                )
+                ->orderByDesc('id')
                 ->paginate(app('site')->count_front);
 
+
+            // dd($music_list);
             return $music_list;
         }
 
@@ -169,15 +102,15 @@ class FavoriteController extends Controller
             if ($item?->type == 'part') return $item?->type_id;
         }, [...$local_favorite]);
 
-        $music_list = FavoriteController::selectNoAuth(new Music, 'music', 'music', $music_ids)
+        $music_list = Favorite::selectNoAuth(new Music, 'music', 'music', $music_ids)
             ->union(
-                FavoriteController::selectNoAuth(new MusicKit, "music_kits",  'music_kit', $music_kit_ids)
+                Favorite::selectNoAuth(new MusicKit, "music_kits",  'music_kit', $music_kit_ids)
             )
             ->union(
-                FavoriteController::selectMusicPartNoAuth('music', 'music', $music_part_ids)
+                Favorite::selectMusicPartNoAuth('music', 'music', $music_part_ids)
             )
             ->union(
-                FavoriteController::selectMusicPartNoAuth('music_kits', 'music_kit', $music_part_ids)
+                Favorite::selectMusicPartNoAuth('music_kits', 'music_kit', $music_part_ids)
             )
             ->orderByDesc('id')
             ->paginate(app('site')->count_front);
@@ -190,6 +123,8 @@ class FavoriteController extends Controller
         $user_id = auth()->id();
 
         if (!$user_id) return count(FavoriteController::getLocalFavorite());
+
+        // dd(Favorite::where('user_id', $user_id)->get());
 
         return Favorite::where('user_id', $user_id)->count();
     }
@@ -205,7 +140,7 @@ class FavoriteController extends Controller
 
         if (auth()->check()) {
             Favorite::where([
-                ['type_id', '=', $request->type],
+                ['type_id', '=', $request->type_id],
                 ['type', '=', $request->type],
                 ['user_id', '=', auth()->id()]
             ])->delete();

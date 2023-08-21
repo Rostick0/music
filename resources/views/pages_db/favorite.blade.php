@@ -11,7 +11,6 @@
     <section class="section section-page tracks">
         <div class="container">
             <h2 class="section-title tracks__title">Favorite</h2>
-            {{-- @dd($music_list) --}}
             <x-favorite_list :music_list="[...$music_list]" />
     </section>
 @endsection

@@ -222,8 +222,10 @@ setSelects();
         const trackItemAudio = item.querySelector('.track-item__audio');
         const dataMusic = trackItemAudio.getAttribute('data-music');
 
+        console.log('.' + trackItemAudio.classList?.value?.replaceAll(' ', '.'));
+
         const wavesurfer = WaveSurfer.create({
-            container: '.' + trackItemAudio.classList?.value?.replace(' ', '.'),
+            container: '.' + trackItemAudio.classList?.value?.replaceAll(' ', '.'),
             waveColor: 'rgba(27, 18, 30, .2)',
             progressColor: '#FF1111',
             url: STORAGE_URL + dataMusic,

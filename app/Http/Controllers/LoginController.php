@@ -11,8 +11,6 @@ class LoginController extends Controller
 {
     public function show()
     {
-        // dd(auth()->user()->id);
-
         return view('login');
     }
 

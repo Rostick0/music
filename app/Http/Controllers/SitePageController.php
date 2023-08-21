@@ -83,9 +83,6 @@ class SitePageController extends Controller
     public function show(Request $request, string $url = '/home', $id = null)
     {
         $path = $this->get_path($url);
-        // dd(auth()->user()->tokens);
-        // dd(auth()->user()->createToken('auth')->plainTextToken);
-
         $site_page = SitePage::firstWhere('url', $url);
 
         if (
