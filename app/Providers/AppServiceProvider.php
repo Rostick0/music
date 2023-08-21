@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Subscription;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -32,7 +33,7 @@ class AppServiceProvider extends ServiceProvider
 
         App::singleton('has_subscription', function () {
             $has_subscription = false;
-            
+
             if (auth()->check()) {
                 $has_subscription = Subscription::where([
                     ['date_end', '>=', Carbon::now()],
@@ -42,5 +43,22 @@ class AppServiceProvider extends ServiceProvider
 
             return $has_subscription;
         });
+
+        View::share('favorite', function ($favorite_id, $music_item_id, $type) {
+            if ($favorite_id) {
+                return true;
+            }
+
+            $local_data = json_decode(Cookie::get('favorite'));
+
+            if (!is_array($local_data)) {
+                return false;
+            }
+
+            $object = (object) ['type_id' => $music_item_id, 'type' => $type];
+
+            return in_array($object, $local_data);
+        });
+        // App::bind();
     }
 }

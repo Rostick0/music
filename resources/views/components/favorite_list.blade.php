@@ -11,11 +11,14 @@
     @if (empty($music_list))
         <h3 class="tracks__none">Music not found</h3>
     @else
+    {{-- @dd($music_list) --}}
         @foreach ($music_list as $music_item)
             @if ($music_item->table_type === 'music')
                 <x-track_item :music_item="$music_item" />
-            @else
+            @elseif ($music_item->table_type === 'music_kit')
                 <x-music_kit_item :music_item="$music_item" />
+            @elseif ($music_item->table_type === 'muisc_part')
+                <x-music_part_item :music_item="$music_item" />
             @endif
         @endforeach
     @endif

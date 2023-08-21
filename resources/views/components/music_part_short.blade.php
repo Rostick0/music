@@ -1,33 +1,27 @@
-@props(['music_item'])
+@props(['music_item', 'part'])
 
-<li class="tracks__item track-item">
-    <a class="track-item__info" href="/music_kit/{{ $music_item->id }}">
-        <img class="track-item__img lazy"
-            data-src="{{ App\Http\Controllers\ImageController::getViewImage($music_item->music_image) }}"
-            alt="{{ $music_item->title }}">
-        <div class="track-item__text text-ellipsis">
-            <div class="track-item__name">{{ $music_item->title }}</div>
-            <div class="track-item__artist">{{ $music_item->music_artist_name }}</div>
-        </div>
-    </a>
+<div class="track-version__item track-item">
     <div class="track-item__timer">
         <button class="track-button track-item__button">
-            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="40" height="40" rx="20" fill="url(#paint0_linear_111_2751)" />
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <rect width="40" height="40" rx="20"
+                    fill="url(#paint0_linear_111_2751)" />
                 <g class="track-item__button_start">
                     <path
                         d="M15 25.509C15.0004 25.9876 15.1322 26.4559 15.3798 26.8581C15.6273 27.2602 15.9801 27.5793 16.3961 27.7771C16.812 27.9749 17.2735 28.0431 17.7254 27.9735C18.1774 27.904 18.6006 27.6996 18.9447 27.3849L27 20.0032L18.9447 12.6169C18.6008 12.3015 18.1775 12.0966 17.7254 12.0267C17.2732 11.9568 16.8114 12.0249 16.3952 12.2228C15.979 12.4207 15.6261 12.7401 15.3787 13.1426C15.1312 13.5452 14.9998 14.014 15 14.4928V25.509Z"
                         fill="white" />
                 </g>
                 <g class="track-item__button_pause">
-                    <path d="M15.9998 13.6665V27.0002" stroke="white" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                    <path d="M24 13.6665V27.0002" stroke="white" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" />
+                    <path d="M15.9998 13.6665V27.0002" stroke="white" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M24 13.6665V27.0002" stroke="white" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
                 </g>
                 <defs>
-                    <linearGradient id="paint0_linear_111_2751" x1="40" y1="0" x2="-3.72369"
-                        y2="4.59913" gradientUnits="userSpaceOnUse">
+                    <linearGradient id="paint0_linear_111_2751" x1="40"
+                        y1="0" x2="-3.72369" y2="4.59913"
+                        gradientUnits="userSpaceOnUse">
                         <stop stop-color="#FF9211" />
                         <stop offset="1" stop-color="#FF1111" />
                     </linearGradient>
@@ -35,22 +29,23 @@
             </svg>
         </button>
         <div class="track-time track-item__time">
-            {{ App\Http\Controllers\MusicController::normalizeTime($music_item->duration) }}</div>
+            {{ App\Http\Controllers\MusicController::normalizeTime($part->duration) }}
+        </div>
     </div>
     @php
-        $music_item_favorite = $favorite($music_item->favorite_id, $music_item->id, 'music_kit');
+        $music_item_favorite = $favorite($part?->favorite_id, $part->id, 'part');
     @endphp
-    <div class="track-item__audio track-item__audio_{{ $music_item->id }}"
-        data-music="{{ '/music_kit/' . $music_item->link }}" data-title="{{ $music_item->music_title }}"
-        data-artist="{{ $music_item->music_artist_name }}" data-favorite="{{ $music_item_favorite }}"
-        data-time="{{ App\Http\Controllers\MusicController::normalizeTime($music_item->duration) }}">
+    <div class="track-item__audio track-item__audio_{{ $part->id . random_int(100, 1000) }}"
+        data-music="{{ '/part/' . $part->link }}" data-title="{{ $part->title }}"
+        data-artist="{{ $music_item->artist->artist_name }}"
+        data-time="{{ App\Http\Controllers\MusicController::normalizeTime($part->duration) }}">
     </div>
     <div class="track-item__buttons">
         @if ($music_item_favorite)
             <form action="{{ route('favorite.delete') }}" method="post">
                 @csrf
-                <input type="hidden" name="type" value="music_kit">
-                <input type="hidden" name="type_id" value="{{ $music_item->id }}">
+                <input type="hidden" name="type" value="part">
+                <input type="hidden" name="type_id" value="{{ $part->id }}">
                 <button class="track-item__favorite _active">
                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -70,8 +65,8 @@
         @else
             <form action="{{ route('favorite.create') }}" method="post">
                 @csrf
-                <input type="hidden" name="type" value="music_kit">
-                <input type="hidden" name="type_id" value="{{ $music_item->id }}">
+                <input type="hidden" name="type" value="part">
+                <input type="hidden" name="type_id" value="{{ $part->id }}">
                 <button class="track-item__favorite">
                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -90,7 +85,7 @@
             </form>
         @endif
         <a class="track-item__download"
-            href="{{ App\Http\Controllers\MusicDownloadController::getLink($music_item->link, $music_item->link_demo, $music_item->is_free) }}"
+            href="{{ App\Http\Controllers\MusicDownloadController::getLink($music_item->link, true, true) }}"
             download>
             <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
@@ -141,4 +136,4 @@
             </svg>
         </a>
     </div>
-</li>
+</div>

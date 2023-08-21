@@ -7,13 +7,23 @@ use App\Models\RelationshipGenre;
 use App\Models\RelationshipInstrument;
 use App\Models\RelationshipMood;
 use App\Models\RelationshipTheme;
+use Illuminate\Database\Query\JoinClause;
 use Illuminate\Http\Request;
 
 class FrontMusicController extends Controller
 {
     public static function getById(int $id)
     {
-        $music_model = Music::where('id', $id);
+        $music_model = Music::select(
+            'music.*',
+            'favorites.id as favorite_id'
+        )
+            ->where('music.id', $id)
+            ->leftJoin('favorites', function (JoinClause $join) {
+                $join->on('favorites.type_id', '=', 'music.id')
+                    ->where('favorites.type', 'music')
+                    ->where('favorites.user_id', auth()->id());
+            });
 
         if (!(auth()->check() && auth()->user()->is_admin)) $music_model->where('is_active', 1);
 
