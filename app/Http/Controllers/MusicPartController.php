@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\MusicArtist;
 use App\Models\MusicPart;
+use getID3;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use wapmorgan\Mp3Info\Mp3Info;
 
 class MusicPartController extends Controller
 {
@@ -32,8 +32,9 @@ class MusicPartController extends Controller
             'name' => trim($request->part_artist)
         ]);
 
-        $audio = new Mp3Info($request->part_link, true);
-        $duration = gmdate("H:i:s", $audio->duration);
+        $getId3 = new getID3();
+        $audio = $getId3->analyze($request->file('link'));
+        $duration = gmdate("H:i:s", $audio['playtime_seconds']);
         $link = MusicUploadController::upload($request->file('part_link'), 'part');
 
         MusicPart::create([
@@ -73,8 +74,9 @@ class MusicPartController extends Controller
         $duration = null;
 
         if ($request->file('link')) {
-            $audio = new Mp3Info($request->link, true);
-            $duration = gmdate("H:i:s", $audio->duration);
+            $getId3 = new getID3();
+            $audio = $getId3->analyze($request->file('link'));
+            $duration = gmdate("H:i:s", $audio['playtime_seconds']);
             $link = MusicUploadController::upload($request->file('link'), 'part');
         }
 

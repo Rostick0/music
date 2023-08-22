@@ -13,12 +13,12 @@ use App\Models\RelationshipInstrument;
 use App\Models\RelationshipMood;
 use App\Models\RelationshipTheme;
 use App\Models\Theme;
+use getID3;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Validation\Rule;
 use Psy\VersionUpdater\Installer;
-use wapmorgan\Mp3Info\Mp3Info;
 
 class MusicKitController extends Controller
 {
@@ -123,8 +123,10 @@ class MusicKitController extends Controller
 
         $image = ImageController::upload($request->file('image'));
 
-        $audio = new Mp3Info($request->link, true);
-        $duration = gmdate("H:i:s", $audio->duration);
+        $getId3 = new getID3();
+        $audio = $getId3->analyze($request->file('link'));
+        $duration = gmdate("H:i:s", $audio['playtime_seconds']);
+
         $music = MusicUploadController::upload($request->file('link'), 'music_kit');
         $music_demo = MusicUploadController::upload($request->file('link_demo'), 'music_kit_demo');
 
@@ -234,8 +236,9 @@ class MusicKitController extends Controller
         $upload_demo = MusicUploadController::upload($request->file('link_demo'), 'music_kit_demo');
 
         if ($upload) {
-            $audio = new Mp3Info($request->file('link'), true);
-            $audio_duration = gmdate("H:i:s", $audio->duration);
+            $getId3 = new getID3();
+            $audio = $getId3->analyze($request->file('link'));
+            $audio_duration = gmdate("H:i:s", $audio['playtime_seconds']);
 
             $update_data['link'] = $upload;
             $update_data['duration'] = $audio_duration;

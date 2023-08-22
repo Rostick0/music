@@ -12,13 +12,10 @@ use App\Models\RelationshipInstrument;
 use App\Models\RelationshipMood;
 use App\Models\RelationshipTheme;
 use App\Models\Theme;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use getID3;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\File;
-use wapmorgan\Mp3Info\Mp3Info;
 
 class MusicController extends Controller
 {
@@ -199,8 +196,9 @@ class MusicController extends Controller
         $music = MusicUploadController::upload($request->file('link'));
         $music_demo = MusicUploadController::upload($request->file('link_demo'), 'music_demo');
 
-        $audio = new Mp3Info($request->file('link'), true);
-        $audio_duration = gmdate("H:i:s", $audio->duration);
+        $getId3 = new getID3();
+        $audio = $getId3->analyze($request->file('link'));
+        $audio_duration = gmdate("H:i:s", $audio['playtime_seconds']);
 
         $music = Music::create([
             'music_artist_id' => $music_artists->id,
@@ -307,8 +305,9 @@ class MusicController extends Controller
         ];
 
         if ($upload) {
-            $audio = new Mp3Info($request->file('link'), true);
-            $audio_duration = gmdate("H:i:s", $audio->duration);
+            $getId3 = new getID3();
+            $audio = $getId3->analyze($request->file('link'));
+            $audio_duration = gmdate("H:i:s", $audio['playtime_seconds']);
 
             $update_data['link'] = $upload;
             $update_data['duration'] = $audio_duration;
