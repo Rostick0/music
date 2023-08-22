@@ -202,10 +202,10 @@ Route::group(['middleware' => 'guest'], function ($router) {
     Route::get('/register', [RegisterController::class, 'show'])->name('register');
     Route::post('/register', [RegisterController::class, 'store']);
 
-    Route::get('/reset_password', [ResetPasswordController::class, 'show'])->name('password.reset');
+    Route::get('/reset_password', [ResetPasswordController::class, 'show'])->name('password.email');
     Route::post('/reset_password', [ResetPasswordController::class, 'store']);
 
-    Route::get('/reset_edit/{token}', [ResetPasswordController::class, 'edit'])->name('password.edit');
+    Route::get('/reset_edit/{token}', [ResetPasswordController::class, 'edit'])->name('password.reset');
     Route::post('/reset_edit', [ResetPasswordController::class, 'update']);
 });
 

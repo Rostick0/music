@@ -33,7 +33,7 @@ class MusicPartController extends Controller
         ]);
 
         $getId3 = new getID3();
-        $audio = $getId3->analyze($request->file('link'));
+        $audio = $getId3->analyze($request->file('part_link'));
         $duration = gmdate("H:i:s", $audio['playtime_seconds']);
         $link = MusicUploadController::upload($request->file('part_link'), 'part');
 
