@@ -33,7 +33,7 @@ class Favorite extends Model
     {
         return MusicPart::select(
             "music_parts.id as id",
-            "music_parts.music_artist_id as music_artist_id",
+            "$table_name.music_artist_id as music_artist_id",
             "music_parts.title as title",
             "music_parts.link as link",
             DB::raw("NULL as `link_demo`"),
@@ -79,7 +79,7 @@ class Favorite extends Model
     {
         return MusicPart::select(
             "music_parts.id as id",
-            "music_parts.music_artist_id as music_artist_id",
+            "$table_name.music_artist_id as music_artist_id",
             "music_parts.title as title",
             "music_parts.link as link",
             DB::raw("NULL as `link_demo`"),

@@ -67,10 +67,10 @@ class SitePageSeeder extends Seeder
         ],
         [
             'name' => 'track',
-            'url' => 'track',
-            'seo_title' => 'track',
-            'seo_description' => 'track',
-            'path' => 'track'
+            'url' => 'music',
+            'seo_title' => 'music',
+            'seo_description' => 'music',
+            'path' => 'music'
         ],
         [
             'name' => 'music_kits',

@@ -213,14 +213,6 @@
                         @enderror
                     </label>
                     <label class="admin-label">
-                        <span>Автор</span>
-                        <input class="admin-input" type="text" name="part_artist" value="{{ old('part_artist') }}"
-                            maxlength="255" required>
-                        @error('part_artist')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </label>
-                    <label class="admin-label">
                         <span>Трэк*</span>
                         <span class="admin-file-upload">
                             <input class="admin-file-upload__input" type="file" name="part_link" accept=".mp3,.wav"
@@ -245,11 +237,6 @@
                     <label class="admin-label">
                         <span>Название</span>
                         <input class="admin-input" type="text" value="{{ $part->title }}" disabled>
-                    </label>
-                    <label class="admin-label">
-                        <span>Автор</span>
-                        <input class="admin-input" type="text" value="{{ $part->artist->artist_name }}" disabled>
-                        <audio src=""></audio>
                     </label>
                     <label class="admin-label">
                         <span>Файл</span>

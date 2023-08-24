@@ -65,7 +65,7 @@
                                     {{ App\Http\Controllers\MusicController::normalizeTime($music->duration) }}</div>
                             </div>
                             <div class="track-item__audio track-item__audio_{{ $music->id }}"
-                                data-music="{{ '/music/' . $music->link }}" data-title="{{ $music->music_title }}"
+                                data-music="{{ '/music/' . $music->link }}" data-title="{{ $music->title }}"
                                 data-artist="{{ $music->artist->artist_name }}"
                                 data-time="{{ App\Http\Controllers\MusicController::normalizeTime($music->duration) }}">
                             </div>
@@ -176,15 +176,6 @@
                             </div>
                         </div>
                     </li>
-                    <br>
-                    @if ($music->parts->count())
-                        <li class="track__version trakc-version">
-                            <div class="track-version__name text-medium">TRACK VERSIONS INCLUDED</div>
-                            @foreach ($music->parts as $part)
-                                <x-music_part_short :music_item="$music" :part="$part" />
-                            @endforeach
-                        </li>
-                    @endif
                 </ul>
             </div>
         </div>
@@ -254,6 +245,20 @@
                 </ul>
             </div>
         </div>
+
+        @if ($music->parts->count())
+        <div class="tracks section-main">
+            <div class="container">
+                <h2 class="section-title tracks__title">Track versions included</h2>
+                <ul class="tracks__list">
+                    @foreach ($music->parts as $part)
+                        <x-music_part_item :music_item="$part" type="part" :author="$music->artist->artist_name" />
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+    @endif
+
         @if (!empty($music->parts))
             <div class="tracks section-main">
                 <div class="container">
@@ -263,4 +268,6 @@
             </div>
         @endif
     </section>
+
+    <x-player />
 @endsection

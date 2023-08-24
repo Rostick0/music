@@ -1,4 +1,4 @@
-@props(['music_item'])
+@props(['music_item', 'author'])
 
 <li class="tracks__item track-item">
     <a class="track-item__info" href="/{{ $music_item?->type }}/{{ $music_item->type_id }}">
@@ -7,7 +7,7 @@
             alt="{{ $music_item->title }}">
         <div class="track-item__text text-ellipsis">
             <div class="track-item__name">{{ $music_item->title }}</div>
-            <div class="track-item__artist">{{ $music_item->music_artist_name }}</div>
+            <div class="track-item__artist">{{ $author }}</div>
         </div>
     </a>
     <div class="track-item__timer">
@@ -38,11 +38,11 @@
             {{ App\Http\Controllers\MusicController::normalizeTime($music_item->duration) }}</div>
     </div>
     @php
-        $music_item_favorite = favorite($music_item?->favorite_id, $music_item->id);
+        $music_item_favorite = $favorite($music_item?->favorite_id, $music_item->id, 'part');
     @endphp
     <div class="track-item__audio track-item__audio_{{ $music_item->id }} track-item__part"
-        data-music="{{ '/part/' . $music_item->link }}" data-title="{{ $music_item->music_title }}"
-        data-artist="{{ $music_item->music_artist_name }}" data-favorite="{{ $music_item_favorite }}"
+        data-music="{{ '/part/' . $music_item->link }}" data-title="{{ $music_item->title }}"
+        data-artist="{{ $author }}" data-favorite="{{ $music_item_favorite }}"
         data-time="{{ App\Http\Controllers\MusicController::normalizeTime($music_item->duration) }}">
     </div>
     <div class="track-item__buttons">

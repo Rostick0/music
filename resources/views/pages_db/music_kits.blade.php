@@ -145,4 +145,5 @@
             <x-music_kit_list :music_kit_list="[...$music_kit_list]" />
             {{ $music_kit_list->appends(Request::all())->links('vendor.front-pagination') }}
     </section>
+    <x-player />
 @endsection

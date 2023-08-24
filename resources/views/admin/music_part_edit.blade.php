@@ -17,14 +17,6 @@
                         <span class="error">{{ $message }}</span>
                     @enderror
                 </label>
-                <label class="admin-label">
-                    <span>Автор*</span>
-                    <input class="admin-input" type="text" name="music_artists" maxlength="255"
-                        value="{{ old('music_artists') ?? $music_part->music_artists }}" required>
-                    @error('music_artists')
-                        <span class="error">{{ $message }}</span>
-                    @enderror
-                </label>
             </div>
             <div class="admin-form__flex">
                 <label class="admin-label">
@@ -46,6 +38,14 @@
                     @endif
                 </label>
             </div>
+            @if (Session::has('success'))
+                <div class="feedback__success success">{{ Session::get('success') }}</div>
+                @if ($music_part->type == 'music')
+                    <meta http-equiv="refresh" content="2; url={{ route('music.edit', ['id' => $music_part->type_id]) }}">
+                @else
+                    <meta http-equiv="refresh" content="2; url={{ route('music_kit.edit', ['id' => $music_part->type_id]) }}">
+                @endif
+            @endif
             <div class="admin-delete__buttons admin-button__margin-top">
                 <button class="admin-button">Сохранить изменения</button>
             </div>

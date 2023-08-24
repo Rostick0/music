@@ -20,7 +20,7 @@
         <h3 class="tracks__none">Music not found</h3>
     @else
         @foreach ($music_list as $music_item)
-            <x-track_item :music_item="$music_item" />
+            <x-music_item :music_item="$music_item" type="music" />
         @endforeach
     @endif
 </ul>

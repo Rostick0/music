@@ -97,5 +97,8 @@
                 <h2 class="section-title tracks__title">Tracks</h2>
                 <x-tracks_list :music_list="[...$playlist->music]" />
             </div>
+        </div>
     </section>
+    
+    <x-player />
 @endsection

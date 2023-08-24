@@ -22,14 +22,8 @@ class MusicPartController extends Controller
     {
         $request->validate([
             'type_id' => 'required',
-            'part_artist' => 'required',
-            'part_title' => 'required|max:255',
             'part_link' => 'required|mimes:mp3,wav',
             'type' => 'in:music,music_kit'
-        ]);
-
-        $music_artists = MusicArtist::firstOrCreate([
-            'name' => trim($request->part_artist)
         ]);
 
         $getId3 = new getID3();
@@ -37,10 +31,9 @@ class MusicPartController extends Controller
         $duration = gmdate("H:i:s", $audio['playtime_seconds']);
         $link = MusicUploadController::upload($request->file('part_link'), 'part');
 
-        MusicPart::create([
+        $music_part = MusicPart::create([
             'type_id' => $request->type_id,
             'title' => $request->part_title,
-            'music_artist_id' => $music_artists->id,
             'link' => $link,
             'duration' => $duration,
             'type' => $request->type
@@ -61,13 +54,8 @@ class MusicPartController extends Controller
     public function update(Request $request, int $id)
     {
         $request->validate([
-            'name' => 'required|max:255',
+            'title' => 'required|max:255',
             'link' => 'mimes:mp3,wav',
-            'music_artists' => 'required',
-        ]);
-
-        $music_artists = MusicArtist::firstOrCreate([
-            'name' => trim($request->music_artists)
         ]);
 
         $link = null;
@@ -82,7 +70,6 @@ class MusicPartController extends Controller
 
         $update_date = [
             'title' => $request->title,
-            'music_artist_id' => $music_artists->id,
         ];
 
         if ($link) $update_date['link'] = $link;
@@ -90,7 +77,7 @@ class MusicPartController extends Controller
 
         MusicPart::find($id)->update($update_date);
 
-        return back();
+        return back()->with('success', 'Успешно измененно');
     }
 
     public function destroy(int $id)

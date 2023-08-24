@@ -118,7 +118,7 @@
             @foreach ($music_kits as $music_kit)
                 <li class="admin-grid__content_item admin-grid-music-kit__content_item">
                     <div>{{ $music_kit->id }}</div>
-                    <div>{{ $music_kit->name }}</div>
+                    <div>{{ $music_kit->title }}</div>
                     <a class="text-ellipsis" title="{{ $music_kit->link }}" target="_blank"
                         href="{{ $music_kit->link }}">{{ $music_kit->link }}</a>
                     <div>{{ $music_kit->duration }}</div>

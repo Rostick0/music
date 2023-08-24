@@ -67,7 +67,10 @@
                                     {{ App\Http\Controllers\MusicController::normalizeTime($music_kit->duration) }}</div>
                             </div>
                             <div class="track-item__audio track-item__audio_{{ $music_kit->id }}"
-                                data-music="/music_kit/{{ $music_kit->link }}"></div>
+                                data-music="/music_kit/{{ $music_kit->link }}" data-title="{{ $music_kit->title }}"
+                                data-artist="{{ $music_kit->artist->artist_name }}"
+                                data-time="{{ App\Http\Controllers\MusicController::normalizeTime($music_kit->duration) }}">
+                            </div>
                             <div class="track-item__buttons">
                                 @if ($favorite($music_kit->favorite_id, $music_kit->id, 'music'))
                                     <form action="{{ route('favorite.delete') }}" method="post">
@@ -175,15 +178,6 @@
                             </div>
                         </div>
                     </li>
-                    <br>
-                    @if ($music_kit->parts->count())
-                        <li class="track__version trakc-version">
-                            <div class="track-version__name text-medium">MUSIC KIT VERSIONS INCLUDED</div>
-                            @foreach ($music_kit->parts as $part)
-                                <x-music_part_short :music_item="$music_kit" :part="$part" />
-                            @endforeach
-                        </li>
-                    @endif
                 </ul>
             </div>
         </div>
@@ -255,6 +249,19 @@
             </div>
         </div>
 
+        @if ($music_kit->parts->count())
+            <div class="tracks section-main">
+                <div class="container">
+                    <h2 class="section-title tracks__title">Music kit versions included</h2>
+                    <ul class="tracks__list">
+                        @foreach ($music_kit->parts as $part)
+                            <x-music_part_item :music_item="$part" type="part" :author="$music_kit->artist->artist_name" />
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        @endif
+
         @if (!empty($music->parts))
             <div class="tracks section-main">
                 <div class="container">
@@ -267,6 +274,6 @@
                 </div>
             </div>
         @endif
-
     </section>
+    <x-player />
 @endsection

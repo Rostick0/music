@@ -176,4 +176,6 @@
             <x-tracks_list :music_list="[...$music_list]" />
             {{ $music_list->appends(Request::all())->links('vendor.front-pagination') }}
     </section>
+
+    <x-player />
 @endsection

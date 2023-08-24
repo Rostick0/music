@@ -15,12 +15,6 @@ class MusicPart extends Model
         'type',
         'title',
         'link',
-        'music_artist_id',
         'duration'
     ];
-
-    public function artist(): BelongsTo
-    {
-        return $this->belongsTo(MusicArtist::class, 'music_artist_id', 'id')->select('music_artists.name as artist_name');
-    }
 }
