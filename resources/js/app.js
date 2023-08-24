@@ -62,17 +62,14 @@ import { asyncSelect } from './ui';
     if (!adminDetails) return;
 
     adminDetails.forEach(detail => {
+        document.addEventListener('click', e => {
+            if (detail.contains(e.target)) return;
 
-        detail.setAttribute('tabindex', 1);
-
-        detail.onblur = () => {
-            console.log(5);
-        }
+            detail.removeAttribute('open');
+        })
 
         detail?.querySelectorAll('.admin-checkbox')?.forEach(label => {
-            label.onclick = () => {
-                detail.removeAttribute('open');
-            }
+            label.onclick = () => detail.removeAttribute('open');
         })
     })
 })();

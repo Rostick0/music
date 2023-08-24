@@ -25,17 +25,14 @@ body,
 }
 
 input[type=range][orient=vertical] {
+    accent-color: #f11;
     writing-mode: bt-lr;
-    -webkit-appearance: slider-vertical;
+    appearance: slider-vertical;
+    outline: none;
     width: 4px;
     height: 80px;
     padding: 0 8px;
 }
-
-// input[type=range] {
-//     background: #ff4500;
-//     accent-color: #f11;
-// }
 
 .wrapper {
     display: flex;
