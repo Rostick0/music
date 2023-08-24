@@ -2,9 +2,13 @@
 
 namespace App\Providers;
 
+use App\Models\Feedback;
+use App\Models\Playlist;
 use App\Models\RemoveClaim;
 use App\Models\Subscription;
 use App\Models\User;
+use App\Observers\FeedbackObserver;
+use App\Observers\PlaylistObserver;
 use App\Observers\RemoveClaimObserver;
 use App\Observers\SubscriptionObserver;
 use App\Observers\UserObserver;
@@ -34,6 +38,8 @@ class EventServiceProvider extends ServiceProvider
         User::observe(UserObserver::class);
         RemoveClaim::observe(RemoveClaimObserver::class);
         Subscription::observe(SubscriptionObserver::class);
+        Feedback::observe(FeedbackObserver::class);
+        Playlist::observe(PlaylistObserver::class);
     }
 
     /**
