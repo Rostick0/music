@@ -5,7 +5,7 @@
         <img class="track-item__img lazy"
             data-src="{{ App\Http\Controllers\ImageController::getViewImage($music_item->music_image) }}"
             alt="{{ $music_item->title }}">
-        <div class="track-item__text text-ellipsis">
+        <div class="track-item__text">
             <div class="track-item__name">{{ $music_item->title }}</div>
             <div class="track-item__artist">{{ $music_item->music_artist_name }}</div>
         </div>

@@ -41,9 +41,9 @@
             @if (Session::has('success'))
                 <div class="feedback__success success">{{ Session::get('success') }}</div>
                 @if ($music_part->type == 'music')
-                    <meta http-equiv="refresh" content="2; url={{ route('music.edit', ['id' => $music_part->type_id]) }}">
+                    <meta http-equiv="refresh" content="1; url={{ route('music.edit', ['id' => $music_part->type_id]) }}">
                 @else
-                    <meta http-equiv="refresh" content="2; url={{ route('music_kit.edit', ['id' => $music_part->type_id]) }}">
+                    <meta http-equiv="refresh" content="1; url={{ route('music_kit.edit', ['id' => $music_part->type_id]) }}">
                 @endif
             @endif
             <div class="admin-delete__buttons admin-button__margin-top">

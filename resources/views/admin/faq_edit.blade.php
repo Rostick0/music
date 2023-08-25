@@ -25,7 +25,7 @@
         </div>
         @if (Session::has('success'))
             <div class="feedback__success success">{{ Session::get('success') }}</div>
-            <meta http-equiv="refresh" content="2; url={{route('settings')}}">
+            <meta http-equiv="refresh" content="1; url={{route('settings')}}">
         @endif
     </form>
 @endsection

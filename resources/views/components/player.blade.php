@@ -44,7 +44,7 @@
             </svg>
         </div>
     </div>
-    <div class="track-item__text player__text text-ellipsis">
+    <div class="track-item__text player__text">
         <div class="track-item__name player__name" title="Новая песня">Новая песня</div>
         <div class="track-item__artist" title="лучший">лучший</div>
     </div>

@@ -85,14 +85,14 @@ setSelects();
         playerVolume.value = getLocalVolume() * 100;
 
         playerVolume.oninput = throttle(e => {
-            setLocalVolume(e.target.value / 100)
+            setLocalVolume(e.target.value / 100);
+            plays[0].setVolume(e.target.value / 100);
         }, 20);
     }
 
     if (player && playerCopy) {
         playerCopy.onclick = () => {
-            const urlMusic = location.protocol + '//' + location.host + location.pathname + '/track/' + activeMusic.substr(7)
-
+            const urlMusic = activeMusic?.link;
             navigator.clipboard.writeText(urlMusic);
         }
     }
@@ -222,8 +222,6 @@ setSelects();
         const trackItemAudio = item.querySelector('.track-item__audio');
         const dataMusic = trackItemAudio.getAttribute('data-music');
 
-        console.log('.' + trackItemAudio.classList?.value?.replaceAll(' ', '.'));
-
         const wavesurfer = WaveSurfer.create({
             container: '.' + trackItemAudio.classList?.value?.replaceAll(' ', '.'),
             waveColor: 'rgba(27, 18, 30, .2)',
@@ -244,9 +242,11 @@ setSelects();
                 addClass(item, '_active');
                 wavesurfer?.play();
                 wavesurfer?.setVolume(getLocalVolume())
-
                 wavesurferPlayer?.unAll();
-                activeMusic = dataMusic;
+                activeMusic = {
+                    link: item.querySelector('.track-item__info')?.href,
+                    src: dataMusic
+                };
                 audioPlayerEdit({
                     title: trackItemAudio.getAttribute('data-title'),
                     artist: trackItemAudio.getAttribute('data-artist'),
@@ -277,7 +277,7 @@ setSelects();
     const playerPrev = document.querySelector('.player__prev');
     if (playerPrev) {
         playerPrev.onclick = () => {
-            const index = musicList?.findIndex(item => item?.music == activeMusic);
+            const index = musicList?.findIndex(item => item?.music == activeMusic?.src);
             if (index === 0) {
                 checkActivePlayer(musicList?.[musicList?.length - 1]?.active);
                 return;
@@ -290,7 +290,7 @@ setSelects();
     const playerNext = document.querySelector('.player__next');
     if (playerNext) {
         playerNext.onclick = () => {
-            const index = musicList?.findIndex(item => item?.music == activeMusic);
+            const index = musicList?.findIndex(item => item?.music == activeMusic?.src);
 
             if (index === musicList?.length - 1) {
                 checkActivePlayer(musicList?.[0]?.active);
@@ -327,7 +327,7 @@ setSelects();
             <img decoding="async" class="track-item__img"
                 src="${music?.image ? IMAGE_URL + music?.image : '/img/music.png'}"
                 alt="${music?.title}">
-            <div class="track-item__text text-ellipsis">
+            <div class="track-item__text">
                 ${music?.is_free ? '<div class="track-item__free">FREE</div>' : ''}
                 <div class="track-item__name">${music?.title}</div>
                 <div class="track-item__artist">${music?.music_artist_name}</div>
@@ -419,7 +419,7 @@ setSelects();
             <img class="track-item__img"
                 src="${musicKit?.music_image ? IMAGE_URL + musicKit?.music_image : '/img/music.png'}"
                 alt="{{ $music_item->title }}">
-            <div class="track-item__text text-ellipsis">
+            <div class="track-item__text">
                 <div class="track-item__name">${musicKit?.title}</div>
                 <div class="track-item__artist">${musicKit?.music_artist_name}</div>
             </div>

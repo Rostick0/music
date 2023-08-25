@@ -5,7 +5,7 @@
         <img class="track-item__img lazy"
             data-src="{{ App\Http\Controllers\ImageController::getViewImage($music_item->music_image) }}"
             alt="{{ $music_item->title }}">
-        <div class="track-item__text text-ellipsis">
+        <div class="track-item__text">
             <div class="track-item__name">{{ $music_item->title }}</div>
             <div class="track-item__artist">{{ $author }}</div>
         </div>
@@ -45,6 +45,7 @@
         data-artist="{{ $author }}" data-favorite="{{ $music_item_favorite }}"
         data-time="{{ App\Http\Controllers\MusicController::normalizeTime($music_item->duration) }}">
     </div>
+    @if ($music_item->type === 'music')
     <div class="track-item__buttons">
         @if ($music_item_favorite)
             <form action="{{ route('favorite.delete') }}" method="post">
@@ -141,4 +142,5 @@
             </svg>
         </a>
     </div>
+    @endif
 </li>
