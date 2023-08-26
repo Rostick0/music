@@ -21,6 +21,16 @@ export const myFetch = (url, options = {}) => {
     })
 }
 
+function isElementInViewport(el) {
+    var rect = el?.getBoundingClientRect();
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+};
+
 (function () {
     const faqItems = document.querySelectorAll('.faq__item');
 
@@ -71,7 +81,7 @@ function setSelects() {
 
 setSelects();
 
-(function () {
+(async function () {
     let wavesurferPlayer = null;
     const player = document.querySelector('.player');
     const playerVolume = player?.querySelector('.player-volume__input');
@@ -167,6 +177,7 @@ setSelects();
         playerAudio.innerHTML = null;
 
         const wavesurferPlayerInner = WaveSurfer.create({
+            backend: 'MediaElement',
             container: '.' + playerAudio.classList?.value?.replace(' ', '.'),
             waveColor: 'rgba(27, 18, 30, .2)',
             progressColor: '#FF1111',
@@ -175,13 +186,17 @@ setSelects();
             volume: 0
         });
 
-
         wavesurferPlayer = wavesurferPlayerInner;
 
         wavesurferPlayerInner.on('ready', () => {
             let isWavesurfer2Clicked = false;
 
             wavesurferPlayerInner.on('click', position => {
+                wavesurfer?.seekTo(position);
+                isWavesurfer2Clicked = true;
+            });
+
+            wavesurferPlayerInner.on('drag', position => {
                 wavesurfer?.seekTo(position);
                 isWavesurfer2Clicked = true;
             });
@@ -223,12 +238,23 @@ setSelects();
         const dataMusic = trackItemAudio.getAttribute('data-music');
 
         const wavesurfer = WaveSurfer.create({
+            backend: 'MediaElement',
             container: '.' + trackItemAudio.classList?.value?.replaceAll(' ', '.'),
             waveColor: 'rgba(27, 18, 30, .2)',
             progressColor: '#FF1111',
-            url: STORAGE_URL + dataMusic,
+            // url: STORAGE_URL + dataMusic,
             height: 40,
         });
+
+        const click = throttle(
+            () => {
+                if (!isElementInViewport(trackItemAudio)) return;
+
+                wavesurfer.load(STORAGE_URL + dataMusic);
+                window.removeEventListener('scroll', click);
+            }, 300
+        );
+        window.addEventListener('scroll', click);
 
         musicItems.push(dataMusic);
 

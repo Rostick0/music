@@ -1,13 +1,12 @@
-@props(['music_item'])
+@props(['music_item', 'author', 'image'])
 
 <li class="tracks__item track-item">
     <a class="track-item__info" href="/{{ $music_item?->type }}/{{ $music_item->type_id }}">
-        <img class="track-item__img lazy"
-            data-src="{{ App\Http\Controllers\ImageController::getViewImage($music_item->image) }}"
+        <img class="track-item__img lazy" data-src="{{ App\Http\Controllers\ImageController::getViewImage($image) }}"
             alt="{{ $music_item->title }}">
         <div class="track-item__text">
             <div class="track-item__name">{{ $music_item->title }}</div>
-            <div class="track-item__artist">{{ $music_item->music_artist_name }}</div>
+            <div class="track-item__artist">{{ $author }}</div>
         </div>
     </a>
     <div class="track-item__timer">
@@ -42,7 +41,7 @@
     @endphp
     <div class="track-item__audio track-item__audio_{{ $music_item->id }} track-item__part"
         data-music="{{ '/part/' . $music_item->link }}" data-title="{{ $music_item->title }}"
-        data-artist="{{ $music_item->music_artist_name }}" data-favorite="{{ $music_item_favorite }}"
+        data-artist="{{ $author }}" data-favorite="{{ $music_item_favorite }}"
         data-time="{{ App\Http\Controllers\MusicController::normalizeTime($music_item->duration) }}">
     </div>
     @if ($music_item->type === 'music')

@@ -39,7 +39,7 @@ import { asyncSelect } from './ui';
     })
 })();
 
-(function () {
+(async function () {
     new LazyLoad({
         elements_selector: ".lazy"
     });

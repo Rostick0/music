@@ -3,7 +3,7 @@
 <li class="tracks__item track-item">
     <a class="track-item__info" href="/{{ $type }}/{{ $music_item->id }}">
         <img class="track-item__img lazy"
-            data-src="{{ App\Http\Controllers\ImageController::getViewImage($music_item->music_image) }}"
+            data-src="{{ App\Http\Controllers\ImageController::getViewImage($music_item->image) }}"
             alt="{{ $music_item->title }}">
         <div class="track-item__text">
             <div class="track-item__name">{{ $music_item->title }}</div>

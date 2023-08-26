@@ -27,10 +27,6 @@
                         @if ($music_kit->description)
                             <p class="track__description text-medium">{{ $music_kit->description }}</p>
                         @endif
-                        <p class="track__description text-medium">Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                            Nisi libero
-                            vitae corrupti id, nobis voluptatibus. Sapiente explicabo molestiae, nobis aperiam illo
-                            cupiditate id doloremque esse ipsa, quaerat quibusdam optio alias?</p>
                     </div>
                 </div>
                 <ul class="track__version">
@@ -255,14 +251,14 @@
                     <h2 class="section-title tracks__title">Music kit versions included</h2>
                     <ul class="tracks__list">
                         @foreach ($music_kit->parts as $part)
-                            <x-music_part_item :music_item="$part" type="part" :author="$music_kit->artist->artist_name" />
+                            <x-music_part_include :music_item="$part" type="part" :author="$music_kit->artist->artist_name" :image="$music_kit->image" />
                         @endforeach
                     </ul>
                 </div>
             </div>
         @endif
 
-        @if (!empty($music->parts))
+        @if (!empty($music_list))
             <div class="tracks section-main">
                 <div class="container">
                     <h2 class="section-title tracks__title">Similar tracks</h2>

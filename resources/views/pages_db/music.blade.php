@@ -25,10 +25,6 @@
                         @if ($music->description)
                             <p class="track__description text-medium">{{ $music->description }}</p>
                         @endif
-                        <p class="track__description text-medium">Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                            Nisi libero
-                            vitae corrupti id, nobis voluptatibus. Sapiente explicabo molestiae, nobis aperiam illo
-                            cupiditate id doloremque esse ipsa, quaerat quibusdam optio alias?</p>
                     </div>
                 </div>
                 <ul class="track__version">
@@ -247,19 +243,19 @@
         </div>
 
         @if ($music->parts->count())
-        <div class="tracks section-main">
-            <div class="container">
-                <h2 class="section-title tracks__title">Track versions included</h2>
-                <ul class="tracks__list">
-                    @foreach ($music->parts as $part)
-                        <x-music_part_item :music_item="$part" type="part" :author="$music->artist->artist_name" />
-                    @endforeach
-                </ul>
+            <div class="tracks section-main">
+                <div class="container">
+                    <h2 class="section-title tracks__title">Track versions included</h2>
+                    <ul class="tracks__list">
+                        @foreach ($music->parts as $part)
+                            <x-music_part_item :music_item="$part" type="part" :author="$music->artist->artist_name" :image="$music->image" />
+                        @endforeach
+                    </ul>
+                </div>
             </div>
-        </div>
-    @endif
+        @endif
 
-        @if (!empty($music->parts))
+        @if (!empty($music_list))
             <div class="tracks section-main">
                 <div class="container">
                     <h2 class="section-title tracks__title">Similar tracks</h2>

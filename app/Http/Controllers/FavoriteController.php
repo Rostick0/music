@@ -102,9 +102,9 @@ class FavoriteController extends Controller
             if ($item?->type == 'part') return $item?->type_id;
         }, [...$local_favorite]);
 
-        $music_list = Favorite::selectNoAuth(new Music, 'music', 'music', $music_ids)
+        $music_list = Favorite::selectMusicNoAuth(new Music, 'music', 'music', $music_ids)
             ->union(
-                Favorite::selectNoAuth(new MusicKit, "music_kits",  'music_kit', $music_kit_ids)
+                Favorite::selectMusicNoAuth(new MusicKit, "music_kits",  'music_kit', $music_kit_ids)
             )
             ->union(
                 Favorite::selectMusicPartNoAuth('music', 'music', $music_part_ids)

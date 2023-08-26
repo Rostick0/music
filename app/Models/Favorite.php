@@ -53,8 +53,8 @@ class Favorite extends Model
             "music_parts.type_id as type_id",
             DB::raw("'muisc_part' as `table_type`"),
         )
-            ->join('music_artists', "music_parts.music_artist_id", '=', 'music_artists.id')
             ->join($table_name, "$table_name.id", '=', 'music_parts.type_id')
+            ->join('music_artists', "$table_name.music_artist_id", '=', 'music_artists.id')
             ->whereIn("music_parts.id", $ids)
             ->where('music_parts.type', $table_type);
     }
@@ -100,8 +100,8 @@ class Favorite extends Model
             DB::raw("'muisc_part' as `table_type`"),
             'favorites.id as favorite_id'
         )
-            ->join('music_artists', "music_parts.music_artist_id", '=', 'music_artists.id')
             ->join($table_name, "$table_name.id", '=', 'music_parts.type_id')
+            ->join('music_artists', "$table_name.music_artist_id", '=', 'music_artists.id')
             ->join('favorites', 'favorites.type_id', '=', 'music_parts.id')
             ->where('favorites.type', 'part')
             ->where('favorites.user_id', auth()->id());
