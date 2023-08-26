@@ -13,6 +13,7 @@
     <title>@yield('seo_title', $site->seo_title)</title>
     <meta name="description" content="@yield('seo_description', $site->seo_description)">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="shortcut icon" href="{{ $site->favicon }}" type="image/x-icon">
     @php
         $token_controller = new App\Http\Controllers\TokenController();
     @endphp

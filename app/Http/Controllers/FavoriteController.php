@@ -77,9 +77,9 @@ class FavoriteController extends Controller
                 ->union(
                     Favorite::selectMusicPart('music', 'music')
                 )
-                ->union(
-                    Favorite::selectMusicPart('music_kits', 'music_kit')
-                )
+                // ->union(
+                //     Favorite::selectMusicPart('music_kits', 'music_kit')
+                // )
                 ->orderByDesc('id')
                 ->paginate(app('site')->count_front);
 
@@ -109,9 +109,9 @@ class FavoriteController extends Controller
             ->union(
                 Favorite::selectMusicPartNoAuth('music', 'music', $music_part_ids)
             )
-            ->union(
-                Favorite::selectMusicPartNoAuth('music_kits', 'music_kit', $music_part_ids)
-            )
+            // ->union(
+            //     Favorite::selectMusicPartNoAuth('music_kits', 'music_kit', $music_part_ids)
+            // )
             ->orderByDesc('id')
             ->paginate(app('site')->count_front);
 

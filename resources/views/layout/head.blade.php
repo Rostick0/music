@@ -8,6 +8,7 @@
     @vite(['resources/scss/index.scss'])
     <title>@yield('seo_title', $site->seo_title)</title>
     <meta name="description" content="@yield('seo_description', $site->seo_description)">
+    <link rel="shortcut icon" href="{{ $site->favicon }}" type="image/x-icon">
 </head>
 
 <body>

@@ -248,7 +248,7 @@
                     <h2 class="section-title tracks__title">Track versions included</h2>
                     <ul class="tracks__list">
                         @foreach ($music->parts as $part)
-                            <x-music_part_item :music_item="$part" type="part" :author="$music->artist->artist_name" :image="$music->image" />
+                            <x-music_part_include :music_item="$part" type="part" :author="$music->artist->artist_name" :image="$music->image" />
                         @endforeach
                     </ul>
                 </div>

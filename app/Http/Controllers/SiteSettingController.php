@@ -54,7 +54,7 @@ class SiteSettingController extends Controller
 
         if ($request->file('favicon')) {
             $new_favicon = ImageController::upload($request->file('favicon'));
-            $result['favicon'] = $new_favicon;
+            $result['favicon'] = '/storage/upload/image/' . $new_favicon;
         }
 
         File::put(public_path('config.json'), json_encode($result));
