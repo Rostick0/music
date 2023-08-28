@@ -68,9 +68,9 @@ import { asyncSelect } from './ui';
             detail.removeAttribute('open');
         })
 
-        detail?.querySelectorAll('.admin-checkbox')?.forEach(label => {
-            label.onclick = () => detail.removeAttribute('open');
-        })
+        // detail?.querySelectorAll('.admin-checkbox')?.forEach(label => {
+        //     label.onclick = () => detail.removeAttribute('open');
+        // })
     })
 })();
 

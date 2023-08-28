@@ -263,9 +263,7 @@
                 <div class="container">
                     <h2 class="section-title tracks__title">Similar tracks</h2>
                     <ul class="tracks__list">
-                        @foreach ($music_list as $music_item)
-                            <x-music_kit_list :music_kit_list="[...$music_kit_list]" />
-                        @endforeach
+                        <x-music_kit_list :music_kit_list="[...$music_list]" />
                     </ul>
                 </div>
             </div>
