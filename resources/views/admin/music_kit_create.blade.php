@@ -129,13 +129,15 @@
             </label>
         </div>
         <div class="admin-form__flex">
-            <label class="admin-label admin-form__flex_long">
+            <div class="admin-label admin-form__flex_100">
                 <span>Описание трека</span>
-                <textarea class="admin-input" type="text" name="description" rows="3">{{ old('description') }}</textarea>
+                <textarea class="summernote" name="description" id="description">{{ old('description') }}</textarea>
                 @error('description')
                     <span class="error">{{ $message }}</span>
                 @enderror
-            </label>
+            </div>
+        </div>
+        <div class="admin-form__flex">
             <label class="admin-label">
                 <span>Изображение</span>
                 <input class="admin-input" type="file" name="image" value="{{ old('image') }}"
@@ -165,4 +167,5 @@
             <button class="admin-button">Сохранить</button>
         </div>
     </form>
+    <x-summernote_links></x-summernote_links>
 @endsection

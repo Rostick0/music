@@ -29,7 +29,7 @@ class FavoriteController extends Controller
 
         foreach ($local_favorite as $favorite) {
             Favorite::firstOrCreate([
-                'type_id' => $favorite->id,
+                'type_id' => $favorite->type_id,
                 'type' => $favorite->type,
                 'user_id' => auth()->id()
             ]);

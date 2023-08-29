@@ -15,7 +15,7 @@ class FeedbackObserver
         $text = 'Обратная связь, E-mail: ' . $feedback->email . ', тема: ' . $feedback->theme . ', сообщение: ' . $feedback->message;
 
         Mail::raw($text, function ($m) {
-            $m->to('Avs29rus@mail.ru', '')->subject('Новая заявка remove claim');
+            $m->to('Avs29rus@mail.ru', '')->subject('новое сообщение с сайта');
         });
     }
 
