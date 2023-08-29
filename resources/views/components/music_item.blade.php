@@ -6,6 +6,9 @@
             data-src="{{ App\Http\Controllers\ImageController::getViewImage($music_item->image) }}"
             alt="{{ $music_item->title }}">
         <div class="track-item__text">
+            @if ($music_item?->is_free)
+                <div class="track-item__free">FREE</div>
+            @endif
             <div class="track-item__name">{{ $music_item->title }}</div>
             <div class="track-item__artist">{{ $music_item->music_artist_name }}</div>
         </div>
