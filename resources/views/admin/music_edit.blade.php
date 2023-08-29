@@ -59,7 +59,7 @@
                         <span class="error">{{ $message }}</span>
                     @enderror
                     @if ($check_demo)
-                        <span>{{ App\Http\Controllers\MusicUploadController::getViewLink($music->link) }}</span>
+                        <span>{{ App\Http\Controllers\MusicUploadController::getViewLink($music->link_demo, 'music_demo') }}</span>
                         <audio class="admin-audio" src="{{ Storage::url('upload/music_demo/' . $music->link_demo) }}"
                             controls></audio>
                     @endif
