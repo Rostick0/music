@@ -60,6 +60,8 @@
                                 <div class="track-time track-item__time">
                                     {{ App\Http\Controllers\MusicController::normalizeTime($music->duration) }}</div>
                             </div>
+                            <a class="track-item__info" href="/music/{{ $music_kit->id }}" rel="noreferrer noopener"
+                                hidden></a>
                             <div class="track-item__audio track-item__audio_{{ $music->id }}"
                                 data-music="{{ '/music/' . $music->link }}" data-title="{{ $music->title }}"
                                 data-id="{{ $music->id }}" data-type="music"

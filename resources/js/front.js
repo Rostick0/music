@@ -6,6 +6,7 @@ const IMAGE_URL = STORAGE_URL + '/image/';
 const MUSIC_URL = '/music/';
 const MUSIC_DEMO_URL = '/music_demo/';
 const MUSIC_KIT_URL = '/music_kit/';
+const MUSIC_KIT_DEMO_URL = '/music_kit_demo/';
 
 export const myFetch = (url, options = {}) => {
     const bearerToken = typeof accessToken === 'string' && accessToken ? 'Bearer ' + accessToken : null;
@@ -102,6 +103,7 @@ setSelects();
 
     if (player && playerCopy) {
         playerCopy.onclick = () => {
+            console.log(activeMusic)
             const urlMusic = activeMusic?.link;
             navigator.clipboard.writeText(urlMusic);
         }
@@ -150,7 +152,7 @@ setSelects();
             </form>`;
         }
 
-        return `<form action="http://localhost/favorite/create" method="post">
+        return `<form action="/favorite/create" method="post">
         <input type="hidden" name="_token" value="${csrfToken}">
         <input type="hidden" name="type_id" value="${musicId}">
         <input type="hidden" name="type" value="${type}">
@@ -352,14 +354,20 @@ setSelects();
 
     initWaveSurfer();
 
-    const downloadButton = (link, linkDemo, isFree) => {
+    const downloadButton = (link, linkDemo, isFree, type) => {
         if (
             isFree || hasSubscription
         ) {
-            return STORAGE_URL + MUSIC_URL + link;
+            let url = MUSIC_KIT_URL;
+            if (type == 'music') url = MUSIC_URL;
+
+            return STORAGE_URL + url + link;
         }
 
-        return MUSIC_DEMO_URL + linkDemo;
+        let url = MUSIC_KIT_DEMO_URL;
+        if (type == 'music') url = MUSIC_DEMO_URL;
+
+        return STORAGE_URL + url + linkDemo;
     };
     const musicItem = (music, type = 'music') => {
         return `<li class="tracks__item track-item">
@@ -402,7 +410,7 @@ setSelects();
         ></div>
         <div class="track-item__buttons">
             ${musicButton(music?.id, music?.favorite_id, type)}
-            <a class="track-item__download" href="${downloadButton(music?.link, music?.link_demo, music?.is_free)}" download>
+            <a class="track-item__download" href="${downloadButton(music?.link, music?.link_demo, music?.is_free, type)}" download>
                 <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_98_282)">

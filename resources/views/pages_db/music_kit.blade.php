@@ -62,10 +62,11 @@
                                 <div class="track-time track-item__time">
                                     {{ App\Http\Controllers\MusicController::normalizeTime($music_kit->duration) }}</div>
                             </div>
+                            <a class="track-item__info" href="/music_kit/{{ $music_kit->id }}" rel="noreferrer noopener"
+                                hidden></a>
                             <div class="track-item__audio track-item__audio_{{ $music_kit->id }}"
                                 data-music="/music_kit/{{ $music_kit->link }}" data-title="{{ $music_kit->title }}"
-                                data-id="{{ $music_kit->id }}"
-                                data-type="music_kit"
+                                data-id="{{ $music_kit->id }}" data-type="music_kit"
                                 data-favorite="{{ $favorite($music_kit?->favorite_id, $music_kit->id, 'music_kit') }}"
                                 data-artist="{{ $music_kit->artist->artist_name }}"
                                 data-time="{{ App\Http\Controllers\MusicController::normalizeTime($music_kit->duration) }}">
