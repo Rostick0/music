@@ -8,6 +8,7 @@ use App\Models\RelationshipGenre;
 use App\Models\RelationshipInstrument;
 use App\Models\RelationshipMood;
 use App\Models\RelationshipTheme;
+use Illuminate\Database\Query\JoinClause;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
 
@@ -15,9 +16,18 @@ class FrontMusicKitController extends Controller
 {
     public static function getById(int $id)
     {
-        $music_kit_model = MusicKit::where('id', $id);
+        $music_kit_model = MusicKit::select(
+            'music_kits.*',
+            'favorites.id as favorite_id'
+        )
+            ->where('music_kits.id', $id)
+            ->leftJoin('favorites', function (JoinClause $join) {
+                $join->on('favorites.type_id', '=', 'music_kits.id')
+                    ->where('favorites.type', 'music_kit')
+                    ->where('favorites.user_id', auth()->id());
+            });;
 
-        if (!(auth()->check() && auth()->user()->is_admin)) $music_kit_model->where('is_active', 1);
+        if (!(auth()->check() && auth()->user()->is_admin)) $music_kit_model->where('music_kits.is_active', 1);
 
         $music_kit = $music_kit_model->first();
 
@@ -84,10 +94,16 @@ class FrontMusicKitController extends Controller
     {
         return MusicKit::select(
             'music_artists.name as music_artist_name',
-            'music_kits.*'
+            'music_kits.*',
+            'favorites.id as favorite_id'
         )
             ->join('music_artists', 'music_kits.music_artist_id', '=', 'music_artists.id')
-            ->where('music_kits.id', '!=', $music_kit_id);
+            ->where('music_kits.id', '!=', $music_kit_id)
+            ->leftJoin('favorites', function (JoinClause $join) {
+                $join->on('favorites.type_id', '=', 'music_kits.id')
+                    ->where('favorites.type', 'music_kit')
+                    ->where('favorites.user_id', auth()->id());
+            });
     }
 
     public function search(Request $request, $type = 'json')
@@ -106,8 +122,14 @@ class FrontMusicKitController extends Controller
         $music_kits = MusicKit::select(
             'music_kits.*',
             'music_artists.name as music_artist_name',
+            'favorites.id as favorite_id'
         )
             ->join('music_artists', 'music_kits.music_artist_id', '=', 'music_artists.id')
+            ->leftJoin('favorites', function (JoinClause $join) {
+                $join->on('favorites.type_id', '=', 'music_kits.id')
+                    ->where('favorites.type', 'music_kit')
+                    ->where('favorites.user_id', auth()->id());
+            })
             ->where($where_sql)
             ->orderByDesc('id');
         if ($request->genres) {

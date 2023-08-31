@@ -25,7 +25,7 @@
                         <h1 class="section-title-big track__title">{{ $music_kit->title }}</h1>
                         <div class="track__artist">{{ $music_kit->artist->artist_name }}</div>
                         @if ($music_kit->description)
-                            <p class="track__description text-medium">{{ $music_kit->description }}</p>
+                            <p class="track__description text-medium">{!! $music_kit->description !!}</p>
                         @endif
                     </div>
                 </div>
@@ -64,11 +64,14 @@
                             </div>
                             <div class="track-item__audio track-item__audio_{{ $music_kit->id }}"
                                 data-music="/music_kit/{{ $music_kit->link }}" data-title="{{ $music_kit->title }}"
+                                data-id="{{ $music_kit->id }}"
+                                data-type="music_kit"
+                                data-favorite="{{ $favorite($music_kit?->favorite_id, $music_kit->id, 'music_kit') }}"
                                 data-artist="{{ $music_kit->artist->artist_name }}"
                                 data-time="{{ App\Http\Controllers\MusicController::normalizeTime($music_kit->duration) }}">
                             </div>
                             <div class="track-item__buttons">
-                                @if ($favorite($music_kit->favorite_id, $music_kit->id, 'music'))
+                                @if ($favorite($music_kit->favorite_id, $music_kit->id, 'music_kit'))
                                     <form action="{{ route('favorite.delete') }}" method="post">
                                         @csrf
                                         <input type="hidden" name="type" value="music_kit">

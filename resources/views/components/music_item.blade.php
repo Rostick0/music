@@ -44,8 +44,9 @@
         $music_item_favorite = $favorite($music_item->favorite_id, $music_item->id, $type);
     @endphp
     <div class="track-item__audio track-item__{{ $type }} track-item__audio_{{ $music_item->id }}"
-        data-music="/{{ $type . '/' . $music_item->link }}" data-title="{{ $music_item->title }}"
-        data-artist="{{ $music_item->music_artist_name }}" data-favorite="{{ $music_item_favorite }}"
+        data-id="{{ $music_item->id }}" data-music="/{{ $type . '/' . $music_item->link }}"
+        data-title="{{ $music_item->title }}" data-artist="{{ $music_item->music_artist_name }}"
+        data-favorite="{{ $music_item_favorite }}" data-type="{{ $type }}"
         data-time="{{ App\Http\Controllers\MusicController::normalizeTime($music_item->duration) }}">
     </div>
     <div class="track-item__buttons">

@@ -37,11 +37,13 @@
             {{ App\Http\Controllers\MusicController::normalizeTime($music_item->duration) }}</div>
     </div>
     @php
-        $music_item_favorite = $favorite($music_item?->favorite_id, $music_item->id, 'part');
+        $music_item_favorite = $favorite($music_item?->favorite, $music_item->id, 'part');
     @endphp
     <div class="track-item__audio track-item__audio_{{ $music_item->id }} track-item__part"
-        data-music="{{ '/part/' . $music_item->link }}" data-title="{{ $music_item->title }}"
-        data-artist="{{ $author }}" data-favorite="{{ $music_item_favorite }}"
+        data-id="{{ $music_item->id }}" data-music="{{ '/part/' . $music_item->link }}"
+        data-title="{{ $music_item->title }}" data-artist="{{ $author }}"
+        data-favorite="{{ $music_item_favorite }}"
+        data-type="part"
         data-time="{{ App\Http\Controllers\MusicController::normalizeTime($music_item->duration) }}">
     </div>
     @if ($music_item->type === 'music')

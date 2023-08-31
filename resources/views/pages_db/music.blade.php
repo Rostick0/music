@@ -23,7 +23,7 @@
                         <h1 class="section-title-big track__title">{{ $music->title }}</h1>
                         <div class="track__artist">{{ $music->artist->artist_name }}</div>
                         @if ($music->description)
-                            <p class="track__description text-medium">{{ $music->description }}</p>
+                            <p class="track__description text-medium">{!! $music->description !!}</p>
                         @endif
                     </div>
                 </div>
@@ -62,6 +62,8 @@
                             </div>
                             <div class="track-item__audio track-item__audio_{{ $music->id }}"
                                 data-music="{{ '/music/' . $music->link }}" data-title="{{ $music->title }}"
+                                data-id="{{ $music->id }}" data-type="music"
+                                data-favorite="{{ $favorite($music?->favorite_id, $music->id, 'music') }}"
                                 data-artist="{{ $music->artist->artist_name }}"
                                 data-time="{{ App\Http\Controllers\MusicController::normalizeTime($music->duration) }}">
                             </div>

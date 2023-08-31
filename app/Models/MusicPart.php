@@ -17,4 +17,9 @@ class MusicPart extends Model
         'link',
         'duration'
     ];
+
+    public function favorite(): BelongsTo
+    {
+        return $this->belongsTo(Favorite::class, 'id', 'type_id')->where('type', 'part');
+    }
 }

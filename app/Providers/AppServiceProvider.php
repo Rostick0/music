@@ -45,15 +45,11 @@ class AppServiceProvider extends ServiceProvider
         });
 
         View::share('favorite', function ($favorite_id, $music_item_id, $type) {
-            if ($favorite_id) {
-                return true;
-            }
+            if ($favorite_id) return true;
 
             $local_data = json_decode(Cookie::get('favorite'));
 
-            if (!is_array($local_data)) {
-                return false;
-            }
+            if (!is_array($local_data)) return false;
 
             $object = (object) ['type_id' => $music_item_id, 'type' => $type];
 

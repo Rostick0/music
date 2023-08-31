@@ -25,7 +25,7 @@ class FrontMusicController extends Controller
                     ->where('favorites.user_id', auth()->id());
             });
 
-        if (!(auth()->check() && auth()->user()->is_admin)) $music_model->where('is_active', 1);
+        if (!(auth()->check() && auth()->user()->is_admin)) $music_model->where('music.is_active', 1);
 
         $music = $music_model->first();
 
@@ -92,9 +92,15 @@ class FrontMusicController extends Controller
     {
         return Music::select(
             'music.*',
-            'music_artists.name as music_artist_name'
+            'music_artists.name as music_artist_name',
+            'favorites.id as favorite_id'
         )
             ->join('music_artists', 'music.music_artist_id', '=', 'music_artists.id')
-            ->whereNot('music.id', $music_id);
+            ->whereNot('music.id', $music_id)
+            ->leftJoin('favorites', function (JoinClause $join) {
+                $join->on('favorites.type_id', '=', 'music.id')
+                    ->where('favorites.type', 'music')
+                    ->where('favorites.user_id', auth()->id());
+            });;
     }
 }
