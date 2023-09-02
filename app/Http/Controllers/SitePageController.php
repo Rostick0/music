@@ -57,6 +57,9 @@ class SitePageController extends Controller
 
             @section("php")
             @endsection
+
+            @section("seo_title", $site_page?->seo_title)
+            @section("seo_description", $site_page?->seo_description)
             
             @section("html")
             ' . $request->content . '
@@ -92,6 +95,7 @@ class SitePageController extends Controller
         ) return abort(404);
 
         return view('pages_db.' . $url, [
+            'site_page' => $site_page,
             'id' => $id,
             'request' => $request
         ]);

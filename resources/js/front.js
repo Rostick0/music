@@ -763,3 +763,24 @@ setSelects();
         removeClass(headerMobileModal, '_active');
     }
 })();
+
+(function () {
+    const modalFavorite = document.querySelector('.modal-favorite');
+
+    if (!modalFavorite) return;
+
+    const modalButton = modalFavorite.querySelector('.modal-favorite__button');
+
+    modalFavorite.onclick = () => {
+        myFetch('/api/favorite/agree', {
+            method: 'POST'
+        })
+            .then(res => {
+                if (res?.ok) return res.json();
+            }).then(() => {
+                if (!modalFavorite.classList.contains('_active')) return;
+
+                modalFavorite.classList.remove('_active');
+            });
+    }
+})();

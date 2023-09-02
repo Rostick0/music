@@ -12,6 +12,9 @@
     @endphp
 @endsection
 
+@section('seo_title', $site_page?->seo_title)
+@section('seo_description', $site_page?->seo_description)
+
 @section('html')
     <section class="section-page playlist">
         <div class="container">
