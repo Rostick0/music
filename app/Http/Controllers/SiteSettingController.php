@@ -42,6 +42,7 @@ class SiteSettingController extends Controller
             'count_admin' => (int) $request->count_admin,
             'count_front' => (int) $request->count_front,
             'about' => $request->about,
+            'user_policy' => $request->user_policy
         ];
 
         $result['logo'] = $old?->logo;
