@@ -1,12 +1,5 @@
 @props(['music_list'])
 
-@php
-    function favorite($favorite_id, $music_item_id)
-    {
-        return true;
-    }
-@endphp
-
 <ul class="tracks__list">
     @if (empty($music_list))
         <h3 class="tracks__none">Music not found</h3>
@@ -22,3 +15,7 @@
         @endforeach
     @endif
 </ul>
+
+<script>
+    const FavorutePage = true;
+</script>

@@ -13,4 +13,6 @@
             <h2 class="section-title tracks__title">Favorite</h2>
             <x-favorite_list :music_list="[...$music_list]" />
     </section>
+
+    <x-player />
 @endsection

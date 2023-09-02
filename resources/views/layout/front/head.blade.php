@@ -85,9 +85,9 @@
                         @php
                             $count_favorite = App\Http\Controllers\FavoriteController::countMy();
                         @endphp
-                        @if ($count_favorite)
-                            <div class="header__favorite_count">{{ $count_favorite }}</div>
-                        @endif
+                        <div class="header__favorite_count"
+                            style="@if (!$count_favorite) display: none; @endif">{{ $count_favorite }}
+                        </div>
                         <svg width="30" height="30" viewBox="0 0 30 30" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_52_186)">

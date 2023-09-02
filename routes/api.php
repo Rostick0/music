@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\MusicController;
 use App\Http\Controllers\FrontMusicKitController;
 use App\Http\Controllers\PlaylistController;
@@ -29,6 +30,11 @@ Route::group(['middleware' => 'auth.api'], function ($router) {
 Route::get('music', [MusicController::class, 'search']);
 Route::get('playlist', [PlaylistController::class, 'search']);
 Route::get('music_kit', [FrontMusicKitController::class, 'search']);
+
+Route::group(['prefix' => 'favorite', 'middleware' => 'json.response'], function () {
+    Route::post('create', [FavoriteController::class, 'create']);
+    Route::post('delete', [FavoriteController::class, 'destroy']);
+});
 
 Route::get('test', function ($request) {
     return response()->json(auth());

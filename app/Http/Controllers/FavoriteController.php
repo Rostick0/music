@@ -50,6 +50,7 @@ class FavoriteController extends Controller
                 ...$validated,
                 'user_id' => auth()->id()
             ]);
+
         } else {
             $local = FavoriteController::getLocalFavorite();
 
@@ -60,11 +61,21 @@ class FavoriteController extends Controller
             }
         }
 
-        $response = back();
+        $response = response()->json([
+            'data' => [
+                ...$validated
+            ]
+        ], 201);
 
-        if ($cookie) $response->cookie($cookie);
+        if ($cookie) $response->withCookie($cookie);
 
         return $response;
+
+        // $response = back();
+
+        // if ($cookie) $response->cookie($cookie);
+
+        // return $response;
     }
 
     public static function getMusic()
@@ -77,14 +88,12 @@ class FavoriteController extends Controller
                 ->union(
                     Favorite::selectMusicPart('music', 'music')
                 )
-                ->union(
-                    Favorite::selectMusicPart('music_kits', 'music_kit')
-                )
+                // ->union(
+                //     Favorite::selectMusicPart('music_kits', 'music_kit')
+                // )
                 ->orderByDesc('id')
                 ->paginate(app('site')->count_front);
 
-
-            // dd($music_list);
             return $music_list;
         }
 
@@ -109,9 +118,9 @@ class FavoriteController extends Controller
             ->union(
                 Favorite::selectMusicPartNoAuth('music', 'music', $music_part_ids)
             )
-            ->union(
-                Favorite::selectMusicPartNoAuth('music_kits', 'music_kit', $music_part_ids)
-            )
+            // ->union(
+            //     Favorite::selectMusicPartNoAuth('music_kits', 'music_kit', $music_part_ids)
+            // )
             ->orderByDesc('id')
             ->paginate(app('site')->count_front);
 
@@ -150,12 +159,16 @@ class FavoriteController extends Controller
             $index = array_search((object) $validated, $local);
             if ($index !== false) array_splice($local, $index, 1);
 
-            $cookie =  cookie('favorite', json_encode($local));
+            $cookie = cookie('favorite', json_encode($local));
         }
 
-        $response = back();
+        $response = response()->json([
+            'data' => [
+                ...$validated
+            ]
+        ], 201);
 
-        if ($cookie) $response->cookie($cookie);
+        if ($cookie) $response->withCookie($cookie);
 
         return $response;
     }

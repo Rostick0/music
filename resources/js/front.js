@@ -1,5 +1,5 @@
 import { throttle } from './optimization';
-import { addClass, addClassOnce, getLocalVolume, normalizeTime, objConvertUrl, removeClass, removeEmpty, setLocalVolume } from './helpers';
+import { addClass, addClassOnce, checkFavoritePage, getLocalVolume, normalizeTime, objConvertUrl, removeClass, removeEmpty, setLocalVolume, valuesForm } from './helpers';
 const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content;
 const STORAGE_URL = '/storage/upload';
 const IMAGE_URL = STORAGE_URL + '/image/';
@@ -12,7 +12,6 @@ export const myFetch = (url, options = {}) => {
     const bearerToken = typeof accessToken === 'string' && accessToken ? 'Bearer ' + accessToken : null;
 
     const { headers, ...other } = options;
-
     return fetch(url, {
         ...other,
         headers: {
@@ -85,11 +84,14 @@ setSelects();
 (async function () {
     let wavesurferPlayer = null;
     const player = document.querySelector('.player');
+    const playerFavorite = player?.querySelector('.player__favorite');
     const playerVolume = player?.querySelector('.player-volume__input');
     const playerCopy = player?.querySelector('.player__copy');
     const plays = [];
     const musicItems = [];
     const musicList = [];
+    const headerFavoriteCount = document.querySelector('.header__favorite_count');
+    let favoriteCount = isNaN(+headerFavoriteCount.textContent) === true ? 0 : +headerFavoriteCount.textContent;
     let activeMusic = null;
 
     if (player && playerVolume) {
@@ -101,15 +103,65 @@ setSelects();
         }, 20);
     }
 
+    const formFavorite = function (e) {
+        e.preventDefault();
+        const data = valuesForm(this);
+        const favoriteCreate = this.classList.contains('favorite-create');
+
+        if (data?.id == activeMusic?.id && data?.type == activeMusic?.type) playerFavorite.innerHTML = musicButton(activeMusic?.id, favoriteCreate, activeMusic?.type, 'player-favorite');
+
+        if (checkFavoritePage()) {
+            const index = musicList.findIndex(item => item.type_id === data?.id && item.type === data.type);
+
+            musicList.splice(index, 1);
+        }
+
+        if (favoriteCreate) {
+            myFetch('/api/favorite/create', {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                method: "POST",
+                body: new FormData(this)
+            }).then(res => res.json())
+                .then(res => {
+                    editFavoriteButton(res?.data, true);
+                    console.log(res?.data)
+
+                    if (favoriteCount === 0) headerFavoriteCount.style.display = 'flex';
+                    favoriteCount += 1
+                    headerFavoriteCount.textContent = favoriteCount;
+                });
+            return;
+        }
+
+        myFetch('/api/favorite/delete', {
+            headers: {
+                "Content-Type": "application/json",
+            },
+            method: "POST",
+            body: new FormData(this)
+        }).then(res => res.json())
+            .then(res => {
+                editFavoriteButton(res?.data, false);
+                console.log(res?.data)
+
+                favoriteCount -= 1;
+
+                if (favoriteCount === 0) headerFavoriteCount.style.display = 'none';
+
+                headerFavoriteCount.textContent = favoriteCount;
+            });
+    };
+
     if (player && playerCopy) {
         playerCopy.onclick = () => {
-            console.log(activeMusic)
             const urlMusic = activeMusic?.link;
             navigator.clipboard.writeText(urlMusic);
         }
     }
 
-    document.querySelectorAll('.track-item__audio')?.forEach(item => {
+    document.querySelectorAll('.track-item')?.forEach(item => {
         const dataMusic = item.getAttribute('data-music');
 
         if (dataMusic) musicList.push(dataMusic);
@@ -130,10 +182,11 @@ setSelects();
         });
     };
 
-    const musicButton = (musicId, favoriteId, type) => {
-        if (favoriteId) {
-            return `
-            <form action="/favorite/delete/" method="post">
+    const musicButton = (musicId, isFavorite, type, unic = null) => {
+        const unicName = unic ? ' ' + unic : '';
+
+        if (isFavorite) {
+            return `<form class="favorite-form favorite-delete${unicName}" action="/favorite/delete" method="post">
                 <input type="hidden" name="_token" value="${csrfToken}">
                 <input type="hidden" name="type_id" value="${musicId}">
                 <input type="hidden" name="type" value="${type}">
@@ -152,7 +205,7 @@ setSelects();
             </form>`;
         }
 
-        return `<form action="/favorite/create" method="post">
+        return `<form class="favorite-form favorite-create${unicName}" action="/favorite/create" method="post">
         <input type="hidden" name="_token" value="${csrfToken}">
         <input type="hidden" name="type_id" value="${musicId}">
         <input type="hidden" name="type" value="${type}">
@@ -170,13 +223,12 @@ setSelects();
         </button>
     </form>`;
     };
-    const audioPlayerEdit = ({ title, artist, time, musicUrl, favoriteId, musicId, type }, itemDom, wavesurfer) => {
+    const audioPlayerEdit = ({ title, artist, time, musicUrl, isFavorite, musicId, type }, itemDom, wavesurfer) => {
         if (!player) return;
 
         const playerText = document.querySelector('.player__text');
         const playerAudio = player?.querySelector('.player__audio');
         const playerButton = player?.querySelector('.player__button');
-        const playerFavorite = player?.querySelector('.player__favorite');
 
         playerAudio.innerHTML = null;
 
@@ -226,11 +278,13 @@ setSelects();
             }
         };
 
-        playerFavorite.innerHTML = musicButton(musicId, favoriteId, type);
+        console.log(activeMusic)
 
-        playerText.innerHTML = `
-            <div class="track-item__name" title="${title}">${title}</div>
-            <div class="track-item__artist" title="${artist}">${artist}</div>`;
+        playerFavorite.innerHTML = musicButton(musicId, isFavorite, type, 'player-favorite');
+
+        document.querySelector('.player-favorite').onsubmit = formFavorite;
+
+        playerText.innerHTML = `<div class="track-item__name" title="${title}">${title}</div><div class="track-item__artist" title="${artist}">${artist}</div>`;
 
         const playerTtime = document.querySelector('.player__time');
 
@@ -239,7 +293,7 @@ setSelects();
 
     const trackItem = item => {
         const trackItemAudio = item.querySelector('.track-item__audio');
-        const dataMusic = trackItemAudio.getAttribute('data-music');
+        const dataMusic = item.getAttribute('data-music');
 
         const wavesurfer = WaveSurfer.create({
             backend: 'MediaElement',
@@ -274,17 +328,19 @@ setSelects();
                 wavesurfer?.setVolume(getLocalVolume())
                 wavesurferPlayer?.unAll();
                 activeMusic = {
+                    type_id: item.getAttribute('data-id'),
+                    type: item.getAttribute('data-type'),
                     link: item.querySelector('.track-item__info')?.href,
                     src: dataMusic
                 };
                 audioPlayerEdit({
-                    title: trackItemAudio.getAttribute('data-title'),
-                    artist: trackItemAudio.getAttribute('data-artist'),
-                    time: trackItemAudio.getAttribute('data-time'),
-                    favoriteId: trackItemAudio.getAttribute('data-favorite'),
-                    musicId: trackItemAudio.getAttribute('data-id'),
+                    title: item.getAttribute('data-title'),
+                    artist: item.getAttribute('data-artist'),
+                    time: item.getAttribute('data-time'),
+                    isFavorite: item.getAttribute('data-favorite'),
+                    musicId: item.getAttribute('data-id'),
                     musicUrl: dataMusic,
-                    type: trackItemAudio.getAttribute('data-type'),
+                    type: item.getAttribute('data-type'),
                 }, item, wavesurfer);
                 return;
             }
@@ -314,12 +370,18 @@ setSelects();
         trackItemButton.onclick = buttonClick;
     }
 
-    const checkActivePlayer = musicActive => typeof musicActive === 'function' && musicActive();;
+    const checkActivePlayer = musicActive => typeof musicActive === 'function' && musicActive();
+
+    const musicFindIndex = () => {
+        const findIndex = musicList?.findIndex(item => item?.music == activeMusic?.src);
+
+        return findIndex !== -1 ? findIndex : 0;
+    };
 
     const playerPrev = document.querySelector('.player__prev');
     if (playerPrev) {
         playerPrev.onclick = () => {
-            const index = musicList?.findIndex(item => item?.music == activeMusic?.src);
+            const index = musicFindIndex();
             if (index === 0) {
                 checkActivePlayer(musicList?.[musicList?.length - 1]?.active);
                 return;
@@ -332,7 +394,7 @@ setSelects();
     const playerNext = document.querySelector('.player__next');
     if (playerNext) {
         playerNext.onclick = () => {
-            const index = musicList?.findIndex(item => item?.music == activeMusic?.src);
+            const index = musicFindIndex();
 
             if (index === musicList?.length - 1) {
                 checkActivePlayer(musicList?.[0]?.active);
@@ -370,7 +432,12 @@ setSelects();
         return STORAGE_URL + url + linkDemo;
     };
     const musicItem = (music, type = 'music') => {
-        return `<li class="tracks__item track-item">
+        return `<li class="tracks__item track-item track-item__${musc?.id} track-item__type_${type}"
+        data-music="${MUSIC_URL + music?.link}" data-title="${music?.name}"
+            data-id="${music?.id}"
+            data-music="/${type}/${music?.link}"
+            data-artist="${music?.music_artist_name}"
+            data-time="${normalizeTime(music?.duration)}">
         <a class="track-item__info" href="/track/${music?.id}">
             <img decoding="async" class="track-item__img"
                 src="${music?.image ? IMAGE_URL + music?.image : '/img/music.png'}"
@@ -401,12 +468,7 @@ setSelects();
             </button>
             <div class="track-time track-item__time">${normalizeTime(music?.duration)}</div>
         </div>
-        <div class="track-item__audio track-item__audio_${music?.id}"
-        data-music="${MUSIC_URL + music?.link}" data-title="${music?.name}"
-            data-id="${music?.id}"
-            data-music="/${type}/${music?.link}"
-            data-artist="${music?.music_artist_name}"
-            data-time="${normalizeTime(music?.duration)}"
+        <div class="track-item__audio"
         ></div>
         <div class="track-item__buttons">
             ${musicButton(music?.id, music?.favorite_id, type)}
@@ -467,6 +529,37 @@ setSelects();
         </div>
     </li>`;
     };
+
+    const editFavoriteButton = (data, isFavorite) => {
+        const item = document.querySelector(`.track-item__${data?.type_id}.track-item__type_${data?.type}`);
+
+        if (checkFavoritePage()) {
+            item.remove();
+            return;
+        }
+
+        const favoriteButton = item.querySelector('.favorite-form');
+
+        if (isFavorite) {
+            item.setAttribute('data-favorite', 1);
+        } else {
+            item.getAttribute('data-favorite') && item.removeAttribute('data-favorite');
+        }
+
+        favoriteButton.innerHTML = musicButton(data?.type_id, isFavorite, data?.type);
+    };
+
+    const favoriteFormInit = () => {
+        // favorite-create
+        // favorite-delete
+        const favoriteForm = document.querySelectorAll('.favorite-form');
+
+        favoriteForm.forEach(item => {
+            item.onsubmit = formFavorite;
+        })
+    };
+
+    favoriteFormInit();
 
     (function () {
         const tracksFilter = document.querySelector('.tracks__filter');

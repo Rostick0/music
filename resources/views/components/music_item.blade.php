@@ -1,6 +1,13 @@
 @props(['music_item', 'type'])
 
-<li class="tracks__item track-item">
+@php
+    $music_item_favorite = $favorite($music_item->favorite_id, $music_item->id, $type);
+@endphp
+<li class="tracks__item track-item track-item__{{ $music_item->id }} track-item__type_{{ $type }}"
+    data-id="{{ $music_item->id }}" data-music="/{{ $type . '/' . $music_item->link }}"
+    data-title="{{ $music_item->title }}" data-artist="{{ $music_item->music_artist_name }}"
+    data-favorite="{{ $music_item_favorite }}" data-type="{{ $type }}"
+    data-time="{{ App\Http\Controllers\MusicController::normalizeTime($music_item->duration) }}">
     <a class="track-item__info" href="/{{ $type }}/{{ $music_item->id }}">
         <img class="track-item__img lazy"
             data-src="{{ App\Http\Controllers\ImageController::getViewImage($music_item->image) }}"
@@ -40,18 +47,10 @@
         <div class="track-time track-item__time">
             {{ App\Http\Controllers\MusicController::normalizeTime($music_item->duration) }}</div>
     </div>
-    @php
-        $music_item_favorite = $favorite($music_item->favorite_id, $music_item->id, $type);
-    @endphp
-    <div class="track-item__audio track-item__{{ $type }} track-item__audio_{{ $music_item->id }}"
-        data-id="{{ $music_item->id }}" data-music="/{{ $type . '/' . $music_item->link }}"
-        data-title="{{ $music_item->title }}" data-artist="{{ $music_item->music_artist_name }}"
-        data-favorite="{{ $music_item_favorite }}" data-type="{{ $type }}"
-        data-time="{{ App\Http\Controllers\MusicController::normalizeTime($music_item->duration) }}">
-    </div>
+    <div class="track-item__audio track-item__{{ $type }} track-item__audio_{{ $music_item->id }}"></div>
     <div class="track-item__buttons">
         @if ($music_item_favorite)
-            <form action="{{ route('favorite.delete') }}" method="post">
+            <form class="favorite-form favorite-delete" action="{{ route('favorite.delete') }}" method="post">
                 @csrf
                 <input type="hidden" name="type" value="{{ $type }}">
                 <input type="hidden" name="type_id" value="{{ $music_item->id }}">
@@ -72,7 +71,7 @@
                 </button>
             </form>
         @else
-            <form action="{{ route('favorite.create') }}" method="post">
+            <form class="favorite-form favorite-create" action="{{ route('favorite.create') }}" method="post">
                 @csrf
                 <input type="hidden" name="type" value="{{ $type }}">
                 <input type="hidden" name="type_id" value="{{ $music_item->id }}">

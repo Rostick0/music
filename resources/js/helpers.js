@@ -39,3 +39,11 @@ export const getLocalVolume = () => {
 export const setLocalVolume = volume => {
     localStorage.setItem('volume', volume);
 }
+
+export const valuesForm = (form) => {
+    return Object.fromEntries(new FormData((form)).entries())
+}
+
+export const checkFavoritePage = () => {
+    return typeof FavorutePage !== 'undefined' && FavorutePage !== false;
+};
