@@ -19,9 +19,9 @@
 
 <div class="modal-agree">
     <div class="modal-agree__inner">
-        <div class="modal-agree__title">Пользовательское соглашение</div>
-        <div class="modal-agree__description">Пользуясь этим сайтом, вы принимаете ...</div>
-        <button class="admin-button modal-agree__button">Согласен</button>
+        <div class="modal-agree__title">User agreement</div>
+        <div class="modal-agree__description">{!! app('site')->user_policy !!}</div>
+        <button class="admin-button modal-agree__button">Agree</button>
     </div>
 </div>
 

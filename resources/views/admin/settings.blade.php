@@ -99,6 +99,13 @@
                         @enderror
                     </label>
                 </div>
+                <div class="admin-label">
+                    <span>Пользовательское соглашение</span>
+                    <textarea class="summernote" name="user_policy" id="user_policy">{{ old('user_policy') ?? $site->user_policy }}</textarea>
+                    @error('user_policy')
+                        <span class="error">{{ $message }}</span>
+                    @enderror
+                </div>
                 <div class="admin-button__margin-top">
                     <button class="admin-button">Сохранить</button>
                 </div>
@@ -330,4 +337,6 @@
             @endforeach
         </ul>
     </div>
+
+    <x-summernote_links></x-summernote_links>
 @endsection

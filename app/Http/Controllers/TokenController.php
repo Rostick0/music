@@ -15,11 +15,13 @@ class TokenController extends Controller
 
         $this->reset();
         $this->token = auth()->user()->createToken('auth')->plainTextToken;
+        // cookie('token', $this->token);
         return $this->token;
     }
 
     public function get()
     {
+        // dd(Cookie::get('token'));
         if (!$this->token) return $this->create();
 
         return $this->token;

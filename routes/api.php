@@ -32,6 +32,7 @@ Route::get('playlist', [PlaylistController::class, 'search']);
 Route::get('music_kit', [FrontMusicKitController::class, 'search']);
 
 Route::group(['prefix' => 'favorite', 'middleware' => 'json.response'], function () {
+    Route::post('agree', [FavoriteController::class, 'agree']);
     Route::post('create', [FavoriteController::class, 'create']);
     Route::post('delete', [FavoriteController::class, 'destroy']);
 });

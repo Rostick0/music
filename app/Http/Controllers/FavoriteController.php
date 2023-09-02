@@ -36,6 +36,15 @@ class FavoriteController extends Controller
         }
     }
 
+    public function agree()
+    {
+        $cookie = cookie('favorite_agree', true);
+
+        return response()->json([
+            'status' => true
+        ], 201)->withCookie($cookie);
+    }
+
     public function create(Request $request)
     {
         $validated = $request->validate([
@@ -50,7 +59,6 @@ class FavoriteController extends Controller
                 ...$validated,
                 'user_id' => auth()->id()
             ]);
-
         } else {
             $local = FavoriteController::getLocalFavorite();
 
