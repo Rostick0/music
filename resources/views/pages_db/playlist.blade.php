@@ -2,8 +2,7 @@
 
 @section('php')
     @php
-        // $playlist = App\Http\Controllers\FrontMusicController::getById($id);
-        $playlist = App\Models\Playlist::findOrFail($id);
+        $playlist = App\Http\Controllers\FrontMusicController::getById($id);
     @endphp
 @endsection
 
@@ -101,6 +100,6 @@
             </div>
         </div>
     </section>
-    
+
     <x-player />
 @endsection
