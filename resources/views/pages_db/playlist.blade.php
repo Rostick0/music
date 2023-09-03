@@ -2,7 +2,7 @@
 
 @section('php')
     @php
-        $playlist = App\Http\Controllers\FrontMusicController::getById($id);
+        $playlist = App\Http\Controllers\FrontPlaylistController::getById($id);
     @endphp
 @endsection
 
@@ -24,7 +24,7 @@
                     <div class="track__info_text">
                         <h1 class="section-title-big track__title">{{ $playlist->title }}</h1>
                         @if ($playlist->description)
-                            <p class="track__description text-medium">{{ $playlist->description }}</p>
+                            <p class="track__description text-medium">{!! $playlist->description !!}</p>
                         @endif
                     </div>
                 </div>
@@ -96,7 +96,7 @@
         <div class="tracks section-main">
             <div class="container">
                 <h2 class="section-title tracks__title">Tracks</h2>
-                <x-tracks_list :music_list="[...$playlist->music]" />
+                <x-tracks_list :music_list="$playlist->music" />
             </div>
         </div>
     </section>
