@@ -108,10 +108,10 @@ setSelects();
         const data = valuesForm(this);
         const favoriteCreate = this.classList.contains('favorite-create');
 
-        if (data?.id == activeMusic?.id && data?.type == activeMusic?.type) playerFavorite.innerHTML = musicButton(activeMusic?.id, favoriteCreate, activeMusic?.type, 'player-favorite');
+        if (data?.type_id == activeMusic?.type_id && data?.type == activeMusic?.type) playerFavorite.innerHTML = musicButton(activeMusic?.type_id, favoriteCreate, activeMusic?.type, 'player-favorite');
 
         if (checkFavoritePage()) {
-            const index = musicList.findIndex(item => item.type_id === data?.id && item.type === data.type);
+            const index = musicList.findIndex(item => item.type_id === data?.type_id && item.type === data.type);
 
             musicList.splice(index, 1);
         }
@@ -278,11 +278,11 @@ setSelects();
             }
         };
 
-        console.log(activeMusic)
-
         playerFavorite.innerHTML = musicButton(musicId, isFavorite, type, 'player-favorite');
 
-        document.querySelector('.player-favorite').onsubmit = formFavorite;
+        playerFavorite.onclick = () => {
+            document.querySelector('.player-favorite').onsubmit = formFavorite;
+        }
 
         playerText.innerHTML = `<div class="track-item__name" title="${title}">${title}</div><div class="track-item__artist" title="${artist}">${artist}</div>`;
 
@@ -368,7 +368,7 @@ setSelects();
         });
 
         trackItemButton.onclick = buttonClick;
-    }
+    };
 
     const checkActivePlayer = musicActive => typeof musicActive === 'function' && musicActive();
 
@@ -432,7 +432,7 @@ setSelects();
         return STORAGE_URL + url + linkDemo;
     };
     const musicItem = (music, type = 'music') => {
-        return `<li class="tracks__item track-item track-item__${musc?.id} track-item__type_${type}"
+        return `<li class="tracks__item track-item track-item__${music?.id} track-item__type_${type}"
         data-music="${MUSIC_URL + music?.link}" data-title="${music?.name}"
             data-id="${music?.id}"
             data-music="/${type}/${music?.link}"
@@ -531,12 +531,14 @@ setSelects();
     };
 
     const editFavoriteButton = (data, isFavorite) => {
+        console.log(`.track-item__${data?.type_id}.track-item__type_${data?.type}`);
         const item = document.querySelector(`.track-item__${data?.type_id}.track-item__type_${data?.type}`);
 
         if (checkFavoritePage()) {
             item.remove();
             return;
         }
+        console.log(item)
 
         const favoriteButton = item.querySelector('.favorite-form');
 
@@ -611,6 +613,7 @@ setSelects();
                             });
 
                             initWaveSurfer();
+                            favoriteFormInit();
                         });
                 }, 500)
             });
@@ -667,6 +670,7 @@ setSelects();
                                 });
 
                                 initWaveSurfer();
+                                favoriteFormInit();
                             });
                     }, 500)
                 });
