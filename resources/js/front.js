@@ -297,7 +297,7 @@ setSelects();
 
         const wavesurfer = WaveSurfer.create({
             backend: 'MediaElement',
-            container: '.' + trackItemAudio.classList?.value?.replaceAll(' ', '.'),
+            container: trackItemAudio,
             waveColor: 'rgba(27, 18, 30, .2)',
             progressColor: '#FF1111',
             // url: STORAGE_URL + dataMusic,
@@ -433,7 +433,7 @@ setSelects();
     };
     const musicItem = (music, type = 'music') => {
         return `<li class="tracks__item track-item track-item__${music?.id} track-item__type_${type}"
-        data-music="${MUSIC_URL + music?.link}" data-title="${music?.name}"
+        data-music="${MUSIC_URL + music?.link}" data-title="${music?.title}"
             data-id="${music?.id}"
             data-music="/${type}/${music?.link}"
             data-artist="${music?.music_artist_name}"
@@ -531,14 +531,12 @@ setSelects();
     };
 
     const editFavoriteButton = (data, isFavorite) => {
-        console.log(`.track-item__${data?.type_id}.track-item__type_${data?.type}`);
         const item = document.querySelector(`.track-item__${data?.type_id}.track-item__type_${data?.type}`);
 
         if (checkFavoritePage()) {
             item.remove();
             return;
         }
-        console.log(item)
 
         const favoriteButton = item.querySelector('.favorite-form');
 
