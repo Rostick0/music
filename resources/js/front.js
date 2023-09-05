@@ -87,6 +87,7 @@ setSelects();
     const playerFavorite = player?.querySelector('.player__favorite');
     const playerVolume = player?.querySelector('.player-volume__input');
     const playerCopy = player?.querySelector('.player__copy');
+    const playerAlertLinks = document.querySelector('.player-links');
     const plays = [];
     const musicItems = [];
     const musicList = [];
@@ -154,10 +155,26 @@ setSelects();
             });
     };
 
+    const playerAlertLink = (url) => {
+        return `<div class="player-link _show">
+            <div class="player-link__icon">✔</div>
+            <div class="player-link__text">
+                <div class="player-link__title">Link copied!</div>
+                <a class="player-link__url" href="${url}">${url}</a>
+            </div>
+        </div>`;
+    };
+
     if (player && playerCopy) {
         playerCopy.onclick = () => {
             const urlMusic = activeMusic?.link;
             navigator.clipboard.writeText(urlMusic);
+            playerAlertLinks.insertAdjacentHTML('beforeend', playerAlertLink(urlMusic).toString().trim());
+
+            setTimeout(() => {
+                document.querySelector('.player-link').remove();
+                // removeClass(playerAlertLink, '_show');
+            }, 1500)
         }
     }
 

@@ -54,7 +54,8 @@
         <div class="player-volume">
             <div class="player-volume__inner">
                 <div class="player-volume__status" dir="rtl">
-                    <input class="player-volume__input" min="0" max="100" type="range" orient="vertical" />
+                    <input class="player-volume__input" min="0" max="100" type="range"
+                        orient="vertical" />
                 </div>
                 <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
@@ -93,7 +94,8 @@
                 stroke="#1B121E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
     </div>
-    <svg class="player__copy" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg class="player__copy" width="40" height="40" viewBox="0 0 40 40" fill="none"
+        xmlns="http://www.w3.org/2000/svg">
         <path
             d="M14.375 22.5C16.1009 22.5 17.5 21.1009 17.5 19.375C17.5 17.6491 16.1009 16.25 14.375 16.25C12.6491 16.25 11.25 17.6491 11.25 19.375C11.25 21.1009 12.6491 22.5 14.375 22.5Z"
             stroke="#1B121E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -109,4 +111,8 @@
             stroke-linejoin="round" />
     </svg>
     <a class="button-gradient player__trial">Start free trial to download</a>
+</div>
+
+<div class="player-links">
+    
 </div>

@@ -762,6 +762,55 @@ input[type=range][orient=vertical] {
     }
 }
 
+.player-link {
+    background-color: #fff;
+    border-radius: .625rem;
+    display: flex;
+    align-items: center;
+    column-gap: .75rem;
+    padding: 1rem 1.5rem;
+    transform: 400ms;
+    // transform: translateX(calc(200% + 1rem));
+
+    &._show {
+        transform: translateX(0);
+    }
+
+    &s {
+        display: flex;
+        flex-direction: column;
+        row-gap: 1rem;
+        position: fixed;
+        right: 1rem;
+        bottom: 1.25rem;
+        z-index: 1001;
+    }
+
+    &__title {
+        color: #FF1111;
+        font-size: .93rem;
+        font-weight: 700;
+        margin-bottom: .33rem;
+    }
+
+    &__icon {
+        border: 1px solid #FF1111;
+        border-radius: 50%;
+        color: #FF1111;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1;
+        width: 1.87rem;
+        height: 1.87rem;
+    }
+
+    &__url {
+        cursor: pointer;
+        text-decoration: underline;
+    }
+}
+
 .pagination {
     display: flex;
     flex-wrap: wrap;
