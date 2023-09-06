@@ -717,13 +717,14 @@ input[type=range][orient=vertical] {
         flex-wrap: wrap;
 
         &__switch {
-            flex-basis: 80%;
+            flex-grow: 1;
+            flex-basis: 75%;
             justify-content: center;
             order: 4;
             margin: 0 0 1.56rem;
         }
 
-        &__name {
+        .track-item__name {
             margin-bottom: .875rem;
         }
 
@@ -743,10 +744,22 @@ input[type=range][orient=vertical] {
         &__time {
             flex-basis: 10%;
             order: 3;
+            margin: 0;
+            margin-bottom: 1.56rem;
+        }
+
+        &__volume {
+            flex-basis: 10%;
+            order: 5;
+            margin-bottom: 1.56rem;
+        }
+
+        &__favorite {
+            order: 6;
         }
 
         svg {
-            order: 5;
+            order: 7;
 
             &:nth-last-child(3) {
                 flex-basis: 10%;
@@ -756,8 +769,14 @@ input[type=range][orient=vertical] {
         }
 
         &__trial {
-            order: 7;
+            order: 8;
             margin-left: 0;
+        }
+    }
+
+    @media (max-width: 400px) {
+        &__switch {
+            flex-basis: 65%;
         }
     }
 }

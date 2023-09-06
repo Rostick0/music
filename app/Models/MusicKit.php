@@ -23,6 +23,7 @@ class MusicKit extends Model
         'description',
         'image',
         'duration',
+        'duration_demo',
         'seo_title',
         'seo_description'
     ];

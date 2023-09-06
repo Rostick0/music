@@ -200,6 +200,10 @@ class MusicController extends Controller
         $audio = $getId3->analyze($request->file('link'));
         $audio_duration = gmdate("H:i:s", $audio['playtime_seconds']);
 
+        $getId3Demo = new getID3();
+        $audio_demo = $getId3Demo->analyze($request->file('link_demo'));
+        $audio_duration_demo = gmdate("H:i:s", $audio_demo['playtime_seconds']);
+
         $music = Music::create([
             'music_artist_id' => $music_artists->id,
             'title' => $request->title,
@@ -212,6 +216,7 @@ class MusicController extends Controller
             'description' => $request->description,
             'image' => $image,
             'duration' => $audio_duration,
+            'duration_demo' => $audio_duration_demo,
             'seo_title' => $request->seo_title,
             'seo_description' => $request->seo_description,
         ]);
@@ -316,7 +321,12 @@ class MusicController extends Controller
         }
 
         if ($upload_demo) {
+            $getId3Demo = new getID3();
+            $audio_demo = $getId3Demo->analyze($request->file('link_demo'));
+            $audio_duration_demo = gmdate("H:i:s", $audio_demo['playtime_seconds']);
+
             $update_data['link_demo'] = $upload_demo;
+            $update_data['duration_demo'] = $audio_duration_demo;
 
             if ($music_old->link_demo) MusicUploadController::destroy($music_old->link_demo, 'music_demo');
         }

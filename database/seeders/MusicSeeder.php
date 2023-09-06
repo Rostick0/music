@@ -22,6 +22,7 @@ class MusicSeeder extends Seeder
             'publisher' => 'https://vk.com',
             'distr' => 'https://vk.com',
             'duration' => '00:05:11',
+            'duration_demo' => '00:02:11',
             'is_active' => 1
         ],
         [
@@ -31,6 +32,7 @@ class MusicSeeder extends Seeder
             'publisher' => 'https://vk.com',
             'distr' => 'https://vk.com',
             'duration' => '00:05:11',
+            'duration_demo' => '00:02:11',
             'is_active' => 1
         ],
     ];

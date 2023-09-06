@@ -432,10 +432,18 @@ setSelects();
 
     initWaveSurfer();
 
+    const isDemoOrFree = (isFree) => {
+        return isFree || hasSubscription;
+    };
+
+    const musicSetDuration = (duration, durationDemo, isFree) => {
+        if (isDemoOrFree(isFree)) return normalizeTime(durationDemo);
+
+        normalizeTime(duration);
+    }
+
     const linkMusic = (link, linkDemo, isFree, type) => {
-        if (
-            isFree || hasSubscription
-        ) {
+        if (isDemoOrFree(isFree)) {
             if (type === 'music') {
                 return STORAGE_URL + MUSIC_URL + link;
             }
@@ -451,13 +459,14 @@ setSelects();
     };
     const musicItem = (music, type = 'music') => {
         const muiscLik = linkMusic(music?.link, music?.link_demo, music?.is_free, type);
+        const musicDuration = musicSetDuration(music?.duration, music?.duration_demo, music?.is_free);
 
         return `<li class="tracks__item track-item track-item__${music?.id} track-item__type_${type}"
         data-music="${music?.link}" data-title="${music?.title}"
             data-id="${music?.id}"
             data-music="/${muiscLik}"
             data-artist="${music?.music_artist_name}"
-            data-time="${normalizeTime(music?.duration)}">
+            data-time="${musicDuration}">
         <a class="track-item__info" href="/track/${music?.id}">
             <img decoding="async" class="track-item__img"
                 src="${music?.image ? IMAGE_URL + music?.image : '/img/music.png'}"
@@ -486,7 +495,7 @@ setSelects();
                     </defs>
                 </svg>
             </button>
-            <div class="track-time track-item__time">${normalizeTime(music?.duration)}</div>
+            <div class="track-time track-item__time">${musicDuration}</div>
         </div>
         <div class="track-item__audio"
         ></div>

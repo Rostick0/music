@@ -3,6 +3,7 @@
     position: relative;
 
     &__img {
+        border-radius: .75rem;
         object-fit: cover;
         width: 100%;
     }

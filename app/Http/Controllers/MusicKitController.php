@@ -127,6 +127,10 @@ class MusicKitController extends Controller
         $audio = $getId3->analyze($request->file('link'));
         $duration = gmdate("H:i:s", $audio['playtime_seconds']);
 
+        $getId3Demo = new getID3();
+        $audio_demo = $getId3Demo->analyze($request->file('link_demo'));
+        $audio_duration_demo = gmdate("H:i:s", $audio_demo['playtime_seconds']);
+
         $music = MusicUploadController::upload($request->file('link'), 'music_kit');
         $music_demo = MusicUploadController::upload($request->file('link_demo'), 'music_kit_demo');
 
@@ -143,7 +147,8 @@ class MusicKitController extends Controller
             'image' => $image,
             'seo_title' => $request->seo_title,
             'seo_description' => $request->seo_description,
-            'duration' => $duration
+            'duration' => $duration,
+            'duration_demo' => $audio_duration_demo,
         ]);
 
         RelationshipGenreController::createAndDeleteRelationship($request->genres, $music_kit->id, 'music_kit');
@@ -247,7 +252,12 @@ class MusicKitController extends Controller
         }
 
         if ($upload_demo) {
+            $getId3Demo = new getID3();
+            $audio_demo = $getId3Demo->analyze($request->file('link_demo'));
+            $audio_duration_demo = gmdate("H:i:s", $audio_demo['playtime_seconds']);
+
             $update_data['link_demo'] = $upload_demo;
+            $update_data['duration_demo'] = $audio_duration_demo;
 
             if ($music_kit_old->link_demo) MusicUploadController::destroy($music_kit_old->link_demo, 'music_kit_demo');
         }

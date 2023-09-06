@@ -1,7 +1,7 @@
 @if ($paginator->hasPages() && $paginator->count())
     <div class="pagination">
         @if ($paginator->currentPage() != 1)
-            <a class="pagination__link" href="{{ $paginator->url(1)->query() }}">1</a>
+            <a class="pagination__link" href="{{ $paginator->query()->url(1) }}">1</a>
         @endif
         @foreach ($elements as $element)
             @if (is_array($element))
