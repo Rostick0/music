@@ -159,6 +159,17 @@ class MusicController extends Controller
         return $time;
     }
 
+    public static function timeFullOrDemo($duration, $duration_demo, $is_free)
+    {
+        if (
+            $is_free
+            ||
+            (app('has_subscription'))
+        ) return MusicController::normalizeTime($duration);
+
+        return MusicController::normalizeTime($duration_demo);
+    }
+
     public function create()
     {
         $genres = Genre::all();

@@ -38,7 +38,7 @@
                             data-title="{{ $music->title }}" data-id="{{ $music->id }}" data-type="music"
                             data-favorite="{{ $favorite($music?->favorite_id, $music->id, 'music') }}"
                             data-artist="{{ $music->artist->artist_name }}"
-                            data-time="{{ App\Http\Controllers\MusicController::normalizeTime($music->duration) }}">
+                            data-time="{{ App\Http\Controllers\MusicController::timeFullOrDemo($music->duration, $music->duration_demo, $music->is_free) }}">
                             <div class="track-item__timer">
                                 <button class="track-button track-item__button">
                                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
@@ -66,7 +66,8 @@
                                     </svg>
                                 </button>
                                 <div class="track-time track-item__time">
-                                    {{ App\Http\Controllers\MusicController::normalizeTime($music->duration) }}</div>
+                                    {{ App\Http\Controllers\MusicController::timeFullOrDemo($music->duration, $music->duration_demo, $music->is_free) }}
+                                </div>
                                 <a class="track-item__info" href="/music/{{ $music->id }}" rel="noreferrer noopener"
                                     hidden></a>
                             </div>

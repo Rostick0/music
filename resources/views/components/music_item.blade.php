@@ -4,10 +4,11 @@
     $music_item_favorite = $favorite($music_item->favorite_id, $music_item->id, $type);
 @endphp
 <li class="tracks__item track-item track-item__{{ $music_item->id }} track-item__type_{{ $type }}"
-    data-id="{{ $music_item->id }}" data-music="{{ App\Http\Controllers\MusicDownloadController::getLink($music_item->link, $music_item->link_demo, $music_item->is_free, $type) }}"
+    data-id="{{ $music_item->id }}"
+    data-music="{{ App\Http\Controllers\MusicDownloadController::getLink($music_item->link, $music_item->link_demo, $music_item->is_free, $type) }}"
     data-title="{{ $music_item->title }}" data-artist="{{ $music_item->music_artist_name }}"
     data-favorite="{{ $music_item_favorite }}" data-type="{{ $type }}"
-    data-time="{{ App\Http\Controllers\MusicController::normalizeTime($music_item->duration) }}">
+    data-time="{{ App\Http\Controllers\MusicController::timeFullOrDemo($music_item->duration, $music_item->duration_demo, $music_item->is_free) }}">
     <a class="track-item__info" href="/{{ $type }}/{{ $music_item->id }}">
         <img class="track-item__img lazy"
             data-src="{{ App\Http\Controllers\ImageController::getViewImage($music_item->image) }}"
@@ -45,7 +46,7 @@
             </svg>
         </button>
         <div class="track-time track-item__time">
-            {{ App\Http\Controllers\MusicController::normalizeTime($music_item->duration) }}</div>
+            {{ App\Http\Controllers\MusicController::timeFullOrDemo($music_item->duration, $music_item->duration_demo, $music_item->is_free)}}</div>
     </div>
     <div class="track-item__audio track-item__{{ $type }} track-item__audio_{{ $music_item->id }}"></div>
     <div class="track-item__buttons">

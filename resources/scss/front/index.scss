@@ -732,6 +732,7 @@ input[type=range][orient=vertical] {
             flex-basis: 100%;
             flex-grow: 1;
             order: 1;
+            margin: 0;
             max-width: 100%;
         }
 
@@ -758,15 +759,20 @@ input[type=range][orient=vertical] {
             order: 6;
         }
 
-        svg {
+        &__copy {
             order: 7;
-
-            &:nth-last-child(3) {
-                flex-basis: 10%;
-                max-width: 2.5rem;
-                min-width: 2.5rem;
-            }
+            margin-left: .625rem;
+            margin-right: 1rem;
         }
+        // svg {
+        //     order: 7;
+
+        //     &:nth-last-child(3) {
+        //         flex-basis: 10%;
+        //         max-width: 2.5rem;
+        //         min-width: 2.5rem;
+        //     }
+        // }
 
         &__trial {
             order: 8;
