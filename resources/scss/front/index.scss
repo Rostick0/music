@@ -764,6 +764,7 @@ input[type=range][orient=vertical] {
             margin-left: .625rem;
             margin-right: 1rem;
         }
+
         // svg {
         //     order: 7;
 
@@ -776,13 +777,19 @@ input[type=range][orient=vertical] {
 
         &__trial {
             order: 8;
-            margin-left: 0;
+            margin-left: auto;
         }
     }
 
     @media (max-width: 400px) {
         &__switch {
             flex-basis: 65%;
+        }
+    }
+
+    @media (max-width: 350px) {
+        &__trial {
+            font-size: .65rem;
         }
     }
 }
@@ -846,11 +853,12 @@ input[type=range][orient=vertical] {
     &__link {
         background: var(--gradient);
         color: var(--white);
+        border-radius: .5rem;
         padding: .5rem .8rem;
 
         &._active {
-            background: var(--white);
-            color: var(--dark);
+            background: var(--dark);
+            color: var(--white);
         }
     }
 }
