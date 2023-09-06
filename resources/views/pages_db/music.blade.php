@@ -33,7 +33,12 @@
                 <ul class="track__version">
                     <li class="track__version trakc-version">
                         <div class="track-version__name text-medium">Full version</div>
-                        <div class="track-version__item track-item">
+                        <div class="track-version__item track-item tracks__item track-item__{{ $music->id }} track-item__type_music"
+                            data-music="{{ App\Http\Controllers\MusicDownloadController::getLink($music->link, $music->link_demo, $music->is_free) }}"
+                            data-title="{{ $music->title }}" data-id="{{ $music->id }}" data-type="music"
+                            data-favorite="{{ $favorite($music?->favorite_id, $music->id, 'music') }}"
+                            data-artist="{{ $music->artist->artist_name }}"
+                            data-time="{{ App\Http\Controllers\MusicController::normalizeTime($music->duration) }}">
                             <div class="track-item__timer">
                                 <button class="track-button track-item__button">
                                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
@@ -62,15 +67,10 @@
                                 </button>
                                 <div class="track-time track-item__time">
                                     {{ App\Http\Controllers\MusicController::normalizeTime($music->duration) }}</div>
+                                <a class="track-item__info" href="/music/{{ $music->id }}" rel="noreferrer noopener"
+                                    hidden></a>
                             </div>
-                            <a class="track-item__info" href="/music/{{ $music->id }}" rel="noreferrer noopener"
-                                hidden></a>
-                            <div class="track-item__audio track-item__audio_{{ $music->id }}"
-                                data-music="{{ '/music/' . $music->link }}" data-title="{{ $music->title }}"
-                                data-id="{{ $music->id }}" data-type="music"
-                                data-favorite="{{ $favorite($music?->favorite_id, $music->id, 'music') }}"
-                                data-artist="{{ $music->artist->artist_name }}"
-                                data-time="{{ App\Http\Controllers\MusicController::normalizeTime($music->duration) }}">
+                            <div class="track-item__audio track-item__audio_{{ $music->id }}">
                             </div>
                             <div class="track-item__buttons">
                                 @if ($favorite($music->favorite_id, $music->id, 'music'))

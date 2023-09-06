@@ -173,8 +173,7 @@ setSelects();
 
             setTimeout(() => {
                 document.querySelector('.player-link').remove();
-                // removeClass(playerAlertLink, '_show');
-            }, 1500)
+            }, 2500)
         }
     }
 
@@ -254,7 +253,7 @@ setSelects();
             container: '.' + playerAudio.classList?.value?.replace(' ', '.'),
             waveColor: 'rgba(27, 18, 30, .2)',
             progressColor: '#FF1111',
-            url: STORAGE_URL + musicUrl,
+            url: musicUrl,
             height: 40,
             volume: 0
         });
@@ -324,7 +323,7 @@ setSelects();
         const lazyLoad = throttle(
             () => {
                 if (!isElementInViewport(trackItemAudio)) return;
-                wavesurfer.load(STORAGE_URL + dataMusic);
+                wavesurfer.load(dataMusic);
                 window.removeEventListener('scroll', lazyLoad);
             }, 300
         );
@@ -433,26 +432,30 @@ setSelects();
 
     initWaveSurfer();
 
-    const downloadButton = (link, linkDemo, isFree, type) => {
+    const linkMusic = (link, linkDemo, isFree, type) => {
         if (
             isFree || hasSubscription
         ) {
-            let url = MUSIC_KIT_URL;
-            if (type == 'music') url = MUSIC_URL;
+            if (type === 'music') {
+                return STORAGE_URL + MUSIC_URL + link;
+            }
 
-            return STORAGE_URL + url + link;
+            return STORAGE_URL + MUSIC_KIT_URL + link;
         }
 
-        let url = MUSIC_KIT_DEMO_URL;
-        if (type == 'music') url = MUSIC_DEMO_URL;
+        if (type === 'music') {
+            return STORAGE_URL + MUSIC_DEMO_URL + link;
+        }
 
-        return STORAGE_URL + url + linkDemo;
+        return STORAGE_URL + MUSIC_KIT_DEMO_URL + linkDemo;
     };
     const musicItem = (music, type = 'music') => {
+        const muiscLik = linkMusic(music?.link, music?.link_demo, music?.is_free, type);
+
         return `<li class="tracks__item track-item track-item__${music?.id} track-item__type_${type}"
-        data-music="${MUSIC_URL + music?.link}" data-title="${music?.title}"
+        data-music="${music?.link}" data-title="${music?.title}"
             data-id="${music?.id}"
-            data-music="/${type}/${music?.link}"
+            data-music="/${muiscLik}"
             data-artist="${music?.music_artist_name}"
             data-time="${normalizeTime(music?.duration)}">
         <a class="track-item__info" href="/track/${music?.id}">
@@ -489,7 +492,7 @@ setSelects();
         ></div>
         <div class="track-item__buttons">
             ${musicButton(music?.id, music?.favorite_id, type)}
-            <a class="track-item__download" href="${downloadButton(music?.link, music?.link_demo, music?.is_free, type)}" download>
+            <a class="track-item__download" href="${muiscLik}" download>
                 <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_98_282)">

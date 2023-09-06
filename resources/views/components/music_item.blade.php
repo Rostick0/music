@@ -4,7 +4,7 @@
     $music_item_favorite = $favorite($music_item->favorite_id, $music_item->id, $type);
 @endphp
 <li class="tracks__item track-item track-item__{{ $music_item->id }} track-item__type_{{ $type }}"
-    data-id="{{ $music_item->id }}" data-music="/{{ $type . '/' . $music_item->link }}"
+    data-id="{{ $music_item->id }}" data-music="{{ App\Http\Controllers\MusicDownloadController::getLink($music_item->link, $music_item->link_demo, $music_item->is_free, $type) }}"
     data-title="{{ $music_item->title }}" data-artist="{{ $music_item->music_artist_name }}"
     data-favorite="{{ $music_item_favorite }}" data-type="{{ $type }}"
     data-time="{{ App\Http\Controllers\MusicController::normalizeTime($music_item->duration) }}">
@@ -93,7 +93,7 @@
             </form>
         @endif
         <a class="track-item__download"
-            href="{{ App\Http\Controllers\MusicDownloadController::getLink($music_item->link, $music_item->link_demo, $music_item->is_free) }}"
+            href="{{ App\Http\Controllers\MusicDownloadController::getLink($music_item->link, $music_item->link_demo, $music_item->is_free, $type) }}"
             download>
             <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                 xmlns="http://www.w3.org/2000/svg">

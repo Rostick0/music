@@ -6,7 +6,7 @@
 <li class="tracks__item track-item track-item__{{ $music_item->id }} track-item__type_part" data-music="{{ '/part/' . $music_item->link }}"
     data-title="{{ $music_item->title }}" data-artist="{{ $music_item->music_artist_name }}"
     data-favorite="{{ $music_item_favorite }}"
-    data-time="{{ App\Http\Controllers\MusicController::normalizeTime($music_item->duration) }}"">
+    data-time="{{ App\Http\Controllers\MusicController::normalizeTime($music_item->duration) }}">
     <a class="track-item__info" href="/{{ $music_item?->type }}/{{ $music_item->type_id }}">
         <img class="track-item__img lazy"
             data-src="{{ App\Http\Controllers\ImageController::getViewImage($music_item->image) }}"
