@@ -127,7 +127,6 @@ setSelects();
             }).then(res => res.json())
                 .then(res => {
                     editFavoriteButton(res?.data, true);
-                    console.log(res?.data)
 
                     if (favoriteCount === 0) headerFavoriteCount.style.display = 'flex';
                     favoriteCount += 1
@@ -145,7 +144,6 @@ setSelects();
         }).then(res => res.json())
             .then(res => {
                 editFavoriteButton(res?.data, false);
-                console.log(res?.data)
 
                 favoriteCount -= 1;
 
@@ -439,7 +437,7 @@ setSelects();
     const musicSetDuration = (duration, durationDemo, isFree) => {
         if (isDemoOrFree(isFree)) return normalizeTime(durationDemo);
 
-        normalizeTime(duration);
+        return normalizeTime(duration);
     }
 
     const linkMusic = (link, linkDemo, isFree, type) => {
@@ -452,19 +450,18 @@ setSelects();
         }
 
         if (type === 'music') {
-            return STORAGE_URL + MUSIC_DEMO_URL + link;
+            return STORAGE_URL + MUSIC_DEMO_URL + linkDemo;
         }
 
         return STORAGE_URL + MUSIC_KIT_DEMO_URL + linkDemo;
     };
     const musicItem = (music, type = 'music') => {
-        const muiscLik = linkMusic(music?.link, music?.link_demo, music?.is_free, type);
+        const muiscLink = linkMusic(music?.link, music?.link_demo, music?.is_free, type);
         const musicDuration = musicSetDuration(music?.duration, music?.duration_demo, music?.is_free);
 
         return `<li class="tracks__item track-item track-item__${music?.id} track-item__type_${type}"
-        data-music="${music?.link}" data-title="${music?.title}"
+        data-music="${muiscLink}" data-title="${music?.title}"
             data-id="${music?.id}"
-            data-music="/${muiscLik}"
             data-artist="${music?.music_artist_name}"
             data-time="${musicDuration}">
         <a class="track-item__info" href="/track/${music?.id}">
@@ -501,7 +498,7 @@ setSelects();
         ></div>
         <div class="track-item__buttons">
             ${musicButton(music?.id, music?.favorite_id, type)}
-            <a class="track-item__download" href="${muiscLik}" download>
+            <a class="track-item__download" href="${muiscLink}" download>
                 <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_98_282)">
@@ -567,15 +564,25 @@ setSelects();
             return;
         }
 
-        const favoriteButton = item.querySelector('.favorite-form');
+        const favoriteForm = item.querySelector('.favorite-form');
 
         if (isFavorite) {
+            favoriteForm.action = "/favorite/delete";
+            removeClass(favoriteForm, 'favorite-create');
+            addClass(favoriteForm, 'favorite-delete');
+
             item.setAttribute('data-favorite', 1);
         } else {
+            favoriteForm.action = "/favorite/create";
+            removeClass(favoriteForm, 'favorite-delete');
+            addClass(favoriteForm, 'favorite-create');
+
             item.getAttribute('data-favorite') && item.removeAttribute('data-favorite');
         }
 
-        favoriteButton.innerHTML = musicButton(data?.type_id, isFavorite, data?.type);
+        favoriteForm.onsubmit = formFavorite;
+
+        favoriteForm.innerHTML = musicButton(data?.type_id, isFavorite, data?.type);
     };
 
     const favoriteFormInit = () => {
