@@ -81,6 +81,19 @@ function setSelects() {
 
 setSelects();
 
+const editPagination = (pagination, links_html) => {
+    if (!pagination) return;
+
+    pagination.innerHTML = links_html;
+
+    if (!links_html) {
+        pagination.style.display = 'none';
+        return;
+    }
+
+    pagination.style.display = 'flex';
+}
+
 (async function () {
     let wavesurferPlayer = null;
     const player = document.querySelector('.player');
@@ -435,9 +448,9 @@ setSelects();
     };
 
     const musicSetDuration = (duration, durationDemo, isFree) => {
-        if (isDemoOrFree(isFree)) return normalizeTime(durationDemo);
+        if (isDemoOrFree(isFree)) return normalizeTime(duration) ?? '';
 
-        return normalizeTime(duration);
+        return normalizeTime(durationDemo) ?? '';
     }
 
     const linkMusic = (link, linkDemo, isFree, type) => {
@@ -634,13 +647,12 @@ setSelects();
                             trackList.innerHTML = "";
 
                             const data = res?.data?.data;
+                            editPagination(pagination, res?.links_html);
 
                             if (!data.length) {
                                 trackList.innerHTML = '<h3 class="tracks__none">Music not found</h3>';
                                 return;
                             }
-
-                            if (pagination) pagination.innerHTML = res?.links_html;
 
                             data.forEach(music => {
                                 trackList.insertAdjacentHTML('beforeend', musicItem(music));
@@ -691,13 +703,12 @@ setSelects();
                                 musicKitList.innerHTML = "";
 
                                 const data = res?.data?.data;
+                                editPagination(pagination, res?.links_html);
 
                                 if (!data.length) {
                                     musicKitList.innerHTML = '<h3 class="tracks__none">Music kit not found</h3>';
                                     return;
                                 }
-
-                                if (pagination) pagination.innerHTML = res?.links_html;
 
                                 data.forEach(music => {
                                     musicKitList.insertAdjacentHTML('beforeend', musicItem(music, 'music_kit'));
@@ -768,13 +779,12 @@ setSelects();
                         playlistList.innerHTML = "";
 
                         const data = res?.data?.data;
+                        editPagination(pagination, res?.links_html);
 
                         if (!data?.length) {
                             playlistList.innerHTML = '<h3 class="playlist__none">Playlist not found</h3>';
                             return;
                         }
-
-                        if (pagination) pagination.innerHTML = res?.links_html;
 
                         data?.forEach(playlist => {
                             playlistList.insertAdjacentHTML('beforeend', playlistItem(playlist));
@@ -809,7 +819,7 @@ setSelects();
 
     const modalButton = modalFavorite.querySelector('.modal-favorite__button');
 
-    modalFavorite.onclick = () => {
+    modalButton.onclick = () => {
         myFetch('/api/favorite/agree', {
             method: 'POST'
         })

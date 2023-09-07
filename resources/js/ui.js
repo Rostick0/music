@@ -36,7 +36,6 @@ export const asyncSelect = (selectDom, asyncFunction) => {
         }
 
         result?.forEach(item => {
-            console.log(item);
             selectList.insertAdjacentHTML('beforeend', `<li data-id="${item?.id}" class="admin-select-async__item">${item?.title}, ${item?.music_artist_name}</li>`)
         });
 

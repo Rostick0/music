@@ -1,5 +1,9 @@
-@if ($paginator->hasPages() && $paginator->count())
-    <div class="pagination">
+@php
+    $if_paginate = $paginator->hasPages() && $paginator->count();
+@endphp
+
+<div class="pagination" @if (!$if_paginate) style="display:none;" @endif>
+    @if ($if_paginate)
         @if ($paginator->currentPage() != 1)
             <a class="pagination__link" href="{{ $paginator->url(1) }}">1</a>
         @endif
@@ -20,5 +24,5 @@
             <a class="pagination__link"
                 href="{{ $paginator->url($paginator->lastPage()) }}">{{ $paginator->lastPage() }}</a>
         @endif
-    </div>
-@endif
+    @endif
+</div>

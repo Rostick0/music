@@ -19,7 +19,7 @@ export const removeClass = (elem, className) => {
 };
 
 export const normalizeTime = (duration) => {
-    let time = duration.slice(3);
+    let time = duration?.slice(3);
 
     return time;
 };
