@@ -14,11 +14,12 @@
         <div class="container">
             <h2 class="section-title tracks__title">Favorite</h2>
             <x-favorite_list :music_list="[...$music_list]" />
+            {{ $music_list->links('vendor.front-pagination') }}
     </section>
 
     <x-player />
 
-    @if ((!auth()->check() && !Cookie::get('favorite_agree')))
+    @if (!auth()->check() && !Cookie::get('favorite_agree'))
         <div class="modal modal-favorite _active">
             <div class="modal__inner">
                 <div class="modal__title">Warning</div>

@@ -189,6 +189,7 @@ const editPagination = (pagination, links_html) => {
     }
 
     document.querySelectorAll('.track-item')?.forEach(item => {
+        console.log(item)
         const dataMusic = item.getAttribute('data-music');
 
         if (dataMusic) musicList.push(dataMusic);
@@ -338,6 +339,7 @@ const editPagination = (pagination, links_html) => {
                 window.removeEventListener('scroll', lazyLoad);
             }, 300
         );
+        lazyLoad();
         window.addEventListener('scroll', lazyLoad);
 
         musicItems.push(dataMusic);

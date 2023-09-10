@@ -75,7 +75,7 @@
                             </div>
                             <div class="track-item__buttons">
                                 @if ($favorite($music->favorite_id, $music->id, 'music'))
-                                    <form action="{{ route('favorite.delete') }}" method="post">
+                                    <form class="favorite-form favorite-delete" action="{{ route('favorite.delete') }}" method="post">
                                         @csrf
                                         <input type="hidden" name="type" value="music">
                                         <input type="hidden" name="type_id" value="{{ $music->id }}">
@@ -98,7 +98,7 @@
                                         </button>
                                     </form>
                                 @else
-                                    <form action="{{ route('favorite.create') }}" method="post">
+                                    <form class="favorite-form favorite-create" action="{{ route('favorite.create') }}" method="post">
                                         @csrf
                                         <input type="hidden" name="type" value="music">
                                         <input type="hidden" name="type_id" value="{{ $music->id }}">

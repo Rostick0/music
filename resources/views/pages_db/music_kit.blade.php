@@ -34,8 +34,8 @@
                 <ul class="track__version">
                     <li class="track__version trakc-version">
                         <div class="track-version__name text-medium">Music kit</div>
-                        <div class="track-version__item track-item tracks__item track-item__{{ $music_kit->id }} track-item__type_music"
-                            data-music="{{ App\Http\Controllers\MusicDownloadController::getLink($music_kit->link, $music_kit->link_demo, $music_kit->is_free) }}"
+                        <div class="track-version__item track-item tracks__item track-item__{{ $music_kit->id }} track-item__type_music_kit"
+                            data-music="{{ App\Http\Controllers\MusicDownloadController::getLink($music_kit->link, $music_kit->link_demo, $music_kit->is_free, 'music_kit') }}"
                             data-title="{{ $music_kit->title }}" data-id="{{ $music_kit->id }}" data-type="music_kit"
                             data-favorite="{{ $favorite($music_kit?->favorite_id, $music_kit->id, 'music_kit') }}"
                             data-artist="{{ $music_kit->artist->artist_name }}"
@@ -69,12 +69,14 @@
                                 <div class="track-time track-item__time">
                                     {{ App\Http\Controllers\MusicController::timeFullOrDemo($music_kit->duration, $music_kit->duration_demo, $music_kit->is_free) }}
                                 </div>
+                                <a class="track-item__info" href="/music_kit/{{ $music_kit->id }}"
+                                    rel="noreferrer noopener" hidden></a>
                             </div>
-                            <a class="track-item__info" href="/music_kit/{{ $music_kit->id }}" rel="noreferrer noopener"
-                                hidden></a>
+                            <div class="track-item__audio track-item__audio_{{ $music_kit->id }}"></div>
                             <div class="track-item__buttons">
                                 @if ($favorite($music_kit->favorite_id, $music_kit->id, 'music_kit'))
-                                    <form action="{{ route('favorite.delete') }}" method="post">
+                                    <form class="favorite-form favorite-delete" action="{{ route('favorite.delete') }}"
+                                        method="post">
                                         @csrf
                                         <input type="hidden" name="type" value="music_kit">
                                         <input type="hidden" name="type_id" value="{{ $music_kit->id }}">
@@ -97,7 +99,8 @@
                                         </button>
                                     </form>
                                 @else
-                                    <form action="{{ route('favorite.create') }}" method="post">
+                                    <form class="favorite-form favorite-create" action="{{ route('favorite.create') }}"
+                                        method="post">
                                         @csrf
                                         <input type="hidden" name="type" value="music_kit">
                                         <input type="hidden" name="type_id" value="{{ $music_kit->id }}">
