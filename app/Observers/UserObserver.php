@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Models\RemoveClaim;
 use App\Models\Statistic;
 use App\Models\User;
 
@@ -31,7 +32,7 @@ class UserObserver
      */
     public function deleted(User $user): void
     {
-        //
+        
     }
 
     /**
@@ -47,6 +48,6 @@ class UserObserver
      */
     public function forceDeleted(User $user): void
     {
-        //
+        
     }
 }

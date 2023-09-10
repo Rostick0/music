@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Notice;
 use App\Models\RemoveClaim;
 use App\Models\Subscription;
 use App\Models\User;
 use Doctrine\Inflector\Rules\Substitution;
+use Illuminate\Console\View\Components\Alert;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -81,6 +83,12 @@ class UserController extends Controller
     public function destroy(int $id)
     {
         $user_email = User::find($id)->email;
+        $collect = collect(RemoveClaim::where('user_id', $id)->get());
+        $collect->each(function ($item) {
+            Notice::where('type_id', $item->id)->where('type', 'remove_сlaim')->delete();
+            RemoveClaim::destroy($item->id);
+        });
+
         $user = User::destroy($id);
 
         return redirect(route('deleted', [
