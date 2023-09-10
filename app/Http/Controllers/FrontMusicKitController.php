@@ -84,10 +84,10 @@ class FrontMusicKitController extends Controller
             ->union($music_genre)
             ->union($music_theme)
             ->union($music_instrument)
-            ->union($music_mood)
-            ->paginate(8);
+            ->union($music_mood);
+        if (!(auth()->check() && auth()->user()->is_admin)) $music_list->where('music_kits.is_active', 1);
 
-        return $music_list;
+        return $music_list->paginate(8);
     }
 
     public static function joinArtist(int $music_kit_id)
