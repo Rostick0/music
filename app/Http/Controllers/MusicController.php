@@ -304,10 +304,6 @@ class MusicController extends Controller
             'name' => trim($request->music_artists)
         ]);
 
-        $image = ImageController::upload($request->file('image'));
-        $upload = MusicUploadController::upload($request->file('link'));
-        $upload_demo = MusicUploadController::upload($request->file('link_demo'), 'music_demo');
-
         $update_data = [
             'music_artist_id' => $music_artists->id,
             'title' => $request->title,
@@ -320,32 +316,30 @@ class MusicController extends Controller
             'seo_description' => $request->seo_description,
         ];
 
-        if ($upload) {
+        if ($request->hasFile('link')) {
+            $upload = MusicUploadController::upload($request->file('link'));
             $getId3 = new getID3();
             $audio = $getId3->analyze($request->file('link'));
             $audio_duration = gmdate("H:i:s", $audio['playtime_seconds']);
 
             $update_data['link'] = $upload;
             $update_data['duration'] = $audio_duration;
-
-            MusicUploadController::destroy($music_old->link);
         }
 
-        if ($upload_demo) {
+        if ($request->file('link_demo')) {
+            $upload_demo = MusicUploadController::upload($request->file('link_demo'), 'music_demo');
             $getId3Demo = new getID3();
             $audio_demo = $getId3Demo->analyze($request->file('link_demo'));
             $audio_duration_demo = gmdate("H:i:s", $audio_demo['playtime_seconds']);
 
             $update_data['link_demo'] = $upload_demo;
             $update_data['duration_demo'] = $audio_duration_demo;
-
-            if ($music_old->link_demo) MusicUploadController::destroy($music_old->link_demo, 'music_demo');
         }
 
-        if ($image) {
-            $update_data['image'] = $image;
+        if ($request->file('link_demo')) {
+            $image = ImageController::upload($request->file('image'));
 
-            if ($music_old->image) ImageController::destroy($music_old->image);
+            $update_data['image'] = $image;
         }
 
         $music_old->update($update_data);

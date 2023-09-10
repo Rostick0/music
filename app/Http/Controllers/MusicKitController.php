@@ -236,36 +236,29 @@ class MusicKitController extends Controller
             'seo_description' => $request->seo_description,
         ];
 
-        $image = ImageController::upload($request->file('image'));
-        $upload = MusicUploadController::upload($request->file('link'), 'music_kit');
-        $upload_demo = MusicUploadController::upload($request->file('link_demo'), 'music_kit_demo');
-
-        if ($upload) {
+        if ($request->hasFile('link')) {
+            $upload = MusicUploadController::upload($request->file('link'), 'music_kit');
             $getId3 = new getID3();
             $audio = $getId3->analyze($request->file('link'));
             $audio_duration = gmdate("H:i:s", $audio['playtime_seconds']);
 
             $update_data['link'] = $upload;
             $update_data['duration'] = $audio_duration;
-
-            MusicUploadController::destroy($music_kit_old->link, 'music_kit');
         }
 
-        if ($upload_demo) {
+        if ($request->hasFile('link_demo')) {
+            $upload_demo = MusicUploadController::upload($request->file('link_demo'), 'music_kit_demo');
             $getId3Demo = new getID3();
             $audio_demo = $getId3Demo->analyze($request->file('link_demo'));
             $audio_duration_demo = gmdate("H:i:s", $audio_demo['playtime_seconds']);
 
             $update_data['link_demo'] = $upload_demo;
             $update_data['duration_demo'] = $audio_duration_demo;
-
-            if ($music_kit_old->link_demo) MusicUploadController::destroy($music_kit_old->link_demo, 'music_kit_demo');
         }
 
-        if ($image) {
+        if ($request->hasFile('image')) {
+            $image = ImageController::upload($request->file('image'));
             $update_data['image'] = $image;
-
-            if ($music_kit_old->image) ImageController::destroy($music_kit_old->image);
         }
 
         RelationshipGenreController::createAndDeleteRelationship($request->genres, $id, 'music_kit');

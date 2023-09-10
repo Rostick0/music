@@ -1,2 +1,35 @@
 @import './reset';
 @import './utils/';
+@import './utils/modal';
+
+.admin-grid__titles,
+.admin-grid__content_item {
+    padding: 18px 4px !important;
+    max-width: 1600px;
+}
+
+ul.admin-grid__content.admin-grid-music__content {
+    max-width: 1600px;
+}
+
+.admin-button-edit {
+    width: 30px !important;
+    height: 30px !important;
+}
+
+.admin-grid__titles.admin-grid-music__titles {
+    max-width: 1660px;
+}
+
+.admin-form__image img {
+    width: 100%;
+    max-width: 150px;
+    border-radius: 20px;
+}
+
+input,
+.admin-details,
+.admin-file-upload,
+textarea {
+    margin: 10px 0px !important;
+}
