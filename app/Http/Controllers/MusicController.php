@@ -336,7 +336,7 @@ class MusicController extends Controller
             $update_data['duration_demo'] = $audio_duration_demo;
         }
 
-        if ($request->file('link_demo')) {
+        if ($request->file('image')) {
             $image = ImageController::upload($request->file('image'));
 
             $update_data['image'] = $image;
