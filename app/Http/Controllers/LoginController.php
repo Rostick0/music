@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Rules\Throttle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -19,7 +20,7 @@ class LoginController extends Controller
         if (Auth::check()) return $this->redirectProfile();
 
         $credentials = $request->validate([
-            'email' => 'required',
+            'email' => ['required', new Throttle('contact-form', 3, 1)],
             'password' => 'required'
         ]);
 

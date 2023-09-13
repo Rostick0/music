@@ -664,6 +664,7 @@ input[type=range][orient=vertical] {
             display: none;
             padding-bottom: 3.25rem;
             position: absolute;
+            z-index: 10;
 
             &__inner {
                 background-color: var(--white);

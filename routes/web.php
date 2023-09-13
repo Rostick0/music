@@ -197,7 +197,9 @@ Route::group(['prefix' => 'client', 'middleware' => 'auth'], function ($router) 
 
 Route::group(['middleware' => 'guest'], function ($router) {
     Route::get('/login', [LoginController::class, 'show'])->name('login');
-    Route::post('/login', [LoginController::class, 'store']);
+    Route::post('/login', [LoginController::class, 'store'])
+    // ->middleware("throttle:1,1")
+    ;
 
     Route::get('/register', [RegisterController::class, 'show'])->name('register');
     Route::post('/register', [RegisterController::class, 'store']);

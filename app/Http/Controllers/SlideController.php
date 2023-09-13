@@ -9,6 +9,8 @@ class SlideController extends Controller
 {
     public static function setType($value)
     {
+        if ($value == 0) return 0;
+
         if (mb_substr($value, -1) == '%') {
             return (int) $value + '%';
         }

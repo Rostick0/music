@@ -10,8 +10,10 @@
         <h1 class="banner-main__title">{{ $config_slider->slider_title }}</h1>
         <div class="banner-main__description text-medium">{{ $config_slider->slider_description }}</div>
         <div class="banner-main__buttons">
-            <a class="button-gradient banner-main__button" href="{{$config_slider->button_first_link}}">{{ $config_slider->button_first_text }}</a>
-            <a class="button-white banner-main__button" href="{{$config_slider->button_second_link}}">{{ $config_slider->button_second_text }}</a>
+            <a class="button-gradient banner-main__button"
+                href="{{ $config_slider->button_first_link }}">{{ $config_slider->button_first_text }}</a>
+            <a class="button-white banner-main__button"
+                href="{{ $config_slider->button_second_link }}">{{ $config_slider->button_second_text }}</a>
         </div>
         <div class="banner-main__slider mySwiper swipper">
             <div class="swiper-wrapper">
@@ -19,7 +21,8 @@
                     <div class="swiper-slide">
                         <img class="lazy" decoding="async" loading="lazy"
                             data-src="{{ App\Http\Controllers\ImageController::getViewImage($slide->image, 'slide') }}"
-                            width="{{ $slide->width }}" height="{{ $slide->height }}" alt="">
+                            data-a="{{ $slide->width }}" width="{{ $slide->width ? $slide->width : '100%' }}"
+                            height="{{ $slide->height ? $slide->height : '100%' }}" alt="{{ $slide->name }}">
                     </div>
                 @endforeach
             </div>

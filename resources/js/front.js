@@ -267,7 +267,7 @@ const editPagination = (pagination, links_html) => {
             progressColor: '#FF1111',
             url: musicUrl,
             height: 40,
-            volume: 0
+            volume: 0,
         });
 
         wavesurferPlayer = wavesurferPlayerInner;
