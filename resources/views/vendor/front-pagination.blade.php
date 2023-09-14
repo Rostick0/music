@@ -14,7 +14,7 @@
                         <span class="pagination__link _active">{{ $page }}</span>
                     @else
                         @if ($page != 1 && $page != $paginator->lastPage())
-                            <a class="pagination__link" href="{{ $url->query() }}">{{ $page }}</a>
+                            <a class="pagination__link" href="{{ $url }}">{{ $page }}</a>
                         @endif
                     @endif
                 @endforeach
