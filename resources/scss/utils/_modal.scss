@@ -39,3 +39,13 @@
         padding: .5rem 1.1rem;
     }
 }
+
+.modal-agree {
+    &__inner {
+        max-width: 80vw;
+    }
+
+    &__description {
+        overflow: auto;
+    }
+}
