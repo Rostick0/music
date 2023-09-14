@@ -60,11 +60,11 @@ class MusicController extends Controller
                 ->get());
         }
         if ($request->min_time && $request->max_time) {
-            $music_list->whereBetween('duration', [$request->min_time, $request->max_time]);
+            $music_list->whereBetween('duration',  $request->min_time, $request->max_time);
         } else if ($request->min_time && !$request->max_time) {
             $music_list->where('duration', '>', $request->min_time);
         } else if (!$request->min_time && $request->max_time) {
-            $music_list->where('duration', '<', $request->max_time);
+            $music_list->where('duration', '<',  $request->max_time);
         }
         $music_list = $music_list->paginate(app('site')->count_admin ?? 20);
 

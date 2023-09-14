@@ -65,9 +65,9 @@ class MusicKitController extends Controller
         if ($request->min_time && $request->max_time) {
             $music_kits->whereBetween('duration', [$request->min_time, $request->max_time]);
         } else if ($request->min_time && !$request->max_time) {
-            $music_kits->where('duration', '>', $request->min_time);
+            $music_kits->where('duration', '>',  $request->min_time);
         } else if (!$request->min_time && $request->max_time) {
-            $music_kits->where('duration', '<', $request->max_time);
+            $music_kits->where('duration', '<',   $request->max_time);
         }
         $music_kits = $music_kits->paginate(app('site')->count_admin ?? 20);
 

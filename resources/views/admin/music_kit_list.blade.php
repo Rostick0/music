@@ -92,11 +92,12 @@
                 </div>
                 <label class="admin-label w-100">
                     <span>Минимальное время</span>
-                    <input class="admin-input" type="time" name="min_time" value={{ Request::get('min_time') }}>
+                    <input class="admin-input" type="time" step="1" name="min_time"
+                        value={{ Request::get('min_time') }}>
                 </label>
                 <label class="admin-label w-100">
                     <span>Максимальное время</span>
-                    <input class="admin-input" type="time" name="max_time" value={{ Request::get('max_time') }}>
+                    <input class="admin-input" type="time" step="1" name="max_time" value={{ Request::get('max_time') }}>
                 </label>
             </div>
             <div class="admin-filter__buttons">
@@ -124,7 +125,8 @@
                     <div>{{ $music_kit->duration }}</div>
                     <div>{{ $music_kit->is_active ? 'Да' : 'Нет' }}</div>
                     <div>{{ $music_kit->created_at }}</div>
-                    <a class="admin-button admin-button-edit" href="{{ route('music_kit.edit', ['id' => $music_kit->id]) }}">
+                    <a class="admin-button admin-button-edit"
+                        href="{{ route('music_kit.edit', ['id' => $music_kit->id]) }}">
                         <svg width="16" height="16" fill="#fff" xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 32 32">
                             <path

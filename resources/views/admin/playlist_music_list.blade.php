@@ -91,11 +91,13 @@
             </div>
             <label class="admin-label w-100">
                 <span>Минимальное время</span>
-                <input class="admin-input" type="time" name="min_time" value={{ Request::get('min_time') }}>
+                <input class="admin-input" type="time"step="1" name="min_time"
+                    value={{ Request::get('min_time') }}>
             </label>
             <label class="admin-label w-100">
                 <span>Максимальное время</span>
-                <input class="admin-input" type="time" name="max_time" value={{ Request::get('max_time') }}>
+                <input class="admin-input" type="time"step="1" name="max_time"
+                    value={{ Request::get('max_time') }}>
             </label>
         </div>
         <div class="admin-filter__buttons">
