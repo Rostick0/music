@@ -20,7 +20,7 @@
                             <div class="pricing-item__block">
                                 <div class="pricing-item__title">{{ $subscription_type->name }}</div>
                                 <div class="pricing-item__info">{{ $subscription_type->price }},
-                                    {{ $subscription_type->description ?? '' }}</div>
+                                    {!! $subscription_type->description ?? '' !!}</div>
                                 <form action="https://unitpay.ru/pay/441707-c74ca" method="post">
                                     <input type="hidden" name="account" value="demo">
                                     <input type="hidden" name="sum" value="{{ $subscription_type->price }}">
@@ -33,7 +33,7 @@
                                 </form>
                             </div>
                             @if ($subscription_type->advantages)
-                                <div class="pricing-item__advantages">{{ $subscription_type->advantages }}</div>
+                                <div class="pricing-item__advantages">{!! $subscription_type->advantages !!}</div>
                             @endif
                         </li>
                     @endforeach

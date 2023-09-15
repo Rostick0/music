@@ -7,7 +7,7 @@
             <label class="admin-label">
                 <span>Название*</span>
                 <input class="admin-input" type="text" name="name" maxlength="255"
-                    value="{{ old('name') ?? $genre->name }}" required>
+                    value="{{ old('name') ?? $theme->name }}" required>
                 @error('name')
                     <span class="error">{{ $message }}</span>
                 @enderror

@@ -12,7 +12,7 @@ class SliderSettingController extends Controller
         $validated = $request->validate([
             'slider_title' => 'required',
             'slider_description' => 'required',
-            'bg_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+            'bg_image' => 'image|mimes:jpeg,png,jpg,gif,svg',
             'button_first_text' => 'required',
             'button_first_link' => 'required',
             'button_second_text' => 'required',
