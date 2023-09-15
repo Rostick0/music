@@ -19,9 +19,6 @@ use Illuminate\Support\Facades\Blade;
 
 class MusicController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
         $where_sql = [];
@@ -174,10 +171,14 @@ class MusicController extends Controller
     {
         $genres = Genre::all();
         $themes = Theme::all();
+        $moods = Mood::all();
+        $instruments = Instrument::all();
 
         return view('admin.music_create', [
             'genres' => $genres,
-            'themes' => $themes
+            'themes' => $themes,
+            'moods' => $moods,
+            'instruments' => $instruments,
         ]);
     }
 
@@ -233,8 +234,8 @@ class MusicController extends Controller
         ]);
 
         RelationshipGenreController::createAndDeleteRelationship($request->genres, $music->id, 'music');
-        RelationshipInstrumentController::createRelationship($request->instruments, $music->id, 'music');
-        RelationshipMoodController::createRelationship($request->moods, $music->id, 'music');
+        RelationshipInstrumentController::createAndDeleteRelationship($request->instruments, $music->id, 'music');
+        RelationshipMoodController::createAndDeleteRelationship($request->moods, $music->id, 'music');
         RelationshipThemeController::createAndDeleteRelationship($request->themes, $music->id, 'music');
 
         return redirect()->route('music.edit', [
@@ -270,13 +271,37 @@ class MusicController extends Controller
                     ['type_id', '=', $music->id],
                     ['type', '=', 'music']
                 ]);
-        })->get();;
+        })->get();
+
+        $moods = Mood::select(
+            'moods.*',
+            'relationship_moods.id as relationship_id'
+        )->leftJoin('relationship_moods', function ($join) use ($music) {
+            $join->on('relationship_moods.mood_id', '=', 'moods.id')
+                ->where([
+                    ['type_id', '=', $music->id],
+                    ['type', '=', 'music']
+                ]);
+        })->get();
+
+        $instruments = Instrument::select(
+            'instruments.*',
+            'relationship_instruments.id as relationship_id'
+        )->leftJoin('relationship_instruments', function ($join) use ($music) {
+            $join->on('relationship_instruments.instrument_id', '=', 'instruments.id')
+                ->where([
+                    ['type_id', '=', $music->id],
+                    ['type', '=', 'music']
+                ]);
+        })->get();
 
         return view('admin.music_edit', [
             'music' => $music,
             'music_artist' => $music_artist,
             'genres' => $genres,
             'themes' => $themes,
+            'moods' => $moods,
+            'instruments' => $instruments,
         ]);
     }
 

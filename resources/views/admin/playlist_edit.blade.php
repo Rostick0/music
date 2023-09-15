@@ -54,12 +54,22 @@
                     </details>
                 </div>
                 <label class="admin-label">
-                    <span>Moods (через запятую)</span>
-                    <input class="admin-input" type="text" name="moods"
-                        value="{{ old('moods') ?? App\Http\Controllers\RelationshipHelper::getNameByItems($playlist->moods) }}">
-                    @error('moods')
-                        <span class="error">{{ $message }}</span>
-                    @enderror
+                    <span>Moods</span>
+                    <details class="admin-details">
+                        <summary class="admin-details__summary">
+                            <div class="admin-input">Настроение</div>
+                        </summary>
+                        <div class="admin-details__content">
+                            @foreach ($moods as $mood)
+                                <label class="admin-checkbox">
+                                    <input class="admin-checkbox__input" type="checkbox" name="moods[]"
+                                        @if (array_search($mood->id, Request::get('moods') ?? []) !== false || isset($mood->relationship_id)) checked @endif value="{{ $mood->id }}">
+                                    <span class="admin-checkbox__icon"></span>
+                                    <span>{{ $mood->name }}</span>
+                                </label>
+                            @endforeach
+                        </div>
+                    </details>
                 </label>
                 <label class="admin-label">
                     <span>Themes</span>
@@ -81,11 +91,21 @@
                 </label>
                 <label class="admin-label">
                     <span>Instruments (через запятую)</span>
-                    <input class="admin-input" type="text" name="instruments"
-                        value="{{ old('instruments') ?? App\Http\Controllers\RelationshipHelper::getNameByItems($playlist->instruments) }}">
-                    @error('instruments')
-                        <span class="error">{{ $message }}</span>
-                    @enderror
+                    <details class="admin-details">
+                        <summary class="admin-details__summary">
+                            <div class="admin-input">Инструмент</div>
+                        </summary>
+                        <div class="admin-details__content">
+                            @foreach ($instruments as $instrument)
+                                <label class="admin-checkbox">
+                                    <input class="admin-checkbox__input" type="checkbox" name="instruments[]"
+                                        @if (array_search($instrument->id, Request::get('instruments') ?? []) !== false || isset($instrument->relationship_id)) checked @endif value="{{ $instrument->id }}">
+                                    <span class="admin-checkbox__icon"></span>
+                                    <span>{{ $instrument->name }}</span>
+                                </label>
+                            @endforeach
+                        </div>
+                    </details>
                 </label>
             </div>
             <div class="admin-form__flex">

@@ -49,6 +49,12 @@
             <li class="admin-aside__navigation_item">
                 <a class="admin-aside__navigation_link{{ Request::segment(2) === 'theme' ? ' _active' : '' }}" href="{{ route('theme.list') }}">Темы</a>
             </li>
+            <li class="admin-aside__navigation_item">
+                <a class="admin-aside__navigation_link{{ Request::segment(2) === 'mood' ? ' _active' : '' }}" href="{{ route('mood.list') }}">Настроения</a>
+            </li>
+            <li class="admin-aside__navigation_item">
+                <a class="admin-aside__navigation_link{{ Request::segment(2) === 'instrument' ? ' _active' : '' }}" href="{{ route('instrument.list') }}">Инструменты</a>
+            </li>
         </ul>
     </nav>
 </aside>

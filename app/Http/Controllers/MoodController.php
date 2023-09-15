@@ -7,59 +7,50 @@ use Illuminate\Http\Request;
 
 class MoodController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $mood_list = Mood::all();
+
+        return view('admin.mood_list', [
+            'mood_list' => $mood_list,
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:255|unique:moods,name',
+        ]);
+
+        Mood::create($validated);
+
+        return back();
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Mood $mood)
+    public function edit(int $id)
     {
-        //
+        $mood = Mood::findOrFail($id);
+
+        return view('admin.mood_edit', [
+            'mood' => $mood,
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Mood $mood)
+    public function update(Request $request, int $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:255|unique:moods,name,' . $id,
+        ]);
+
+        Mood::find($id)->update($validated);
+
+        return back();
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Mood $mood)
+    public function destroy(int $id)
     {
-        //
-    }
+        Mood::destroy($id);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Mood $mood)
-    {
-        //
+        return redirect()->route('mood.list');
     }
 }

@@ -19,9 +19,6 @@ use Illuminate\Validation\Rule;
 
 class PlaylistController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
         $where_sql = [];
@@ -111,23 +108,21 @@ class PlaylistController extends Controller
         return $playlists;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $genres = Genre::all();
         $themes = Theme::all();
+        $moods = Mood::all();
+        $instruments = Instrument::all();
 
         return view('admin.playlist_create', [
             'genres' => $genres,
-            'themes' => $themes
+            'themes' => $themes,
+            'moods' => $moods,
+            'instruments' => $instruments,
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $validator = $request->validate([
@@ -188,10 +183,34 @@ class PlaylistController extends Controller
                 ]);
         })->get();
 
+        $moods = Mood::select(
+            'moods.*',
+            'relationship_moods.id as relationship_id'
+        )->leftJoin('relationship_moods', function ($join) use ($playlist) {
+            $join->on('relationship_moods.mood_id', '=', 'moods.id')
+                ->where([
+                    ['type_id', '=', $playlist->id],
+                    ['type', '=', 'playlist']
+                ]);
+        })->get();
+
+        $instruments = Instrument::select(
+            'instruments.*',
+            'relationship_instruments.id as relationship_id'
+        )->leftJoin('relationship_instruments', function ($join) use ($playlist) {
+            $join->on('relationship_instruments.instrument_id', '=', 'instruments.id')
+                ->where([
+                    ['type_id', '=', $playlist->id],
+                    ['type', '=', 'playlist']
+                ]);
+        })->get();
+
         return view('admin.playlist_edit', [
             'playlist' => $playlist,
             'genres' => $genres,
             'themes' => $themes,
+            'moods' => $moods,
+            'instruments' => $instruments,
         ]);
     }
 

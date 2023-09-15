@@ -5,6 +5,7 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <script type="text/javascript" defer>
     $('.summernote').summernote({
-        height: 500
+        height: 500,
+        disableGrammar: true
     });
 </script>

@@ -13,40 +13,22 @@ class Type
 class RelationshipMoodController extends Controller
 {
     // @param 'music|playlist' $type
-    static public function createRelationship($request_moods, int $type_id, string $type)
-    {
-        $moods = explode(',', $request_moods);
-        foreach ($moods as $mood) {
-            if (!trim($mood)) continue;
-
-            $value_mood = Mood::firstOrCreate([
-                'name' => trim(mb_strtolower($mood))
-            ]);
-
-            RelationshipMood::firstOrCreate([
-                'type' => $type,
-                'type_id' => $type_id,
-                'mood_id' => $value_mood->id,
-            ]);
-        }
-    }
 
     static public function createAndDeleteRelationship($request_moods, int $type_id, string $type)
     {
-        $moods = explode(',', $request_moods);
+        $moods = $request_moods;
+
+        if (!$moods) return;
+
+        if (!is_array($moods)) $moods = [$moods];
+
         $array_id = [];
 
         foreach ($moods as $mood) {
-            if (!trim($mood)) continue;
-
-            $value_mood = Mood::firstOrCreate([
-                'name' => trim(mb_strtolower($mood))
-            ]);
-
             $relationship = RelationshipMood::firstOrCreate([
                 'type' => $type,
                 'type_id' => $type_id,
-                'mood_id' => $value_mood->id,
+                'mood_id' => $mood,
             ]);
 
             $array_id[] = $relationship->id;

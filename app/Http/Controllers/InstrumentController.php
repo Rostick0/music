@@ -7,59 +7,50 @@ use Illuminate\Http\Request;
 
 class InstrumentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $instrument_list = Instrument::all();
+
+        return view('admin.instrument_list', [
+            'instrument_list' => $instrument_list,
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:255|unique:instruments,name',
+        ]);
+
+        Instrument::create($validated);
+
+        return back();
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Instrument $instrument)
+    public function edit(int $id)
     {
-        //
+        $instrument = Instrument::findOrFail($id);
+
+        return view('admin.instrument_edit', [
+            'instrument' => $instrument,
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Instrument $instrument)
+    public function update(Request $request, int $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:255|unique:instruments,name,' . $id,
+        ]);
+
+        Instrument::find($id)->update($validated);
+
+        return back();
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Instrument $instrument)
+    public function destroy(int $id)
     {
-        //
-    }
+        Instrument::destroy($id);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Instrument $instrument)
-    {
-        //
+        return redirect()->route('instrument.list');
     }
 }

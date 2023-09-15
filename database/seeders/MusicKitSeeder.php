@@ -77,8 +77,8 @@ class MusicKitSeeder extends Seeder
             ]);
 
             RelationshipGenreController::createAndDeleteRelationship($this->genres[$i], $music_kit->id, 'music_kit');
-            RelationshipInstrumentController::createRelationship($this->instruments[$i], $music_kit->id, 'music_kit');
-            RelationshipMoodController::createRelationship($this->moods[$i], $music_kit->id, 'music_kit');
+            RelationshipInstrumentController::createAndDeleteRelationship($this->instruments[$i], $music_kit->id, 'music_kit');
+            RelationshipMoodController::createAndDeleteRelationship($this->moods[$i], $music_kit->id, 'music_kit');
             RelationshipThemeController::createAndDeleteRelationship($this->themes[$i], $music_kit->id, 'music_kit');
         }
     }

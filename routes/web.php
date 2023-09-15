@@ -11,8 +11,10 @@ use App\Http\Controllers\EmailVertificationController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\GenreController;
+use App\Http\Controllers\InstrumentController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\MoodController;
 use App\Http\Controllers\MusicController;
 use App\Http\Controllers\MusicKitController;
 use App\Http\Controllers\MusicPartController;
@@ -172,6 +174,22 @@ Route::group(['prefix' => 'admin'], function ($router) {
         Route::post('delete/{id}', [GenreController::class, 'destroy'])->name('genre.delete');
     });
 
+    Route::group(['prefix' => 'mood'], function ($router) {
+        Route::get('list', [MoodController::class, 'index'])->name('mood.list');
+        Route::post('list', [MoodController::class, 'store']);
+        Route::get('edit/{id}', [MoodController::class, 'edit'])->name('mood.edit');
+        Route::post('edit/{id}', [MoodController::class, 'update']);
+        Route::post('delete/{id}', [MoodController::class, 'destroy'])->name('mood.delete');
+    });
+
+    Route::group(['prefix' => 'instrument'], function ($router) {
+        Route::get('list', [InstrumentController::class, 'index'])->name('instrument.list');
+        Route::post('list', [InstrumentController::class, 'store']);
+        Route::get('edit/{id}', [InstrumentController::class, 'edit'])->name('instrument.edit');
+        Route::post('edit/{id}', [InstrumentController::class, 'update']);
+        Route::post('delete/{id}', [InstrumentController::class, 'destroy'])->name('instrument.delete');
+    });
+
     Route::group(['prefix' => 'theme'], function ($router) {
         Route::get('list', [ThemeController::class, 'index'])->name('theme.list');
         Route::post('list', [ThemeController::class, 'store']);
@@ -197,9 +215,7 @@ Route::group(['prefix' => 'client', 'middleware' => 'auth'], function ($router) 
 
 Route::group(['middleware' => 'guest'], function ($router) {
     Route::get('/login', [LoginController::class, 'show'])->name('login');
-    Route::post('/login', [LoginController::class, 'store'])
-    // ->middleware("throttle:1,1")
-    ;
+    Route::post('/login', [LoginController::class, 'store']);
 
     Route::get('/register', [RegisterController::class, 'show'])->name('register');
     Route::post('/register', [RegisterController::class, 'store']);
