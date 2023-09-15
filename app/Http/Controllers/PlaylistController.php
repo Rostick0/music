@@ -154,9 +154,6 @@ class PlaylistController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(int $id)
     {
         $playlist = Playlist::findOrFail($id);
@@ -214,9 +211,6 @@ class PlaylistController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, int $id)
     {
         $validator = $request->validate([
@@ -249,9 +243,6 @@ class PlaylistController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(int $id)
     {
         $playlist = Playlist::find($id);

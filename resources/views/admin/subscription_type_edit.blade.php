@@ -22,16 +22,16 @@
             </label>
         </div>
         <div class="admin-form__flex">
-            <label class="admin-label">
+            <label class="admin-label admin-form__flex_long">
                 <span>Описание</span>
-                <textarea class="admin-input" name="description" rows="3" maxlength="65536">{{ old('description') ?? $subscription_type->description }}</textarea>
+                <textarea class="summernote" name="description" rows="3" maxlength="65536">{{ old('description') ?? $subscription_type->description }}</textarea>
                 @error('description')
                     <span class="error">{{ $message }}</span>
                 @enderror
             </label>
-            <label class="admin-label">
+            <label class="admin-label admin-form__flex_long">
                 <span>Преимущества</span>
-                <textarea class="admin-input" name="advantages" rows="3" maxlength="65536">{{ old('advantages') ?? $subscription_type->advantages }}</textarea>
+                <textarea class="summernote" name="advantages" rows="3" maxlength="65536">{{ old('advantages') ?? $subscription_type->advantages }}</textarea>
                 @error('advantages')
                     <span class="error">{{ $message }}</span>
                 @enderror
@@ -54,4 +54,6 @@
         @csrf
         <button class="admin-button-red">Удалить</button>
     </form>
+
+    <x-summernote_links></x-summernote_links>
 @endsection

@@ -104,7 +104,7 @@
                     <span>Moods</span>
                     <details class="admin-details">
                         <summary class="admin-details__summary">
-                            <div class="admin-input">Жанр</div>
+                            <div class="admin-input">Настроение</div>
                         </summary>
                         <div class="admin-details__content">
                             @foreach ($moods as $mood)

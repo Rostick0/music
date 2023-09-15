@@ -155,8 +155,8 @@
             </div>
             <div class="footer__bottom">
                 <span class="opacity-60">© 2023 TopAudio</span>
-                <a class="a-white" href="#" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
-                <a class="a-white" href="#" target="_blank" rel="noopener noreferrer">Terms of Use</a>
+                <a class="a-white" href="/terms" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+                <a class="a-white" href="/Privacy Policy" target="_blank" rel="noopener noreferrer">Terms of Use</a>
             </div>
         </div>
     </div>
