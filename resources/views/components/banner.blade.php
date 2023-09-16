@@ -1,4 +1,4 @@
-@if (!auth()->check())
+@if (!Auth::check())
     <div class="banner">
         <div class="container">
             <div class="banner__container">

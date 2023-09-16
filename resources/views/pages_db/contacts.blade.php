@@ -7,7 +7,39 @@
     <section class="section-page feedback">
         <div class="container">
             <div class="feedback__container">
-                <h1 class="section-title-big feedback__title">Contacts</h1>
+                <h1 class="section-title-big feedback__title">Contacts us</h1>
+                <form class="feedback__form" action="{{ url()->current() }}" method="post">
+                    @csrf
+                    <label class="label">
+                        <span class="label__name">Email</span>
+                        <input class="input" type="text" name="email" value="{{ old('email') }}" maxlength="255"
+                            required>
+                        @error('email')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </label>
+                    <label class="label">
+                        <span class="label__name">Theme</span>
+                        <input class="input" type="text" name="theme" value="{{ old('theme') }}" maxlength="255"
+                            required>
+                        @error('theme')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </label>
+                    <label class="label">
+                        <span class="label__name">Message</span>
+                        <x-contact_textearea />
+                        @error('message')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </label>
+                    @if (Session::has('success'))
+                        <br />
+                        <div class="feedback__success success">{{ Session::get('success') }}</div>
+                        <br />
+                    @endif
+                    <button class="button-gradient feedback__button">Send</button>
+                </form>
                 <ul class="feedback__social">
                     <li class="feedback__social_item">
                         <a class="feedback__social_link" href="">
@@ -86,13 +118,14 @@
                                         fill="white"></path>
                                 </g>
                                 <defs>
-                                    <linearGradient id="paint0_linear_88_23" x1="20.0022" y1="38.6089" x2="20.0022"
-                                        y2="-0.00736777" gradientUnits="userSpaceOnUse">
+                                    <linearGradient id="paint0_linear_88_23" x1="20.0022" y1="38.6089"
+                                        x2="20.0022" y2="-0.00736777" gradientUnits="userSpaceOnUse">
                                         <stop stop-color="#0062E0"></stop>
                                         <stop offset="1" stop-color="#19AFFF"></stop>
                                     </linearGradient>
                                     <clipPath id="clip0_88_23">
-                                        <rect width="40" height="40" fill="white" transform="translate(0.0012207)">
+                                        <rect width="40" height="40" fill="white"
+                                            transform="translate(0.0012207)">
                                         </rect>
                                     </clipPath>
                                 </defs>
@@ -100,38 +133,6 @@
                         </a>
                     </li>
                 </ul>
-                <form class="feedback__form" action="{{ url()->current() }}" method="post">
-                    @csrf
-                    <label class="label">
-                        <span class="label__name">Email</span>
-                        <input class="input" type="text" name="email" value="{{ old('email') }}" maxlength="255"
-                            required>
-                        @error('email')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </label>
-                    <label class="label">
-                        <span class="label__name">Theme</span>
-                        <input class="input" type="text" name="theme" value="{{ old('theme') }}" maxlength="255"
-                            required>
-                        @error('theme')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </label>
-                    <label class="label">
-                        <span class="label__name">Message</span>
-                        <textarea class="input" name="message" maxlength="65536" rows="5" required>{{ old('message') }}</textarea>
-                        @error('message')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </label>
-                    @if (Session::has('success'))
-                        <br />
-                        <div class="feedback__success success">{{ Session::get('success') }}</div>
-                        <br />
-                    @endif
-                    <button class="button-gradient feedback__button">Отправить</button>
-                </form>
             </div>
         </div>
     </section>

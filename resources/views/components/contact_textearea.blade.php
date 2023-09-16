@@ -1,0 +1,1 @@
+<textarea class="input" name="message" maxlength="65536" rows="5" required>{{ old('message') }}</textarea>
