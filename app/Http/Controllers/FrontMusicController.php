@@ -83,7 +83,7 @@ class FrontMusicController extends Controller
             ->union($music_theme)
             ->union($music_instrument)
             ->union($music_mood);
-        if (!(auth()->check() && auth()->user()->is_admin)) $music_list->where('music_kits.is_active', 1);
+        if (!(auth()->check() && auth()->user()->is_admin)) $music_list->where('music.is_active', 1);
 
         return $music_list->paginate(8);
     }

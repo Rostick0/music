@@ -23,7 +23,7 @@ class SliderSettingController extends Controller
             'count_slide_min' => 'required|numeric'
         ]);
 
-        $image = ImageController::upload($request->file('bg_image'));
+        $old = SliderSettingController::get();
 
         $data_update = [
             'slider_title' => $request->slider_title,
@@ -38,7 +38,11 @@ class SliderSettingController extends Controller
             'count_slide_min' => $request->count_slide_min
         ];
 
-        if ($image) $data_update['bg_image'] = $image;
+        if ($request->hasFile('bg_image')) {
+            $data_update['bg_image'] =  ImageController::upload($request->file('bg_image'));;
+        } else {
+            $data_update['bg_image'] = $old->bg_image;
+        }
 
         File::put(public_path('slider.json'), json_encode($data_update));
 

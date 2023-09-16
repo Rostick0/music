@@ -28,17 +28,11 @@ class SitePageController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('admin.page_create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $validator = $request->validate([
@@ -55,13 +49,10 @@ class SitePageController extends Controller
             $path,
             '@extends("layout.front.index")
 
-            @section("php")
-            @endsection
-
             @section("seo_title", $site_page["seo_title"])
             @section("seo_description", $site_page["seo_description"])
             
-            @section("html")
+            @section(' . "'html'" . ')
             ' . $request->content . '
             @endsection'
         );
@@ -80,9 +71,6 @@ class SitePageController extends Controller
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Request $request, string $url = '/home', $id = null)
     {
         $path = $this->get_path($url);
@@ -101,9 +89,6 @@ class SitePageController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(int $id)
     {
         $page = SitePage::findOrFail($id);
@@ -120,9 +105,6 @@ class SitePageController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, int $id)
     {
         $validator = $request->validate([
@@ -137,11 +119,20 @@ class SitePageController extends Controller
         $path_old = $this->get_path($old_page->path);
         $path_new = $this->get_path($request->path);
 
+        $content = '@extends("layout.front.index")
+
+        @section("seo_title", $site_page["seo_title"])
+        @section("seo_description", $site_page["seo_description"])
+        
+        @section(' . "'html'" . ')
+        ' . $request->content . '
+        @endsection';
+
         if ($old_page->path != $request->path) {
             File::delete($path_old);
-            $file = File::put($path_new, $request->content);
+            $file = File::put($path_new, $content);
         } else {
-            $file = File::put($path_old, $request->content);
+            $file = File::put($path_old, $content);
         }
 
         $old_page->update([
@@ -156,9 +147,6 @@ class SitePageController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(int $id)
     {
         $site_page = SitePage::find($id);

@@ -55,6 +55,19 @@ class AppServiceProvider extends ServiceProvider
 
             return in_array($object, $local_data);
         });
-        // App::bind();
+
+        View::share('htmlSection', function ($text) {
+            $startString = "@section('html')";
+            $endString = '@endsection';
+            $startPosition = strpos($text, $startString);
+            if ($startPosition !== false) {
+                $startPosition += strlen($startString);
+                $endPosition = strpos($text, $endString, $startPosition);
+                if ($endPosition !== false) {
+                    $result = substr($text, $startPosition, $endPosition - $startPosition);
+                    echo $result;
+                }
+            }
+        });
     }
 }
