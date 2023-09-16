@@ -1,4 +1,4 @@
-@if (!auth()->check() && !Cookie::get('favorite_agree'))
+@if (!Auth::check() && !Cookie::get('favorite_agree'))
     <div class="modal modal-favorite _active">
         <div class="modal__inner">
             <div class="modal__title">Warning</div>

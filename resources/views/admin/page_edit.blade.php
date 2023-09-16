@@ -58,7 +58,7 @@
         <div class="admin-form__flex">
             <div class="admin-label admin-form__flex_long admin-form__flex_100">
                 <span>Контент страницы</span>
-                <textarea class="summernote" name="content" id="content">{{ old('content') ?? $htmlSection($content) }}</textarea>
+                <textarea class="summernote" name="content" id="content">{!! old('content') ?? $htmlSection($content) !!}</textarea>
                 @error('content')
                     <span class="error">{{ $message }}</span>
                 @enderror
