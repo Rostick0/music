@@ -31,6 +31,11 @@ class AppServiceProvider extends ServiceProvider
         });
         View::share('site', app('site'));
 
+        App::singleton('banner', function () {
+            return json_decode(File::get(public_path('banner.json')));
+        });
+        View::share('banner', app('banner'));
+
         App::singleton('has_subscription', function () {
             $has_subscription = false;
 

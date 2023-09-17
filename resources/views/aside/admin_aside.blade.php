@@ -34,9 +34,9 @@
             <li class="admin-aside__navigation_item">
                 <a class="admin-aside__navigation_link{{ Request::segment(2) === 'pages' ? ' _active' : '' }}" href="{{ route('page.list') }}">Страницы</a>
             </li>
-            <li class="admin-aside__navigation_item">
+            {{-- <li class="admin-aside__navigation_item">
                 <a class="admin-aside__navigation_link{{ Request::segment(2) === 'components' ? ' _active' : '' }}" href="{{ route('component.list') }}">Компоненты</a>
-            </li>
+            </li> --}}
             <li class="admin-aside__navigation_item">
                 <a class="admin-aside__navigation_link{{ Request::segment(2) === 'settings' ? ' _active' : '' }}" href="{{ route('settings') }}">Настройки</a>
             </li>

@@ -9,6 +9,7 @@
                     <li class="tab" id="slider">FAQ</li>
                     <li class="tab" id="faq">Слайдер</li>
                     <li class="tab" id="sliderlogo">Слайдер лого</li>
+                    <li class="tab" id="banner">Баннер</li>
                 </ul>
                 <div class="tabs__content block main active">
                     <h2 class="admin-content__title">Настройки</h2>
@@ -121,8 +122,6 @@
                             <button class="admin-button">Сохранить</button>
                         </div>
                     </form>
-                </div>
-                <div>
                 </div>
                 <div class="tabs__content block faq">
                     <h2 class="admin-content__title">FAQ</h2>
@@ -359,6 +358,45 @@
                             </li>
                         @endforeach
                     </ul>
+                </div>
+                <div class="tabs__content block banner">
+                    <h3>Баннер</h3>
+                    <form class="admin-form__flex aling-items-end" action="{{ route('banner.edit') }}" method="post"
+                        enctype="multipart/form-data">
+                        @csrf
+                        <label class="admin-label">
+                            <span>Текст баннера</span>
+                            <input class="admin-input" type="text" name="text">
+                            @error('text')
+                                <span class="error">{{ $message }}</span>
+                            @enderror
+                        </label>
+                        <label class="admin-label">
+                            <span>Картинка</span>
+                            <input class="admin-input" type="file" name="icon"
+                                accept="image/png, image/gif, image/jpeg, image/svg">
+                            @error('icon')
+                                <span class="error">{{ $message }}</span>
+                            @enderror
+                        </label>
+                        <label class="admin-label">
+                            <span>Текст кнопки</span>
+                            <input class="admin-input" type="text" name="button_text">
+                            @error('button_text')
+                                <span class="error">{{ $message }}</span>
+                            @enderror
+                        </label>
+                        <label class="admin-label">
+                            <span>Ссылка кнопки</span>
+                            <input class="admin-input" type="text" name="button_link">
+                            @error('button_link')
+                                <span class="error">{{ $message }}</span>
+                            @enderror
+                        </label>
+                        <span>
+                            <button class="admin-button" style="position: relative;top:-16px;">Сохранить</button>
+                        </span>
+                    </form>
                 </div>
             </div>
 

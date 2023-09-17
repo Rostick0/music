@@ -24,6 +24,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RelationshipPlaylistController;
 use App\Http\Controllers\RemoveClaimController;
 use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\SiteBannerController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\SiteFaqController;
 use App\Http\Controllers\SiteMenuController;
@@ -140,14 +141,15 @@ Route::group(['prefix' => 'admin'], function ($router) {
         Route::post('delete/{id}', [SitePageController::class, 'destroy'])->name('site_page.delete');
     });
 
-    Route::group(['prefix' => 'components'], function ($router) {
-        Route::get('list', [ComponentController::class, 'index'])->name('component.list');
-        Route::get('create', [ComponentController::class, 'create'])->name('component.create');
-        Route::post('create', [ComponentController::class, 'store']);
-        Route::get('{id}', [ComponentController::class, 'edit'])->name('component.edit');
-        Route::post('{id}', [ComponentController::class, 'update']);
-        Route::post('delete/{id}', [ComponentController::class, 'destroy'])->name('component.delete');
-    });
+    Route::post('banner', [SiteBannerController::class, 'update'])->name('banner.edit');
+    // Route::group(['prefix' => 'components'], function ($router) {
+    //     Route::get('list', [ComponentController::class, 'index'])->name('component.list');
+    //     Route::get('create', [ComponentController::class, 'create'])->name('component.create');
+    //     Route::post('create', [ComponentController::class, 'store']);
+    //     Route::get('{id}', [ComponentController::class, 'edit'])->name('component.edit');
+    //     Route::post('{id}', [ComponentController::class, 'update']);
+    //     Route::post('delete/{id}', [ComponentController::class, 'destroy'])->name('component.delete');
+    // });
 
     Route::get('notices', [NoticeController::class, 'index'])->name('notices');
 
