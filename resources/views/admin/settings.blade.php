@@ -26,7 +26,6 @@
                                         <span
                                             class="admin-file-upload__name">{{ $site->logo ? 'Загружено' : 'Загрузить файл' }}</span>
                                     </span>
-
                                 </span>
                                 @error('logo')
                                     <span class="error">{{ $message }}</span>
@@ -366,29 +365,38 @@
                         @csrf
                         <label class="admin-label">
                             <span>Текст баннера</span>
-                            <input class="admin-input" type="text" name="text">
+                            <input class="admin-input" type="text" name="text" value="{{ $banner->text }}">
                             @error('text')
                                 <span class="error">{{ $message }}</span>
                             @enderror
                         </label>
                         <label class="admin-label">
                             <span>Картинка</span>
-                            <input class="admin-input" type="file" name="icon"
-                                accept="image/png, image/gif, image/jpeg, image/svg">
+                            <span class="admin-file-upload">
+                                <input class="admin-file-upload__input" type="file" name="icon"
+                                    accept="image/png, image/gif, image/jpeg, image/svg+xml"
+                                    value="{{ old('icon') ?? $banner->icon }}">
+                                <span class="admin-input">
+                                    <span
+                                        class="admin-file-upload__name">{{ $banner->icon ? 'Загружено' : 'Загрузить файл' }}</span>
+                                </span>
+                            </span>
                             @error('icon')
                                 <span class="error">{{ $message }}</span>
                             @enderror
                         </label>
                         <label class="admin-label">
                             <span>Текст кнопки</span>
-                            <input class="admin-input" type="text" name="button_text">
+                            <input class="admin-input" type="text" name="button_text"
+                                value="{{ $banner->button_text }}">
                             @error('button_text')
                                 <span class="error">{{ $message }}</span>
                             @enderror
                         </label>
                         <label class="admin-label">
                             <span>Ссылка кнопки</span>
-                            <input class="admin-input" type="text" name="button_link">
+                            <input class="admin-input" type="text" name="button_link"
+                                value="{{ $banner->button_link }}">
                             @error('button_link')
                                 <span class="error">{{ $message }}</span>
                             @enderror

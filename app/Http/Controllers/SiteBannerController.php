@@ -17,7 +17,6 @@ class SiteBannerController extends Controller
 
         $old = app('banner');
         $icon = $old?->icon;
-        dd($old);  
 
         $update_date = [...$validated, 'icon' => $icon];
 
