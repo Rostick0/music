@@ -125,7 +125,7 @@ class SitePageController extends Controller
         @section("seo_description", $site_page["seo_description"])
         
         @section(' . "'html'" . ')
-        ' . $request->content . '
+        ' . htmlspecialchars_decode($request->content) . '
         @endsection';
 
         if ($old_page->path != $request->path) {

@@ -1,12 +1,12 @@
 @extends('layout.front.index')
 
-@section('seo_title', 'Sing in')
+@section('seo_title', 'Sign in')
 
 @section('html')
     <div class="container auth">
         <form class="auth-form" action="{{ url()->current() }}" method="post">
             @csrf
-            <div class="auth-form__title">Sing in</div>
+            <div class="auth-form__title">Sign in</div>
             @if (Session::has('success'))
                 <div class="auth-form__success success">{{ Session::get('success') }}</div>
             @endif
@@ -26,10 +26,10 @@
                     @enderror
                 </label>
             </div>
-            <button class="button-gradient auth-form__button">Sing in</button>
+            <button class="button-gradient auth-form__button">Sign in</button>
             <div class="auth-form__bottom">
                 <span>Have an account?&nbsp;</span>
-                <a class="auth-form__link" href="{{ route('register') }}">Sing up</a>
+                <a class="auth-form__link" href="{{ route('register') }}">Sign up</a>
                 or
                 <a class="auth-form__link" href="{{ route('password.email') }}">Recovery</a>
             </div>

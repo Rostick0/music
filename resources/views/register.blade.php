@@ -1,12 +1,12 @@
 @extends('layout.front.index')
 
-@section('seo_title', 'Sing up')
+@section('seo_title', 'Sign up')
 
 @section('html')
     <div class="container auth">
         <form class="auth-form auth-form-register" action="{{ url()->current() }}" method="post">
             @csrf
-            <div class="auth-form__title">Sing up</div>
+            <div class="auth-form__title">Sign up</div>
             <div class="auth-form__inputs auth-form-register__inputs">
                 <label class="label">
                     <span>Name*</span>
@@ -55,10 +55,10 @@
                     <input class="input-form" type="password" name="password_confirmation" required />
                 </label>
             </div>
-            <button class="admin-button auth-form__button auth-form-register__button">Sing up</button>
+            <button class="admin-button auth-form__button auth-form-register__button">Sign up</button>
             <div class="auth-form__bottom">
                 <span>Don't have an account?&nbsp;</span>
-                <a class="auth-form__link" href="{{ route('login') }}">Sing in</a>
+                <a class="auth-form__link" href="{{ route('login') }}">Sign in</a>
             </div>
         </form>
     </div>

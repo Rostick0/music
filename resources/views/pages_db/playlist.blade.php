@@ -1,15 +1,13 @@
 @extends('layout.front.index')
 
-@section('php')
-    @php
-        $playlist = App\Http\Controllers\FrontPlaylistController::getById($id);
-    @endphp
-@endsection
-
 @section('seo_title', $site_page?->seo_title)
 @section('seo_description', $site_page?->seo_description)
 
 @section('html')
+    @php
+        $playlist = App\Http\Controllers\FrontPlaylistController::getById($id);
+    @endphp
+
     <section class="section-page track">
         <div class="track__top">
             <div class="container">

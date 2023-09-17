@@ -1,17 +1,13 @@
 @extends('layout.front.index')
 
-@section('php')
-    @php
-        $music_kit = App\Http\Controllers\FrontMusicKitController::getById($id);
-        $artist_name = App\Models\MusicArtist::find($music_kit->music_artist_id)->name;
-        $music_list = App\Http\Controllers\FrontMusicKitController::getSimilar($music_kit->id);
-    @endphp
-@endsection
-
 @section('seo_title', $site_page?->seo_title)
 @section('seo_description', $site_page?->seo_description)
 
 @section('html')
+    @php
+        $music_kit = App\Http\Controllers\FrontMusicKitController::getById($id);
+        $music_list = App\Http\Controllers\FrontMusicKitController::getSimilar($music_kit->id);
+    @endphp
     <section class="section-page track">
         <div class="track__top">
             <div class="container">

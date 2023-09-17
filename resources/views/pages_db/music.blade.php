@@ -1,16 +1,13 @@
 @extends('layout.front.index')
 
-@section('php')
-    @php
-        $music = App\Http\Controllers\FrontMusicController::getById($id);
-        $music_list = App\Http\Controllers\FrontMusicController::getSimilar($id);
-    @endphp
-@endsection
-
 @section('seo_title', $site_page?->seo_title)
 @section('seo_description', $site_page?->seo_description)
 
 @section('html')
+    @php
+        $music = App\Http\Controllers\FrontMusicController::getById($id);
+        $music_list = App\Http\Controllers\FrontMusicController::getSimilar($id);
+    @endphp
     <section class="section-page track">
         <div class="track__top">
             <div class="container">

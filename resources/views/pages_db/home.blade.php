@@ -1,24 +1,15 @@
 @extends('layout.front.index')
 
-@section('php')
-    @php
-        $genres = App\Models\Genre::all();
-        $moods = App\Models\Mood::all();
-        $themes = App\Models\Theme::all();
-        $instruments = App\Models\Instrument::all();
-        $music_controller = new App\Http\Controllers\MusicController();
-        $music_list = $music_controller->search($request, '');
-        $playlist_controller = new App\Http\Controllers\PlaylistController();
-        $playlist_list = $playlist_controller->search(null, '');
-    @endphp
-@endsection
-
 @section('seo_title', $site_page?->seo_title)
 @section('seo_description', $site_page?->seo_description)
 
 @section('html')
     <x-main-banner />
 
+    @php
+        $playlist_controller = new App\Http\Controllers\PlaylistController();
+        $playlist_list = $playlist_controller->search(null, '');
+    @endphp
     <section class="section section-main playlist">
         <div class="container">
             <h2 class="section-title playlist__title">Playlists</h2>
@@ -57,7 +48,7 @@
                     </div>
                     <ul class="select__list">
                         <li class="select__item" data-id="">None</li>
-                        @foreach ($genres as $genre)
+                        @foreach (App\Models\Genre::all() as $genre)
                             <li class="select__item" data-id="{{ $genre->id }}">{{ $genre->name }}</li>
                         @endforeach
                     </ul>
@@ -88,7 +79,7 @@
                     </div>
                     <ul class="select__list">
                         <li class="select__item" data-id="">None</li>
-                        @foreach ($moods as $mood)
+                        @foreach (App\Models\Mood::all() as $mood)
                             <li class="select__item" data-id="{{ $mood->id }}">{{ $mood->name }}</li>
                         @endforeach
                     </ul>
@@ -119,7 +110,7 @@
                     </div>
                     <ul class="select__list">
                         <li class="select__item" data-id="">None</li>
-                        @foreach ($themes as $theme)
+                        @foreach (App\Models\Theme::all() as $theme)
                             <li class="select__item" data-id="{{ $theme->id }}">{{ $theme->name }}</li>
                         @endforeach
                     </ul>
@@ -150,7 +141,7 @@
                     </div>
                     <ul class="select__list">
                         <li class="select__item" data-id="">None</li>
-                        @foreach ($instruments as $instrument)
+                        @foreach (App\Models\Instrument::all() as $instrument)
                             <li class="select__item" data-id="{{ $instrument->id }}">{{ $instrument->name }}</li>
                         @endforeach
                     </ul>
@@ -187,6 +178,10 @@
                     </ul>
                 </div>
             </form>
+            @php
+                $music_controller = new App\Http\Controllers\MusicController();
+                $music_list = $music_controller->search($request, '');
+            @endphp
             <x-tracks_list :music_list="[...$music_list]" />
             <a class="button-white-border button__all tracks__all" href="/tracks">Show more</a>
     </section>

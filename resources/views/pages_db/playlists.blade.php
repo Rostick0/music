@@ -1,17 +1,5 @@
 @extends('layout.front.index')
 
-@section('php')
-    @php
-        $genres = App\Models\Genre::all();
-        $moods = App\Models\Mood::all();
-        $themes = App\Models\Theme::all();
-        $instruments = App\Models\Instrument::all();
-        
-        $playlist_controller = new App\Http\Controllers\PlaylistController();
-        $playlist_list = $playlist_controller->search($request, '');
-    @endphp
-@endsection
-
 @section('seo_title', $site_page?->seo_title)
 @section('seo_description', $site_page?->seo_description)
 
@@ -46,7 +34,7 @@
                     </div>
                     <ul class="select__list">
                         <li class="select__item" data-id="">None</li>
-                        @foreach ($genres as $genre)
+                        @foreach (App\Models\Genre::all() as $genre)
                             <li class="select__item" data-id="{{ $genre->id }}">{{ $genre->name }}</li>
                         @endforeach
                     </ul>
@@ -77,7 +65,7 @@
                     </div>
                     <ul class="select__list">
                         <li class="select__item" data-id="">None</li>
-                        @foreach ($moods as $mood)
+                        @foreach (App\Models\Mood::all() as $mood)
                             <li class="select__item" data-id="{{ $mood->id }}">{{ $mood->name }}</li>
                         @endforeach
                     </ul>
@@ -108,7 +96,7 @@
                     </div>
                     <ul class="select__list">
                         <li class="select__item" data-id="">None</li>
-                        @foreach ($themes as $theme)
+                        @foreach (App\Models\Theme::all() as $theme)
                             <li class="select__item" data-id="{{ $theme->id }}">{{ $theme->name }}</li>
                         @endforeach
                     </ul>
@@ -139,12 +127,16 @@
                     </div>
                     <ul class="select__list">
                         <li class="select__item" data-id="">None</li>
-                        @foreach ($instruments as $instrument)
+                        @foreach (App\Models\Instrument::all() as $instrument)
                             <li class="select__item" data-id="{{ $instrument->id }}">{{ $instrument->name }}</li>
                         @endforeach
                     </ul>
                 </div>
             </form>
+            @php
+                $playlist_controller = new App\Http\Controllers\PlaylistController();
+                $playlist_list = $playlist_controller->search($request, '');
+            @endphp
             <x-playlists_list :playlist_list="[...$playlist_list]" />
             {{ $playlist_list->appends(Request::all())->links('vendor.front-pagination') }}
         </div>

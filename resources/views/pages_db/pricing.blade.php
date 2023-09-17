@@ -39,8 +39,8 @@
                     @endforeach
                 </ul>
                 <div class="pricing__buttons">
-                    <a class="button-white pricing__button" href="/register">Sing up</a>
-                    <a class="button-gradient pricing__button" href="/login">Sing in</a>
+                    <a class="button-white pricing__button" href="/register">Sign up</a>
+                    <a class="button-gradient pricing__button" href="/login">Sign in</a>
                 </div>
             </div>
         </div>
