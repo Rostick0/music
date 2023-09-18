@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\MusicUploadController;
+use App\Models\Favorite;
 use App\Models\Music;
 use App\Models\RelationshipInstrument;
 use App\Models\RelationshipMood;
@@ -43,6 +44,10 @@ class MusicObserver
         RelationshipMood::where($where_sql)->delete();
         RelationshipTheme::where($where_sql)->delete();
         RelationshipInstrument::where($where_sql)->delete();
+        Favorite::where([
+            ['type', '=', 'music'],
+            ['type_id', '=', $music->id]
+        ]);
     }
 
     /**

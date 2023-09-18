@@ -1,11 +1,5 @@
 @extends('layout.front.index')
 
-@section('php')
-    @php
-        $subscription_types = App\Models\SubscriptionType::all();
-    @endphp
-@endsection
-
 @section('seo_title', $site_page?->seo_title)
 @section('seo_description', $site_page?->seo_description)
 
@@ -15,12 +9,12 @@
             <div class="pricing__container">
                 <h1 class="section-title-big pricing__title">Pricing plan</h1>
                 <ul class="pricing__list">
-                    @foreach ($subscription_types as $subscription_type)
+                    @foreach (App\Models\SubscriptionType::all() as $subscription_type)
                         <li class="pricing__item pricing-item">
                             <div class="pricing-item__block">
                                 <div class="pricing-item__title">{{ $subscription_type->name }}</div>
-                                <div class="pricing-item__info">{{ $subscription_type->price }},
-                                    {!! $subscription_type->description ?? '' !!}</div>
+                                <div class="pricing-item__price">{{ $subscription_type->price }} $</div>
+                                <div class="pricing-item__info">{!! $subscription_type->description ?? '' !!}</div>
                                 <form action="https://unitpay.ru/pay/441707-c74ca" method="post">
                                     <input type="hidden" name="account" value="demo">
                                     <input type="hidden" name="sum" value="{{ $subscription_type->price }}">

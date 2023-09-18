@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Http\Controllers\MusicUploadController;
+use App\Models\Favorite;
 use App\Models\MusicKit;
 
 class MusicKitObserver
@@ -29,6 +30,10 @@ class MusicKitObserver
     public function deleted(MusicKit $musicKit): void
     {
         MusicUploadController::destroy($musicKit->link, 'music_kit');
+        Favorite::where([
+            ['type', '=', 'music_kit'],
+            ['type_id', '=', $musicKit->id]
+        ]);
     }
 
     /**

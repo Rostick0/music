@@ -3,11 +3,17 @@
 namespace App\Providers;
 
 use App\Models\Feedback;
+use App\Models\Music;
+use App\Models\MusicKit;
+use App\Models\MusicPart;
 use App\Models\Playlist;
 use App\Models\RemoveClaim;
 use App\Models\Subscription;
 use App\Models\User;
 use App\Observers\FeedbackObserver;
+use App\Observers\MusicKitObserver;
+use App\Observers\MusicObserver;
+use App\Observers\MusicPartObserver;
 use App\Observers\PlaylistObserver;
 use App\Observers\RemoveClaimObserver;
 use App\Observers\SubscriptionObserver;
@@ -40,6 +46,9 @@ class EventServiceProvider extends ServiceProvider
         Subscription::observe(SubscriptionObserver::class);
         Feedback::observe(FeedbackObserver::class);
         Playlist::observe(PlaylistObserver::class);
+        Music::observe(MusicObserver::class);
+        MusicKit::observe(MusicKitObserver::class);
+        MusicPart::observe(MusicPartObserver::class);
     }
 
     /**
