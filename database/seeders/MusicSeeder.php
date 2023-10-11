@@ -38,13 +38,13 @@ class MusicSeeder extends Seeder
     ];
 
     private $moods = [
-        'Радость',
-        'Грусть'
+        1,
+        2
     ];
 
     private $instruments = [
-        'Гитара',
-        'Барабан'
+        1,
+        2
     ];
 
     private $themes = [
@@ -78,8 +78,8 @@ class MusicSeeder extends Seeder
             ]);
 
             RelationshipGenreController::createAndDeleteRelationship($this->genres[$i], $music->id, 'music');
-            RelationshipInstrumentController::createAndDeleteRelationship($this->instruments[$i], $music->id, 'music');
-            RelationshipMoodController::createAndDeleteRelationship($this->moods[$i], $music->id, 'music');
+            // RelationshipInstrumentController::createAndDeleteRelationship($this->instruments[$i], $music->id, 'music');
+            // RelationshipMoodController::createAndDeleteRelationship($this->moods[$i], $music->id, 'music');
             RelationshipThemeController::createAndDeleteRelationship($this->themes[$i], $music->id, 'music');
         }
     }

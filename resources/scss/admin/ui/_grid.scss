@@ -128,4 +128,11 @@
             grid-template-columns: auto 1.35fr 1.65fr .5fr 152px;
         }
     }
+
+    &-account {
+        &__titles,
+        &__content_item {
+            grid-template-columns: auto .5fr 2fr .5fr;
+        }
+    }
 }

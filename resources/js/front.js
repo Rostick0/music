@@ -105,7 +105,7 @@ const editPagination = (pagination, links_html) => {
     const musicItems = [];
     const musicList = [];
     const headerFavoriteCount = document.querySelector('.header__favorite_count');
-    let favoriteCount = isNaN(+headerFavoriteCount.textContent) === true ? 0 : +headerFavoriteCount.textContent;
+    let favoriteCount = isNaN(+headerFavoriteCount?.textContent) === true ? 0 : +headerFavoriteCount?.textContent;
     let activeMusic = null;
 
     if (player && playerVolume) {

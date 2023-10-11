@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\ClientAccountController;
 use App\Http\Controllers\ClientRemoveClaimController;
 use App\Http\Controllers\ClientStatisticController;
 use App\Http\Controllers\ClientSubscriptionController;
@@ -199,6 +201,8 @@ Route::group(['prefix' => 'admin'], function ($router) {
         Route::post('edit/{id}', [ThemeController::class, 'update']);
         Route::post('delete/{id}', [ThemeController::class, 'destroy'])->name('theme.delete');
     });
+
+    Route::get('account_list', [AccountController::class, 'index'])->name('account.list');
 });
 
 Route::group(['prefix' => 'client', 'middleware' => 'auth'], function ($router) {
@@ -209,6 +213,9 @@ Route::group(['prefix' => 'client', 'middleware' => 'auth'], function ($router) 
         Route::get('create', [ClientRemoveClaimController::class, 'create'])->name('client.remove_claim.create');
         Route::post('create', [ClientRemoveClaimController::class, 'store']);
     });
+
+    Route::get('youtube', [ClientAccountController::class, 'edit'])->name('client.youtube.edit');
+    Route::post('youtube', [ClientAccountController::class, 'update']);
 
     Route::get('profile_edit', [ClientUserController::class, 'edit'])->name('client.profile_edit');
     Route::post('profile_edit', [ClientUserController::class, 'update']);

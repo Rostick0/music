@@ -55,6 +55,9 @@
             <li class="admin-aside__navigation_item">
                 <a class="admin-aside__navigation_link{{ Request::segment(2) === 'instrument' ? ' _active' : '' }}" href="{{ route('instrument.list') }}">Инструменты</a>
             </li>
+            <li class="admin-aside__navigation_item">
+                <a class="admin-aside__navigation_link{{ Request::segment(2) === 'account' ? ' _active' : '' }}" href="{{ route('account.list') }}">Аккаунты</a>
+            </li>
         </ul>
     </nav>
 </aside>

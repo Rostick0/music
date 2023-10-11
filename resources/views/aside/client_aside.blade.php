@@ -14,6 +14,9 @@
                 <a class="admin-aside__navigation_link" href="{{ route('client.remove_claim.list') }}">Удаление
                     копирайта</a>
             </li>
+            <li class="admin-aside__navigation_item{{ Request::segment(2) === 'client' ? ' _active' : '' }}">
+                <a class="admin-aside__navigation_link" href="{{ route('client.youtube.edit') }}">Ютуб аккаунт</a>
+            </li>
         </ul>
     </nav>
 </aside>

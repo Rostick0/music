@@ -31,7 +31,6 @@ class PlaylistSeeder extends Seeder
             'relationship_playlist' => [
                 'music_id' => 1
             ],
-            'mood' => 2
         ],
     ];
     public function run(): void
@@ -48,14 +47,6 @@ class PlaylistSeeder extends Seeder
                     'type_id' => $playlist->id,
                     'type' => 'playlist',
                     'genre_id' => $item['genre']
-                ]);
-            }
-
-            if (isset($item['mood'])) {
-                RelationshipMood::create([
-                    'type_id' => $playlist->id,
-                    'type' => 'playlist',
-                    'mood_id' => $item['mood']
                 ]);
             }
         }

@@ -174,7 +174,7 @@
                         <li class="select__item" data-id="">All durations</li>
                         <li class="select__item" data-id="max_time=00:00:30">Short</li>
                         <li class="select__item" data-id="min_time=00:00:30&max_time=00:01:00">Medium</li>
-                        <li class="select__item" data-id="min_time=1:00">Long</li>
+                        <li class="select__item" data-id="min_time=00:01:00">Long</li>
                     </ul>
                 </div>
             </form>
