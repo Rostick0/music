@@ -58,6 +58,9 @@
             <li class="admin-aside__navigation_item">
                 <a class="admin-aside__navigation_link{{ Request::segment(2) === 'account' ? ' _active' : '' }}" href="{{ route('account.list') }}">Аккаунты</a>
             </li>
+            <li class="admin-aside__navigation_item">
+                <a class="admin-aside__navigation_link{{ Request::segment(2) === 'story' ? ' _active' : '' }}" href="{{ route('story.list') }}">История загрузки</a>
+            </li>
         </ul>
     </nav>
 </aside>

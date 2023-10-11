@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClientStoryController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\MusicController;
 use App\Http\Controllers\FrontMusicKitController;
@@ -37,6 +38,7 @@ Route::group(['prefix' => 'favorite', 'middleware' => 'json.response'], function
     Route::post('delete', [FavoriteController::class, 'destroy']);
 });
 
-Route::get('test', function ($request) {
-    return response()->json(auth());
-});
+Route::post('story', [ClientStoryController::class, 'store'])->middleware('json.response');
+// Route::get('test', function ($request) {
+//     return response()->json(auth());
+// });

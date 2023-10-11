@@ -35,6 +35,7 @@ use App\Http\Controllers\SiteSettingController;
 use App\Http\Controllers\SlideController;
 use App\Http\Controllers\SliderSettingController;
 use App\Http\Controllers\StatisticController;
+use App\Http\Controllers\StoryController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\SubscriptionTypeController;
 use App\Http\Controllers\ThemeController;
@@ -203,6 +204,8 @@ Route::group(['prefix' => 'admin'], function ($router) {
     });
 
     Route::get('account_list', [AccountController::class, 'index'])->name('account.list');
+
+    Route::get('story_list', [StoryController::class, 'index'])->name('story.list');
 });
 
 Route::group(['prefix' => 'client', 'middleware' => 'auth'], function ($router) {

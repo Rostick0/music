@@ -15,10 +15,24 @@ export const myFetch = (url, options = {}) => {
     return fetch(url, {
         ...other,
         headers: {
+            ...headers,
             Authorization: bearerToken,
             'X-CSRF-TOKEN': csrfToken
         }
     })
+}
+
+const createStory = (typeId, type) => {
+    return myFetch('/api/story', {
+        headers: {
+            "Content-Type": "application/json",
+        },
+        method: 'POST',
+        body: JSON.stringify({
+            type_id: typeId,
+            type
+        })
+    });
 }
 
 function isElementInViewport(el) {
@@ -321,6 +335,14 @@ const editPagination = (pagination, links_html) => {
     const trackItem = item => {
         const trackItemAudio = item.querySelector('.track-item__audio');
         const dataMusic = item.getAttribute('data-music');
+
+        const download = item.querySelector('.track-item__download');
+
+        download.onclick = () => {
+            createStory(item.getAttribute('data-id'), item.getAttribute('data-type')).then(res => {
+                return res.json()
+            });
+        }
 
         const wavesurfer = WaveSurfer.create({
             backend: 'MediaElement',
@@ -641,7 +663,6 @@ const editPagination = (pagination, links_html) => {
                     myFetch('/api/music' + covertUrl)
                         .then(res => {
                             if (!res?.ok) return;
-
                             return res.json()
                         })
                         .then(res => {
@@ -833,3 +854,4 @@ const editPagination = (pagination, links_html) => {
             });
     }
 })();
+
