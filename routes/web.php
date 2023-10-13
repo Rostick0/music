@@ -3,8 +3,10 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\ClientAccountController;
+use App\Http\Controllers\ClientMusicController;
 use App\Http\Controllers\ClientRemoveClaimController;
 use App\Http\Controllers\ClientStatisticController;
+use App\Http\Controllers\ClientStoryController;
 use App\Http\Controllers\ClientSubscriptionController;
 use App\Http\Controllers\ClientUserController;
 use App\Http\Controllers\ComponentController;
@@ -203,9 +205,9 @@ Route::group(['prefix' => 'admin'], function ($router) {
         Route::post('delete/{id}', [ThemeController::class, 'destroy'])->name('theme.delete');
     });
 
-    Route::get('account_list', [AccountController::class, 'index'])->name('account.list');
+    Route::get('account/list', [AccountController::class, 'index'])->name('account.list');
 
-    Route::get('story_list', [StoryController::class, 'index'])->name('story.list');
+    Route::get('story/list', [StoryController::class, 'index'])->name('story.list');
 });
 
 Route::group(['prefix' => 'client', 'middleware' => 'auth'], function ($router) {
@@ -217,8 +219,18 @@ Route::group(['prefix' => 'client', 'middleware' => 'auth'], function ($router) 
         Route::post('create', [ClientRemoveClaimController::class, 'store']);
     });
 
-    Route::get('youtube', [ClientAccountController::class, 'edit'])->name('client.youtube.edit');
-    Route::post('youtube', [ClientAccountController::class, 'update']);
+    Route::group(['prefix' => 'account'], function ($router) {
+        Route::get('list', [ClientAccountController::class, 'index'])->name('client.account.list');
+        Route::get('create', [ClientAccountController::class, 'create'])->name('client.account.create');
+        Route::post('create', [ClientAccountController::class, 'store']);
+        Route::get('edit/{id}', [ClientAccountController::class, 'edit'])->name('client.account.edit');
+        Route::post('edit/{id}', [ClientAccountController::class, 'update']);
+        Route::post('delete/{id}', [ClientAccountController::class, 'destroy'])->name('client.account.delete');
+    });
+
+    Route::get('story/list', [ClientStoryController::class, 'index'])->name('client.story.list');
+
+    Route::get('music/list', [ClientMusicController::class, 'index'])->name('client.music.list');
 
     Route::get('profile_edit', [ClientUserController::class, 'edit'])->name('client.profile_edit');
     Route::post('profile_edit', [ClientUserController::class, 'update']);

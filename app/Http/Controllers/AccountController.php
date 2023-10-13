@@ -12,9 +12,7 @@ class AccountController extends Controller
     {
         $accounts = Account::orderByDesc('id');
 
-        if ($request->email) $accounts->whereHas('user', function (Builder $query) use ($request) {
-            $query->where('email', 'like', '%' . $request->email . '%');
-        });
+        if ($request->title) $accounts->where('title', 'like', '%' . $request->title . '%');
 
         $accounts = $accounts->paginate(app('site')->count_admin ?? 20);
 

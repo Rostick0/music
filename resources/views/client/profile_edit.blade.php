@@ -5,7 +5,7 @@
         @csrf
         <div class="admin-form__flex">
             <label class="admin-label">
-                <span>Имя*</span>
+                <span>Name*</span>
                 <input class="admin-input" type="text" name="name" maxlength="255" value="{{ old('name') ?? $user->name }}"
                     required>
                 @error('name')
@@ -13,7 +13,7 @@
                 @enderror
             </label>
             <label class="admin-label">
-                <span>Фамилия*</span>
+                <span>Surname*</span>
                 <input class="admin-input" type="text" name="surname" maxlength="255"
                     value="{{ old('surname') ?? $user->surname }}" required>
                 @error('surname')
@@ -23,7 +23,7 @@
         </div>
         <div class="admin-form__flex">
             <label class="admin-label">
-                <span>Эл. почта*</span>
+                <span>E-mail*</span>
                 <input class="admin-input" type="text" name="email" maxlength="255"
                     value="{{ old('email') ?? $user->email }}" required>
                 @error('email')
@@ -31,7 +31,7 @@
                 @enderror
             </label>
             <label class="admin-label">
-                <span>Телефон</span>
+                <span>Phone</span>
                 <input class="admin-input" type="tel" name="telephone" maxlength="255"
                     value="{{ old('telephone') ?? $user->telephone }}">
                 @error('telephone')
@@ -40,7 +40,7 @@
             </label>
         </div>
         <div class="admin-delete__buttons">
-            <button class="admin-button">Изменить</button>
+            <button class="admin-button">Edit</button>
         </div>
     </form>
     <br>
@@ -49,7 +49,7 @@
         @csrf
         <div class="admin-form__flex">
             <label class="admin-label">
-                <span>Текущий пароль*</span>
+                <span>Current password*</span>
                 <input class="admin-input" type="password" name="old_password" maxlength="255" required>
                 @error('name')
                     <span class="error">{{ $message }}</span>
@@ -58,14 +58,14 @@
         </div>
         <div class="admin-form__flex">
             <label class="admin-label">
-                <span>Новый пароль*</span>
+                <span>New password*</span>
                 <input class="admin-input" type="text" name="password" maxlength="255" required>
                 @error('surname')
                     <span class="error">{{ $message }}</span>
                 @enderror
             </label>
             <label class="admin-label">
-                <span>Подтвердите пароль*</span>
+                <span>Confirm password*</span>
                 <input class="admin-input" type="text" name="password_confirmation" maxlength="255" required>
                 @error('email')
                     <span class="error">{{ $message }}</span>
@@ -73,7 +73,7 @@
             </label>
         </div>
         <div class="admin-delete__buttons">
-            <button class="admin-button">Изменить</button>
+            <button class="admin-button">Edit</button>
         </div>
     </form>
 @endsection

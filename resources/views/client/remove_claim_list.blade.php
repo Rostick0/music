@@ -2,7 +2,7 @@
 
 @section('html')
     <a class="admin-button admin-button-add" href="{{ route('client.remove_claim.create') }}">
-        <span>Создать</span>
+        <span>Create</span>
         <span class="admin-button-add__plus">+</span>
     </a>
     {{-- <form class="admin-filter" action="{{ url()->current() }}">
@@ -21,10 +21,10 @@
     <div class="admin-grid">
         <div class="admin-grid__titles admin-grid-remove-claim-client__titles">
             <div>ID</div>
-            <div>Музыка</div>
-            <div>Ссылка</div>
-            <div>Статус</div>
-            <div>Дата</div>
+            <div>Music</div>
+            <div>Link</div>
+            <div>Status</div>
+            <div>Date</div>
         </div>
         <ul class="admin-grid__content admin-grid-remove-claim-client__content">
             @foreach ($remove_claims as $remove_claim)

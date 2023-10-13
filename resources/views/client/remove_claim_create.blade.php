@@ -5,10 +5,10 @@
         @csrf
         <div class="admin-form__flex">
             <div class="admin-label" tabindex="0">
-                <span>Название музыки*</span>
+                <span>Name music*</span>
                 <div class="admin-select-async music-select-async">
                     <input class="admin-input admin-select-async__input" type="text" name="music_name"
-                        placeholder="Введите название" required>
+                        placeholder="Name music" required>
                     <input class="admin-select-async__value" name="music_id" value="{{ old('music_id') }}" required hidden>
                     <ul class="admin-select-async__list">
                         @foreach ($music_list as $music_item)
@@ -24,7 +24,7 @@
         <div class="admin-form__flex">
             <label class="admin-label">
                 <label class="admin-label">
-                    <span>Ссылка*</span>
+                    <span>Link*</span>
                     <input class="admin-input" type="text" name="link" value="{{ old('link') }}" maxlength="255"
                         required>
                     @error('link')
@@ -34,7 +34,7 @@
             </label>
         </div>
         <div>
-            <button class="admin-button">Отправить</button>
+            <button class="admin-button">Send</button>
         </div>
     </form>
 @endsection

@@ -4,8 +4,8 @@
     <div class="">
         <form class="admin-filter" action="{{ url()->current() }}">
             <div class="admin-filter__inputs">
-                <input class="admin-input" type="search" placeholder="E-mail" name="email"
-                    value={{ Request::get('email') }}>
+                <input class="admin-input" type="search" placeholder="Название" name="title"
+                    value={{ Request::get('title') }}>
             </div>
             <div class="admin-filter__buttons">
                 <button class="admin-button admin-filter__button">Поиск</button>
@@ -16,7 +16,7 @@
     <div class="admin-grid">
         <div class="admin-grid__titles admin-grid-account__titles">
             <div>ID</div>
-            <div>E-mail</div>
+            <div>Название</div>
             <div>Аккаунт url</div>
             <div>Дата создание</div>
         </div>
@@ -24,7 +24,7 @@
             @foreach ($accounts as $account)
                 <li class="admin-grid__content_item admin-grid-account__content_item">
                     <div>{{ $account->id }}</div>
-                    <div>{{ $account->user->email }}</div>
+                    <div>{{ $account->name }}</div>
                     <div>{{ $account->url }}</div>
                     <div>{{ $account->created_at }}</div>
                 </li>

@@ -7,41 +7,78 @@ use Illuminate\Http\Request;
 
 class ClientAccountController extends Controller
 {
-    public function edit()
+    public function index(Request $request)
     {
-        $account = Account::firstWhere([
+        $accounts = Account::where('user_id', auth()->id())->orderByDesc('id');
+
+        if ($request->title) $accounts->where('title', 'like', '%' . $request->title . '%');
+
+        $accounts = $accounts->paginate(app('site')->count_admin ?? 20);
+
+        return view('client.account_list', [
+            'accounts' => $accounts
+        ]);
+    }
+
+    public function create()
+    {
+        return view('client.account_create');
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required',
+            'url' => 'required',
+        ]);
+
+        $account = Account::create([
+            ...$validated,
             'user_id' => auth()->id()
         ]);
 
-        // dd($account);
+        return redirect()->route('client.account.edit', [
+            'id' => $account->id
+        ]);
+    }
 
-        return view('client.account', [
+    public function edit(int $id)
+    {
+        $account = Account::where([
+            'id' => $id,
+            'user_id' => auth()->id()
+        ])->firstOrFail();
+
+        return view('client.account_edit', [
             'account' => $account
         ]);
     }
 
 
-    public function update(Request $request)
+    public function update(Request $request, int $id)
     {
         $validated = $request->validate([
-            'url' => [
-                \Illuminate\Validation\Rule::unique('accounts', 'url')->ignore(auth()->id(), 'user_id')
-            ]
+            'name' => 'required',
+            'url' => 'required'
         ]);
 
-        $account = Account::firstWhere([
+        $account = Account::where([
+            'id' => $id,
             'user_id' => auth()->id()
-        ]);
+        ])->firstOrFail();
 
-        if ($account) {
-            $account->update($validated);
-        } else {
-            $account = Account::create([
-                ...$validated,
-                'user_id' => auth()->id()
-            ]);
-        }
+        $account->update($validated);
 
         return redirect()->back();
+    }
+
+    public function destroy($id)
+    {
+        Account::where([
+            'id' => $id,
+            'user_id' => auth()->id()
+        ])->delete();
+
+        return redirect()->route('client.account.list');
     }
 }

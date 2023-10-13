@@ -5,7 +5,7 @@
         <div class="admin-filter__inputs">
             <details class="admin-details">
                 <summary class="admin-details__summary">
-                    <div class="admin-input">Тип подписки</div>
+                    <div class="admin-input">Subscription type</div>
                 </summary>
                 <div class="admin-details__content">
                     @foreach ($subscription_types as $subscription_type)
@@ -20,17 +20,17 @@
             </details>
         </div>
         <div class="admin-filter__buttons">
-            <button class="admin-button admin-filter__button">Поиск</button>
-            <a class="admin-button-red admin-filter__button" href="{{ url()->current() }}">Сброс</a>
+            <button class="admin-button admin-filter__button">Search</button>
+            <a class="admin-button-red admin-filter__button" href="{{ url()->current() }}">Reset</a>
         </div>
     </form>
     <div class="admin-grid">
         <div class="admin-grid__titles admin-grid-subscription-client__titles">
             <div>ID</div>
-            <div>Тип</div>
+            <div>Type</div>
             <div>Автопродление</div>
-            <div>Дата начала</div>
-            <div>Дата Окончания</div>
+            <div>Date create</div>
+            <div>Date end</div>
         </div>
         <ul class="admin-grid__content admin-grid-subscription-client__content">
             @foreach ($subscriptions as $subscription)
