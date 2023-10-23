@@ -45,10 +45,6 @@ class DeletedController extends Controller
 
         $data = DB::table($request->type)->where('id', $request->type_id)->first();
 
-        if ($request->type == 'users') {
-            RemoveClaim::where('user_id', $request->type_id)->delete();
-        }
-
         if (!$data) return abort(404);
 
         $type = $request->type;

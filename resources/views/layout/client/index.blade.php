@@ -8,8 +8,8 @@
             <div class="admin-content__burger">
                 <span></span>
             </div>
-            <a class="admin-content__top_item" href="{{ route('client.profile_edit') }}">Личный кабинет</a>
-            <a class="admin-content__top_item" href="{{ route('logout') }}">Выход</a>
+            <a class="admin-content__top_item" href="{{ route('client.profile_edit') }}">Personal account</a>
+            <a class="admin-content__top_item" href="{{ route('logout') }}">Exit</a>
         </div>
         <div class="admin-content__inner">
             @yield('html')

@@ -84,12 +84,16 @@ class UserController extends Controller
     {
         $user_email = User::find($id)->email;
         $collect = collect(RemoveClaim::where('user_id', $id)->get());
+        
         $collect->each(function ($item) {
-            Notice::where('type_id', $item->id)->where('type', 'remove_сlaim')->delete();
+            Notice::where([
+                ['type_id', '=', $item->id],
+                ['type', '=', 'remove_сlaim']
+            ])->delete();
             RemoveClaim::destroy($item->id);
         });
 
-        $user = User::destroy($id);
+        User::destroy($id);
 
         return redirect(route('deleted', [
             'text' => 'Пользователь удален ' . $user_email
