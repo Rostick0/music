@@ -18,8 +18,8 @@ class RemoveClaimObserver
             'type_id' => $removeClaim->id,
         ]);
 
-        Mail::raw('Поступила новая заявка remove claim ссылка: ' . $removeClaim->link . ', на музыку: ' . $removeClaim->music->title .', ' . $removeClaim->music->artist->artist_name, function ($m) {
-            $m->to(app('site')?->email, '')->subject('Новое сообщение с сайта');
+        Mail::raw('Поступила новая заявка remove claim'.PHP_EOL.'Cсылка на канал:' . $removeClaim->link .PHP_EOL. 'Трек: ' . $removeClaim->music->title .', ' . $removeClaim->music->artist->artist_name, function ($m) {
+            $m->to(app('site')?->email, '')->subject('Заявка на remove claim');
         });
     }
 

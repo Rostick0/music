@@ -12,10 +12,10 @@ class FeedbackObserver
      */
     public function created(Feedback $feedback): void
     {
-        $text = 'Обратная связь, E-mail: ' . $feedback->email . ', тема: ' . $feedback->theme . ', сообщение: ' . $feedback->message;
+        $text = 'Обратная связь'.PHP_EOL.' E-mail: ' . $feedback->email .PHP_EOL.'Тема: ' . $feedback->theme .PHP_EOL.'Сообщение: ' . $feedback->message;
 
         Mail::raw($text, function ($m) {
-            $m->to(app('site')?->email, '')->subject('новое сообщение с сайта');
+            $m->to(app('site')?->email, '')->subject('Новое сообщение с сайта');
         });
     }
 

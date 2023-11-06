@@ -146,9 +146,6 @@ const editPagination = (pagination, links_html) => {
 
         if (favoriteCreate) {
             myFetch('/api/favorite/create', {
-                headers: {
-                    "Content-Type": "application/json",
-                },
                 method: "POST",
                 body: new FormData(this)
             }).then(res => res.json())
@@ -163,9 +160,6 @@ const editPagination = (pagination, links_html) => {
         }
 
         myFetch('/api/favorite/delete', {
-            headers: {
-                "Content-Type": "application/json",
-            },
             method: "POST",
             body: new FormData(this)
         }).then(res => res.json())
