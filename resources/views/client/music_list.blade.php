@@ -171,6 +171,6 @@
     </section>
 
     <x-player />
-
+    <script src="/js/libs/wavesurfer.js"></script>
     @vite(['resources/js/front.js'])
 @endsection
