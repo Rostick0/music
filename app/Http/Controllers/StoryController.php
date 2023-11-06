@@ -12,7 +12,7 @@ class StoryController extends Controller
      */
     public function index()
     {
-        $stories = Story::paginate(app('site')->count_admin ?? 20);
+        $stories = Story::with(['user', 'audio'])->paginate(app('site')->count_admin ?? 20);
 
         return view('admin.story_list', [
             'stories' => $stories

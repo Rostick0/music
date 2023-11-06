@@ -4,8 +4,7 @@
     <div class="">
         <form class="admin-filter" action="{{ url()->current() }}">
             <div class="admin-filter__inputs">
-                <input class="admin-input" type="search" placeholder="E-mail" name="email"
-                    value={{ Request::get('email') }}>
+                <input class="admin-input" type="search" placeholder="E-mail" name="email" value={{ Request::get('email') }}>
             </div>
             <div class="admin-filter__buttons">
                 <button class="admin-button admin-filter__button">Поиск</button>
@@ -25,9 +24,9 @@
             @foreach ($stories as $story)
                 <li class="admin-grid__content_item admin-grid-story__content_item">
                     <div>{{ $story->id }}</div>
-                    <div>{{ $story->type }}</div>
+                    <div>{{ $story->audio }}</div>
                     <div>{{ $story->type_id }}</div>
-                    <div>{{ $story?->user_id }}</div>
+                    <div>{{ $story?->user ? $story?->user->name . ' ' . $story?->user->surname : '-' }}</div>
                     <div>{{ $story->created_at }}</div>
                 </li>
             @endforeach
