@@ -16,7 +16,7 @@
     <div class="admin-grid">
         <div class="admin-grid__titles admin-grid-story__titles">
             <div>ID</div>
-            <div>Type</div>
+            <div>Music</div>
             <div>Type id</div>
             <div>ID user</div>
             <div>Date create</div>
@@ -25,9 +25,9 @@
             @foreach ($stories as $story)
                 <li class="admin-grid__content_item admin-grid-story__content_item">
                     <div>{{ $story->id }}</div>
-                    <div>{{ $story->type }}</div>
-                    <div>{{ $story->type_id }}</div>
-                    <div>{{ $story?->user_id }}</div>
+                    <div>{{ $story?->storysable?->title ?? '-' }}</div>
+                    <div>{{ $story?->storysable?->id }}</div>
+                    <div>{{ $story?->user ? $story?->user->name . ' ' . $story?->user->surname : '-' }}</div>
                     <div>{{ $story->created_at }}</div>
                 </li>
             @endforeach

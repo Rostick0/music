@@ -17,6 +17,7 @@ class ClientStoryController extends Controller
     public function index()
     {
         $stories = Story::where('user_id', auth()->id())
+            ->orderByDesc('id')
             ->paginate(app('site')->count_admin ?? 20);
 
         return view('client.story_list', [
