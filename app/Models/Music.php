@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Music extends Model
 {
@@ -57,5 +58,10 @@ class Music extends Model
     public function artist(): BelongsTo
     {
         return $this->belongsTo(MusicArtist::class, 'music_artist_id', 'id')->select('music_artists.name as artist_name');
+    }
+
+    public function stories(): MorphMany
+    {
+        return $this->morphMany(Story::class, 'storysable');
     }
 }

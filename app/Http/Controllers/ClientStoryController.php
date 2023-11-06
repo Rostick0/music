@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Music;
+use App\Models\MusicKit;
+use App\Models\MusicPart;
 use App\Models\Story;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -27,15 +30,27 @@ class ClientStoryController extends Controller
      */
     public function store(Request $request)
     {
+        $audio = null;
         $validated = $request->validate([
             'type_id' => 'required|numeric',
             'type' => 'required|in:music,music_kit,music_part',
         ]);
 
-        $data = Story::create([
-            ...$validated,
+        if ($request->type === 'music') {
+            $audio = Music::findOrFail($request->type_id);
+        } else if ($request->type === 'music_kit') {
+            $audio = MusicKit::findOrFail($request->type_id);
+        } else {
+            $audio = MusicPart::findOrFail($request->type_id);
+        }
+
+        $data = $audio->stories()->create([
             'user_id' => auth()->id(),
         ]);
+        // $data = Story::create([
+        //     ...$validated,
+        //     'user_id' => auth()->id(),
+        // ]);
 
         return new JsonResponse([
             'data' => $data

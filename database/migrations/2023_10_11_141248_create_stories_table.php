@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('stories', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id')->nullable();
-            $table->integer('type_id');
-            $table->enum('type', ['music','music_kit','music_part'])->nullable();
+            $table->morphs('storysable');
             $table->timestamps();
         });
     }
