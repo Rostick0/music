@@ -1,37 +1,24 @@
 @extends('layout.client.index')
 
 @section('html')
-    <div class="">
-        <form class="admin-filter" action="{{ url()->current() }}">
-            <div class="admin-filter__inputs">
-                <input class="admin-input" type="search" placeholder="E-mail" name="email"
-                    value={{ Request::get('email') }}>
-            </div>
-            <div class="admin-filter__buttons">
-                <button class="admin-button admin-filter__button">Search</button>
-                <a class="admin-button-red admin-filter__button" href="{{ url()->current() }}">Reset</a>
-            </div>
-        </form>
-    </div>
-    <div class="admin-grid">
-        <div class="admin-grid__titles admin-grid-story__titles">
-            <div>ID</div>
-            <div>Music</div>
-            <div>Type id</div>
-            <div>ID user</div>
-            <div>Date create</div>
-        </div>
-        <ul class="admin-grid__content admin-grid-story__content">
-            @foreach ($stories as $story)
-                <li class="admin-grid__content_item admin-grid-story__content_item">
-                    <div>{{ $story->id }}</div>
-                    <div>{{ $story?->storysable?->title ?? '-' }}</div>
-                    <div>{{ $story?->storysable?->id }}</div>
-                    <div>{{ $story?->user ? $story?->user->name . ' ' . $story?->user->surname : '-' }}</div>
-                    <div>{{ $story->created_at }}</div>
-                </li>
-            @endforeach
-        </ul>
-        {{ $stories->appends(Request::all())->links('vendor.admin-pagination') }}
-    </div>
+    @vite(['resources/scss/front/index.scss'])
+
+    <section class="section-page tracks">
+        <div class="container">
+            <ul class="tracks__list">
+                @foreach ($stories as $story)
+                    @if ($story->storysable_type === 'App\Models\Music')
+                        <x-music_item :music_item="$story?->storysable" type="music" />
+                    @endif
+                    @if ($story->storysable_type === 'App\Models\MusicKit')
+                        <x-music_item :music_item="$story?->storysable" type="music_kit" />
+                    @endif
+                @endforeach
+            </ul>
+            {{ $stories->appends(Request::all())->links('vendor.front-pagination') }}
+    </section>
+
+    <x-player />
+    <script src="/js/libs/wavesurfer.js"></script>
+    @vite(['resources/js/front.js'])
 @endsection

@@ -6,7 +6,7 @@
 <li class="tracks__item track-item track-item__{{ $music_item->id }} track-item__type_{{ $type }}"
     data-id="{{ $music_item->id }}"
     data-music="{{ App\Http\Controllers\MusicDownloadController::getLink($music_item->link, $music_item->link_demo, $music_item->is_free, $type) }}"
-    data-title="{{ $music_item->title }}" data-artist="{{ $music_item->music_artist_name }}"
+    data-title="{{ $music_item->title }}" data-artist="{{ $music_item->artist->artist_name }}"
     data-favorite="{{ $music_item_favorite }}" data-type="{{ $type }}"
     data-time="{{ App\Http\Controllers\MusicController::timeFullOrDemo($music_item->duration, $music_item->duration_demo, $music_item->is_free) }}">
     <a class="track-item__info" href="/{{ $type }}/{{ $music_item->id }}">
@@ -18,7 +18,7 @@
                 <div class="track-item__free">FREE</div>
             @endif
             <div class="track-item__name">{{ $music_item->title }}</div>
-            <div class="track-item__artist">{{ $music_item->music_artist_name }}</div>
+            <div class="track-item__artist">{{ $music_item->artist->artist_name }}</div>
         </div>
     </a>
     <div class="track-item__timer">
