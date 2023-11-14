@@ -61,6 +61,9 @@
             <li class="admin-aside__navigation_item">
                 <a class="admin-aside__navigation_link{{ Request::segment(2) === 'story' ? ' _active' : '' }}" href="{{ route('story.list') }}">История скачиваний</a>
             </li>
+             <li class="admin-aside__navigation_item">
+                <a class="admin-aside__navigation_link{{ Request::segment(2) === 'pdf' ? ' _active' : '' }}" href="{{ route('pdf.edit') }}">Лицензия</a>
+            </li>
         </ul>
     </nav>
 </aside>

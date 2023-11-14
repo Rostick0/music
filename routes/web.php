@@ -211,6 +211,8 @@ Route::group(['prefix' => 'admin'], function ($router) {
     Route::get('story/list', [StoryController::class, 'index'])->name('story.list');
 
     Route::group(['prefix' => 'pdf'], function () {
+        Route::get('/edit', [PDFController::class, 'edit'])->name('pdf.edit');
+        Route::post('/edit', [PDFController::class, 'update']);
         Route::get('/preview', [PDFController::class, 'preview'])->name('pdf.preview');
         Route::get('/generate/{id}', [PDFController::class, 'generate'])->name('pdf.generate');
     });

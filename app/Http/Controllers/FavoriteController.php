@@ -141,8 +141,6 @@ class FavoriteController extends Controller
 
         if (!$user_id) return count(FavoriteController::getLocalFavorite());
 
-        // dd(Favorite::where('user_id', $user_id)->get());
-
         return Favorite::where('user_id', $user_id)->count();
     }
 
