@@ -9,18 +9,23 @@ class PDFController extends Controller
 {
     public function preview()
     {
+        $license = License::findOrFail(1);
+
+        $user = $license->user;
+
+        dd($user->subscription_last->subscription_type);
+        $pdf = PDF::loadView('pdf.license', compact('license'));
+
         return view('pdf.license');
     }
 
     public function generate(int $id)
     {
-        // $license = License::findOrFail($id);
+        $license = License::findOrFail($id);
 
-        // if (auth()->id() == $license->user_id) return abort(404);
+        if (auth()->id() == $license->user_id) return abort(404);
 
-        // $user = auth()->user();
-
-        $pdf = PDF::loadView('pdf.license');
+        $pdf = PDF::loadView('pdf.license', compact('license'));
 
         return ($pdf->stream()->header('charset', 'utf-8'));
     }

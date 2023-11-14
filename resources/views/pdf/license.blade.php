@@ -10,7 +10,7 @@
         * {
             font-family: DejaVu Sans !important;
         }
-        
+
         ul {
             list-style: none;
             padding: 0;
@@ -19,34 +19,34 @@
 </head>
 
 <body>
-    Licensee: Имя Клиента
+    Licensee: {{ $license->user->name }}
     <br>
-    Email: Почта Клиента
+    Email: {{ $license->user->email }}
     <br>
-    Date of Purchase: дата покупки пакета
+    Date of Purchase: {{ $license->user->subscription_last->created_at }}
     <br>
     <br>
-    This document certifies the purchase of the following license under the subscription package [Тут название
-    приобретенного клиента пакета] as per your request dated (далее дата приобретенного пакета)
+    This document certifies the purchase of the following license under the subscription package
+    {{ $license->user->subscription_last->subscription_type->name }} as per your request dated
+    {{ $license->user->subscription_last->created_at }}
     <ul>
         <li>
             <strong>- License Type:</strong> Commercial Use License
         </li>
         <li>
-            <strong>- Track Title:</strong> Название Трека
+            <strong>- Track Title:</strong> {{ $license->licensesable->title }}
         </li>
         <li>
-            <strong>- Track Author:</strong> Имя Автора
+            <strong>- Track Author:</strong> {{ $license->licensesable?->artist?->artist_name }}
         </li>
         <li>
-            <strong>- Track URL:</strong>
-            [https://topaudio.store/track/true-moments-trailer](https://topaudio.store/track/true-moments-trailer)
+            <strong>- Track URL:</strong> {{ 'https://topaudio.store/music/' . $license->licensesable->id }}
         </li>
         <li>
-            <strong>- Track ID:</strong> нумерация трека который присваивается ему при загрузке на сайт
+            <strong>- Track ID:</strong> {{ $license->licensesable->id }}
         </li>
         <li>
-            <strong>- Unique License Code:</strong> Тут уникальный код трека
+            <strong>- Unique License Code:</strong> {{ $license->code }}
         </li>
     </ul>
     License Terms and Conditions:
