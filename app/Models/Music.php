@@ -64,4 +64,9 @@ class Music extends Model
     {
         return $this->morphMany(Story::class, 'storysable');
     }
+
+    public function licenses(): MorphMany
+    {
+        return $this->morphMany(License::class, 'licensesable');
+    }
 }

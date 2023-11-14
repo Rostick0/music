@@ -28,7 +28,8 @@ class DatabaseSeeder extends Seeder
             SubscriptionTypeSeeder::class,
             SubscriptionSeeder::class,
             // NoticeSeeder::class,
-            SlideSeeder::class
+            SlideSeeder::class,
+            LicenseSeeder::class,
         ]);
     }
 }

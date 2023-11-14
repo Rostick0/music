@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('licenses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('music_id')->references('id')->on('music')->onDelete('cascade');
+            $table->morphs('licensesable');
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('name')->unique();
+            $table->string('code')->unique();
             $table->timestamps();
         });
     }
