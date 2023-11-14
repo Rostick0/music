@@ -4,7 +4,7 @@ namespace App\Utils;
 
 class GeneratorString
 {
-    public static function generateRandomCode($length = 15, $characters = 'ABCDE1234567890'): string
+    public static function randomCode($length = 15, $characters = 'ABCDE1234567890'): string
     {
         $code = '';
         $charsCount = strlen($characters);

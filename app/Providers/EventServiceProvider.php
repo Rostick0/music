@@ -8,6 +8,7 @@ use App\Models\MusicKit;
 use App\Models\MusicPart;
 use App\Models\Playlist;
 use App\Models\RemoveClaim;
+use App\Models\Story;
 use App\Models\Subscription;
 use App\Models\User;
 use App\Observers\FeedbackObserver;
@@ -16,6 +17,7 @@ use App\Observers\MusicObserver;
 use App\Observers\MusicPartObserver;
 use App\Observers\PlaylistObserver;
 use App\Observers\RemoveClaimObserver;
+use App\Observers\StoryObserver;
 use App\Observers\SubscriptionObserver;
 use App\Observers\UserObserver;
 use Illuminate\Auth\Events\Registered;
@@ -49,6 +51,7 @@ class EventServiceProvider extends ServiceProvider
         Music::observe(MusicObserver::class);
         MusicKit::observe(MusicKitObserver::class);
         MusicPart::observe(MusicPartObserver::class);
+        Story::observe(StoryObserver::class);
     }
 
     /**
