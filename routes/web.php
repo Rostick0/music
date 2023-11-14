@@ -23,6 +23,7 @@ use App\Http\Controllers\MusicController;
 use App\Http\Controllers\MusicKitController;
 use App\Http\Controllers\MusicPartController;
 use App\Http\Controllers\NoticeController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RelationshipPlaylistController;
@@ -208,6 +209,11 @@ Route::group(['prefix' => 'admin'], function ($router) {
     Route::get('account/list', [AccountController::class, 'index'])->name('account.list');
 
     Route::get('story/list', [StoryController::class, 'index'])->name('story.list');
+
+    Route::group(['prefix' => 'pdf'], function () {
+        Route::get('/preview', [PDFController::class, 'preview'])->name('pdf.preview');
+        Route::get('/generate/{id}', [PDFController::class, 'generate'])->name('pdf.generate');
+    });
 });
 
 Route::group(['prefix' => 'client', 'middleware' => 'auth'], function ($router) {
@@ -235,6 +241,9 @@ Route::group(['prefix' => 'client', 'middleware' => 'auth'], function ($router) 
     Route::get('profile_edit', [ClientUserController::class, 'edit'])->name('client.profile_edit');
     Route::post('profile_edit', [ClientUserController::class, 'update']);
     Route::post('profile_password', [ClientUserController::class, 'password_update'])->name('client.profile_password');
+
+    Route::group(['prefix' => 'pdf'], function () {
+    });
 });
 
 Route::group(['middleware' => 'guest'], function ($router) {
