@@ -6,6 +6,7 @@ use App\Models\License;
 use App\Models\Story;
 use App\Utils\GeneratorString;
 use App\Utils\LicenseCode;
+use Carbon\Carbon;
 
 class StoryObserver
 {
@@ -14,6 +15,16 @@ class StoryObserver
      */
     public function created(Story $story): void
     {
+        if ($story->storysable_type == 'App\Models\MusicPart') return;
+
+        if (!isset($story->user->subscription_last?->date_end)) return;
+        
+        $date = $story->user->subscription_last?->date_end;
+        $now = Carbon::now();
+        $dateTime = Carbon::parse($date);
+
+        if (!$dateTime->gt($now)) return;
+
         $code = LicenseCode::normalize(
             LicenseCode::unic()
         );

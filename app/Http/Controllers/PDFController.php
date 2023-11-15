@@ -32,10 +32,9 @@ class PDFController extends Controller
         return back();
     }
 
-    public function preview()
+    public function preview(int $id)
     {
-        $license = License::findOrFail(1);;
-        $user = $license->user;
+        $license = License::findOrFail($id);;
         // dd($license);
 
         // dd($user->subscription_last->subscription_type);

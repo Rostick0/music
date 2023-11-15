@@ -2,7 +2,6 @@
 
 @section('html')
     <div class="admin-content__inner_gap">
-
         <form class="admin-form" action="{{ url()->current() }}" method="post">
             @csrf
             <div class="admin-form__flex">

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\ClientAccountController;
+use App\Http\Controllers\ClientLicenseController;
 use App\Http\Controllers\ClientMusicController;
 use App\Http\Controllers\ClientRemoveClaimController;
 use App\Http\Controllers\ClientStatisticController;
@@ -16,6 +17,7 @@ use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\InstrumentController;
+use App\Http\Controllers\LicnseController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\MoodController;
@@ -210,10 +212,14 @@ Route::group(['prefix' => 'admin'], function ($router) {
 
     Route::get('story/list', [StoryController::class, 'index'])->name('story.list');
 
+    Route::group(['prefix' => 'license'], function () {
+        Route::get('/list', [LicnseController::class, 'index'])->name('license.list');
+    });
+
     Route::group(['prefix' => 'pdf'], function () {
         Route::get('/edit', [PDFController::class, 'edit'])->name('pdf.edit');
         Route::post('/edit', [PDFController::class, 'update']);
-        Route::get('/preview', [PDFController::class, 'preview'])->name('pdf.preview');
+        Route::get('/preview/{id}', [PDFController::class, 'preview'])->name('pdf.preview');
         Route::get('/generate/{id}', [PDFController::class, 'generate'])->name('pdf.generate');
     });
 });
@@ -239,6 +245,9 @@ Route::group(['prefix' => 'client', 'middleware' => 'auth'], function ($router) 
     Route::get('story/list', [ClientStoryController::class, 'index'])->name('client.story.list');
 
     Route::get('music/list', [ClientMusicController::class, 'index'])->name('client.music.list');
+
+    Route::get('license/list', [ClientLicenseController::class, 'index'])->name('client.license.list');
+    Route::get('license/{id}', [ClientLicenseController::class, 'show'])->name('client.license.show');
 
     Route::get('profile_edit', [ClientUserController::class, 'edit'])->name('client.profile_edit');
     Route::post('profile_edit', [ClientUserController::class, 'update']);

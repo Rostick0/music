@@ -12,6 +12,8 @@ class License extends Model
     use HasFactory;
 
     protected $fillable = [
+        'licensesable_type',
+        'licensesable_id',
         'user_id',
         'code',
     ];

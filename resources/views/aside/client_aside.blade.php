@@ -22,6 +22,10 @@
             <li class="admin-aside__navigation_item{{ Request::segment(2) === 'music' ? ' _active' : '' }}">
                 <a class="admin-aside__navigation_link" href="{{ route('client.music.list') }}">Music</a>
             </li>
+            <li class="admin-aside__navigation_item">
+                <a class="admin-aside__navigation_link{{ Request::segment(2) === 'license' ? ' _active' : '' }}"
+                    href="{{ route('client.license.list') }}">Licenses</a>
+            </li>
         </ul>
     </nav>
 </aside>

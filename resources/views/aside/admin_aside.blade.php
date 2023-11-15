@@ -12,7 +12,8 @@
                     href="{{ route('music.list') }}">Треки</a>
             </li>
             <li class="admin-aside__navigation_item">
-                <a class="admin-aside__navigation_link{{ Request::segment(2) === 'music_kit' ? ' _active' : '' }}" href="{{ route('music_kit.list') }}">Треки music kit</a>
+                <a class="admin-aside__navigation_link{{ Request::segment(2) === 'music_kit' ? ' _active' : '' }}"
+                    href="{{ route('music_kit.list') }}">Треки music kit</a>
             </li>
             <li class="admin-aside__navigation_item">
                 <a class="admin-aside__navigation_link{{ Request::segment(2) === 'playlist' ? ' _active' : '' }}"
@@ -23,46 +24,63 @@
                     href="{{ route('statistic') }}">Статистика</a>
             </li>
             <li class="admin-aside__navigation_item">
-                <a class="admin-aside__navigation_link{{ Request::segment(2) === 'subscriptions' ? ' _active' : '' }}" href="{{ route('subscriptions') }}">Подписки</a>
+                <a class="admin-aside__navigation_link{{ Request::segment(2) === 'subscriptions' ? ' _active' : '' }}"
+                    href="{{ route('subscriptions') }}">Подписки</a>
             </li>
             <li class="admin-aside__navigation_item">
-                <a class="admin-aside__navigation_link{{ Request::segment(2) === 'subscription_type' ? ' _active' : '' }}" href="{{ route('subscription_type.list') }}">Виды подписок</a>
+                <a class="admin-aside__navigation_link{{ Request::segment(2) === 'subscription_type' ? ' _active' : '' }}"
+                    href="{{ route('subscription_type.list') }}">Виды подписок</a>
             </li>
             <li class="admin-aside__navigation_item">
-                <a class="admin-aside__navigation_link{{ Request::segment(2) === 'users' ? ' _active' : '' }}" href="{{ route('user.list') }}">Клиенты</a>
+                <a class="admin-aside__navigation_link{{ Request::segment(2) === 'users' ? ' _active' : '' }}"
+                    href="{{ route('user.list') }}">Клиенты</a>
             </li>
             <li class="admin-aside__navigation_item">
-                <a class="admin-aside__navigation_link{{ Request::segment(2) === 'pages' ? ' _active' : '' }}" href="{{ route('page.list') }}">Страницы</a>
+                <a class="admin-aside__navigation_link{{ Request::segment(2) === 'pages' ? ' _active' : '' }}"
+                    href="{{ route('page.list') }}">Страницы</a>
             </li>
             {{-- <li class="admin-aside__navigation_item">
                 <a class="admin-aside__navigation_link{{ Request::segment(2) === 'components' ? ' _active' : '' }}" href="{{ route('component.list') }}">Компоненты</a>
             </li> --}}
             <li class="admin-aside__navigation_item">
-                <a class="admin-aside__navigation_link{{ Request::segment(2) === 'settings' ? ' _active' : '' }}" href="{{ route('settings') }}">Настройки</a>
+                <a class="admin-aside__navigation_link{{ Request::segment(2) === 'settings' ? ' _active' : '' }}"
+                    href="{{ route('settings') }}">Настройки</a>
             </li>
             <li class="admin-aside__navigation_item">
-                <a class="admin-aside__navigation_link{{ Request::segment(2) === 'menu' ? ' _active' : '' }}" href="{{ route('menu.list') }}">Меню</a>
+                <a class="admin-aside__navigation_link{{ Request::segment(2) === 'menu' ? ' _active' : '' }}"
+                    href="{{ route('menu.list') }}">Меню</a>
             </li>
             <li class="admin-aside__navigation_item">
-                <a class="admin-aside__navigation_link{{ Request::segment(2) === 'genre' ? ' _active' : '' }}" href="{{ route('genre.list') }}">Жанры</a>
+                <a class="admin-aside__navigation_link{{ Request::segment(2) === 'genre' ? ' _active' : '' }}"
+                    href="{{ route('genre.list') }}">Жанры</a>
             </li>
             <li class="admin-aside__navigation_item">
-                <a class="admin-aside__navigation_link{{ Request::segment(2) === 'theme' ? ' _active' : '' }}" href="{{ route('theme.list') }}">Темы</a>
+                <a class="admin-aside__navigation_link{{ Request::segment(2) === 'theme' ? ' _active' : '' }}"
+                    href="{{ route('theme.list') }}">Темы</a>
             </li>
             <li class="admin-aside__navigation_item">
-                <a class="admin-aside__navigation_link{{ Request::segment(2) === 'mood' ? ' _active' : '' }}" href="{{ route('mood.list') }}">Настроения</a>
+                <a class="admin-aside__navigation_link{{ Request::segment(2) === 'mood' ? ' _active' : '' }}"
+                    href="{{ route('mood.list') }}">Настроения</a>
             </li>
             <li class="admin-aside__navigation_item">
-                <a class="admin-aside__navigation_link{{ Request::segment(2) === 'instrument' ? ' _active' : '' }}" href="{{ route('instrument.list') }}">Инструменты</a>
+                <a class="admin-aside__navigation_link{{ Request::segment(2) === 'instrument' ? ' _active' : '' }}"
+                    href="{{ route('instrument.list') }}">Инструменты</a>
             </li>
             <li class="admin-aside__navigation_item">
-                <a class="admin-aside__navigation_link{{ Request::segment(2) === 'account' ? ' _active' : '' }}" href="{{ route('account.list') }}">Аккаунты</a>
+                <a class="admin-aside__navigation_link{{ Request::segment(2) === 'account' ? ' _active' : '' }}"
+                    href="{{ route('account.list') }}">Аккаунты</a>
             </li>
             <li class="admin-aside__navigation_item">
-                <a class="admin-aside__navigation_link{{ Request::segment(2) === 'story' ? ' _active' : '' }}" href="{{ route('story.list') }}">История скачиваний</a>
+                <a class="admin-aside__navigation_link{{ Request::segment(2) === 'story' ? ' _active' : '' }}"
+                    href="{{ route('story.list') }}">История скачиваний</a>
             </li>
-             <li class="admin-aside__navigation_item">
-                <a class="admin-aside__navigation_link{{ Request::segment(2) === 'pdf' ? ' _active' : '' }}" href="{{ route('pdf.edit') }}">Лицензия</a>
+            <li class="admin-aside__navigation_item">
+                <a class="admin-aside__navigation_link{{ Request::segment(2) === 'pdf' ? ' _active' : '' }}"
+                    href="{{ route('pdf.edit') }}">Лицензия</a>
+            </li>
+            <li class="admin-aside__navigation_item">
+                <a class="admin-aside__navigation_link{{ Request::segment(2) === 'license' ? ' _active' : '' }}"
+                    href="{{ route('license.list') }}">Лицензии клиентов</a>
             </li>
         </ul>
     </nav>

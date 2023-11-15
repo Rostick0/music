@@ -2,12 +2,12 @@ Licensee: {{ $license->user->name }}
 <br>
 Email: {{ $license->user->email }}
 <br>
-Date of Purchase: {{ $license->user->subscription_last->created_at }}
+Date of Purchase: {{ $license->user->subscription_last?->created_at }}
 <br>
 <br>
 This document certifies the purchase of the following license under the subscription package
-{{ $license->user->subscription_last->subscription_type->name }} as per your request dated
-{{ $license->user->subscription_last->created_at }}
+{{ $license->user->subscription_last?->subscription_type->name }} as per your request dated
+{{ $license->user->subscription_last?->created_at }}
 <ul>
     <li>
         <strong>- License Type:</strong> Commercial Use License
