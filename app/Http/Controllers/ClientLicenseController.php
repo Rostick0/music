@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\License;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 class ClientLicenseController extends Controller
 {
@@ -29,8 +30,10 @@ class ClientLicenseController extends Controller
     {
         $license = License::findOrFail($id);
 
-        if ($license->user_id != auth()->id()) abort(404);
+        // if (auth()->id() != $license->user_id) return abort(404);
 
-        return view('pdf.license', compact('license'));
+        $pdf = PDF::loadView('pdf.license', compact('license'));
+
+        return $pdf->stream($license->code . '.pdf');
     }
 }

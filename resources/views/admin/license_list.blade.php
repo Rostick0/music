@@ -41,7 +41,7 @@
                     <div>{{ $license?->user ? $license?->user?->email : '-' }}</div>
                     <div>{{ $license->created_at }}</div>
                     <a class="admin-button admin-button-edit"
-                        href="{{ route('pdf.preview', [
+                        href="{{ route('pdf.generate', [
                             'id' => $license->id,
                         ]) }}">
                         <svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
