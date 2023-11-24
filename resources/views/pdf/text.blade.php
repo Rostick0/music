@@ -1,5 +1,5 @@
 <div>
-    <img src="https://topaudio.store/storage/upload/image/1696407240.svg" width="80" height="25">
+    <img src="{{ public_path() }}/img/logo_pdf.png" width="80" height="25">
 </div>
 <br>
 <br>
