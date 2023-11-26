@@ -1,5 +1,5 @@
 <div>
-    <img src="{{ public_path() }}/img/logo_pdf.png" width="80" height="25">
+    <img src="{{url($site->logo) }}" width="160" alt="">
 </div>
 <br>
 <br>
