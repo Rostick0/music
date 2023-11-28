@@ -1,5 +1,5 @@
 <div>
-    <img src="{{url($site->logo) }}" width="160" alt="">
+    <img src="https://topaudio.store/storage/upload/image/1701170091.jpeg" width="160" alt="">
 </div>
 <br>
 <br>
