@@ -1,5 +1,7 @@
 .admin-grid {
-    overflow-x: auto;
+    @media (max-width: 1024px) {
+        overflow-x: auto;
+    }
 
     &__titles,
     &__content_item {
@@ -8,7 +10,7 @@
         padding: 8px 4px;
         word-break: break-all;
         overflow-wrap: anywhere;
-        min-width: 1200px;
+        min-width: 800px;
     }
 
     &__titles {
@@ -130,6 +132,7 @@
     }
 
     &-account {
+
         &__titles,
         &__content_item {
             grid-template-columns: auto .5fr 2fr 152px 20px;
@@ -137,6 +140,7 @@
     }
 
     &-story {
+
         &__titles,
         &__content_item {
             grid-template-columns: auto .5fr .5fr .5fr 152px;
@@ -144,6 +148,7 @@
     }
 
     &-license {
+
         &__titles,
         &__content_item {
             grid-template-columns: auto .5fr .5fr .5fr 152px 20px;
