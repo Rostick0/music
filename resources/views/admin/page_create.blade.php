@@ -5,7 +5,7 @@
         @csrf
         <div class="admin-form__flex">
             <label class="admin-label">
-                <span>Название*</span>
+                <span>Page title*</span>
                 <input class="admin-input" type="text" name="name" maxlength="255" value="{{ old('name') }}" required>
                 @error('name')
                     <span class="error">{{ $message }}</span>
@@ -20,7 +20,7 @@
                 @enderror
             </label>
             <label class="admin-label">
-                <span>Путь*</span>
+                <span>Path*</span>
                 <input class="admin-input" type="text" name="path" maxlength="255" value="{{ old('path') }}"
                     required>
                 @error('path')
@@ -33,7 +33,7 @@
                 <input class="admin-checkbox__input" type="checkbox" name="is_active"
                     {{ old('is_active') ? 'checked' : '' }}>
                 <span class="admin-checkbox__icon"></span>
-                <span>Активна?</span>
+                <span>Active?</span>
             </label>
         </div>
         <div class="admin-form__flex">
@@ -54,7 +54,7 @@
         </div>
         <div class="admin-form__flex">
             <label class="admin-label admin-form__flex_long admin-form__flex_100">
-                <span>Контент страницы</span>
+                <span>Page content</span>
                 <textarea class="summernote" name="content" id="content">{{ old('content') }}</textarea>
                 @error('content')
                     <span class="error">{{ $message }}</span>

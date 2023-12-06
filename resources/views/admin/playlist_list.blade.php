@@ -3,14 +3,14 @@
 @section('html')
     <div class="">
         <a class="admin-button admin-button-add" href="{{ route('playlist.create') }}">
-            <span>Добавить</span>
+            <span>Add</span>
             <span class="admin-button-add__plus">+</span>
         </a>
         <form class="admin-filter" action="{{ url()->current() }}">
             <div class="admin-filter__inputs">
                 <details class="admin-details">
                     <summary class="admin-details__summary">
-                        <div class="admin-input">Жанр</div>
+                        <div class="admin-input">Genre</div>
                     </summary>
                     <div class="admin-details__content">
                         @foreach ($genres as $genre)
@@ -25,7 +25,7 @@
                 </details>
                 <details class="admin-details">
                     <summary class="admin-details__summary">
-                        <div class="admin-input">Настроение</div>
+                        <div class="admin-input">Moods</div>
                     </summary>
                     <div class="admin-details__content">
                         @foreach ($moods as $mood)
@@ -40,7 +40,7 @@
                 </details>
                 <details class="admin-details">
                     <summary class="admin-details__summary">
-                        <div class="admin-input">Тема</div>
+                        <div class="admin-input">Theme</div>
                     </summary>
                     <div class="admin-details__content">
                         @foreach ($themes as $theme)
@@ -55,7 +55,7 @@
                 </details>
                 <details class="admin-details">
                     <summary class="admin-details__summary">
-                        <div class="admin-input">Инструменты</div>
+                        <div class="admin-input">Instruments</div>
                     </summary>
                     <div class="admin-details__content">
                         @foreach ($instruments as $instrument)
@@ -72,8 +72,8 @@
                     value={{ Request::get('title') }}>
             </div>
             <div class="admin-filter__buttons">
-                <button class="admin-button admin-filter__button">Поиск</button>
-                <a class="admin-button-red admin-filter__button" href="{{ url()->current() }}">Сброс</a>
+                <button class="admin-button admin-filter__button">Search</button>
+                <a class="admin-button-red admin-filter__button" href="{{ url()->current() }}">Reset</a>
             </div>
         </form>
     </div>
@@ -81,13 +81,13 @@
         <div class="admin-grid__inner">
             <div class="admin-grid__titles admin-grid-playlist__titles">
                 <div>ID</div>
-                <div>Название</div>
-                <div>Жанры</div>
-                <div>Настроения</div>
-                <div>Инструменты</div>
-                <div>Темы</div>
-                <div>Активен?</div>
-                <div>Дата</div>
+                <div>Name</div>
+                <div>Genre</div>
+                <div>Moods</div>
+                <div>Instruments</div>
+                <div>Theme</div>
+                <div>Active?</div>
+                <div>Date</div>
             </div>
             <ul class="admin-grid__content admin-grid-playlist__content">
                 @foreach ($playlists as $playlist)

@@ -8,17 +8,17 @@
                     value={{ Request::get('title') }}>
             </div>
             <div class="admin-filter__buttons">
-                <button class="admin-button admin-filter__button">Поиск</button>
-                <a class="admin-button-red admin-filter__button" href="{{ url()->current() }}">Сброс</a>
+                <button class="admin-button admin-filter__button">Search</button>
+                <a class="admin-button-red admin-filter__button" href="{{ url()->current() }}">Reset</a>
             </div>
         </form>
     </div>
     <div class="admin-grid">
         <div class="admin-grid__titles admin-grid-account__titles">
             <div>ID</div>
-            <div>Название</div>
-            <div>Аккаунт url</div>
-            <div>Дата создание</div>
+            <div>Name</div>
+            <div>Account url</div>
+            <div>Date of creation</div>
         </div>
         <ul class="admin-grid__content admin-grid-account__content">
             @foreach ($accounts as $account)

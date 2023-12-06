@@ -3,31 +3,31 @@
 @section('html')
     <div class="">
         <a class="admin-button admin-button-add" href="{{ route('subscription_type.create') }}">
-            <span>Добавить</span>
+            <span>Add</span>
             <span class="admin-button-add__plus">+</span>
         </a>
         <form class="admin-filter" action="{{ url()->current() }}">
             <div class="admin-filter__inputs">
-                <input class="admin-input" type="search" placeholder="Название" name="name"
+                <input class="admin-input" type="search" placeholder="Name" name="name"
                     value="{{ Request::get('name') }}">
-                <input class="admin-input" type="number" step="0.01" placeholder="Цена от" name="price_min"
+                <input class="admin-input" type="number" step="0.01" placeholder="Price from" name="price_min"
                     value="{{ Request::get('price_min') }}">
-                <input class="admin-input" type="number" step="0.01" placeholder="Цена до" name="price_max"
+                <input class="admin-input" type="number" step="0.01" placeholder="Price up to" name="price_max"
                     value="{{ Request::get('price_max') }}">
             </div>
             <div class="admin-filter__buttons">
-                <button class="admin-button admin-filter__button">Поиск</button>
-                <a class="admin-button-red admin-filter__button" href="{{ url()->current() }}">Сброс</a>
+                <button class="admin-button admin-filter__button">Search</button>
+                <a class="admin-button-red admin-filter__button" href="{{ url()->current() }}">Reset</a>
             </div>
         </form>
     </div>
     <div class="admin-grid">
         <div class="admin-grid__titles admin-grid-subscription_type__titles">
             <div>ID</div>
-            <div>Название</div>
-            <div>Цена</div>
-            <div>Активна</div>
-            <div>Дата начала</div>
+            <div>Name</div>
+            <div>Price</div>
+            <div>Active?</div>
+            <div>Date start</div>
         </div>
         <ul class="admin-grid__content admin-grid-subscription_type__content">
             @foreach ($subscription_types as $subscription_type)

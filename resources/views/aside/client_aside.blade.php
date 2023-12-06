@@ -1,7 +1,7 @@
 <aside class="admin-aside">
     <div class="admin-aside__top">
         <div class="admin-aside__logo">
-            <img src="{{ $site->logo }}" alt="">
+            <img src="{{ $site->logo }}" alt="" style="width:200px">
         </div>
         <div class="admin-aside__burger-close"> </div>
     </div>

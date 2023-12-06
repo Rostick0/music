@@ -6,7 +6,7 @@
         @csrf
         <div class="admin-form__flex">
             <label class="admin-label">
-                <span>Название*</span>
+                <span>Name*</span>
                 <input class="admin-input" type="text" name="name" maxlength="255" value="{{ old('name') ?? $page->name }}"
                     required>
                 @error('name')
@@ -22,7 +22,7 @@
                 @enderror
             </label>
             <label class="admin-label">
-                <span>Путь*</span>
+                <span>Path*</span>
                 <input class="admin-input" type="text" name="path" maxlength="255"
                     value="{{ old('path') ?? $page->path }}" required>
                 @error('path')
@@ -35,12 +35,12 @@
                 <input class="admin-checkbox__input" type="checkbox" name="is_active"
                     {{ old('is_active') ?? $page->is_active ? 'checked' : '' }}>
                 <span class="admin-checkbox__icon"></span>
-                <span>Активна?</span>
+                <span>Active?</span>
             </label>
         </div>
         <div class="admin-form__flex">
             <label class="admin-label">
-                <span>seo title</span>
+                <span>Seo title</span>
                 <input class="admin-input" type="text" name="seo_title"
                     value="{{ old('seo_title') ?? $page->seo_title }}">
                 @error('seo_title')
@@ -57,7 +57,7 @@
         </div>
         <div class="admin-form__flex">
             <div class="admin-label admin-form__flex_long admin-form__flex_100">
-                <span>Контент страницы</span>
+                <span>Page content</span>
                 <textarea class="summernote" name="content" id="content">{!! old('content') ?? $htmlSection($content) !!}</textarea>
                 @error('content')
                     <span class="error">{{ $message }}</span>
@@ -65,12 +65,12 @@
             </div>
         </div>
         <div class="admin-delete__buttons admin-button__margin-top">
-            <button class="admin-button admin-delete__button">Сохранить</button>
+            <button class="admin-button admin-delete__button">Save</button>
             <a class="admin-button-red admin-delete__button"
                 href="{{ route('delete_confirm', [
                     'type' => 'site_pages',
                     'type_id' => $page->id,
-                ]) }}">Удалить</a>
+                ]) }}">Remove</a>
         </div>
     </form>
     <style>

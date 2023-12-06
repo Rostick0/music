@@ -9,7 +9,7 @@
                 <span></span>
             </div>
             <a class="admin-content__top_item" href="{{ route('notices') }}">
-                <span>Уведомления</span>
+                <span>Notices</span>
                 <span class="admin-content__top_alert">
                     @php
                         $count = App\Models\Notice::where('is_read', 0)->count();
@@ -24,8 +24,8 @@
                     </svg>
                 </span>
             </a>
-            <a class="admin-content__top_item" href="{{ route('admin.profile.edit') }}">Личный кабинет</a>
-            <a class="admin-content__top_item" href="{{ route('logout') }}">Выход</a>
+            <a class="admin-content__top_item" href="{{ route('admin.profile.edit') }}">Personal account</a>
+            <a class="admin-content__top_item" href="{{ route('logout') }}">Exit</a>
         </div>
         <div class="admin-content__inner">
             @yield('html')

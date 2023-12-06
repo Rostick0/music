@@ -5,7 +5,7 @@
         @csrf
         <div class="admin-form__flex">
             <label class="admin-label">
-                <span>Исполнитель*</span>
+                <span>Author*</span>
                 <input class="admin-input" type="text" name="music_artists" maxlength="255"
                     value="{{ old('music_artists') }}" required>
                 @error('music_artists')
@@ -13,7 +13,7 @@
                 @enderror
             </label>
             <label class="admin-label">
-                <span>Название*</span>
+                <span>Track name*</span>
                 <input class="admin-input" type="text" name="title" maxlength="255" value="{{ old('title') }}"
                     required>
                 @error('title')
@@ -23,12 +23,12 @@
         </div>
         <div class="admin-form__flex">
             <label class="admin-label">
-                <span>Трэк*</span>
+                <span>Track*</span>
                 <span class="admin-file-upload">
                     <input class="admin-file-upload__input" type="file" name="link" accept=".mp3,.wav"
                         value="{{ old('link') }}" required>
                     <span class="admin-input">
-                        <span class="admin-file-upload__name">Загрузить файл</span>
+                        <span class="admin-file-upload__name">Upload file</span>
                     </span>
                 </span>
                 @error('link')
@@ -36,12 +36,12 @@
                 @enderror
             </label>
             <label class="admin-label">
-                <span>Демо трэк</span>
+                <span>Demo track</span>
                 <span class="admin-file-upload">
                     <input class="admin-file-upload__input" type="file" name="link_demo" accept=".mp3,.wav"
                         value="{{ old('link_demo') }}" required>
                     <span class="admin-input">
-                        <span class="admin-file-upload__name">Загрузить файл</span>
+                        <span class="admin-file-upload__name">Upload file</span>
                     </span>
                 </span>
                 @error('link_demo')
@@ -49,14 +49,14 @@
                 @enderror
             </label>
             <label class="admin-label">
-                <span>Ссылка на паблишер</span>
+                <span>Link to the publisher</span>
                 <input class="admin-input" type="text" name="publisher" maxlength="255" value="{{ old('publisher') }}">
                 @error('publisher')
                     <span class="error">{{ $message }}</span>
                 @enderror
             </label>
             <label class="admin-label">
-                <span>Ссылка на дистрибьютор</span>
+                <span>Link to the distributor</span>
                 <input class="admin-input" type="text" name="distr" maxlength="255" value="{{ old('distr') }}">
                 @error('distr')
                     <span class="error">{{ $message }}</span>
@@ -68,7 +68,7 @@
                 <span>Genres</span>
                 <details class="admin-details">
                     <summary class="admin-details__summary">
-                        <div class="admin-input">Жанры</div>
+                        <div class="admin-input">Genre</div>
                     </summary>
                     <div class="admin-details__content">
                         @foreach ($genres as $genre)
@@ -86,7 +86,7 @@
                 <span>Moods</span>
                 <details class="admin-details">
                     <summary class="admin-details__summary">
-                        <div class="admin-input">Настроение</div>
+                        <div class="admin-input">Mood</div>
                     </summary>
                     <div class="admin-details__content">
                         @foreach ($moods as $mood)
@@ -104,7 +104,7 @@
                 <span>Themes</span>
                 <details class="admin-details">
                     <summary class="admin-details__summary">
-                        <div class="admin-input">Тема</div>
+                        <div class="admin-input">Theme</div>
                     </summary>
                     <div class="admin-details__content">
                         @foreach ($themes as $theme)
@@ -122,7 +122,7 @@
                 <span>Instruments</span>
                 <details class="admin-details">
                     <summary class="admin-details__summary">
-                        <div class="admin-input">Инструмент</div>
+                        <div class="admin-input">Instrument</div>
                     </summary>
                     <div class="admin-details__content">
                         @foreach ($instruments as $instrument)
@@ -142,17 +142,17 @@
                 <input class="admin-checkbox__input" type="checkbox" name="is_active" checked
                     {{ old('is_active') ? 'checked' : '' }}>
                 <span class="admin-checkbox__icon"></span>
-                <span>Активен?</span>
+                <span>Active?</span>
             </label>
             <label class="admin-checkbox">
                 <input class="admin-checkbox__input" type="checkbox" name="is_free" {{ old('is_free') ? 'checked' : '' }}>
                 <span class="admin-checkbox__icon"></span>
-                <span>Бесплатный?</span>
+                <span>Free?</span>
             </label>
         </div>
         <div class="admin-form__flex">
             <div class="admin-label admin-form__flex_100">
-                <span>Описание трека</span>
+                <span>Track description</span>
                 <textarea class="summernote" name="description" id="description">{{ old('description') }}</textarea>
                 @error('description')
                     <span class="error">{{ $message }}</span>
@@ -161,7 +161,7 @@
         </div>
         <div class="admin-form__flex">
             <label class="admin-label">
-                <span>Изображение</span>
+                <span>Image</span>
                 <input class="admin-input" type="file" name="image" value="{{ old('image') }}">
                 @error('image')
                     <span class="error">{{ $message }}</span>
@@ -170,14 +170,14 @@
         </div>
         <div class="admin-form__flex">
             <label class="admin-label">
-                <span>seo title</span>
+                <span>Seo title</span>
                 <input class="admin-input" type="text" name="seo_title" value="{{ old('seo_title') }}">
                 @error('seo_title')
                     <span class="error">{{ $message }}</span>
                 @enderror
             </label>
             <label class="admin-label admin-form__flex_long">
-                <span>seo description</span>
+                <span>Seo description</span>
                 <textarea class="admin-input" type="text" name="seo_description" rows="1">{{ old('seo_description') }}</textarea>
                 @error('seo_description')
                     <span class="error">{{ $message }}</span>
@@ -185,7 +185,7 @@
             </label>
         </div>
         <div class="admin-button__margin-top">
-            <button class="admin-button">Сохранить</button>
+            <button class="admin-button">Save</button>
         </div>
     </form>
     <x-summernote_links></x-summernote_links>

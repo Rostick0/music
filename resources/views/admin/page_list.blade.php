@@ -3,28 +3,28 @@
 @section('html')
     <div class="">
         <a class="admin-button admin-button-add" href="{{ route('page.create') }}">
-            <span>Добавить</span>
+            <span>Add</span>
             <span class="admin-button-add__plus">+</span>
         </a>
         <form class="admin-filter" action="{{ url()->current() }}">
             <div class="admin-filter__inputs">
-                <input class="admin-input" type="search" placeholder="Название" name="name"
+                <input class="admin-input" type="search" placeholder="Page name" name="name"
                     value={{ Request::get('name') }}>
-                <input class="admin-input" type="search" placeholder="Ссылка (Без http и домена)" name="url"
+                <input class="admin-input" type="search" placeholder="url (without http and domain name)" name="url"
                     value={{ Request::get('url') }}>
             </div>
             <div class="admin-filter__buttons">
-                <button class="admin-button admin-filter__button">Поиск</button>
-                <a class="admin-button-red admin-filter__button" href="{{ url()->current() }}">Сброс</a>
+                <button class="admin-button admin-filter__button">Search</button>
+                <a class="admin-button-red admin-filter__button" href="{{ url()->current() }}">Reset</a>
             </div>
         </form>
     </div>
     <div class="admin-grid">
         <div class="admin-grid__titles admin-grid-page__titles">
             <div>ID</div>
-            <div>Название</div>
-            <div>Ссылка</div>
-            <div>Дата</div>
+            <div>Name</div>
+            <div>Url</div>
+            <div>Date</div>
         </div>
         <ul class="admin-grid__content admin-grid-page__content">
             @foreach ($pages as $page)

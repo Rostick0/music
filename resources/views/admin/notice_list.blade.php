@@ -4,13 +4,13 @@
     <div class="admin-grid">
         <div class="admin-grid__titles admin-grid-notice__titles">
             <div>ID</div>
-            <div>Тип</div>
-            <div>Ссылка</div>
-            <div>Статус</div>
-            <div>Имя</div>
+            <div>Type</div>
+            <div>Url</div>
+            <div>Status</div>
+            <div>Name</div>
             <div>Email</div>
-            <div>Музыка</div>
-            <div>Дата</div>
+            <div>Track</div>
+            <div>Date</div>
         </div>
         <ul class="admin-grid__content admin-grid-notice__content">
             @foreach ($notices as $notice)

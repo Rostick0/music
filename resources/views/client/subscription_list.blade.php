@@ -28,7 +28,7 @@
         <div class="admin-grid__titles admin-grid-subscription-client__titles">
             <div>ID</div>
             <div>Type</div>
-            <div>Автопродление</div>
+            <div>Auto-renewal</div>
             <div>Date create</div>
             <div>Date end</div>
         </div>

@@ -10,7 +10,7 @@
             @csrf
             <div class="admin-form__flex">
                 <label class="admin-label">
-                    <span>Название*</span>
+                    <span>Name*</span>
                     <input class="admin-input" type="text" name="title" maxlength="255"
                         value="{{ old('title') ?? $music_part->title }}" required>
                     @error('title')
@@ -20,7 +20,7 @@
             </div>
             <div class="admin-form__flex">
                 <label class="admin-label">
-                    <span>Трэк*</span>
+                    <span>Track*</span>
                     <span class="admin-file-upload">
                         <input class="admin-file-upload__input" type="file" name="link" accept=".mp3,.wav"
                             value="{{ old('link') }}">
@@ -47,7 +47,7 @@
                 @endif
             @endif
             <div class="admin-delete__buttons admin-button__margin-top">
-                <button class="admin-button">Сохранить изменения</button>
+                <button class="admin-button">Save changes</button>
             </div>
         </form>
     </div>

@@ -5,28 +5,28 @@
         <form class="admin-filter" action="{{ url()->current() }}">
             <div class="admin-filter__inputs">
                 <label class="admin-label">
-                    <span>Уникальный код</span>
+                    <span>Track code</span>
                     <input class="admin-input" type="search" name="code" value={{ Request::get('code') }}>
                 </label>
                 <label class="admin-label">
-                    <span>Трек Id</span>
+                    <span>Track Id</span>
                     <input class="admin-input" type="search" name="licensesable_id"
                         value={{ Request::get('licensesable_id') }}>
                 </label>
             </div>
             <div class="admin-filter__buttons">
-                <button class="admin-button admin-filter__button">Поиск</button>
-                <a class="admin-button-red admin-filter__button" href="{{ url()->current() }}">Сброс</a>
+                <button class="admin-button admin-filter__button">Search</button>
+                <a class="admin-button-red admin-filter__button" href="{{ url()->current() }}">Reset</a>
             </div>
         </form>
     </div>
     <div class="admin-grid">
         <div class="admin-grid__titles admin-grid-license__titles">
             <div>ID</div>
-            <div>Название</div>
-            <div>Код</div>
-            <div>Почта пользователя</div>
-            <div>Дата создание</div>
+            <div>Name</div>
+            <div>Code</div>
+            <div>Email</div>
+            <div>Date</div>
         </div>
         <ul class="admin-grid__content admin-grid-license__content">
             @foreach ($licenses as $license)

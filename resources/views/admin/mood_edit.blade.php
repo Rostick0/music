@@ -5,7 +5,7 @@
         @csrf
         <div class="admin-form__flex">
             <label class="admin-label">
-                <span>Название*</span>
+                <span>Name*</span>
                 <input class="admin-input" type="text" name="name" maxlength="255"
                     value="{{ old('name') ?? $mood->name }}" required>
                 @error('name')
@@ -14,7 +14,7 @@
             </label>
         </div>
         <div class="admin-buttons admin-button__margin-top">
-            <button class="admin-button">Изменить</button>
+            <button class="admin-button">Change</button>
         </div>
     </form>
 @endsection

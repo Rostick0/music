@@ -3,26 +3,26 @@
 @section('html')
     <div class="">
         <a class="admin-button admin-button-add" href="{{ route('music_kit.create') }}">
-            <span>Добавить</span>
+            <span>Add Track</span>
             <span class="admin-button-add__plus">+</span>
         </a>
         <form class="admin-filter" action="{{ url()->current() }}">
             <div class="admin-filter__inputs">
                 <label class="admin-label w-100">
-                    <span>Название</span>
-                    <input class="admin-input" type="search" placeholder="Название" name="music_artists"
+                    <span>Track name</span>
+                    <input class="admin-input" type="search" placeholder="Name" name="music_artists"
                         value={{ Request::get('music_artists') }}>
                 </label>
                 <label class="admin-label w-100">
-                    <span>Автор</span>
-                    <input class="admin-input" type="search" placeholder="Автор" name="artists"
+                    <span>Autor</span>
+                    <input class="admin-input" type="search" placeholder="Author" name="artists"
                         value={{ Request::get('artists') }}>
                 </label>
                 <div class="admin-label w-100">
-                    <span>Жанры</span>
+                     <span>Genres</span>
                     <details class="admin-details">
                         <summary class="admin-details__summary">
-                            <div class="admin-input">Жанры</div>
+                            <div class="admin-input">Genres</div>
                         </summary>
                         <div class="admin-details__content">
                             @foreach ($genres as $genre)
@@ -37,10 +37,10 @@
                     </details>
                 </div>
                 <div class="admin-label w-100">
-                    <span>Настроение</span>
+                      <span>Moods</span>
                     <details class="admin-details">
                         <summary class="admin-details__summary">
-                            <div class="admin-input">Настроение</div>
+                            <div class="admin-input">Moods</div>
                         </summary>
                         <div class="admin-details__content">
                             @foreach ($moods as $mood)
@@ -55,10 +55,10 @@
                     </details>
                 </div>
                 <div class="admin-label w-100">
-                    <span>Темы</span>
+                     <span>Themes</span>
                     <details class="admin-details">
                         <summary class="admin-details__summary">
-                            <div class="admin-input">Тема</div>
+                            <div class="admin-input">Theme</div>
                         </summary>
                         <div class="admin-details__content">
                             @foreach ($themes as $theme)
@@ -73,10 +73,10 @@
                     </details>
                 </div>
                 <div class="admin-label w-100">
-                    <span>Инструменты</span>
+                      <span>Instruments</span>
                     <details class="admin-details">
                         <summary class="admin-details__summary">
-                            <div class="admin-input">Инструменты</div>
+                            <div class="admin-input">Instrument</div>
                         </summary>
                         <div class="admin-details__content">
                             @foreach ($instruments as $instrument)
@@ -91,29 +91,29 @@
                     </details>
                 </div>
                 <label class="admin-label w-100">
-                    <span>Минимальное время</span>
+                    <span>Min time</span>
                     <input class="admin-input" type="time" step="1" name="min_time"
                         value={{ Request::get('min_time') }}>
                 </label>
                 <label class="admin-label w-100">
-                    <span>Максимальное время</span>
+                    <span>Max time</span>
                     <input class="admin-input" type="time" step="1" name="max_time" value={{ Request::get('max_time') }}>
                 </label>
             </div>
             <div class="admin-filter__buttons">
-                <button class="admin-button admin-filter__button">Поиск</button>
-                <a class="admin-button-red admin-filter__button" href="{{ url()->current() }}">Сброс</a>
+                <button class="admin-button admin-filter__button">Search</button>
+                <a class="admin-button-red admin-filter__button" href="{{ url()->current() }}">Reset</a>
             </div>
         </form>
     </div>
     <div class="admin-grid">
         <div class="admin-grid__titles admin-grid-music-kit__titles">
             <div>ID</div>
-            <div>Название</div>
-            <div>Ссылка</div>
-            <div>Длительность</div>
-            <div>Активен</div>
-            <div>Дата</div>
+            <div>Name</div>
+            <div>Url</div>
+            <div>Time</div>
+            <div>Active?</div>
+            <div>Date</div
         </div>
         <ul class="admin-grid__content admin-grid-music-kit__content">
             @foreach ($music_kits as $music_kit)

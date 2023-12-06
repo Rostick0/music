@@ -5,21 +5,21 @@
         @csrf
         <div class="admin-form__gird playlist-grid">
             <label class="admin-label">
-                <span>Название*</span>
+                <span>Name*</span>
                 <input class="admin-input" type="text" name="title" maxlength="255" value="{{ old('title') }}" required>
                 @error('title')
                     <span class="error">{{ $message }}</span>
                 @enderror
             </label>
             <label class="admin-label playlist-grid__description">
-                <span>Описание</span>
+                <span>Description</span>
                 <textarea class="admin-input flex-grow-1" type="text" name="description" rows="3">{{ old('description') }}</textarea>
                 @error('description')
                     <span class="error">{{ $message }}</span>
                 @enderror
             </label>
             <label class="admin-label">
-                <span>Изображение</span>
+                <span>Image</span>
                 <input class="admin-input" type="file" name="image" value="{{ old('image') }}"
                     accept="image/png, image/gif, image/jpeg">
                 @error('image')
@@ -32,7 +32,7 @@
                 <span>Genres</span>
                 <details class="admin-details">
                     <summary class="admin-details__summary">
-                        <div class="admin-input">Жанры</div>
+                        <div class="admin-input">Genre</div>
                     </summary>
                     <div class="admin-details__content">
                         @foreach ($genres as $genre)
@@ -50,7 +50,7 @@
                 <span>Moods</span>
                 <details class="admin-details">
                     <summary class="admin-details__summary">
-                        <div class="admin-input">Настроение</div>
+                        <div class="admin-input">Mood</div>
                     </summary>
                     <div class="admin-details__content">
                         @foreach ($moods as $mood)
@@ -68,7 +68,7 @@
                 <span>Themes</span>
                 <details class="admin-details">
                     <summary class="admin-details__summary">
-                        <div class="admin-input">Тема</div>
+                        <div class="admin-input">Theme</div>
                     </summary>
                     <div class="admin-details__content">
                         @foreach ($themes as $theme)
@@ -86,7 +86,7 @@
                 <span>Instruments</span>
                 <details class="admin-details">
                     <summary class="admin-details__summary">
-                        <div class="admin-input">Инструмент</div>
+                        <div class="admin-input">Instrument</div>
                     </summary>
                     <div class="admin-details__content">
                         @foreach ($instruments as $instrument)
@@ -106,19 +106,19 @@
                 <input class="admin-checkbox__input" type="checkbox" name="is_active"
                     {{ old('is_active') ? 'checked' : '' }}>
                 <span class="admin-checkbox__icon"></span>
-                <span>Активен?</span>
+                <span>Active?</span>
             </label>
         </div>
         <div class="admin-form__flex">
             <label class="admin-label">
-                <span>seo title</span>
+                <span>Seo title</span>
                 <input class="admin-input" type="text" name="seo_title" value="{{ old('seo_title') }}">
                 @error('seo_title')
                     <span class="error">{{ $message }}</span>
                 @enderror
             </label>
             <label class="admin-label admin-form__flex_long">
-                <span>seo description</span>
+                <span>Seo description</span>
                 <textarea class="admin-input" type="text" name="seo_description" rows="1">{{ old('seo_description') }}</textarea>
                 @error('seo_description')
                     <span class="error">{{ $message }}</span>
@@ -126,7 +126,7 @@
             </label>
         </div>
         <div class="admin-button__margin-top">
-            <button class="admin-button">Сохранить</button>
+            <button class="admin-button">Save</button>
         </div>
     </form>
 @endsection

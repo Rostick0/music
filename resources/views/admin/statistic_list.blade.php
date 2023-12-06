@@ -5,7 +5,7 @@
         <div class="admin-filter__inputs">
             <details class="admin-details">
                 <summary class="admin-details__summary">
-                    <div class="admin-input">Тип статистики</div>
+                    <div class="admin-input">Type of statistics</div>
                 </summary>
                 <div class="admin-details__content">
                     @foreach ($statistic_types as $statistic_type)
@@ -21,16 +21,16 @@
             <input class="admin-input" type="search" placeholder="E-mail" name="email" value={{ Request::get('email') }}>
         </div>
         <div class="admin-filter__buttons">
-            <button class="admin-button admin-filter__button">Поиск</button>
-            <a class="admin-button-red admin-filter__button" href="{{ url()->current() }}">Сброс</a>
+            <button class="admin-button admin-filter__button">Search</button>
+            <a class="admin-button-red admin-filter__button" href="{{ url()->current() }}">Reset</a>
         </div>
     </form>
     <div class="admin-grid">
         <div class="admin-grid__titles admin-grid-statistic__titles">
             <div>ID</div>
-            <div>Тип</div>
+            <div>Type</div>
             <div>Email</div>
-            <div>Дата</div>
+            <div>Date</div>
         </div>
         <ul class="admin-grid__content admin-grid-statistic__content">
             @foreach ($statistics as $statistic)
