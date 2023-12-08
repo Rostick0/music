@@ -52,10 +52,15 @@ class SiteSettingController extends Controller
         }
 
         $result['favicon'] = $old?->favicon;
-
         if ($request->file('favicon')) {
             $new_favicon = ImageController::upload($request->file('favicon'));
             $result['favicon'] = '/storage/upload/image/' . $new_favicon;
+        }
+
+        $result['logo_pdf'] = $old?->logo_pdf;
+        if ($request->file('logo_pdf')) {
+            $new_logo_pdf = ImageController::upload($request->file('logo_pdf'));
+            $result['logo_pdf'] = '/storage/upload/image/' . $new_logo_pdf;
         }
 
         File::put(public_path('config.json'), json_encode($result));

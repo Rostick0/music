@@ -15,5 +15,6 @@ class SubscriptionType extends Model
         'advantages',
         'is_active',
         'price',
+        'channel'
     ];
 }

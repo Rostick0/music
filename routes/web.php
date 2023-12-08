@@ -243,7 +243,7 @@ Route::group(['prefix' => 'client', 'middleware' => 'auth'], function ($router) 
         Route::post('delete/{id}', [ClientAccountController::class, 'destroy'])->name('client.account.delete');
     });
 
-    Route::get('', [ClientController::class, 'index']);
+    Route::get('', [ClientController::class, 'index'])->name('client.index');
 
     Route::get('story/list', [ClientStoryController::class, 'index'])->name('client.story.list');
 

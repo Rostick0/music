@@ -40,7 +40,7 @@ class LoginController extends Controller
 
     public function redirectProfile()
     {
-        return Auth::user()->is_admin ? redirect()->route('music.list') : redirect()->route('client.profile_edit', [
+        return Auth::user()->is_admin ? redirect()->route('music.list') : redirect()->route('client.index', [
             'user' => User::find(auth()->id())
         ]);
     }

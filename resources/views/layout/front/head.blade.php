@@ -110,7 +110,7 @@
                     </a>
                     @if (auth()->check())
                         <a class="button-gradient header__sing-in"
-                            href="{{ auth()->user()->is_admin ? route('settings') : route('client.profile_edit') }}">Profile</a>
+                            href="{{ auth()->user()->is_admin ? route('settings') : route('client.index') }}">Profile</a>
                     @else
                         <a class="button-gradient header__sing-in" href="/login">Sign in</a>
                     @endif

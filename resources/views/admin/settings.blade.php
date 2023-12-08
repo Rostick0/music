@@ -33,6 +33,22 @@
                                 <img src="{{ old('logo') ?? $site->logo }}" class="adminimg">
                             </label>
                             <label class="admin-label">
+                                <span>Logo pdf*</span>
+                                <span class="admin-file-upload">
+                                    <input class="admin-file-upload__input" type="file" name="logo_pdf"
+                                        accept="image/png, image/gif, image/jpeg, image/svg+xml"
+                                        value="{{ old('logo_pdf') ?? $site->logo_pdf }}">
+                                    <span class="admin-input">
+                                        <span
+                                            class="admin-file-upload__name">{{ $site->logo_pdf ? 'Загружено' : 'Загрузить файл' }}</span>
+                                    </span>
+                                </span>
+                                @error('logo_pdf')
+                                    <span class="error">{{ $message }}</span>
+                                @enderror
+                                <img src="{{ old('logo_pdf') ?? $site->logo_pdf }}" class="adminimg">
+                            </label>
+                            <label class="admin-label">
                                 <span>Icon</span>
                                 <span class="admin-file-upload">
                                     <input class="admin-file-upload__input" type="file"
