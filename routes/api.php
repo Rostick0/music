@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ClientAccountController;
+use App\Http\Controllers\ClientRemoveClaimController;
 use App\Http\Controllers\ClientStoryController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\MusicController;
@@ -32,13 +34,18 @@ Route::get('music', [MusicController::class, 'search']);
 Route::get('playlist', [PlaylistController::class, 'search']);
 Route::get('music_kit', [FrontMusicKitController::class, 'search']);
 
-Route::group(['prefix' => 'favorite', 'middleware' => 'json.response'], function () {
-    Route::post('agree', [FavoriteController::class, 'agree']);
-    Route::post('create', [FavoriteController::class, 'create']);
-    Route::post('delete', [FavoriteController::class, 'destroy']);
-});
+Route::group(['middleware' => 'json.response'], function () {
+    Route::group(['prefix' => 'favorite'], function () {
+        Route::post('agree', [FavoriteController::class, 'agree']);
+        Route::post('create', [FavoriteController::class, 'create']);
+        Route::post('delete', [FavoriteController::class, 'destroy']);
+    });
 
-Route::post('story', [ClientStoryController::class, 'store'])->middleware('json.response');
+    Route::post('remove-claim', [ClientRemoveClaimController::class, 'store']);
+    Route::apiResource('account', ClientAccountController::class)->only(['store', 'destroy']);
+
+    Route::post('story', [ClientStoryController::class, 'store']);
+});
 // Route::get('test', function ($request) {
 //     return response()->json(auth());
 // });

@@ -53,4 +53,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasOne(Subscription::class)->latestOfMany();
     }
+
+    public function accounts(): HasMany
+    {
+        return $this->hasMany(Account::class, 'user_id', 'id');
+    }
 }

@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -46,6 +47,7 @@ class AppServiceProvider extends ServiceProvider
                 ])->count() ? true : false;
             }
 
+
             return $has_subscription;
         });
 
@@ -73,6 +75,14 @@ class AppServiceProvider extends ServiceProvider
                     echo $result;
                 }
             }
+        });
+
+        Validator::extend('account_count', function ($attribute, $value, $parameters) {
+            $accounts = auth()->user()->accounts?->count() ?? 0;
+
+            $has_subscription = app('has_subscription');
+
+            return !$has_subscription && $accounts > auth()->user()->subscription_last->subscription_type->channel;
         });
     }
 }

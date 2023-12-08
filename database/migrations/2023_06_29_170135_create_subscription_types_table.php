@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('advantages')->nullable();
             $table->boolean('is_active')->default(0);
             $table->float('price');
+            $table->integer('сhannel');
             $table->timestamps();
         });
     }

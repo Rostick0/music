@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Account;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class ClientAccountController extends Controller
@@ -28,18 +29,23 @@ class ClientAccountController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required',
+            'account_count' => 'account_count',
+            'name' => '',
             'url' => 'required',
         ]);
 
-        $account = Account::create([
+        $data = Account::create([
             ...$validated,
             'user_id' => auth()->id()
         ]);
 
-        return redirect()->route('client.account.edit', [
-            'id' => $account->id
+        return new JsonResponse([
+            'data' => $data
         ]);
+
+        // return redirect()->route('client.account.edit', [
+        //     'id' => $account->id
+        // ]);
     }
 
     public function edit(int $id)
@@ -79,6 +85,9 @@ class ClientAccountController extends Controller
             'user_id' => auth()->id()
         ])->delete();
 
-        return redirect()->route('client.account.list');
+        return new JsonResponse([
+            'message' => 'Deleted'
+        ]);
+        // return redirect()->route('client.account.list');
     }
 }

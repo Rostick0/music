@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\ClientAccountController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ClientLicenseController;
 use App\Http\Controllers\ClientMusicController;
 use App\Http\Controllers\ClientRemoveClaimController;
@@ -241,6 +242,8 @@ Route::group(['prefix' => 'client', 'middleware' => 'auth'], function ($router) 
         Route::post('edit/{id}', [ClientAccountController::class, 'update']);
         Route::post('delete/{id}', [ClientAccountController::class, 'destroy'])->name('client.account.delete');
     });
+
+    Route::get('', [ClientController::class, 'index']);
 
     Route::get('story/list', [ClientStoryController::class, 'index'])->name('client.story.list');
 

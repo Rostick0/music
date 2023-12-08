@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Music;
 use App\Models\RemoveClaim;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class ClientRemoveClaimController extends Controller
@@ -35,11 +36,15 @@ class ClientRemoveClaimController extends Controller
             'music_id' => 'required'
         ]);
 
-        RemoveClaim::create([
+        $data = RemoveClaim::create([
             ...$validated,
             'user_id' => auth()->id()
         ]);
 
-        return redirect()->route('client.remove_claim.list');
+        return new JsonResponse([
+            'data' => $$data
+        ]);
+
+        // return redirect()->route('client.remove_claim.list');
     }
 }
