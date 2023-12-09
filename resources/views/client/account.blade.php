@@ -30,28 +30,30 @@
             <div class="form-section">
                 <h3>YouTube channels</h3>
                 <p id="channelCounter">Adding {{ $accounts->count() }} out of {{ $max_channels }} possible.</p>
-                <input class="admin-input" style="width: initial" type="url" id="new-channel-url" placeholder="URL channel" required>
+                <input class="admin-input" style="width: initial" type="url" id="new-channel-url"
+                    placeholder="URL channel" required>
                 <button class="admin-button admin-button-gradient" onclick="addChannel()">Add channel</button>
-
+            </div>
+            <div class="pre-table">
                 <table class="channels-table" id="channelsTable">
                     <tr>
                         <th>URL</th>
                         <th>Date created</th>
                         <th>Action</th>
                     </tr>
-                    <!-- Строки таблицы будут добавляться здесь -->
                     @foreach ($accounts as $account)
                         <tr>
                             <td>{{ $account->url }}</td>
                             <td>{{ date('d.m.Y', strtotime($account->created_at)) }}</td>
-                            <td><button class="admin-button admin-button-gradient" data-id="{{ $account->id }}" onclick="removeChannel(this)">Delete</button></td>
+                            <td><button class="admin-button admin-button-gradient" data-id="{{ $account->id }}"
+                                    onclick="removeChannel(this)">Delete</button></td>
                         </tr>
                     @endforeach
                 </table>
-                <br>
-                <p>Do you want to add more channels? <a href="https://topaudio.store/pricing">Go to Subscriptions</a>
-                </p>
             </div>
+            <br>
+            <p>Do you want to add more channels? <a href="https://topaudio.store/pricing">Go to Subscriptions</a>
+            </p>
         </div>
     </div>
 

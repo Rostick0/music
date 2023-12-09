@@ -8,6 +8,7 @@ export default defineConfig({
                 'resources/scss/index.scss',
                 'resources/scss/front/index.scss',
                 'resources/scss/admin/index.scss',
+                'resources/scss/client.scss',
                 'resources/js/app.js',
                 'resources/js/front.js'
             ],

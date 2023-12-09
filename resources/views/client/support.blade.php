@@ -3,7 +3,7 @@
 @section('html')
     <div class="container">
         <div id="support" class="content">
-            <h2>Контакт и Поддержка</h2>
+            <h2>Support</h2>
             <div class="feedback__container">
                 <form class="admin-form" action="{{ url('/contacts') }}" method="post">
                     @csrf
