@@ -71,6 +71,11 @@
         margin-top: 1.25rem;
     }
 
+    &-gradient {
+        background: linear-gradient(225deg, #FF9211 0%, #F11 100%);
+        color: #fff;
+    }
+
     @media (max-width: 1024px) {
         &__margin-top {
             margin-top: .33rem;

@@ -244,16 +244,21 @@ Route::group(['prefix' => 'client', 'middleware' => 'auth'], function ($router) 
     });
 
     Route::get('', [ClientController::class, 'index'])->name('client.index');
+    Route::get('account', [ClientController::class, 'account'])->name('client.account');
+    Route::get('support', [ClientController::class, 'support'])->name('client.support');
+    Route::get('settings', [ClientController::class, 'settings'])->name('client.settings');
+    Route::get('subscription', [ClientController::class, 'subscription'])->name('client.subscription');
 
-    Route::get('story/list', [ClientStoryController::class, 'index'])->name('client.story.list');
 
-    Route::get('music/list', [ClientMusicController::class, 'index'])->name('client.music.list');
+    // Route::get('story/list', [ClientStoryController::class, 'index'])->name('client.story.list');
 
-    Route::get('license/list', [ClientLicenseController::class, 'index'])->name('client.license.list');
-    Route::get('license/{id}', [ClientLicenseController::class, 'show'])->name('client.license.show');
+    // Route::get('music/list', [ClientMusicController::class, 'index'])->name('client.music.list');
 
-    Route::get('profile_edit', [ClientUserController::class, 'edit'])->name('client.profile_edit');
-    Route::post('profile_edit', [ClientUserController::class, 'update']);
+    // Route::get('license/list', [ClientLicenseController::class, 'index'])->name('client.license.list');
+    // Route::get('license/{id}', [ClientLicenseController::class, 'show'])->name('client.license.show');
+
+    // Route::get('profile_edit', [ClientUserController::class, 'edit'])->name('client.profile_edit');
+    Route::post('profile_edit', [ClientUserController::class, 'update'])->name('client.profile_edit');
     Route::post('profile_password', [ClientUserController::class, 'password_update'])->name('client.profile_password');
 
     Route::group(['prefix' => 'pdf'], function () {
