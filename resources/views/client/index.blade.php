@@ -2,7 +2,7 @@
 
 @section('html')
     <div class="container">
-        <div id="licenses" class="content" >
+        <div id="licenses" class="content">
             <h2>License</h2>
             <table class="licenses-table">
                 <thead>
@@ -22,7 +22,7 @@
                             <td>{{ $license->code }}</td>
                             <td>{{ $license->user->email }}</td>
                             <td>{{ date('d.m.Y', strtotime($license->created_at)) }}</td>
-                            <td><a class="btn-download"
+                            <td><a class="admin-button admin-button-gradient"
                                     href="{{ route('client.license.show', [
                                         'id' => $license->id,
                                     ]) }}">Download</a>
@@ -32,6 +32,8 @@
                     <!-- Повторение строк для каждой лицензии -->
                 </tbody>
             </table>
+            <br>
+            {{ $licenses->links('vendor.front-pagination') }}
         </div>
     </div>
 @endsection

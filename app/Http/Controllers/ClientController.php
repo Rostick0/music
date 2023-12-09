@@ -14,20 +14,11 @@ class ClientController extends Controller
 {
     public function index()
     {
-        $max_price_subscription = SubscriptionType::orderByDesc('price')->first()->price;
-        $subscriptions = Subscription::orderByDesc('id')
-            ->where('user_id', auth()->id())
-            ->paginate(app('site')->count_admin ?? 20);
-
         $licenses = License::orderByDesc('id')
             ->where('user_id', auth()->id())
             ->paginate(app('site')->count_admin ?? 20);
 
-        $music = Music::all();
-
-        $accounts = Account::where('user_id', auth()->id())->get();
-
-        return view('client.index', compact('max_price_subscription', 'subscriptions', 'licenses', 'music', 'accounts'));
+        return view('client.index', compact('licenses'));
     }
 
     public function account()
@@ -40,11 +31,12 @@ class ClientController extends Controller
 
     public function subscription()
     {
+        $max_price_subscription = SubscriptionType::orderByDesc('price')->first()->price;
         $subscriptions = Subscription::orderByDesc('id')
             ->where('user_id', auth()->id())
             ->paginate(app('site')->count_admin ?? 20);
 
-        return view('client.subscription', compact('subscriptions'));
+        return view('client.subscription', compact('max_price_subscription', 'subscriptions'));
     }
 
     public function settings()

@@ -255,7 +255,7 @@ Route::group(['prefix' => 'client', 'middleware' => 'auth'], function ($router) 
     // Route::get('music/list', [ClientMusicController::class, 'index'])->name('client.music.list');
 
     // Route::get('license/list', [ClientLicenseController::class, 'index'])->name('client.license.list');
-    // Route::get('license/{id}', [ClientLicenseController::class, 'show'])->name('client.license.show');
+    Route::get('license/{id}', [ClientLicenseController::class, 'show'])->name('client.license.show');
 
     // Route::get('profile_edit', [ClientUserController::class, 'edit'])->name('client.profile_edit');
     Route::post('profile_edit', [ClientUserController::class, 'update'])->name('client.profile_edit');

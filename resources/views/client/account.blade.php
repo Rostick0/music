@@ -13,26 +13,25 @@
                 <h3>Remove claim YouTube</h3>
                 <form>
                     <label for="track-select">Select track:</label>
-                    <select id="track-select" name="track">
+                    <select class="admin-input" style="width: initial" id="track-select" name="track">
                         <!-- Предполагается, что эти опции заполняются данными с сервера -->
                         @foreach ($music as $music_item)
                             <option value="{{ $music_item->id }}">{{ $music_item->title }}</option>
                         @endforeach
                         <!-- Другие треки -->
                     </select>
-
                     <label for="youtube-url">Link YouTube:</label>
-                    <input type="url" id="youtube-url" name="youtube-url"
+                    <input class="admin-input" style="width: initial" type="url" id="youtube-url" name="youtube-url"
                         placeholder="https://www.youtube.com/watch?v=..." required>
-                    <button id="button-link" type="submit">Send</button>
+                    <button class="admin-button admin-button-gradient" id="button-link" type="submit">Send</button>
                 </form>
             </div>
 
             <div class="form-section">
                 <h3>YouTube channels</h3>
                 <p id="channelCounter">Adding {{ $accounts->count() }} out of {{ $max_channels }} possible.</p>
-                <input type="url" id="new-channel-url" placeholder="URL channel" required>
-                <button onclick="addChannel()">Add channel</button>
+                <input class="admin-input" style="width: initial" type="url" id="new-channel-url" placeholder="URL channel" required>
+                <button class="admin-button admin-button-gradient" onclick="addChannel()">Add channel</button>
 
                 <table class="channels-table" id="channelsTable">
                     <tr>
@@ -45,10 +44,11 @@
                         <tr>
                             <td>{{ $account->url }}</td>
                             <td>{{ date('d.m.Y', strtotime($account->created_at)) }}</td>
-                            <td><button data-id="{{ $account->id }}" onclick="removeChannel(this)">delete</button></td>
+                            <td><button class="admin-button admin-button-gradient" data-id="{{ $account->id }}" onclick="removeChannel(this)">Delete</button></td>
                         </tr>
                     @endforeach
                 </table>
+                <br>
                 <p>Do you want to add more channels? <a href="https://topaudio.store/pricing">Go to Subscriptions</a>
                 </p>
             </div>
@@ -93,7 +93,7 @@
                         cell1.innerHTML = value;
                         cell2.innerHTML = new Date().toLocaleDateString();
                         cell3.innerHTML =
-                            `<button data-id="${data.id}" onclick="removeChannel(this)">Delete</button>`;
+                            `<button class="admin-button admin-button-gradient" data-id="${data.id}" onclick="removeChannel(this)">Delete</button>`;
 
                         currentChannels++;
                         updateChannelCounter();

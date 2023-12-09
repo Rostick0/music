@@ -74,6 +74,11 @@
     &-gradient {
         background: linear-gradient(225deg, #FF9211 0%, #F11 100%);
         color: #fff;
+
+        &:disabled {
+            background: linear-gradient(225deg, #FF9211 0%, #F11 10%);
+            color: rgba(255, 255, 255, .8);
+        }
     }
 
     @media (max-width: 1024px) {
