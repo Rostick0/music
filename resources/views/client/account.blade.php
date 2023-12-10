@@ -36,11 +36,13 @@
             </div>
             <div class="pre-table">
                 <table class="channels-table" id="channelsTable">
-                    <tr>
-                        <th>URL</th>
-                        <th>Date created</th>
-                        <th>Action</th>
-                    </tr>
+                    <thead class="thead">
+                        <tr class="head">
+                            <th>URL</th>
+                            <th>Date created</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
                     @foreach ($accounts as $account)
                         <tr>
                             <td>{{ $account->url }}</td>

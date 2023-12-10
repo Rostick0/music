@@ -6,7 +6,7 @@
             <h2>License</h2>
             <div class="pre-table">
                 <table class="licenses-table">
-                    <thead>
+                    <thead class="thead">
                         <tr>
                             <th>Автор - Track</th>
                             <th>License code</th>

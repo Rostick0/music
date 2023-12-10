@@ -8,12 +8,14 @@
             @if ($subscriptions->count())
                 <div class="pre-table">
                     <table id="subscription-table" class="subscription-table">
-                        <tr>
-                            <th>Name</th>
-                            <th>Date created</th>
-                            <th>Date end</th>
-                            <th>Action</th>
-                        </tr>
+                        <thead class="thead">
+                            <tr>
+                                <th>Name</th>
+                                <th>Date created</th>
+                                <th>Date end</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
                         @foreach ($subscriptions as $subscription)
                             <tr>
                                 <td>{{ $subscription->subscription_type->name }} @if ($subscription->subscription_type->price != $max_price_subscription)

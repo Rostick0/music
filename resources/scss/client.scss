@@ -36,9 +36,11 @@ h3 {
         padding: 8px;
     }
 
-    th {
-        background: linear-gradient(225deg,#FF9211 0%,#F11 100%);
-        color: white;
+    .thead {
+        tr {
+            background: linear-gradient(225deg, #FF9211 0%, #F11 100%);
+            color: white;
+        }
     }
 
     td:nth-child(2) {
