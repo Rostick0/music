@@ -19,25 +19,14 @@ class ClientUserController extends Controller
 
     public function update(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|max:255',
             'surname' => 'max:255',
-            'nickname' => 'required|unique:users|max:255|regex:/^[a-z-_A-Z\d]+/',
+            'phone' => 'nullable',
             'email' => 'required|email|max:255|unique:users,email,' . auth()->id(),
-            'password' => 'required|confirmed|min:6|max:255',
         ]);
 
-        // if (auth()->user()->email != $request->email) {
-
-        // }
-
-        User::find()->update([
-            'name' => $request->name,
-            'surname' => $request->surname,
-            'nickname' => $request->nickname,
-            'email' => $request->email,
-            'telephone' => $request->telephone,
-        ]);
+        User::find(auth()->id())->update($validated);
 
         return back();
     }
@@ -48,6 +37,7 @@ class ClientUserController extends Controller
             'old_password' => 'required',
             'password' => 'required|confirmed|min:6|max:255',
         ]);
+
 
         $user = auth()->user();
 

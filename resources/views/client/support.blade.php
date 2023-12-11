@@ -38,7 +38,7 @@
                         <div class="feedback__success success">{{ Session::get('success') }}</div>
                     @endif
                     <div class="admin-delete__buttons">
-                        <button class="admin-button admin-button-gradient">Edit</button>
+                        <button class="admin-button admin-button-gradient">Send</button>
                     </div>
                 </form>
             </div>

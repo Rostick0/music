@@ -7,6 +7,9 @@
 
 
 <div class="header">
+    <a class="header__logo" href="/">
+        <img src="https://topaudio.store/storage/upload/image/1701868901.svg" width="150" alt="">
+    </a>
     <div>Top-Audio Store by Top Flow</div>
 </div>
 
@@ -14,7 +17,7 @@
     <a class="{{ Request::route()->getName() === 'client.subscription' ? ' active' : '' }}"
         href="{{ route('client.subscription') }}">Subscription</a>
     <a class="{{ Request::route()->getName() === 'client.index' ? ' active' : '' }}"
-        href="{{ route('client.index') }}">License</a>
+        href="{{ route('client.index') }}">Download</a>
     <a class="{{ Request::route()->getName() === 'client.account' ? ' active' : '' }}"
         href="{{ route('client.account') }}">Accounts</a>
     <a class="{{ Request::route()->getName() === 'client.settings' ? ' active' : '' }}"

@@ -8,18 +8,18 @@
                 <table class="licenses-table">
                     <thead class="thead">
                         <tr>
-                            <th>Автор - Track</th>
+                            <th>Author - Track</th>
                             <th>License code</th>
                             <th>Email</th>
                             <th>Date created</th>
-                            <th>Download</th>
+                            <th>Download license</th>
                         </tr>
                     </thead>
                     <tbody>
                         <!-- Здесь будут строки, заполненные сервером -->
                         @foreach ($licenses as $license)
                             <tr>
-                                <td>{{ $license?->licensesable?->author }} {{ $license?->licensesable?->title }}</td>
+                                <td>{{ $license?->licensesable?->artist->artist_name }} - {{ $license?->licensesable?->title }}</td>
                                 <td>{{ $license->code }}</td>
                                 <td>{{ $license->user->email }}</td>
                                 <td>{{ date('d.m.Y', strtotime($license->created_at)) }}</td>
