@@ -3,7 +3,7 @@
 @section('html')
     <div class="container">
         <div id="licenses" class="content">
-            <h2>License</h2>
+            <h2>Download</h2>
             <div class="pre-table">
                 <table class="licenses-table">
                     <thead class="thead">

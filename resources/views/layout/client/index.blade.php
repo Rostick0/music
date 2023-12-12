@@ -23,7 +23,7 @@
     <a class="{{ Request::route()->getName() === 'client.index' ? ' active' : '' }}"
         href="{{ route('client.index') }}">Download</a>
     <a class="{{ Request::route()->getName() === 'client.account' ? ' active' : '' }}"
-        href="{{ route('client.account') }}">Accounts</a>
+        href="{{ route('client.account') }}">Remove claim and my chanels</a>
     <a class="{{ Request::route()->getName() === 'client.settings' ? ' active' : '' }}"
         href="{{ route('client.settings') }}">Settings</a>
     <a class="{{ Request::route()->getName() === 'client.support' ? ' active' : '' }}"
