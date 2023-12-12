@@ -22,7 +22,7 @@ class ClientUserController extends Controller
         $validated = $request->validate([
             'name' => 'required|max:255',
             'surname' => 'max:255',
-            'phone' => 'nullable',
+            'telephone' => 'nullable',
             'email' => 'required|email|max:255|unique:users,email,' . auth()->id(),
         ]);
 

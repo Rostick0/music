@@ -89,13 +89,33 @@ body {
 }
 
 .header {
-    position: relative;
-}
-
-.header {
     background-color: #fff;
     padding: 10px 20px;
-    text-align: center;
+
+    &__container {
+        position: relative;
+        text-align: center;
+    }
+
+    &__logo {
+        display: inline-block;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+    }
+
+    @media (max-width: 768px) {
+        &__container {
+            margin-bottom: 10px;
+        }
+
+        &__logo {
+            margin-bottom: 5px;
+            position: static;
+            transform: none;
+        }
+    }
 }
 
 .navbar {

@@ -7,10 +7,14 @@
 
 
 <div class="header">
-    <a class="header__logo" href="/">
-        <img src="https://topaudio.store/storage/upload/image/1701868901.svg" width="150" alt="">
-    </a>
-    <div>Top-Audio Store by Top Flow</div>
+    <div class="container">
+        <div class="header__container">
+            <a class="header__logo" href="/">
+                <img src="{{ $site->logo }}" width="150" alt="Top Audio">
+            </a>
+            <div>Top-Audio Store by Top Flow</div>
+        </div>
+    </div>
 </div>
 
 <div class="navbar">
