@@ -54,7 +54,7 @@
                     <label class="admin-label">
                         <span>Current password*</span>
                         <input class="admin-input" type="password" name="old_password" maxlength="255" required>
-                        @error('name')
+                        @error('old_password')
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </label>
@@ -63,14 +63,14 @@
                     <label class="admin-label">
                         <span>New password*</span>
                         <input class="admin-input" type="text" name="password" maxlength="255" required>
-                        @error('surname')
+                        @error('password')
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </label>
                     <label class="admin-label">
                         <span>Confirm password*</span>
                         <input class="admin-input" type="text" name="password_confirmation" maxlength="255" required>
-                        @error('email')
+                        @error('password_confirmation')
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </label>

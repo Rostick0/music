@@ -54,7 +54,7 @@
                 </table>
             </div>
             <br>
-            <p>Do you want to add more channels? <a href="https://topaudio.store/pricing">Go to Subscriptions</a>
+            <p>Do you want to add more channels? <a class="link" href="https://topaudio.store/pricing">Go to Subscriptions</a>
             </p>
         </div>
     </div>

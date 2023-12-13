@@ -19,7 +19,7 @@
                         @foreach ($subscriptions as $subscription)
                             <tr>
                                 <td>{{ $subscription->subscription_type->name }} @if ($subscription->subscription_type->price != $max_price_subscription)
-                                        <a href="https://topaudio.store/pricing" style="font-size: small;">upgrade</a>
+                                        <a class="link" href="https://topaudio.store/pricing" style="font-size: small;">upgrade</a>
                                     @endif
                                 </td>
                                 <td>{{ date('d.m.Y', strtotime($subscription->created_at)) }}</td>
@@ -36,7 +36,7 @@
                 {{ $subscriptions->links('vendor.front-pagination') }}
             @else
                 <div id="no-subscription">
-                    <p>You don't have any subscription packages. Do you want to start? <a
+                    <p>You don't have any subscription packages. Do you want to start? <a class="link"
                             href="https://topaudio.store/pricing">Go to Subscriptions</a></p>
                 </div>
             @endif

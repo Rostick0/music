@@ -1,4 +1,6 @@
-@include('layout.head')
+@include('layout.front.head')
+@vite(['resources/scss/front/index.scss'])
+<!--@include('layout.head')-->
 @vite(['resources/scss/admin/index.scss'])
 
 @section('seo_title', 'Top-Audio Store by Top Flow')
@@ -6,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 
 
-<div class="header">
+<!--<div class="header">
     <div class="container">
         <div class="header__container">
             <a class="header__logo" href="/">
@@ -15,15 +17,15 @@
             <div>Top-Audio Store by Top Flow</div>
         </div>
     </div>
-</div>
+</div>-->
 
 <div class="navbar">
     <a class="{{ Request::route()->getName() === 'client.subscription' ? ' active' : '' }}"
         href="{{ route('client.subscription') }}">Subscription</a>
     <a class="{{ Request::route()->getName() === 'client.index' ? ' active' : '' }}"
-        href="{{ route('client.index') }}">Download</a>
+        href="{{ route('client.index') }}">Downloads</a>
     <a class="{{ Request::route()->getName() === 'client.account' ? ' active' : '' }}"
-        href="{{ route('client.account') }}">Remove claim and my chanels</a>
+        href="{{ route('client.account') }}">Remove claim and my channels</a>
     <a class="{{ Request::route()->getName() === 'client.settings' ? ' active' : '' }}"
         href="{{ route('client.settings') }}">Settings</a>
     <a class="{{ Request::route()->getName() === 'client.support' ? ' active' : '' }}"

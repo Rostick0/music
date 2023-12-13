@@ -18,6 +18,11 @@ h3 {
     margin-bottom: 20px;
 }
 
+.link {
+    color: #ff3111;
+    font-weight: 600;
+}
+
 .pre-table {
     overflow: auto;
 }
@@ -97,24 +102,11 @@ body {
         text-align: center;
     }
 
-    &__logo {
-        display: inline-block;
-        position: absolute;
-        top: 50%;
-        left: 0;
-        transform: translateY(-50%);
-    }
-
     @media (max-width: 768px) {
         &__container {
             margin-bottom: 10px;
         }
 
-        &__logo {
-            margin-bottom: 5px;
-            position: static;
-            transform: none;
-        }
     }
 }
 
@@ -129,7 +121,9 @@ body {
     a {
         color: #333;
         text-align: center;
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         padding: 14px 20px;
         text-decoration: none;
         transition: .3s;
