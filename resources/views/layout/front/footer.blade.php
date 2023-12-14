@@ -176,9 +176,13 @@
                 </ul>
             </div>
             <div class="footer__bottom">
-                <span class="opacity-60">© 2023 TopAudio</span>
-                <a class="a-white" href="/terms" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
-                <a class="a-white" href="/Privacy Policy" target="_blank" rel="noopener noreferrer">Terms of Use</a>
+                <span class="opacity-60">© <?php echo date('Y'); ?> TopAudio</span>
+                <a class="a-white" href="/terms_of_use" target="_blank" rel="noopener noreferrer">Terms of Use</a>
+                <a class="a-white" href="/privacy_policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+                <a class="a-white" href="/return_policy" target="_blank" rel="noopener noreferrer">Return Policy</a>
+                <a class="a-white" href="/cookie_policy" target="_blank" rel="noopener noreferrer">Cookie Policy</a>
+
+
             </div>
         </div>
     </div>
