@@ -494,7 +494,7 @@ const editPagination = (pagination, links_html) => {
             data-id="${music?.id}"
             data-artist="${music?.music_artist_name}"
             data-time="${musicDuration}">
-        <a class="track-item__info" href="/track/${music?.id}">
+        <a class="track-item__info" href="/music/${music?.id}">
             <img decoding="async" class="track-item__img"
                 src="${music?.image ? IMAGE_URL + music?.image : '/img/music.png'}"
                 alt="${music?.title}">

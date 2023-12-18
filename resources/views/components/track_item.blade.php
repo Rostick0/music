@@ -1,7 +1,7 @@
 @props(['music_item'])
 
 <li class="tracks__item track-item">
-    <a class="track-item__info" href="/track/{{ $music_item->id }}">
+    <a class="track-item__info" href="/music/{{ $music_item->id }}">
         <img class="track-item__img lazy"
             data-src="{{ App\Http\Controllers\ImageController::getViewImage($music_item->image) }}"
             alt="{{ $music_item->title }}">
