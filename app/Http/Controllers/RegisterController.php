@@ -22,7 +22,7 @@ class RegisterController extends Controller
             'nickname' => 'required|unique:users,nickname|max:255|regex:/^[a-z-_A-Z\d]+/',
             'email' => 'required|email|unique:users,email|max:255',
             'password' => 'required|confirmed|min:6|max:255',
-            // 'telephone' => ''
+            'telephone' => 'nullable'
             // password_confirmation
         ]);
 
@@ -38,10 +38,6 @@ class RegisterController extends Controller
         Auth::login($user);
         FavoriteController::insertDb();
 
-        if ($user->is_admin) return redirect()->route('admin.music');
-
-        return redirect()->route('client.profile_edit', [
-            'user' => $user
-        ]);
+        return LoginController::redirectProfile();
     }
 }

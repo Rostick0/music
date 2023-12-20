@@ -17,7 +17,7 @@ class LoginController extends Controller
 
     public function store(Request $request)
     {
-        if (Auth::check()) return $this->redirectProfile();
+        if (Auth::check()) return $this::redirectProfile();
 
         $credentials = $request->validate([
             'email' => ['required', new Throttle('contact-form', 3, 1)],
@@ -32,13 +32,13 @@ class LoginController extends Controller
 
         if (Auth::check()) {
             FavoriteController::insertDb();
-            return $this->redirectProfile();
+            return $this::redirectProfile();
         }
 
         return redirect()->route('login');
     }
 
-    public function redirectProfile()
+    public static function redirectProfile()
     {
         return Auth::user()->is_admin ? redirect()->route('music.list') : redirect()->route('client.index', [
             'user' => User::find(auth()->id())
